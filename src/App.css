@@ -1,0 +1,144 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Px-Grotesk !important;
+}
+@keyframes listFade {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+a {
+  color: var(--darkGray) !important;
+}
+a:hover {
+  color: var(--yellow) !important;
+}
+.items {
+  background-color: white;
+  border-radius: 7px;
+  /* border: 1px solid var(--lighterGray); */
+  display: flex;
+
+  flex-direction: column;
+}
+.items > div {
+  border-bottom: 1px solid var(--lightGray);
+}
+.items > div:last-child {
+  border-bottom: none;
+}
+/* .ant-table-thead {
+  animation: listFade 0.6s;
+} */
+.ant-table-row {
+  animation: listFade 0.6s;
+}
+
+.ant-table-column-sorters {
+  padding: 10px 0px !important;
+  animation: listFade 0.6s;
+}
+.ant-table-cell {
+  padding: 5px 7px !important;
+}
+.ant-input:focus {
+  outline: 0 !important;
+  border: 0.5px solid var(--yellow) !important;
+  -webkit-box-shadow: 0 0 0 2px #eeeaaf !important;
+  box-shadow: 0 0 0 2px #eeeaaf !important;
+}
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: var(--yellow) !important;
+  border-color: var(--yellow) !important;
+}
+.ant-checkbox-wrapper:hover .ant-checkbox-inner,
+.ant-checkbox:hover .ant-checkbox-inner,
+.ant-checkbox-input:focus + .ant-checkbox-inner {
+  border: 1px solid var(--yellow) !important;
+}
+
+.ant-checkbox-wrapper,
+.ant-checkbox-inner,
+.ant-checkbox,
+.ant-checkbox-inner,
+.ant-checkbox-input:focus + .ant-checkbox-inner {
+  border-radius: 6px !important;
+  outline: 0 !important;
+  margin-left: 3px !important;
+}
+
+.ant-btn:hover,
+.ant-btn:focus {
+  color: var(--black);
+  background: #fff;
+  border-color: var(--yellow) !important;
+}
+.ant-table-container {
+  border: 1px solid var(--lighterGray) !important;
+  border-radius: 10px 10px 0 0 !important;
+  border-bottom: none !important;
+  animation: listFade 0.6s;
+}
+th:first-child {
+  border-radius: 10px 0 0 0 !important;
+}
+th:last-child {
+  border-radius: 0 10px 0 0 !important;
+}
+.ant-tag {
+  border: none !important;
+  border-radius: 6px !important;
+}
+.ant-tag-green {
+  color: var(--darkGreen) !important;
+  background: var(--LightGreen) !important;
+}
+.ant-tag-red {
+  color: var(--red) !important;
+  background: var(--lightRed) !important;
+}
+.ant-tag-gold {
+  color: var(--orange) !important;
+  background: var(--lightOrange) !important;
+}
+.ant-tag-blue {
+  color: var(--blue) !important;
+  background: var(--lightBlue) !important;
+}
+:root {
+  --black: #1d1d1d;
+  --yellow: #f0e001;
+
+  --gray: #8a8a8a;
+  --darkGray: #a1a1a1;
+  --lighterGray: #e6e6e6;
+  --lightGray: #f7f7f7;
+  --blue: #3b86ff;
+  --lightBlue: #ecf1fa;
+  --red: #ff4d61;
+  --lightRed: #fee7e7;
+  --purple: #8b41dc;
+  --orange: #ffac30;
+  --lightOrange: #fff5e5;
+  --darkGreen: #43cf5f;
+  --RayGreen: #54ff34;
+  --LightGreen: #ecfaef;
+  --lightOrange: #fff5e5;
+}
+@font-face {
+  font-family: "Px-Grotesk";
+  src: url("/fonts/Px-Grotesk-Bold-Italic.ttf");
+  src: url("/fonts/Px-Grotesk-Bold.ttf");
+  src: url("/fonts/Px-Grotesk-Light.ttf");
+  src: url("/fonts/Px-Grotesk-Regular-Italic.ttf");
+  src: url("/fonts/Px-Grotesk-Regular-Italic.ttf");
+  src: url("/fonts/Px-Grotesk-Regular.ttf");
+}
