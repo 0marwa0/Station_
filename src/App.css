@@ -1,9 +1,18 @@
 * {
   padding: 0;
   margin: 0;
+
   box-sizing: border-box;
   font-family: Px-Grotesk !important;
 }
+.customModal {
+  border-radius: 10px;
+}
+/* background-image: linear-gradient(
+    transparent,
+    rgba(2, 2, 2, 0.3),
+    rgba(2, 2, 2, 0.8)
+  ); */
 @keyframes listFade {
   from {
     opacity: 0;
@@ -35,17 +44,17 @@ a:hover {
 .items > div:last-child {
   border-bottom: none;
 }
-/* .ant-table-thead {
+
+/* .ant-table-row {
   animation: listFade 0.6s;
 } */
-.ant-table-row {
-  animation: listFade 0.6s;
+.ant-input {
+  border-radius: 7px !important;
 }
-
-.ant-table-column-sorters {
+/* .ant-table-column-sorters {
   padding: 10px 0px !important;
   animation: listFade 0.6s;
-}
+} */
 .ant-table-cell {
   padding: 5px 7px !important;
 }
@@ -85,7 +94,7 @@ a:hover {
   border: 1px solid var(--lighterGray) !important;
   border-radius: 10px 10px 0 0 !important;
   border-bottom: none !important;
-  animation: listFade 0.6s;
+  /* animation: listFade 0.6s; */
 }
 th:first-child {
   border-radius: 10px 0 0 0 !important;

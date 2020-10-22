@@ -28,7 +28,7 @@ const ArticlesColumns = [
       <div style={{ width: "50px" }}>
         <ArticleImage
           alt={theImageURL}
-          src={require("../../public/images/event_1.png")}
+          src={require(`../../public/${theImageURL}`)}
         />
       </div>
     ),

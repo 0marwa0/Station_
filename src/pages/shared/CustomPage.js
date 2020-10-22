@@ -1,6 +1,9 @@
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsFillGridFill } from "react-icons/bs";
-
+import { useState } from "react";
+import NewBooking from "../Booking/NewBooking";
+import "react-responsive-modal/styles.css";
+import { Modal } from "react-responsive-modal";
 import {
   Col,
   Row,
@@ -24,6 +27,7 @@ import styled from "styled-components";
 
 import { UserImage } from "../Sidebar";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import ListItem from "../Booking/ListItem";
 export const CustomPageWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -77,9 +81,18 @@ const PageNmber = styled.div`
 const IconCss = styled.span`
   color: var(--yellow);
 `;
-export const CustomButton = ({ lable, children, Main, filter, pageTitle }) => {
+
+export const CustomButton = ({
+  lable,
+  children,
+  Main,
+  filter,
+  onOpen,
+  pageTitle,
+}) => {
   return (
     <Button
+      onClick={Main && pageTitle === "Booking" ? onOpen : () => console.log()}
       style={{
         backgroundColor: Main ? "var(--yellow)" : "var(--lightGray)",
         borderRadius: "7px",
@@ -101,109 +114,153 @@ export const CustomButton = ({ lable, children, Main, filter, pageTitle }) => {
     </Button>
   );
 };
-class CustomPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  componentDidMount() {
-    console.log(this.props.pageTitle);
-  }
-  render() {
-    let pageTitle = this.props.pageTitle;
-    const columns = this.props.columns;
-    const data = this.props.data;
-    return (
-      <CustomPageWrapper>
-        <SideBar />
-        <PageContent>
-          <Row>
-            <Col>
-              <PageTitle>{this.props.pageTitle}</PageTitle>
-            </Col>
-          </Row>
-          <Row>
-            <PageBtn>
-              <ButtonGroup space>
-                {this.props.pageTitle === "Articles" ? (
-                  <div style={{ display: "flex", gap: "6px" }}>
-                    {" "}
-                    <GiHamburgerMenu size={27} color="var(--yellow)" />
-                    <BsFillGridFill size={25} color="var(--lightGray)" />
-                  </div>
-                ) : (
-                  ""
-                )}
-                <Input
-                  style={{
-                    borderRadius: "6px",
-                    border: "1px solid var(--lighterGray)",
-                    height: "30px",
-                    color: "var(--lighterGray)",
-                    width: "300px",
-                  }}
-                  placeholder="Search"
-                />{" "}
-                {this.props.pageTitle === "Resources" ? (
-                  ""
-                ) : this.props.pageTitle === "File Uploader" ? (
-                  ""
-                ) : (
-                  <CustomButton lable="Filter" filter>
-                    <FiFilter />
-                  </CustomButton>
-                )}
-              </ButtonGroup>
-              <ButtonGroup>
-                {this.props.pageTitle === "Resources" ? (
-                  ""
-                ) : this.props.pageTitle === "File Uploader" ? (
-                  ""
-                ) : (
-                  <CustomButton lable="Import">
-                    <BiImport />
-                  </CustomButton>
-                )}
-                <CustomButton lable="Export">
-                  <BiExport />
-                </CustomButton>
-                <CustomButton
-                  Main
-                  lable={`New ${pageTitle}`}
-                  pageTitle={pageTitle}
-                >
-                  <AiOutlinePlus />
-                </CustomButton>
-              </ButtonGroup>
-            </PageBtn>
-          </Row>
+function CustomPage(props) {
+  const [open, setOpen] = useState(false);
 
-          <Row>
-            <Col style={{ width: "100%" }}>
-              <Table
-                columns={columns}
-                rowClassName="tableRow"
-                pagination={false}
-                dataSource={data}
+  const onOpenModal = (open) => {
+    setOpen(open);
+    console.log(open, "what");
+  };
+  let pageTitle = props.pageTitle;
+  const columns = props.columns;
+  const data = props.data;
+  const [showList, setShowList] = useState(false);
+  const showListItem = () => {
+    setShowList(true);
+    hideTableItem();
+  };
+  const hideListItem = () => {
+    setShowList(false);
+  };
+  const [showTable, setShowTable] = useState(true);
+  const showTableItem = () => {
+    setShowTable(true);
+    hideListItem();
+  };
+  const hideTableItem = () => {
+    setShowTable(false);
+  };
+  let pageTitleName = props.pageTitle.substring(0, props.pageTitle.length - 1);
+  return (
+    <CustomPageWrapper>
+      <SideBar title={props.pageTitle} />
+      <PageContent>
+        <Row>
+          <Col>
+            <PageTitle>{props.pageTitle}</PageTitle>
+          </Col>
+        </Row>
+        <Row>
+          <PageBtn>
+            <ButtonGroup space>
+              {props.pageTitle === "Articles" ? (
+                <div style={{ display: "flex", gap: "6px" }}>
+                  {" "}
+                  <GiHamburgerMenu
+                    size={27}
+                    color="var(--yellow)"
+                    cursor="pointer"
+                    onClick={showTableItem}
+                  />
+                  <BsFillGridFill
+                    size={25}
+                    cursor="pointer"
+                    color="var(--lightGray)"
+                    onClick={showListItem}
+                  />
+                </div>
+              ) : (
+                ""
+              )}
+              <Input
+                style={{
+                  borderRadius: "6px",
+                  border: "1px solid var(--lighterGray)",
+                  height: "30px",
+                  color: "var(--lighterGray)",
+                  width: "220px",
+                }}
+                placeholder="Search"
               />
-              <Pagination>
-                <PageText>
-                  View search of 12 from 1,232 search we got .
-                </PageText>
-                <PageNmber>
-                  <LeftOutlined />
-                  <p style={{ marginTop: "12px" }}> 1/ 12</p>
-                  <IconCss>
-                    <RightOutlined />
-                  </IconCss>
-                </PageNmber>
-              </Pagination>
-            </Col>
-          </Row>
-        </PageContent>
-      </CustomPageWrapper>
-    );
-  }
+              {props.pageTitle === "Resources" ? (
+                ""
+              ) : props.pageTitle === "File Uploader" ? (
+                ""
+              ) : (
+                <CustomButton lable="Filter" filter>
+                  <FiFilter />
+                </CustomButton>
+              )}
+            </ButtonGroup>
+            <ButtonGroup>
+              {props.pageTitle === "Resources" ? (
+                ""
+              ) : props.pageTitle === "File Uploader" ? (
+                ""
+              ) : (
+                <CustomButton lable="Import">
+                  <BiImport />
+                </CustomButton>
+              )}
+              <CustomButton lable="Export">
+                <BiExport />
+              </CustomButton>
+              <CustomButton
+                Main
+                lable={`New ${pageTitleName}`}
+                pageTitle={pageTitle}
+                onOpen={() => onOpenModal(true)}
+              >
+                <AiOutlinePlus />
+              </CustomButton>
+            </ButtonGroup>
+          </PageBtn>
+        </Row>
+
+        <Row>
+          <Col style={{ width: "100%" }}>
+            {showTable ? (
+              <div>
+                <Table
+                  columns={columns}
+                  rowClassName="tableRow"
+                  pagination={false}
+                  dataSource={data}
+                />
+                <Pagination>
+                  <PageText>
+                    View search of 12 from 1,232 search we got .
+                  </PageText>
+                  <PageNmber>
+                    <LeftOutlined />
+                    <p style={{ marginTop: "12px" }}> 1/ 12</p>
+                    <IconCss>
+                      <RightOutlined />
+                    </IconCss>
+                  </PageNmber>
+                </Pagination>
+              </div>
+            ) : showList ? (
+              <ListItem />
+            ) : (
+              ""
+            )}
+          </Col>
+        </Row>
+      </PageContent>
+      <Modal
+        closeOnOverlayClick={false}
+        open={open}
+        onClose={() => onOpenModal(false)}
+        center
+        classNames={{
+          modal: "customModal",
+        }}
+      >
+        <NewBooking />
+      </Modal>
+    </CustomPageWrapper>
+  );
 }
 
 export default CustomPage;

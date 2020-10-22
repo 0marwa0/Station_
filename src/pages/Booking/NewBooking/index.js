@@ -1,0 +1,126 @@
+// create new booking  modle
+
+import React from "react";
+import { useState } from "react";
+import styled from "styled-components";
+import { Button } from "antd";
+import { FirstPage, SecondPage } from "./Modle";
+const data = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
+const Dot = styled.span`
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--lighterGray);
+  float: left;
+  margin: 0 3px;
+  animation: all 0.8s;
+`;
+const CurrentDot = styled.span`
+  width: 50px;
+  height: 6px;
+  border-radius: 20%;
+  float: left;
+  margin: 0 3px;
+  animation: all 0.8s;
+  background-color: var(--yellow);
+`;
+
+const ModleTitle = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 2px;
+`;
+const Btn = styled(Button)`
+  border-radius: 7px;
+  border: none;
+  background-color: ${(props) =>
+    props.Main ? " var(--yellow)" : "var(--lighterGray)"};
+  &:hover {
+    background-color: ${(props) =>
+      props.Main ? " var(--yellow)" : "var(--lighterGray)"};
+  }
+`;
+const ModleFooter = styled.div`
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+`;
+class Index extends React.Component {
+  state = {
+    currentPage: 1,
+    pagePerOnce: 1,
+
+    pageNumber: 0,
+  };
+  prevPage = () => {
+    const currentPage = this.state.currentPage;
+    if (currentPage > 1) {
+      this.setState({
+        currentPage: this.state.currentPage - 1,
+      });
+    }
+  };
+
+  nextPage = () => {
+    const currentPage = this.state.currentPage;
+    const totalPge = Math.ceil(data.length / this.state.pagePerOnce);
+    if (currentPage != totalPge) {
+      this.setState({
+        currentPage: this.state.currentPage + 1,
+      });
+    }
+  };
+
+  render() {
+    const indexOfLastPage = this.state.currentPage * this.state.pagePerOnce;
+    const indexOfFirstPage = indexOfLastPage - this.state.pagePerOnce;
+    const pages = data.slice(indexOfFirstPage, indexOfLastPage);
+    console.log(this.state.currentPage);
+    return (
+      <div>
+        <ModleTitle>
+          <div style={{ fontWeight: "bold", fontSize: "20px" }}>
+            New Booking
+          </div>
+          <div>Create a booking for a costumer directly from reception</div>
+        </ModleTitle>
+        {pages.map((i) => {
+          return (
+            <div>
+              {i.id === 1 ? <FirstPage /> : i.id === 2 ? <SecondPage /> : ""}
+            </div>
+          );
+        })}
+        <ModleFooter>
+          <div>
+            {data.map((i) => (
+              <span
+                style={{
+                  width: "200px",
+
+                  animation: "all 0.6s",
+                }}
+              >
+                {i.id === this.state.currentPage ? (
+                  <CurrentDot></CurrentDot>
+                ) : (
+                  <Dot></Dot>
+                )}
+              </span>
+            ))}
+          </div>
+          <div>
+            <Btn onClick={this.prevPage}>back</Btn>{" "}
+            <Btn Main onClick={this.nextPage}>
+              Next
+            </Btn>
+          </div>
+        </ModleFooter>
+      </div>
+    );
+  }
+}
+
+export default Index;

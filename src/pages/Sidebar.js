@@ -11,16 +11,26 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { FaRegUser } from "react-icons/fa";
 import { Tooltip } from "antd";
 import { Link } from "react-router-dom";
-const NavItem = ({ slug, children }) => {
+const NavItem = ({ slug, children, index, title }) => {
+  // const [selected,setSelected]
   let url = `/` + slug;
-  if (url === "/Dashboard") {
-    url = "/";
+  let type = "";
+
+  if (url === "/profile") {
+    type = index;
   }
+  console.log(slug, title);
   return (
     <Tooltip title={`${slug}`} placement="right">
-      <SideItem active>
-        <Link to={url}>{children}</Link>
-      </SideItem>
+      {slug === title ? (
+        <SideItem active type>
+          <Link to={url}>{children} </Link>
+        </SideItem>
+      ) : (
+        <SideItem type>
+          <Link to={url}>{children}</Link>
+        </SideItem>
+      )}
     </Tooltip>
   );
 };
@@ -30,7 +40,6 @@ export const SideWrapper = styled.div`
   display: flex;
   position: fixed;
   padding-top: 30px;
-
   padding-right: 4px;
   flex-direction: column;
   justify-content: space-between;
@@ -42,7 +51,7 @@ export const SideList = styled.ul`
   }
 `;
 export const SideItem = styled.li`
-  color: var(--gray);
+  color: ${(props) => (props.active ? "var(--yellow)" : "var(--gray)")};
   position: relative;
   margin-bottom: 10px;
   padding: 0 20px;
@@ -53,14 +62,16 @@ export const SideItem = styled.li`
   justify-content: center;
   align-items: center;
   &:hover {
-    border-left: 2px solid var(--yellow);
+    border-left: ${(props) =>
+      props.type ? "2px solid var(--black) " : " 2px solid var(--yellow)"};
+
     color: var(--yellow);
   }
 `;
 export const UserImage = styled.img`
   width: 30px;
   height: 30px;
-  border-readius: 50%;
+  border-radius: 50%;
 `;
 
 const Active = styled.div`
@@ -73,8 +84,10 @@ const Active = styled.div`
   border: 2px solid var(--black);
   background-color: var(--RayGreen);
 `;
-const Logo = styled.img`width: 35px, height: 23px ;
- margin-bottom: 30px;
+const Logo = styled.img`
+  width: 60px;
+  height: 23px;
+  margin-bottom: 20px;
   padding: 0 10px;
 `;
 class SideBar extends React.Component {
@@ -84,34 +97,35 @@ class SideBar extends React.Component {
   }
 
   render() {
+    let title = this.props.title;
+    console.log(this.props.title, "from slider");
     return (
       <div>
         <SideWrapper>
           <SideList>
             <Logo src={require("../public/images/Logo.png")} />
-
-            <NavItem slug="Dashboard">
+            <NavItem slug="Dashboard" title={title}>
               <BiLineChart />
             </NavItem>
-            <NavItem slug="Booking">
+            <NavItem slug="Booking" title={title}>
               <BiBookAdd />
             </NavItem>
-            <NavItem slug="Articles">
+            <NavItem slug="Articles" title={title}>
               <MdEventNote />
             </NavItem>
-            <NavItem slug="Events">
+            <NavItem slug="Events" title={title}>
               <MdEventNote />
             </NavItem>
-            <NavItem slug="Customers">
+            <NavItem slug="Customers" title={title}>
               <HiOutlineUsers />
             </NavItem>
-            <NavItem slug="Admins">
+            <NavItem slug="Admins" title={title}>
               <FaRegUser />
             </NavItem>
-            <NavItem slug="FileUploader">
+            <NavItem slug="FileUploader" title={title}>
               <CloudUploadOutlined />
             </NavItem>
-            <NavItem slug="Resources">
+            <NavItem slug="Resources" title={title}>
               <VscSourceControl />
             </NavItem>
           </SideList>
@@ -122,10 +136,11 @@ class SideBar extends React.Component {
             <SideItem>
               <IoMdNotificationsOutline />
             </SideItem>
-            <SideItem>
+
+            <NavItem slug="profile" index="profile">
               <UserImage src={require("../public/images/user.png")} />
               <Active></Active>
-            </SideItem>
+            </NavItem>
           </SideList>
         </SideWrapper>
       </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import CustomPage from "../shared/CustomPage";
 // import { BookingColumns } from "./Config";
 import { BiDotsVerticalRounded } from "react-icons/bi";
@@ -7,11 +7,13 @@ import { Checkbox, Table, Tooltip, Tag, Space, Button, Input } from "antd";
 import { BookingData } from "../../fakeData/index";
 function Booking() {
   return (
-    <CustomPage
-      pageTitle="Booking"
-      columns={BookingColumns}
-      data={BookingData}
-    />
+    <div>
+      <CustomPage
+        pageTitle="Booking"
+        columns={BookingColumns}
+        data={BookingData}
+      />
+    </div>
   );
 }
 

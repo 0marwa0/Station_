@@ -122,6 +122,30 @@ export const ArticlesData = [
     CreatedDate: "23 September 2020",
     Createdby: "images/user2.png",
   },
+  {
+    image: "images/event_2.png",
+    Title: "CS50 FAIR,FRESH CODERS IN BAGHDAD",
+    CreatedDate: "23 September 2020",
+    Createdby: "images/user2.png",
+  },
+  {
+    image: "images/event_3.png",
+    Title: "CS50 FAIR,FRESH CODERS IN BAGHDAD",
+    CreatedDate: "23 September 2020",
+    Createdby: "images/user2.png",
+  },
+  {
+    image: "images/event_6.png",
+    Title: "CS50 FAIR,FRESH CODERS IN BAGHDAD",
+    CreatedDate: "23 September 2020",
+    Createdby: "images/user2.png",
+  },
+  {
+    image: "images/event_5.png",
+    Title: "CS50 FAIR,FRESH CODERS IN BAGHDAD",
+    CreatedDate: "23 September 2020",
+    Createdby: "images/user2.png",
+  },
 ];
 export const CustomersData = [
   {
