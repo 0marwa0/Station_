@@ -28,7 +28,7 @@ function Aritcle() {
         data={ArticlesData}
         onOpenModal={onOpenModal}
       />
-      <Modal
+      {/* <Modal
         closeOnOverlayClick={false}
         open={open}
         onClose={() => onOpenModal(false)}
@@ -38,7 +38,7 @@ function Aritcle() {
         }}
       >
         <h1>new article</h1>
-      </Modal>
+      </Modal> */}
     </div>
   );
 }

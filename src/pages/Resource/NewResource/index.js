@@ -24,7 +24,7 @@ function Index() {
         </InputLable>{" "}
       </PageWrapper>{" "}
       <ModleFooter>
-        <CustomModleButton>Cansle</CustomModleButton>
+        <CustomModleButton>cancel</CustomModleButton>
         <CustomModleButton Main>Upload</CustomModleButton>
       </ModleFooter>
     </div>

@@ -18,7 +18,7 @@ function Events() {
         onOpenModal={onOpenModal}
       />
 
-      <Modal
+      {/* <Modal
         closeOnOverlayClick={false}
         open={open}
         onClose={() => onOpenModal(false)}
@@ -28,7 +28,7 @@ function Events() {
         }}
       >
         <div> new event</div>
-      </Modal>
+      </Modal> */}
     </div>
   );
 }

@@ -13,7 +13,7 @@ function Index() {
       <ModleHeader>Upload New Media</ModleHeader>
       <PageWrapper>upload file</PageWrapper>{" "}
       <ModleFooter>
-        <CustomModleButton>Cansle</CustomModleButton>
+        <CustomModleButton>cancel</CustomModleButton>
         <CustomModleButton Main>Upload</CustomModleButton>
       </ModleFooter>
     </div>

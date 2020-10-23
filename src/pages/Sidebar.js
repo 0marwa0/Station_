@@ -62,8 +62,7 @@ export const SideItem = styled.li`
   justify-content: center;
   align-items: center;
   &:hover {
-    border-left: ${(props) =>
-      props.active ? "2px solid var(--black) " : " 2px solid var(--yellow)"};
+    border-left: 2px solid var(--yellow);
 
     color: var(--yellow);
   }

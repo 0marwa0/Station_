@@ -34,7 +34,7 @@ const CardWrapper = styled.div`
   gap: 10px;
 `;
 const PageWrapper = styled.div`
-  width: 500px;
+  width: 520px;
   margin-bottom: 18px;
   padding: 10px 40px;
 `;
