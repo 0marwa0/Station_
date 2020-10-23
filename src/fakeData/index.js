@@ -1,4 +1,58 @@
 import { Descriptions } from "antd";
+export const StatisticData = [
+  {
+    name: "Total Reservations",
+    time: "3,254",
+    doc: "245k New Products",
+  },
+  {
+    name: "Total Events",
+    time: "63",
+    doc: "12,5k New Products",
+  },
+  {
+    name: "Total Booked Hours",
+    time: "3,254",
+    doc: "245k New Products",
+  },
+  {
+    name: "Total Cost",
+    time: "63",
+    doc: "12,5k New Products",
+  },
+  {
+    name: "Total Income",
+    time: "63",
+    doc: "12,5k New Products",
+  },
+];
+export const ReservationsData = [
+  {
+    place: "Hall",
+    name: "Fikra Space",
+    time: "4 week ago",
+    doc: "Dr.Ahmed Hameed|20April2020",
+  },
+  {
+    place: "A",
+    name: "Fikra Space",
+    time: "4 week ago",
+    doc: "Dr.Ahmed Hameed|20April2020",
+  },
+  {
+    place: "B",
+    name: "Fikra Space",
+    time: "4 week ago",
+    doc: "Dr.Ahmed Hameed|20April2020",
+  },
+  {
+    place: "C",
+    name: "Fikra Space",
+    time: "4 week ago",
+    doc: "Dr.Ahmed Hameed|20April2020",
+  },
+];
+
 export const FileUpoaderData = [
   {
     FileTitle: "thestation_profile_arabic_version.pdf",

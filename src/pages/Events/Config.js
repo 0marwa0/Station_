@@ -1,13 +1,12 @@
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { UserImage } from "../Sidebar";
 import { Checkbox, Progress, Tooltip, Tag, Space, Button, Input } from "antd";
+import React from "react";
+
 export const EventsColumns = [
+  { key: "1", title: "", dataIndex: "", render: () => <Checkbox /> },
   {
-    title: "",
-    dataIndex: "",
-    render: () => <Checkbox />,
-  },
-  {
+    key: "2",
     title: "#",
     dataIndex: "num",
     sorter: {
@@ -16,6 +15,7 @@ export const EventsColumns = [
     },
   },
   {
+    key: "3",
     title: "Organizer",
     dataIndex: "Organizer",
     sorter: {
@@ -24,6 +24,7 @@ export const EventsColumns = [
     },
   },
   {
+    key: "4",
     title: "Date",
     dataIndex: "Date",
     sorter: {
@@ -32,6 +33,7 @@ export const EventsColumns = [
     },
   },
   {
+    key: "5",
     title: "Space",
     dataIndex: "Space",
     sorter: {
@@ -57,6 +59,7 @@ export const EventsColumns = [
     ),
   },
   {
+    key: "6",
     title: "Sold Tickets",
     dataIndex: "SoldTickets",
     sorter: {
@@ -70,11 +73,15 @@ export const EventsColumns = [
     ),
   },
   {
+    key: "7",
     title: "Approved by",
     dataIndex: "Image",
     render: (theImageURL) => (
       <div style={{ width: "50px" }}>
-        <UserImage alt={theImageURL} src="images/user2.png" />
+        <UserImage
+          alt={theImageURL}
+          src={require("../../public/images/user2.png")}
+        />
       </div>
     ),
     sorter: {
@@ -83,6 +90,7 @@ export const EventsColumns = [
     },
   },
   {
+    key: "8",
     title: "",
     dataIndex: "",
     render: () => (

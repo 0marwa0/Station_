@@ -1,6 +1,6 @@
 // Admins page config
 import { BiDotsVerticalRounded } from "react-icons/bi";
-
+import React from "react";
 import { Checkbox, Table, Tooltip, Tag, Space, Button, Input } from "antd";
 export const AdminsColumns = [
   {
@@ -11,6 +11,14 @@ export const AdminsColumns = [
   {
     title: "Full Name",
     dataIndex: "FullName",
+    sorter: {
+      compare: (a, b) => a.english - b.english,
+      multiple: 1,
+    },
+  },
+  {
+    title: "User name",
+    dataIndex: "Username",
     sorter: {
       compare: (a, b) => a.english - b.english,
       multiple: 1,

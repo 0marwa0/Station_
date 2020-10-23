@@ -1,6 +1,6 @@
 // Booinkg page config
 import { BiDotsVerticalRounded } from "react-icons/bi";
-
+import React from "react";
 import { Checkbox, Tag } from "antd";
 export const CustomersColumns = [
   {

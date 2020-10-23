@@ -5,8 +5,17 @@
   box-sizing: border-box;
   font-family: Px-Grotesk !important;
 }
+
+.ant-input:hover {
+  border-color: var(--yellow) !important;
+  border-right-width: 1px !important;
+}
 .customModal {
-  border-radius: 10px;
+  border-radius: 7px;
+  padding: 0 !important;
+}
+input:hover {
+  border: 1px solid var(--yellow) !important;
 }
 /* background-image: linear-gradient(
     transparent,
@@ -16,12 +25,12 @@
 @keyframes listFade {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translatex(16px);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0px);
+    transform: translatex(0px);
   }
 }
 a {
@@ -48,6 +57,7 @@ a:hover {
 /* .ant-table-row {
   animation: listFade 0.6s;
 } */
+.ant-picker,
 .ant-input {
   border-radius: 7px !important;
 }
@@ -58,7 +68,8 @@ a:hover {
 .ant-table-cell {
   padding: 5px 7px !important;
 }
-.ant-input:focus {
+.ant-input:focus,
+.ant-input-number:focus {
   outline: 0 !important;
   border: 0.5px solid var(--yellow) !important;
   -webkit-box-shadow: 0 0 0 2px #eeeaaf !important;
@@ -83,12 +94,21 @@ a:hover {
   outline: 0 !important;
   margin-left: 3px !important;
 }
-
+.ant-input-number-focused {
+  color: none !important;
+  background: none !important;
+  border-color: none !important;
+}
 .ant-btn:hover,
+.ant-input-number,
 .ant-btn:focus {
-  color: var(--black);
+  color: var(--black) !important;
   background: #fff;
   border-color: var(--yellow) !important;
+}
+.ant-btn {
+  border-radius: 7px !important;
+  text-align: left !important;
 }
 .ant-table-container {
   border: 1px solid var(--lighterGray) !important;

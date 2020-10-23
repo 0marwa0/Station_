@@ -2,6 +2,7 @@ import { BiDotsVerticalRounded } from "react-icons/bi";
 import { UserImage } from "../Sidebar";
 import { Checkbox } from "antd";
 import styled from "styled-components";
+import React from "react";
 const ArticleImage = styled.img`
   width: 55px;
   height: 50px;
@@ -9,21 +10,27 @@ const ArticleImage = styled.img`
 `;
 const ArticlesColumns = [
   {
+    key: "1",
     title: "",
     dataIndex: "",
     render: () => <Checkbox />,
   },
   {
+    key: "2",
     title: "",
     dataIndex: "image",
 
     render: (theImageURL) => (
       <div style={{ width: "50px" }}>
-        <ArticleImage alt={theImageURL} src="images/event_1.png" />
+        <ArticleImage
+          alt={theImageURL}
+          src={require(`../../public/${theImageURL}`)}
+        />
       </div>
     ),
   },
   {
+    key: "3",
     title: "Title",
     dataIndex: "Title",
     sorter: {
@@ -32,6 +39,7 @@ const ArticlesColumns = [
     },
   },
   {
+    key: "4",
     title: "Created Date",
     dataIndex: "CreatedDate",
     sorter: {
@@ -41,13 +49,14 @@ const ArticlesColumns = [
   },
 
   {
+    key: "5",
     title: "Created by",
     dataIndex: "Createdby",
     render: (theImageURL) => (
       <div style={{ width: "50px" }}>
         <UserImage
           alt={theImageURL}
-          src={require("../public/images/images/user2.png")}
+          src={require("../../public/images/user2.png")}
         />
       </div>
     ),
@@ -57,6 +66,7 @@ const ArticlesColumns = [
     },
   },
   {
+    key: "6",
     title: "",
     dataIndex: "",
     render: () => (

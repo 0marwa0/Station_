@@ -3,6 +3,7 @@ import { DatePicker, Input, InputNumber } from "antd";
 import { Menu, Dropdown, Button, message, Tooltip } from "antd";
 import { DownOutlined, UserOutlined } from "@ant-design/icons";
 import styled from "styled-components";
+import { InputLable } from "../../../shared/SharedStyle";
 const { TextArea } = Input;
 
 const optionData = (
@@ -12,13 +13,37 @@ const optionData = (
     <Menu.Item key="3">50</Menu.Item>
   </Menu>
 );
-const FirstPageWrapper = styled.div``;
+
+const CardItem = styled.div`
+  width: 180px;
+  height: 100px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  courser: pointer;
+  gap: 5px;
+  border: 1px solid var(--lighterGray);
+  &:hover {
+    border: 1px solid var(--yellow);
+  }
+`;
+const CardWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+`;
+const PageWrapper = styled.div`
+  width: 500px;
+  margin-bottom: 18px;
+  padding: 10px 40px;
+`;
 const Page1Item = styled.div`
   display: grid;
   grid-template-columns: 1fr 0.5fr;
   align-items: center;
   justify-content: center;
-
+  gap: 15px;
   font-size: 14px;
 `;
 const BookedItem = styled.div`
@@ -31,20 +56,16 @@ const BookedItem = styled.div`
 `;
 const SecondPageInput = styled.div`
   display: grid;
-  justify-content: center;
+
   align-itmes: center;
 
-  grid-template-columns: 0.5fr 0.3fr 0.3fr auto;
+  gap: 15px;
+  grid-template-columns: 1fr 0.1fr 0.1fr auto;
 `;
-const InputLable = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin: 0 6px;
-`;
+
 export function FirstPage() {
   return (
-    <FirstPageWrapper>
+    <PageWrapper>
       <Page1Item>
         <InputLable>
           Booking Title
@@ -53,7 +74,7 @@ export function FirstPage() {
         <InputLable>
           Space
           <Dropdown overlay={optionData}>
-            <Button style={{ width: "130px", borderRadius: "7px" }}>
+            <Button style={{ borderRadius: "7px" }}>
               Choose space <DownOutlined />
             </Button>
           </Dropdown>
@@ -66,20 +87,20 @@ export function FirstPage() {
         </InputLable>{" "}
         <InputLable>
           No. of People Max 3D{" "}
-          <InputNumber style={{ width: "130px", borderRadius: "7px" }} />
+          <InputNumber style={{ borderRadius: "7px", width: "100%" }} />
         </InputLable>
       </Page1Item>
       <InputLable>
         Comment
         <TextArea placeholder="write something about booking ..." />
       </InputLable>
-    </FirstPageWrapper>
+    </PageWrapper>
   );
 }
 
 export function SecondPage() {
   return (
-    <FirstPageWrapper>
+    <PageWrapper>
       <SecondPageInput>
         <InputLable>
           Choose Date
@@ -105,7 +126,7 @@ export function SecondPage() {
           <Button
             style={{
               borderRadius: "7px",
-              marginTop: "70%",
+              marginTop: "80%",
               backgroundColor: "var(--lighterGray)",
             }}
           >
@@ -130,7 +151,57 @@ export function SecondPage() {
           <div>06:00 Am</div>
         </BookedItem>
       </div>
-    </FirstPageWrapper>
+    </PageWrapper>
+  );
+}
+
+export function ThirdPage() {
+  return (
+    <PageWrapper>
+      <InputLable>
+        Coffe Brake Pack
+        <CardWrapper>
+          <CardItem>Title</CardItem>
+          <CardItem>Title</CardItem>
+          <CardItem>Title</CardItem>
+        </CardWrapper>
+      </InputLable>
+      <InputLable>
+        Lunches
+        <CardWrapper>
+          <CardItem>Title</CardItem>
+          <CardItem>Title</CardItem>
+          <CardItem>Title</CardItem>
+        </CardWrapper>
+      </InputLable>
+      <InputLable>
+        Hall Design
+        <CardWrapper>
+          <CardItem>Title</CardItem>
+          <CardItem>Title</CardItem>
+          <CardItem>Title</CardItem>
+        </CardWrapper>
+      </InputLable>
+    </PageWrapper>
+  );
+}
+
+export function ForthPage() {
+  return (
+    <PageWrapper>
+      <div
+        style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}
+      >
+        <InputLable>
+          Totle Price
+          <Input />
+        </InputLable>
+        <InputLable>
+          Received
+          <Input />
+        </InputLable>
+      </div>
+    </PageWrapper>
   );
 }
 function Index() {

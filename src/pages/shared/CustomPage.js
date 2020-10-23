@@ -1,32 +1,16 @@
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsFillGridFill } from "react-icons/bs";
 import { useState } from "react";
-import NewBooking from "../Booking/NewBooking";
-import "react-responsive-modal/styles.css";
-import { Modal } from "react-responsive-modal";
-import {
-  Col,
-  Row,
-  Progress,
-  Checkbox,
-  Table,
-  Tooltip,
-  Tag,
-  Space,
-  Button,
-  Input,
-} from "antd";
+import { Col, Row, Table, Input } from "antd";
 import React from "react";
 import { BiImport, BiExport } from "react-icons/bi";
 import { FiFilter } from "react-icons/fi";
-import { RiArrowDownSFill } from "react-icons/ri";
+import { CustomButton } from "../shared/SharedComponents";
 import { AiOutlinePlus } from "react-icons/ai";
 import SideBar from "../Sidebar";
-import { BiDotsVerticalRounded } from "react-icons/bi";
 import styled from "styled-components";
-
-import { UserImage } from "../Sidebar";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+
 import ListItem from "../Booking/ListItem";
 export const CustomPageWrapper = styled.div`
   display: flex;
@@ -82,45 +66,7 @@ const IconCss = styled.span`
   color: var(--yellow);
 `;
 
-export const CustomButton = ({
-  lable,
-  children,
-  Main,
-  filter,
-  onOpen,
-  pageTitle,
-}) => {
-  return (
-    <Button
-      onClick={Main && pageTitle === "Booking" ? onOpen : () => console.log()}
-      style={{
-        backgroundColor: Main ? "var(--yellow)" : "var(--lightGray)",
-        borderRadius: "7px",
-        border: Main ? "" : "1px solid var(--lighterGray)",
-        display: "flex",
-        gap: "5px",
-        padding: Main ? "0 15px" : "0 8px",
-        alignItems: "center",
-        height: "30px",
-      }}
-    >
-      {children}
-      {pageTitle === "Resources"
-        ? (lable = "Upload")
-        : pageTitle === "File Uploader"
-        ? (lable = "Upload")
-        : lable}
-      {filter ? <RiArrowDownSFill color="var(--lighterGray)" /> : ""}
-    </Button>
-  );
-};
 function CustomPage(props) {
-  const [open, setOpen] = useState(false);
-
-  const onOpenModal = (open) => {
-    setOpen(open);
-    console.log(open, "what");
-  };
   let pageTitle = props.pageTitle;
   const columns = props.columns;
   const data = props.data;
@@ -140,7 +86,13 @@ function CustomPage(props) {
   const hideTableItem = () => {
     setShowTable(false);
   };
-  let pageTitleName = props.pageTitle.substring(0, props.pageTitle.length - 1);
+  let pageTitleName;
+  if (pageTitle === "Booking") {
+    pageTitleName = props.pageTitle;
+  } else {
+    pageTitleName = props.pageTitle.substring(0, props.pageTitle.length - 1);
+  }
+
   return (
     <CustomPageWrapper>
       <SideBar title={props.pageTitle} />
@@ -209,7 +161,7 @@ function CustomPage(props) {
                 Main
                 lable={`New ${pageTitleName}`}
                 pageTitle={pageTitle}
-                onOpen={() => onOpenModal(true)}
+                onOpen={() => props.onOpenModal(true)}
               >
                 <AiOutlinePlus />
               </CustomButton>
@@ -248,17 +200,6 @@ function CustomPage(props) {
           </Col>
         </Row>
       </PageContent>
-      <Modal
-        closeOnOverlayClick={false}
-        open={open}
-        onClose={() => onOpenModal(false)}
-        center
-        classNames={{
-          modal: "customModal",
-        }}
-      >
-        <NewBooking />
-      </Modal>
     </CustomPageWrapper>
   );
 }
