@@ -1,4 +1,4 @@
-* {
+/* * {
   padding: 0;
   margin: 0;
 
@@ -22,7 +22,7 @@
 .items {
   background-color: white;
   border-radius: 7px;
-  /* border: 1px solid var(--lighterGray); */
+ 
   display: flex;
 
   flex-direction: column;
@@ -101,33 +101,4 @@ th:last-child {
 .ant-tag-blue {
   color: var(--blue) !important;
   background: var(--lightBlue) !important;
-}
-:root {
-  --black: #1d1d1d;
-  --yellow: #f0e001;
-
-  --gray: #8a8a8a;
-  --darkGray: #a1a1a1;
-  --lighterGray: #e6e6e6;
-  --lightGray: #f7f7f7;
-  --blue: #3b86ff;
-  --lightBlue: #ecf1fa;
-  --red: #ff4d61;
-  --lightRed: #fee7e7;
-  --purple: #8b41dc;
-  --orange: #ffac30;
-  --lightOrange: #fff5e5;
-  --darkGreen: #43cf5f;
-  --RayGreen: #54ff34;
-  --LightGreen: #ecfaef;
-  --lightOrange: #fff5e5;
-}
-@font-face {
-  font-family: "Px-Grotesk";
-  src: url("../public/fonts/Px-Grotesk-Bold-Italic.ttf");
-  src: url("../public/fonts/Px-Grotesk-Bold.ttf");
-  src: url("../public/fonts/Px-Grotesk-Light.ttf");
-  src: url("../public/fonts/Px-Grotesk-Regular-Italic.ttf");
-  src: url("../public/fonts/Px-Grotesk-Regular-Italic.ttf");
-  src: url("../public/fonts/Px-Grotesk-Regular.ttf");
-}
+} */

@@ -32,16 +32,7 @@ const ModleTitle = styled.div`
   gap: 5px;
   padding: 20px 40px;
 `;
-const Btn = styled(Button)`
-  border-radius: 7px;
-  border: none;
-  background-color: ${(props) =>
-    props.Main ? " var(--yellow)" : "var(--lighterGray)"};
-  &:hover {
-    background-color: ${(props) =>
-      props.Main ? " var(--yellow)" : "var(--lighterGray)"};
-  }
-`;
+
 const ModleFooter = styled.div`
   display: flex;
   transition: all 0.3s ease;

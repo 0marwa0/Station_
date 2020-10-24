@@ -6,17 +6,55 @@
   font-family: Px-Grotesk !important;
 }
 
-.ant-input:hover {
+/* .ant-input:hover {
   border-color: var(--yellow) !important;
   border-right-width: 1px !important;
-}
+} */
 .customModal {
   border-radius: 7px;
   padding: 0 !important;
 }
-input:hover {
-  border: 1px solid var(--yellow) !important;
+
+.upload_modal .img {
+  height: auto;
+  width: 140px;
+  height: 120px;
+  padding: 15px;
+
+  pointer-events: none;
 }
+.upload_img_close {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.upload_modal {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  border: 2px dashed transparent;
+  border-radius: 3px;
+  min-height: 270px;
+  /* height: auto; */
+  grid-gap: 5%;
+  padding-top: 50px;
+  padding-bottom: 10px;
+  background-color: #f4f7fc;
+}
+.upload_modal [type="file"] + label {
+  border: none;
+  color: var(--blue);
+  cursor: pointer;
+  outline: none;
+}
+.upload_modal [type="file"] {
+  height: 0;
+  overflow: hidden;
+  width: 0;
+}
+
 /* background-image: linear-gradient(
     transparent,
     rgba(2, 2, 2, 0.3),
@@ -68,13 +106,13 @@ a:hover {
 .ant-table-cell {
   padding: 5px 7px !important;
 }
-.ant-input:focus,
+/* .ant-input:focus,
 .ant-input-number:focus {
   outline: 0 !important;
   border: 0.5px solid var(--yellow) !important;
   -webkit-box-shadow: 0 0 0 2px #eeeaaf !important;
   box-shadow: 0 0 0 2px #eeeaaf !important;
-}
+} */
 .ant-checkbox-checked .ant-checkbox-inner {
   background-color: var(--yellow) !important;
   border-color: var(--yellow) !important;
@@ -110,6 +148,16 @@ a:hover {
   border-radius: 7px !important;
   text-align: left !important;
 }
+/* .ant-input-password {
+  background-color: rebeccapurple !important;
+}
+.ant-input-affix-wrapper {
+  background-color: red !important;
+} */
+.slick-dots li.slick-active button:before {
+  color: var(--yellow) !important;
+}
+
 .ant-table-container {
   border: 1px solid var(--lighterGray) !important;
   border-radius: 10px 10px 0 0 !important;
@@ -164,10 +212,10 @@ th:last-child {
 }
 @font-face {
   font-family: "Px-Grotesk";
-  src: url("/fonts/Px-Grotesk-Bold-Italic.ttf");
-  src: url("/fonts/Px-Grotesk-Bold.ttf");
-  src: url("/fonts/Px-Grotesk-Light.ttf");
-  src: url("/fonts/Px-Grotesk-Regular-Italic.ttf");
-  src: url("/fonts/Px-Grotesk-Regular-Italic.ttf");
-  src: url("/fonts/Px-Grotesk-Regular.ttf");
+  src: url("./public/fonts/Px-Grotesk-Bold-Italic.ttf");
+  src: url("./public/fonts/Px-Grotesk-Bold.ttf");
+  src: url("./public/fonts/Px-Grotesk-Light.ttf");
+  src: url("./public/fonts/Px-Grotesk-Regular-Italic.ttf");
+  src: url("./public/fonts/Px-Grotesk-Regular-Italic.ttf");
+  src: url("./public/fonts/Px-Grotesk-Regular.ttf");
 }

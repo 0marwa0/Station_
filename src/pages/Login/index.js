@@ -2,23 +2,29 @@ import styled from "styled-components";
 import React from "react";
 import { Input, Button, Checkbox } from "antd";
 import { Link } from "react-router-dom";
-const PageWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr auto;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { Carousel } from "antd";
+const PageWrapper = styled.span`
+  display: flex;
   @media (max-width: 768px) {
-    grid-template-columns: auto;
+    flex-direction: column;
   }
 `;
 const LoginForm = styled.div`
+  width: 35%;
+  padding: 40px;
   display: flex;
+  gap: 14px;
+  margin-top: 6%;
+  font-size: 18px;
+  color: var(--darkGray);
   flex-direction: column;
-  padding: 20%;
-  gap: 20px;
-  width: 600px;
-  margin: auto;
+  @media (max-width: 768px) {
+    width: 80%;
+    margin: auto;
+  }
 `;
 const Logo = styled.img`
   width: 100px;
@@ -26,28 +32,78 @@ const Logo = styled.img`
 `;
 const ShortCat = styled.div`
   background-color: var(--lightGray);
-  padding: 50px;
-  display: flex;
-  gap: 20px;
+
   height: 100vh;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
+
+  width: 65%;
+
   color: var(--darkGray);
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 const BoldText = styled.div`
   font-size: 20px;
   font-weight: bold;
   color: black;
 `;
-
+const CopyRights = styled.div`
+  font-size: 16px;
+  color: var(--yellow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 70px;
+  gap: 5px;
+`;
 const LoginInfo = styled.div`
   display: flex;
+  font-size: 15px;
   justify-content: space-between;
 `;
-class Index extends React.Component {
+const Slide = styled.div`
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  padding-top: 60px;
+  padding-left: 15%;
+  padding-right: 15%;
+`;
+const StyledPassword = styled(Input.Password)`
+  Input {
+    background-color: transparent;
+    border-color: red;
+    color: white;
+    padding: 10px;
+    height: auto;
+    border-radius: 3px;
+  }
+`;
+export default class AutoPlayMethods extends React.Component {
+  constructor(props) {
+    super(props);
+    this.play = this.play.bind(this);
+    this.pause = this.pause.bind(this);
+  }
+  play() {
+    this.slider.slickPlay();
+  }
+  pause() {
+    this.slider.slickPause();
+  }
   render() {
+    const settings = {
+      dots: true,
+      infinite: true,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 2000,
+    };
+    const contentStyle = {};
     return (
       <div>
         <PageWrapper>
@@ -56,21 +112,24 @@ class Index extends React.Component {
             <div>
               User Name{" "}
               <Input
+                placeholder="Enter you user name"
                 style={{
-                  height: "50px",
+                  height: "60px",
                   borderRadius: "6px",
                   marginTop: "5px",
+                  padding: "20px",
                 }}
               />
             </div>
-
             <div>
               Password
-              <Input
+              <StyledPassword
+                placeholder="Enter you passwrd"
                 style={{
-                  height: "50px",
+                  height: "60px",
                   borderRadius: "6px",
                   marginTop: "5px",
+                  padding: "20px",
                 }}
               />
             </div>
@@ -86,8 +145,8 @@ class Index extends React.Component {
                     padding: "0 40%",
                     width: "100%",
                     alignItems: "center",
-
-                    height: "50px",
+                    fontSize: "18px",
+                    height: "60px",
                   }}
                 >
                   Login
@@ -100,24 +159,51 @@ class Index extends React.Component {
               </div>
               <u>Forgot Password?</u>
             </LoginInfo>
+            <CopyRights>
+              <span style={{ color: "var(--darkGray)", fontSize: "13px" }}>
+                A system by {"  "}
+              </span>
+              Solo Creative Studio
+            </CopyRights>
           </LoginForm>
-
           <ShortCat>
-            <img
-              src={require("../../public/images/Browser.png")}
-              style={{ width: "100%" }}
-            />
-            <BoldText>Trusted & certificated Dashboard System </BoldText>
-            <p>
-              Turn your smartphone or tablet into powerful POS Manage sales
-              inventory and employees with ease; engage custommers increase your
-              revenue
-            </p>
+            <Slider
+              arrows={false}
+              ref={(slider) => (this.slider = slider)}
+              {...settings}
+            >
+              <div>
+                <Slide>
+                  <img
+                    src={require("../../public/images/Browser.png")}
+                    style={{ width: "100%", marginBottom: "70px" }}
+                  />
+                  <BoldText>Trusted & certificated Dashboard System </BoldText>
+                  <p>
+                    Turn your smartphone or tablet into powerful POS Manage
+                    sales inventory and employees with ease; engage custommers
+                    increase your revenue
+                  </p>{" "}
+                </Slide>
+              </div>
+              <div>
+                <Slide>
+                  <img
+                    src={require("../../public/images/Browser.png")}
+                    style={{ width: "100%", marginBottom: "70px" }}
+                  />
+                  <BoldText>Trusted & certificated Dashboard System </BoldText>
+                  <p>
+                    Turn your smartphone or tablet into powerful POS Manage
+                    sales inventory and employees with ease; engage custommers
+                    increase your revenue
+                  </p>{" "}
+                </Slide>
+              </div>
+            </Slider>
           </ShortCat>
         </PageWrapper>
       </div>
     );
   }
 }
-
-export default Index;

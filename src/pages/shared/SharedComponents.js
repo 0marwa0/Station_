@@ -1,5 +1,7 @@
 import React from "react";
 import { RiArrowDownSFill } from "react-icons/ri";
+import { AiOutlineClose } from "react-icons/ai";
+
 import { ButtonStyled } from "../shared/SharedStyle";
 export const CustomButton = ({
   lable,
