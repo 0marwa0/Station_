@@ -1,4 +1,4 @@
-/* * {
+* {
   padding: 0;
   margin: 0;
 
@@ -22,7 +22,7 @@
 .items {
   background-color: white;
   border-radius: 7px;
- 
+
   display: flex;
 
   flex-direction: column;
@@ -101,4 +101,4 @@ th:last-child {
 .ant-tag-blue {
   color: var(--blue) !important;
   background: var(--lightBlue) !important;
-} */
+}
