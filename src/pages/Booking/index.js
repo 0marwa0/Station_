@@ -18,7 +18,7 @@ function Booking() {
         pageTitle="Booking"
         columns={BookingColumns}
         data={BookingData}
-        onOpenModal={onOpenModal}
+        onOpenModal={() => onOpenModal(true)}
       />
 
       <Modal

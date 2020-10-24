@@ -5,6 +5,8 @@ import { BsTrashFill } from "react-icons/bs";
 import { FiEdit } from "react-icons/fi";
 import { FaCalendarAlt } from "react-icons/fa";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
+
 const ListItemWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -100,10 +102,6 @@ const BottomText = styled.div`
   justify-content: space-between;
 `;
 const ListItem = () => {
-  //   const [showActions, setShowActions] = useState(false);
-  //   const show = () => {
-  //     setShowActions(true);
-  //   };
   return (
     <ListItemWrapper>
       {ArticlesData.map((item, i) => {

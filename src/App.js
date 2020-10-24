@@ -12,6 +12,7 @@ import Resources from "./pages/Resource";
 import FilUploader from "./pages/FileUploader";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
+import CreateEvent from "./pages/Events/CreateEvent";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
           <Route path="/" component={Login} exact />
           <Route path="/Dashboard" component={Dashboard} exact />
           <Route path="/profile" component={Profile} exact />
-
+          <Route path="/createEvent" component={CreateEvent} exact />
           <Route path="/Articles" component={Articles} exact />
           <Route path="/Booking" component={Booking} exact />
           <Route path="/Events" component={Events} exact />

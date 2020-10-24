@@ -4,10 +4,14 @@ import { EventsData } from "../../fakeData";
 import CustomPage from "../shared/CustomPage";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
+import { useHistory } from "react-router-dom";
 function Events() {
   const [open, setOpen] = useState(false);
+  const history = useHistory();
   const onOpenModal = (open) => {
     setOpen(open);
+
+    history.push("/createEvent");
   };
   return (
     <div>
