@@ -39,7 +39,7 @@
 .ant-table-cell {
   padding: 5px 7px !important;
 }
-.ant-input:focus {
+/* .ant-input:focus {
   outline: 0 !important;
   border: 0.5px solid var(--yellow) !important;
   -webkit-box-shadow: 0 0 0 2px #eeeaaf !important;
@@ -70,7 +70,7 @@
   color: var(--black);
   background: #fff;
   border-color: var(--yellow) !important;
-}
+} */
 .ant-table-container {
   border: 1px solid var(--lighterGray) !important;
   border-radius: 10px 10px 0 0 !important;

@@ -123,7 +123,7 @@ export default class AutoPlayMethods extends React.Component {
             </div>
             <div>
               Password
-              <StyledPassword
+              <Input.Password
                 placeholder="Enter you passwrd"
                 style={{
                   height: "60px",
