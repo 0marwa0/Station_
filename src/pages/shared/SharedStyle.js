@@ -32,8 +32,9 @@ export const ModleFooter = styled.div`
   display: flex;
   gap: 10px;
   justify-content: flex-end;
-  marign-top: 20px;
+  marign-top: 5px;
   padding: 20px;
+
   border-top: 1px solid var(--lighterGray);
 `;
 export const ModleHeader = styled.div`

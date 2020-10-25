@@ -1,5 +1,5 @@
 import React from "react";
-import { InputLable, ModleFooter, ModleHeade } from "../../shared/SharedStyle";
+import { InputLable } from "../../shared/SharedStyle";
 import { CustomModleButton } from "../../shared/SharedComponents";
 import { Menu, Dropdown, Button, Input } from "antd";
 import {
@@ -11,7 +11,14 @@ import styled from "styled-components";
 import { AiOutlineClose } from "react-icons/ai";
 import "../../../App.css";
 const PageWrapper = styled.div``;
-const optionData = (
+const Option = (
+  <Menu>
+    <Menu.Item key="1">200</Menu.Item>
+    <Menu.Item key="2">100</Menu.Item>
+    <Menu.Item key="3">50</Menu.Item>
+  </Menu>
+);
+const Data = (
   <Menu>
     <Menu.Item key="1">200</Menu.Item>
     <Menu.Item key="2">100</Menu.Item>
@@ -29,7 +36,9 @@ const SideOverlay = styled.div`
   backdrop-filter: blur(4px);
   background-color: rgba(0, 0, 0, 0.75);
 `;
-
+const ModalFooter = styled.div`
+  margin-top: 35%;
+`;
 const SideModal = styled.div`
   position: absolute;
   top: 0;
@@ -75,10 +84,7 @@ function Index(props) {
         </InputLable>
         <InputLable>
           Branch
-          <Dropdown
-            overlay={optionData}
-            placeholder="choose admin branch location"
-          >
+          <Dropdown overlay={Option} placeholder="choose admin branch location">
             <Button style={{ borderRadius: "7px", float: "right" }}>
               <DownOutlined />
             </Button>
@@ -86,19 +92,19 @@ function Index(props) {
         </InputLable>
         <InputLable>
           Role
-          <Dropdown overlay={optionData}>
-            <Button
-              style={{ borderRadius: "7px", float: "right" }}
-              placeholder="choose admin branch Role"
-            >
+          <Dropdown overlay={Data}>
+            <Button style={{ borderRadius: "7px", float: "right" }}>
               <DownOutlined />
             </Button>
           </Dropdown>
         </InputLable>
-        {/* <div style={{ float: "right" }}>
-          {" "}
-          <CustomModleButton Main>Create</CustomModleButton>
-        </div> */}
+
+        <ModalFooter>
+          <div style={{ float: "right" }}>
+            {" "}
+            <CustomModleButton Main>Create</CustomModleButton>
+          </div>
+        </ModalFooter>
       </SideModal>
     </SideOverlay>
   );

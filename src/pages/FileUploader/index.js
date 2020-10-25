@@ -14,13 +14,13 @@ function FilUploader() {
 
   return (
     <div>
+      {" "}
       <CustomPage
         pageTitle="File Uploader"
         columns={FilUploadedColumns}
         data={FileUpoaderData}
         onOpenModal={onOpenModal}
       />
-
       <Modal
         closeOnOverlayClick={false}
         open={open}

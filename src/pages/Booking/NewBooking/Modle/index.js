@@ -3,6 +3,8 @@ import { DatePicker, Input, InputNumber } from "antd";
 import { Menu, Dropdown, Button, message, Tooltip } from "antd";
 import { DownOutlined, UserOutlined } from "@ant-design/icons";
 import styled from "styled-components";
+import Draggable from "react-draggable";
+import Slider from "react-slick";
 import { InputLable } from "../../../shared/SharedStyle";
 const { TextArea } = Input;
 
@@ -15,7 +17,7 @@ const optionData = (
 );
 
 const CardItem = styled.div`
-  width: 180px;
+  width: 200px;
   height: 100px;
   padding: 8px;
   display: flex;
@@ -32,9 +34,11 @@ const CardWrapper = styled.div`
   display: flex;
   flex-direction: row;
   gap: 10px;
+  courser: grap;
+  width: 900px;
 `;
 const PageWrapper = styled.div`
-  width: 520px;
+  width: 550px;
   margin-bottom: 18px;
   padding: 10px 40px;
 `;
@@ -62,7 +66,9 @@ const SecondPageInput = styled.div`
   gap: 15px;
   grid-template-columns: 1fr 0.1fr 0.1fr auto;
 `;
-
+const GrayText = styled.div`
+  color: var(--lighterGray);
+`;
 export function FirstPage() {
   return (
     <PageWrapper>
@@ -154,34 +160,90 @@ export function SecondPage() {
     </PageWrapper>
   );
 }
+const settings = {
+  dots: false,
+  infinite: false,
+  speed: 500,
+  slidesToShow: 2,
+  slidesToScroll: 1,
+  arrows: false,
+  responsive: [
+    {
+      breakpoint: 320,
+      settings: { slidesToShow: 1, slidesToScroll: 1, infinite: false },
+    },
+    {
+      breakpoint: 768,
+      settings: { slidesToShow: 2, slidesToScroll: 2, infinite: false },
+    },
+    {
+      breakpoint: 1024,
+      settings: { slidesToShow: 3, slidesToScroll: 3, infinite: false },
+    },
+  ],
+};
 
 export function ThirdPage() {
   return (
     <PageWrapper>
-      <InputLable>
-        Coffe Brake Pack
-        <CardWrapper>
-          <CardItem>Title</CardItem>
-          <CardItem>Title</CardItem>
-          <CardItem>Title</CardItem>
-        </CardWrapper>
-      </InputLable>
-      <InputLable>
-        Lunches
-        <CardWrapper>
-          <CardItem>Title</CardItem>
-          <CardItem>Title</CardItem>
-          <CardItem>Title</CardItem>
-        </CardWrapper>
-      </InputLable>
-      <InputLable>
-        Hall Design
-        <CardWrapper>
-          <CardItem>Title</CardItem>
-          <CardItem>Title</CardItem>
-          <CardItem>Title</CardItem>
-        </CardWrapper>
-      </InputLable>
+      <Slider {...settings}>
+        <div>
+          <InputLable>
+            Coffe Brake Pack
+            <CardWrapper>
+              <CardItem>
+                <div>5,000 IQD</div>
+                <GrayText>Water coffe 3 cupcakes,Tea with cookies</GrayText>
+              </CardItem>
+              <CardItem>
+                <div>5,000 IQD</div>
+                <GrayText>Water coffe 3 cupcakes,Tea with cookies</GrayText>
+              </CardItem>
+              <CardItem>
+                <div>5,000 IQD</div>
+                <GrayText>Water coffe 3 cupcakes,Tea with cookies</GrayText>
+              </CardItem>
+            </CardWrapper>
+          </InputLable>
+          <InputLable>
+            Lunches
+            <CardWrapper>
+              <CardItem>
+                <div>5,000 IQD</div>
+                <GrayText>Water coffe 3 cupcakes,Tea with cookies</GrayText>
+              </CardItem>
+              <CardItem>
+                <div>5,000 IQD</div>
+                <GrayText>Water coffe 3 cupcakes,Tea with cookies</GrayText>
+              </CardItem>
+              <CardItem>
+                <div>5,000 IQD</div>
+                <GrayText>Water coffe 3 cupcakes,Tea with cookies</GrayText>
+              </CardItem>
+            </CardWrapper>
+          </InputLable>
+          <InputLable>
+            Hall Design
+            <CardWrapper>
+              <CardItem>
+                <div>5,000 IQD</div>
+                <GrayText>Water coffe 3 cupcakes,Tea with cookies</GrayText>
+              </CardItem>
+              <CardItem>
+                <div>5,000 IQD</div>
+                <GrayText>Water coffe 3 cupcakes,Tea with cookies</GrayText>
+              </CardItem>
+              <CardItem>
+                <div>5,000 IQD</div>
+                <GrayText>Water coffe 3 cupcakes,Tea with cookies</GrayText>
+              </CardItem>
+            </CardWrapper>
+          </InputLable>
+        </div>
+
+        <div></div>
+        <div></div>
+      </Slider>
     </PageWrapper>
   );
 }
