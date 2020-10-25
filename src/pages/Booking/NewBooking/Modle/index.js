@@ -5,6 +5,7 @@ import { DownOutlined, UserOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 import Draggable from "react-draggable";
 import Slider from "react-slick";
+import { FaTrashAlt } from "react-icons/fa";
 import { InputLable } from "../../../shared/SharedStyle";
 const { TextArea } = Input;
 
@@ -52,7 +53,7 @@ const Page1Item = styled.div`
 `;
 const BookedItem = styled.div`
   display: grid;
-
+  padding: 5px 0;
   grid-template-columns: 0.5fr 0.3fr 0.3fr 0.2fr;
   border-bottom: ${(props) =>
     props.head ? "1px solid var(--lighterGray)" : "none"};
@@ -150,11 +151,13 @@ export function SecondPage() {
           <div>13 Oct 2020</div>
           <div>09:00 Am</div>
           <div>06:00 Am</div>
+          <FaTrashAlt color="var(--lighterGray)" />
         </BookedItem>
         <BookedItem>
           <div>15 Oct 2020</div>
           <div>09:00 Am</div>
           <div>06:00 Am</div>
+          <FaTrashAlt color="var(--lighterGray)" />
         </BookedItem>
       </div>
     </PageWrapper>

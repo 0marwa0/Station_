@@ -4,6 +4,7 @@ import { Menu, Dropdown, Button } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { InputLable, ModleFooter, ModleHeader } from "../../shared/SharedStyle";
 import styled from "styled-components";
+import { GiNorthStarShuriken } from "react-icons/gi";
 import { CustomModleButton } from "../../shared/SharedComponents";
 const { TextArea } = Input;
 
@@ -27,11 +28,17 @@ function Index() {
       <ModleHeader>Send notification</ModleHeader>
       <PageWrapper>
         <InputLable>
-          Title
+          <span>
+            Title <GiNorthStarShuriken color="red" size={8} />
+          </span>
           <Input placeholder="write notification title" />
         </InputLable>
         <InputLable>
-          Message
+          <span>
+            {" "}
+            Message <GiNorthStarShuriken color="red" size={8} />
+          </span>
+
           <TextArea placeholder="write notification message ..." />
         </InputLable>{" "}
         <InputLable>
