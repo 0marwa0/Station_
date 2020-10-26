@@ -110,14 +110,14 @@ function CustomPage(props) {
                   {" "}
                   <GiHamburgerMenu
                     size={27}
-                    color="var(--yellow)"
+                    color={showTable ? "var(--yellow)" : "var(--lighterGray)"}
                     cursor="pointer"
                     onClick={showTableItem}
                   />
                   <BsFillGridFill
                     size={25}
                     cursor="pointer"
-                    color="var(--lightGray)"
+                    color={showList ? "var(--yellow)" : "var(--lighterGray)"}
                     onClick={showListItem}
                   />
                 </div>
