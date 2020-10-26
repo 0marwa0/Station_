@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { MdEventNote } from "react-icons/md";
 import { BiBookAdd } from "react-icons/bi";
@@ -10,26 +10,44 @@ import { CloudUploadOutlined } from "@ant-design/icons";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { FaRegUser } from "react-icons/fa";
 import { Tooltip } from "antd";
+import { useLocation } from "react-router-dom";
+
 import { Link } from "react-router-dom";
 const NavItem = ({ slug, children, index, title }) => {
-  // const [selected,setSelected]
+  const location = useLocation();
   let url = `/` + slug;
-  let type = "";
-
-  if (url === "/profile") {
-    type = index;
+  let type;
+  let isSelected = false;
+  if (index) {
+    type = true;
+    console.log(type, "trueee");
+  } else {
+    type = false;
   }
-  console.log(slug, title);
+
+  if (slug === location.pathname.substr(1)) {
+    isSelected = true;
+  }
+  if (location.pathname.substr(1) === "BookingDetalis" && slug === "Booking") {
+    isSelected = true;
+  }
+  if (location.pathname.substr(1) === "createEvent" && slug === "Events") {
+    isSelected = true;
+  }
   return (
     <Tooltip title={`${slug}`} placement="right">
       {slug === title ? (
-        <SideItem active type>
-          <Link to={url}>{children} </Link>
-        </SideItem>
+        <Link to={url}>
+          <SideItem type={type} isSelected={isSelected}>
+            {children}
+          </SideItem>
+        </Link>
       ) : (
-        <SideItem type>
-          <Link to={url}>{children}</Link>
-        </SideItem>
+        <Link to={url}>
+          <SideItem type={type} isSelected={isSelected}>
+            {children}
+          </SideItem>
+        </Link>
       )}
     </Tooltip>
   );
@@ -51,14 +69,20 @@ export const SideList = styled.ul`
   }
 `;
 export const SideItem = styled.li`
-  color: ${(props) => (props.active ? "var(--yellow)" : "var(--gray)")};
   position: relative;
-  margin-bottom: 10px;
-  padding: 0 20px;
+  margin-bottom: 15px;
+  padding: 3px 5px;
   cursor: pointer;
-  border-left: 2px solid var(--black);
-  font-size: 23px;
+  border-left: ${(props) =>
+    props.type
+      ? "2px solid var(--black);"
+      : props.isSelected
+      ? "2px solid var(--yellow);"
+      : "2px solid var(--black);"};
+  font-size: 25px;
   display: flex;
+  color: ${(props) => (props.isSelected ? "var(--yellow);" : "var(--gray);")};
+
   justify-content: center;
   align-items: center;
   &:hover {
@@ -67,6 +91,7 @@ export const SideItem = styled.li`
     color: var(--yellow);
   }
 `;
+
 export const UserImage = styled.img`
   width: 30px;
   height: 30px;
@@ -89,62 +114,57 @@ const Logo = styled.img`
   margin-bottom: 20px;
   padding: 0 10px;
 `;
-class SideBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+function SideBar(props) {
+  let title = props.title;
 
-  render() {
-    let title = this.props.title;
-    console.log(this.props.title, "from slider");
-    return (
-      <div>
-        <SideWrapper>
-          <SideList>
-            <Logo src={require("../public/images/Logo.png")} />
-            <NavItem slug="Dashboard" title={title}>
-              <BiLineChart />
-            </NavItem>
-            <NavItem slug="Booking" title={title}>
-              <BiBookAdd />
-            </NavItem>
-            <NavItem slug="Articles" title={title}>
-              <MdEventNote />
-            </NavItem>
-            <NavItem slug="Events" title={title}>
-              <MdEventNote />
-            </NavItem>
-            <NavItem slug="Customers" title={title}>
-              <HiOutlineUsers />
-            </NavItem>
-            <NavItem slug="Admins" title={title}>
-              <FaRegUser />
-            </NavItem>
-            <NavItem slug="FileUploader" title={title}>
-              <CloudUploadOutlined />
-            </NavItem>
-            <NavItem slug="Resources" title={title}>
-              <VscSourceControl />
-            </NavItem>
-          </SideList>
-          <SideList>
-            <SideItem>
-              <BsSearch />
-            </SideItem>
-            <SideItem>
-              <IoMdNotificationsOutline />
-            </SideItem>
+  return (
+    <div>
+      <SideWrapper>
+        <SideList>
+          <Logo src={require("../public/images/Logo.png")} />
 
-            <NavItem slug="profile" index="profile">
-              <UserImage src={require("../public/images/user.png")} />
-              <Active></Active>
-            </NavItem>
-          </SideList>
-        </SideWrapper>
-      </div>
-    );
-  }
+          <NavItem slug="Dashboard" title={title}>
+            <BiLineChart />
+          </NavItem>
+
+          <NavItem slug="Booking" title={title}>
+            <BiBookAdd />
+          </NavItem>
+          <NavItem slug="Articles" title={title}>
+            <MdEventNote />
+          </NavItem>
+          <NavItem slug="Events" title={title}>
+            <MdEventNote />
+          </NavItem>
+          <NavItem slug="Customers" title={title}>
+            <HiOutlineUsers />
+          </NavItem>
+          <NavItem slug="Admins" title={title}>
+            <FaRegUser />
+          </NavItem>
+          <NavItem slug="FileUploader" title={title}>
+            <CloudUploadOutlined />
+          </NavItem>
+          <NavItem slug="Resources" title={title}>
+            <VscSourceControl />
+          </NavItem>
+        </SideList>
+        <SideList>
+          <SideItem>
+            <BsSearch />
+          </SideItem>
+          <SideItem>
+            <IoMdNotificationsOutline />
+          </SideItem>
+
+          <NavItem slug="profile" index={true}>
+            <UserImage src={require("../public/images/user.png")} />
+            <Active></Active>
+          </NavItem>
+        </SideList>
+      </SideWrapper>
+    </div>
+  );
 }
 
 export default SideBar;

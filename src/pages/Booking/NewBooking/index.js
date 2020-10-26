@@ -5,6 +5,7 @@ import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import { Button } from "antd";
+import { Link } from "react-router-dom";
 import { FirstPage, SecondPage, ThirdPage, ForthPage } from "./Modle";
 const data = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
 const Dot = styled.span`
@@ -102,8 +103,6 @@ class Index extends React.Component {
               <span
                 style={{
                   width: "200px",
-
-                  transition: "all 10s ease",
                 }}
               >
                 {i.id === this.state.currentPage ? (
@@ -115,10 +114,20 @@ class Index extends React.Component {
             ))}
           </div>
           <span style={{ display: "flex", gap: "5px" }}>
-            <CustomModleButton fun={this.prevPage}>back</CustomModleButton>
-            <CustomModleButton Main fun={this.nextPage}>
-              Next
-            </CustomModleButton>
+            {this.state.currentPage === 1 ? null : (
+              <CustomModleButton fun={this.prevPage}>back</CustomModleButton>
+            )}
+            {this.state.currentPage === 4 ? (
+              <Link to="/BookingDetalis">
+                <CustomModleButton Main fun={this.nextPage}>
+                  finsh
+                </CustomModleButton>
+              </Link>
+            ) : (
+              <CustomModleButton Main fun={this.nextPage}>
+                Next
+              </CustomModleButton>
+            )}
           </span>
         </ModleFooter>
       </div>

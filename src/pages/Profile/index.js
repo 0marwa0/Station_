@@ -22,7 +22,7 @@ const ProfileHead = styled.div`
   flex-direction: column;
   gap: 10px;
 `;
-const PageBack = styled.div`
+export const PageBack = styled.div`
   display: flex;
   flex-direction: row;
   gap: 5px;

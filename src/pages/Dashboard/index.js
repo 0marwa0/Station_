@@ -8,6 +8,18 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { Col, Row, Input, Button, Menu, Dropdown } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { CustomButton } from "../shared/SharedComponents";
+import {
+  ScheduleComponent,
+  t,
+  ViewsDirective,
+  ViewDirective,
+  Day,
+  Week,
+  WorkWeek,
+  Month,
+  Agenda,
+  Inject,
+} from "@syncfusion/ej2-react-schedule";
 
 import {
   CustomPageWrapper,
@@ -57,6 +69,14 @@ const Clander = styled.div`
 class Booking extends React.Component {
   constructor(props) {
     super(props);
+    this.data = [
+      {
+        Id: 2,
+        Subject: "Paris",
+        StartTime: new Date(2018, 1, 15, 10, 0),
+        EndTime: new Date(2018, 1, 15, 12, 30),
+      },
+    ];
     this.state = {};
   }
   render() {
@@ -75,7 +95,6 @@ class Booking extends React.Component {
             }}
           >
             <PageTitle>Dashboard</PageTitle>
-
             <span style={{ marginTop: "20px", color: "var(--darkGray)" }}>
               Welcome Back, <h8 style={{ color: "black" }}>Marwa!</h8>
             </span>
@@ -118,7 +137,18 @@ class Booking extends React.Component {
                 height: "560px",
               }}
             >
-              <Clander></Clander>
+              <Clander>
+                {/* <ScheduleComponent
+                  height="550px"
+                  currentView="Month"
+                  selectedDate={new Date(2020, 1, 15)}
+                  // showHeaderBar={false}
+                  cssClass="schedule-date-header-template"
+                  eventSettings={{ dataSource: this.data }}
+                >
+                  <Inject services={[Month]} />
+                </ScheduleComponent> */}
+              </Clander>
             </Col>
             <Col style={{ width: "22%", height: "500px" }}>
               <Reservation />
