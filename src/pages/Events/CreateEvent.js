@@ -5,6 +5,9 @@ import {
   PageContent,
   PageTitle,
 } from "../shared/CustomPage";
+import { Link } from "react-router-dom";
+import { BsArrowLeft } from "react-icons/bs";
+import { PageBack } from "../Profile";
 import { Menu, Dropdown, message, Tooltip } from "antd";
 import { DownOutlined, UserOutlined } from "@ant-design/icons";
 import SideBar from "../Sidebar";
@@ -159,6 +162,12 @@ const Index = () => {
       <SideBar />
       <PageContent>
         <Row>
+          <Link to="/Events">
+            <PageBack>
+              <BsArrowLeft />
+              <div>Events</div>
+            </PageBack>
+          </Link>
           <Col
             style={{
               width: "99%",
