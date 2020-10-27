@@ -10,13 +10,15 @@
 }
 .fc-theme-standard .fc-scrollgrid {
   border: none !important;
-  height: 450px !important;
+  height: 423px !important;
+  padding: 0 25px !important;
 }
 .fc-daygrid-day-frame.fc-scrollgrid-sync-inner {
   min-height: 20px !important;
 }
 td:last-child {
   border-right: none !important;
+  border-bottom: none !important;
 }
 .fc-prev-button,
 .fc-next-button {

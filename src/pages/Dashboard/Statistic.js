@@ -75,7 +75,7 @@ const TotlaCost = styled.div`
 
 function Index() {
   return (
-    <Widget>
+    <Widget main>
       <ItemHeader>
         <span style={{ fontWeight: "bold", fontSize: "1.2vw" }}>
           Statistics

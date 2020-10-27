@@ -43,9 +43,11 @@ export const Widget = styled.div`
   border-radius: 7px;
   border: 1px solid var(--lighterGray);
   display: flex;
-  padding: 5px 15px;
+  padding: 5px 7%;
+  height: ${(props) => (props.main ? "52%" : "45%")};
   flex-direction: column;
-  margin-bottom: 30px;
+
+  margin-bottom: ${(props) => (props.main ? "0" : "20px")};
 `;
 
 const Clander = styled.div`
@@ -119,12 +121,12 @@ class Booking extends React.Component {
             </PageBtn>
           </Row>
 
-          <Row style={{ display: "flex", gap: "35px" }}>
+          <Row style={{ display: "flex" }}>
             <Col
               style={{
                 width: "75%",
-
-                height: "560px",
+                marginRight: "2%",
+                height: "620px",
               }}
             >
               <Clander>
@@ -134,7 +136,7 @@ class Booking extends React.Component {
                 />
               </Clander>
             </Col>
-            <Col style={{ width: "22%", height: "500px" }}>
+            <Col style={{ width: "23%", height: "100%" }}>
               <Reservation />
               <Statistic />
             </Col>

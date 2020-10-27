@@ -29,11 +29,13 @@ export const PageBtn = styled.div`
   flex-cirection: row;
   justify-content: space-between;
   margin-bottom: 17px;
+
   width: 100%;
 `;
 export const ButtonGroup = styled.div`
   display: flex;
   gap: 10px;
+
   justify-content: flex-end;
   margin-right: ${(props) => (props.space ? "10px" : "0")};
 `;
