@@ -22,7 +22,7 @@ export const PageContent = styled.div`
   width: 100%;
   margin-top: 10px;
   margin-left: 100px;
-  margin-right: 40px;
+  margin-right: 35px;
 `;
 export const PageBtn = styled.div`
   display: flex;

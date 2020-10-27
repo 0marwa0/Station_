@@ -8,18 +8,8 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { Col, Row, Input, Button, Menu, Dropdown } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { CustomButton } from "../shared/SharedComponents";
-import {
-  ScheduleComponent,
-  t,
-  ViewsDirective,
-  ViewDirective,
-  Day,
-  Week,
-  WorkWeek,
-  Month,
-  Agenda,
-  Inject,
-} from "@syncfusion/ej2-react-schedule";
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
 
 import {
   CustomPageWrapper,
@@ -55,7 +45,7 @@ export const Widget = styled.div`
   display: flex;
   padding: 5px 15px;
   flex-direction: column;
-  margin-bottom: 5px;
+  margin-bottom: 30px;
 `;
 
 const Clander = styled.div`
@@ -129,7 +119,7 @@ class Booking extends React.Component {
             </PageBtn>
           </Row>
 
-          <Row style={{ display: "flex", gap: "3%" }}>
+          <Row style={{ display: "flex", gap: "35px" }}>
             <Col
               style={{
                 width: "75%",
@@ -138,16 +128,10 @@ class Booking extends React.Component {
               }}
             >
               <Clander>
-                {/* <ScheduleComponent
-                  height="550px"
-                  currentView="Month"
-                  selectedDate={new Date(2020, 1, 15)}
-                  // showHeaderBar={false}
-                  cssClass="schedule-date-header-template"
-                  eventSettings={{ dataSource: this.data }}
-                >
-                  <Inject services={[Month]} />
-                </ScheduleComponent> */}
+                <FullCalendar
+                  plugins={[dayGridPlugin]}
+                  initialView="dayGridMonth"
+                />
               </Clander>
             </Col>
             <Col style={{ width: "22%", height: "500px" }}>

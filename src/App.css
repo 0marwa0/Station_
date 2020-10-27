@@ -5,7 +5,35 @@
   box-sizing: border-box;
   font-family: Px-Grotesk !important;
 }
+.fc-button-group {
+  gap: 10px !important;
+}
+.fc-theme-standard .fc-scrollgrid {
+  border: none !important;
+  height: 450px !important;
+}
+.fc-prev-button,
+.fc-next-button {
+  background-color: white !important;
+  color: black !important;
+  padding: 1px 5px !important;
+  border-radius: 8px !important;
+  text-transform: capitalize !important;
+  height: 28px !important;
+  border: 1px solid var(--darkGray) !important;
+}
+.fc-header-toolbar {
+  padding: 20px !important;
+}
+.fc-today-button {
+  background-color: white !important;
+  color: black !important;
+  padding: 3px 15px !important;
+  border-radius: 8px !important;
+  text-transform: capitalize !important;
 
+  border: 1px solid var(--darkGray) !important;
+}
 /* .ant-input:hover {
   border-color: var(--yellow) !important;
   border-right-width: 1px !important;

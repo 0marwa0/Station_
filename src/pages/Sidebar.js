@@ -70,8 +70,9 @@ export const SideList = styled.ul`
 `;
 export const SideItem = styled.li`
   position: relative;
-  margin-bottom: 15px;
-  padding: 3px 5px;
+
+  margin-top: 10px;
+  padding: 5px 15px;
   cursor: pointer;
   border-left: ${(props) =>
     props.type
@@ -82,7 +83,6 @@ export const SideItem = styled.li`
   font-size: 25px;
   display: flex;
   color: ${(props) => (props.isSelected ? "var(--yellow);" : "var(--gray);")};
-
   justify-content: center;
   align-items: center;
   &:hover {
