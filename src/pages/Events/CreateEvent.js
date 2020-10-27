@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { IoMdRefresh } from "react-icons/io";
+import Editor from "@stfy/react-editor.js";
+
 import {
   CustomPageWrapper,
   PageContent,
   PageTitle,
 } from "../shared/CustomPage";
+import EditorJS from "@editorjs/editorjs";
+import Header from "@editorjs/header";
+import List from "@editorjs/list";
 import { Link } from "react-router-dom";
 import { BsArrowLeft } from "react-icons/bs";
 import { PageBack } from "../Profile";
@@ -17,6 +22,7 @@ import styled from "styled-components";
 import { ImAttachment } from "react-icons/im";
 import { FaTrashAlt } from "react-icons/fa";
 import { CustomButton } from "../shared/SharedComponents";
+
 export const TextNote = styled.div`
   color: var(--darkGray);
   font-size: 13px;
@@ -74,6 +80,13 @@ const ImageHolder = styled.div`
 const FileImage = styled.img`
   width: 120px;
   height: 100px;
+`;
+const EventHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid var(--lighterGray);
 `;
 const Mainoption = (
   <Menu>
@@ -156,6 +169,7 @@ const Index = () => {
     setFileName(e.dataTransfer.files[0].name);
     getFileSize(e.dataTransfer.files[0].size);
   };
+
   return (
     <CustomPageWrapper>
       <GlobalStyle />
@@ -201,13 +215,40 @@ const Index = () => {
             style={{
               width: "67%",
               height: "560px",
-              padding: "20px",
+              padding: "40px 50px",
               backgroundColor: "white",
               borderRadius: "7px",
             }}
           >
-            {/* <Input placeholder="Add event title .." />
-            <Input placeholder="Price" /> */}
+            <EventHeader>
+              <div>
+                <Input
+                  placeholder="Add event title .."
+                  style={{ width: "400px", height: "60px", fontSize: "20px" }}
+                />
+              </div>
+              <div>
+                {" "}
+                <Input
+                  placeholder="Add event Price"
+                  style={{ width: "200px" }}
+                />
+              </div>{" "}
+            </EventHeader>
+
+            <div
+              style={{
+                padding: "20px 0",
+                fontSize: "17px",
+              }}
+            >
+              <Editor
+                placeholder="Start writing or tap here to add images or videos .."
+                // instanceRef={(instance) => (instanceRef.current = instance)}
+                // tools={EDITOR_JS_TOOLS}
+                // data={data}
+              />
+            </div>
           </Col>
           <Col
             style={{

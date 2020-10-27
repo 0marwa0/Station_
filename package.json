@@ -4,8 +4,12 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.2.2",
+    "@editorjs/editorjs": "^2.19.0",
+    "@editorjs/header": "^2.6.0",
+    "@editorjs/list": "^1.6.0",
     "@fullcalendar/daygrid": "^5.3.2",
     "@fullcalendar/react": "^5.3.1",
+    "@stfy/react-editor.js": "^1.0.3",
     "@syncfusion/ej2-react-schedule": "^18.3.42",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",

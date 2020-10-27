@@ -5,6 +5,11 @@
   box-sizing: border-box;
   font-family: Px-Grotesk !important;
 }
+.ce-toolbar__plus {
+  border-radius: 7px !important;
+  color: black !important;
+  background-color: var(--yellow) !important;
+}
 .fc-button-group {
   gap: 10px !important;
 }
