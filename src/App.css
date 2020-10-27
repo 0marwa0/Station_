@@ -12,6 +12,12 @@
   border: none !important;
   height: 450px !important;
 }
+.fc-daygrid-day-frame.fc-scrollgrid-sync-inner {
+  min-height: 20px !important;
+}
+td:last-child {
+  border-right: none !important;
+}
 .fc-prev-button,
 .fc-next-button {
   background-color: white !important;
@@ -23,7 +29,9 @@
   border: 1px solid var(--darkGray) !important;
 }
 .fc-header-toolbar {
-  padding: 20px !important;
+  margin: 25px !important;
+  padding-bottom: 10px !important;
+  border-bottom: 1px solid var(--lighterGray) !important;
 }
 .fc-today-button {
   background-color: white !important;
