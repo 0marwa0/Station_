@@ -13,6 +13,7 @@ import FilUploader from "./pages/FileUploader";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import CreateEvent from "./pages/Events/CreateEvent";
+import Home from "./pages/Home";
 import BookingDetalis from "./pages/Booking/BookingDetalis";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 function App() {
@@ -27,7 +28,7 @@ function App() {
           <Route path="/Articles" component={Articles} exact />
           <Route path="/Booking" component={Booking} exact />
           <Route path="/BookingDetalis" component={BookingDetalis} exact />
-
+          <Route path="/Home" component={Home} exact />
           <Route path="/Events" component={Events} exact />
           <Route path="/Customers" component={Customers} exact />
           <Route path="/Admins" component={Admins} exact />

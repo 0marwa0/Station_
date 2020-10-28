@@ -1,4 +1,13 @@
 import { Descriptions } from "antd";
+
+export const Notifications = [
+  { name: "muratdha", action: "requested some stock in the", time: "2 min" },
+
+  { name: "muratdha", action: "requested some stock in the", time: "2 min" },
+
+  { name: "muratdha", action: "requested some stock in the", time: "2 min" },
+];
+
 export const StatisticData = [
   {
     name: "Total Reservations",

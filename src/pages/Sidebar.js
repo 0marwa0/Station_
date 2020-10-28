@@ -9,10 +9,52 @@ import { VscSourceControl } from "react-icons/vsc";
 import { CloudUploadOutlined } from "@ant-design/icons";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { FaRegUser } from "react-icons/fa";
-import { Tooltip } from "antd";
+import { Tooltip, Button } from "antd";
 import { useLocation } from "react-router-dom";
-
 import { Link } from "react-router-dom";
+import { Notifications } from "../fakeData";
+const NotificationsHolder = styled.div`
+  padding: 10px 5px;
+  display: flex;
+  flex-direction: column;
+  color: black;
+`;
+const NotifiHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--lighterGray);
+`;
+const NotifiItem = styled.div`
+  display: grid;
+  grid-template-column: auto 1fr auto;
+  gap: 10px;
+  border-bottom: 1px solid var(--lighterGray);
+`;
+export const NotifiImage = styled.img`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+`;
+const Notify = () => {
+  return (
+    <NotificationsHolder>
+      <NotifiHeader>
+        Notifications <u>see all</u>
+      </NotifiHeader>
+      {Notifications.map((item, i) => {
+        return (
+          <NotifiItem key={i}>
+            <NotifiImage src={require("../public/images/user2.png")} />
+            <div>
+              {item.name} {item.action}
+            </div>
+          </NotifiItem>
+        );
+      })}
+    </NotificationsHolder>
+  );
+};
+
 const NavItem = ({ slug, children, index, title }) => {
   const location = useLocation();
   let url = `/` + slug;
@@ -34,22 +76,31 @@ const NavItem = ({ slug, children, index, title }) => {
   if (location.pathname.substr(1) === "createEvent" && slug === "Events") {
     isSelected = true;
   }
+
+  //  slug != "Home" ? (
   return (
     <Tooltip title={`${slug}`} placement="right">
-      {slug === title ? (
-        <Link to={url}>
-          <SideItem type={type} isSelected={isSelected}>
-            {children}
-          </SideItem>
-        </Link>
-      ) : (
-        <Link to={url}>
-          <SideItem type={type} isSelected={isSelected}>
-            {children}
-          </SideItem>
-        </Link>
-      )}
+      <Link to={url}>
+        <SideItem type={type} isSelected={isSelected}>
+          {children}
+        </SideItem>
+      </Link>
     </Tooltip>
+    // ) : (
+    // <Tooltip
+    //   title={Notify}
+    //   placement="right"
+    //   color="white"
+    //   style={{
+    //     borderRadius: "20px",
+    //   }}
+    // >
+    //   <Link to={url}>
+    //     <SideItem type={type} isSelected={isSelected}>
+    //       {children}
+    //     </SideItem>
+    //   </Link>
+    // </Tooltip>
   );
 };
 export const SideWrapper = styled.div`
@@ -103,7 +154,7 @@ const Active = styled.div`
   height: 9px;
   border-radius: 50%;
   position: absolute;
-  bottom: 1px;
+  bottom: 5px;
   right: 22%;
   border: 2px solid var(--black);
   background-color: var(--RayGreen);
@@ -153,13 +204,13 @@ function SideBar(props) {
           <SideItem>
             <BsSearch />
           </SideItem>
-          <SideItem>
+          <NavItem slug="Home" title={title}>
             <IoMdNotificationsOutline />
-          </SideItem>
+          </NavItem>
 
           <NavItem slug="profile" index={true}>
             <UserImage src={require("../public/images/user.png")} />
-            <Active></Active>
+            <Active />
           </NavItem>
         </SideList>
       </SideWrapper>

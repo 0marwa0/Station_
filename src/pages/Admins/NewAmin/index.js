@@ -10,15 +10,15 @@ import {
 import styled from "styled-components";
 import { AiOutlineClose } from "react-icons/ai";
 import "../../../App.css";
-const PageWrapper = styled.div``;
-const Option = (
+
+const option = (
   <Menu>
     <Menu.Item key="1">200</Menu.Item>
     <Menu.Item key="2">100</Menu.Item>
     <Menu.Item key="3">50</Menu.Item>
   </Menu>
 );
-const Data = (
+const data = (
   <Menu>
     <Menu.Item key="1">200</Menu.Item>
     <Menu.Item key="2">100</Menu.Item>
@@ -84,17 +84,31 @@ function Index(props) {
         </InputLable>
         <InputLable>
           Branch
-          <Dropdown overlay={Option} placeholder="choose admin branch location">
-            <Button style={{ borderRadius: "7px", float: "right" }}>
-              <DownOutlined />
+          <Dropdown overlay={option}>
+            <Button style={{ color: "var(--darkGray)" }}>
+              Choose admin branch loaction
+              <DownOutlined
+                style={{
+                  float: "right",
+                  marginTop: "5px",
+                  color: "var(--darkGray)",
+                }}
+              />
             </Button>
           </Dropdown>
         </InputLable>
         <InputLable>
           Role
-          <Dropdown overlay={Data}>
-            <Button style={{ borderRadius: "7px", float: "right" }}>
-              <DownOutlined />
+          <Dropdown overlay={data}>
+            <Button style={{ color: "var(--darkGray)" }}>
+              Choose admin role
+              <DownOutlined
+                style={{
+                  float: "right",
+                  marginTop: "5px",
+                  color: "var(--darkGray)",
+                }}
+              />
             </Button>
           </Dropdown>
         </InputLable>
