@@ -7,7 +7,8 @@ const ReservationItem = styled.div`
   display: grid;
   grid-template-columns: auto 1fr auto;
   gap: 7px;
-  padding: 5px 0;
+  padding-bottom: 3px;
+  padding-top: 7px;
   font-size: 1vw;
 `;
 const ItemHeader = styled.div`
@@ -63,13 +64,15 @@ const GrayText = styled.div`
 `;
 const NumBtn = styled.div`
   background-color: var(--yellow);
-  padding: 3.5px 6px;
+  padding-top: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
   border-radius: 5px;
-  font-size: 1vw;
+  font-size: 0.8vw;
 `;
 const SeeAll = styled.div`
   text-align: center;
-
+  padding-top: 5px;
   cursor: pointer;
 `;
 function Index() {

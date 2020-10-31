@@ -35,17 +35,18 @@ const CardWrapper = styled.div`
   display: flex;
   flex-direction: row;
   gap: 10px;
-  courser: grap;
+  cursor: grab;
   width: 900px;
 `;
 const PageWrapper = styled.div`
-  width: 550px;
+  width: 580px;
+
   margin-bottom: 18px;
-  padding: 10px 40px;
+  padding: 0px 40px;
 `;
 const Page1Item = styled.div`
   display: grid;
-  grid-template-columns: 1fr 0.5fr;
+  grid-template-columns: 1fr 0.7fr;
   align-items: center;
   justify-content: center;
   gap: 15px;
@@ -65,14 +66,18 @@ const SecondPageInput = styled.div`
   align-itmes: center;
 
   gap: 15px;
-  grid-template-columns: 1fr 0.1fr 0.1fr auto;
+  grid-template-columns: 1.2fr 0.1fr 0.1fr auto;
 `;
 const GrayText = styled.div`
   color: var(--lighterGray);
 `;
+const Size = styled.span`
+  display: flex;
+  justify-content: space-between;
+`;
 export function FirstPage() {
   return (
-    <PageWrapper>
+    <div className="modleWrapper ">
       <Page1Item>
         <InputLable>
           Booking Title
@@ -93,7 +98,9 @@ export function FirstPage() {
           <Input placeholder="write organizer name" />
         </InputLable>{" "}
         <InputLable>
-          No. of People Max 3D{" "}
+          <Size>
+            No. of People<span>Max 3D</span>{" "}
+          </Size>
           <InputNumber style={{ borderRadius: "7px", width: "100%" }} />
         </InputLable>
       </Page1Item>
@@ -101,13 +108,13 @@ export function FirstPage() {
         Comment
         <TextArea placeholder="write something about booking ..." />
       </InputLable>
-    </PageWrapper>
+    </div>
   );
 }
 
 export function SecondPage() {
   return (
-    <PageWrapper>
+    <div className="modleWrapper">
       <SecondPageInput>
         <InputLable>
           Choose Date
@@ -160,7 +167,7 @@ export function SecondPage() {
           <FaTrashAlt color="var(--lighterGray)" />
         </BookedItem>
       </div>
-    </PageWrapper>
+    </div>
   );
 }
 const settings = {
@@ -188,11 +195,11 @@ const settings = {
 
 export function ThirdPage() {
   return (
-    <PageWrapper>
-      <Slider {...settings}>
-        <div>
-          <InputLable>
-            Coffe Brake Pack
+    <div className="modleWrapper">
+      <InputLable>
+        Coffe Brake Pack
+        <Slider {...settings}>
+          <div>
             <CardWrapper>
               <CardItem>
                 <div>5,000 IQD</div>
@@ -207,9 +214,15 @@ export function ThirdPage() {
                 <GrayText>Water coffe 3 cupcakes,Tea with cookies</GrayText>
               </CardItem>
             </CardWrapper>
-          </InputLable>
-          <InputLable>
-            Lunches
+          </div>
+          <div></div>
+          <div></div>
+        </Slider>
+      </InputLable>
+      <InputLable>
+        Lunches
+        <Slider {...settings}>
+          <div>
             <CardWrapper>
               <CardItem>
                 <div>5,000 IQD</div>
@@ -224,9 +237,15 @@ export function ThirdPage() {
                 <GrayText>Water coffe 3 cupcakes,Tea with cookies</GrayText>
               </CardItem>
             </CardWrapper>
-          </InputLable>
-          <InputLable>
-            Hall Design
+          </div>
+          <div></div>
+          <div></div>
+        </Slider>
+      </InputLable>
+      <InputLable>
+        Hall Design{" "}
+        <Slider {...settings}>
+          <div>
             <CardWrapper>
               <CardItem>
                 <div>5,000 IQD</div>
@@ -241,32 +260,31 @@ export function ThirdPage() {
                 <GrayText>Water coffe 3 cupcakes,Tea with cookies</GrayText>
               </CardItem>
             </CardWrapper>
-          </InputLable>
-        </div>
-
-        <div></div>
-        <div></div>
-      </Slider>
-    </PageWrapper>
+          </div>
+          <div></div>
+          <div></div>
+        </Slider>
+      </InputLable>
+    </div>
   );
 }
 
 export function ForthPage() {
   return (
-    <PageWrapper>
+    <div className="modleWrapper ">
       <div
         style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}
       >
         <InputLable>
           Totle Price
-          <Input />
+          <Input addonAfter="IQD" placeholder="0.0" />
         </InputLable>
         <InputLable>
           Received
-          <Input />
+          <Input addonAfter="IQD" placeholder="0.0" />
         </InputLable>
       </div>
-    </PageWrapper>
+    </div>
   );
 }
 function Index() {

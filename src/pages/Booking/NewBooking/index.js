@@ -8,30 +8,14 @@ import { Button } from "antd";
 import { Link } from "react-router-dom";
 import { FirstPage, SecondPage, ThirdPage, ForthPage } from "./Modle";
 const data = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
-const Dot = styled.span`
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: var(--lighterGray);
-  float: left;
-  margin: 0 3px;
-  transition: all 10s ease;
-`;
-const CurrentDot = styled.span`
-  width: 50px;
-  height: 6px;
-  border-radius: 20%;
-  float: left;
-  margin: 2px 3px;
-  transition: all 10s ease;
-  background-color: var(--yellow);
-`;
+const Dot = styled.span``;
+const CurrentDot = styled.span``;
 
 const ModleTitle = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
-  padding: 20px 40px;
+  padding: 40px;
 `;
 
 const ModleFooter = styled.div`
@@ -106,9 +90,9 @@ class Index extends React.Component {
                 }}
               >
                 {i.id === this.state.currentPage ? (
-                  <CurrentDot></CurrentDot>
+                  <span className="cDot"></span>
                 ) : (
-                  <Dot></Dot>
+                  <span className="dot"></span>
                 )}
               </span>
             ))}

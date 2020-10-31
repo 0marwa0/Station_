@@ -21,7 +21,7 @@ export const PageContent = styled.div`
   flex-direction: column;
   width: 100%;
   margin-top: 10px;
-  margin-left: 100px;
+  margin-left: 123px;
   margin-right: 35px;
 `;
 export const PageBtn = styled.div`
@@ -35,7 +35,7 @@ export const PageBtn = styled.div`
 export const ButtonGroup = styled.div`
   display: flex;
   gap: 10px;
-
+  algin-items: cneter;
   justify-content: flex-end;
   margin-right: ${(props) => (props.space ? "10px" : "0")};
 `;

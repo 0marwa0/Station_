@@ -34,8 +34,6 @@ export const ModleFooter = styled.div`
   justify-content: flex-end;
   marign-top: 5px;
   padding: 20px;
-
-  border-top: 1px solid var(--lighterGray);
 `;
 export const ModleHeader = styled.div`
   display: flex;
@@ -45,5 +43,4 @@ export const ModleHeader = styled.div`
   font-size: 20px;
   padding-top: 20px;
   padding-left: 40px;
-  background-color: var(--lightGray);
 `;

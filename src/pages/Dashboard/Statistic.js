@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { Widget } from "./index";
+import { RiArrowDropDownLine } from "react-icons/ri";
+
 import { MdShowChart } from "react-icons/md";
 import { GiElectric } from "react-icons/gi";
 import { StatisticData } from "../../fakeData";
@@ -13,12 +15,14 @@ const ReservationItem = styled.div`
   grid-template-columns: auto 1fr auto;
   gap: 7px;
   padding: 5px 0;
+  color: var(--darkBlue);
   font-size: 1vw;
 `;
 const ItemHeader = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 10px 0;
+
   align-items: center;
 `;
 const GrayText = styled.div`
@@ -72,7 +76,11 @@ const TotlaCost = styled.div`
   justify-content: center;
   background-color: var(--LightGreen);
 `;
-
+const BoldText = styled.div`
+  color: black;
+  font-weight: 600;
+  font-size: 0.9vw;
+`;
 function Index() {
   return (
     <Widget main>
@@ -83,15 +91,21 @@ function Index() {
         <Dropdown overlay={menu2}>
           <Button
             style={{
-              padding: " 5px 10px",
+              padding: "5px 4px",
               borderRadius: "10px",
+              height: "23px",
+              fontSize: "10px",
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+              justifyContent: "center",
             }}
           >
-            Oct <DownOutlined />
+            Oct <RiArrowDropDownLine size="18px" />
           </Button>
         </Dropdown>
       </ItemHeader>{" "}
-      <div className="items">
+      <div>
         {StatisticData.map((item, i) => {
           let name = item.name;
           return (
@@ -123,7 +137,7 @@ function Index() {
                 {item.name}
                 <GrayText>{item.doc}</GrayText>
               </div>
-              {item.time}
+              <BoldText>{item.time}</BoldText>
             </ReservationItem>
           );
         })}

@@ -70,9 +70,11 @@ export const CustomersColumns = [
     title: "",
     dataIndex: "",
     render: () => (
-      <BiDotsVerticalRounded
-        style={{ fontSize: "20px", color: "var(--lighterGray)" }}
-      />
+      <div>
+        <BiDotsVerticalRounded
+          style={{ fontSize: "20px", color: "var(--lighterGray)" }}
+        />
+      </div>
     ),
   },
 ];
