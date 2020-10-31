@@ -40,7 +40,7 @@ const NavItem = ({ slug, children, index, title }) => {
   }
 
   return slug === "Home" ? (
-    <a href="#popup1">
+    <a href="#/">
       <SideItem isSelected={isSelected}>{children}</SideItem>
     </a>
   ) : (

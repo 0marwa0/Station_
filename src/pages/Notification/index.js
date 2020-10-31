@@ -45,7 +45,7 @@ const Text = styled.span`
 function Index() {
   return (
     <div>
-      <div id="popup1" class="popup">
+      <div id="/" class="popup">
         <div className="Notification_content">
           <div className="popup_arrow"></div>
           <NotificationsHolder>
