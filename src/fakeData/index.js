@@ -36,25 +36,29 @@ export const ReservationsData = [
     place: "Hall",
     name: "Fikra Space",
     time: "4 week ago",
-    doc: "Dr.Ahmed Hameed|20April2020",
+    doc: "Dr.Ahmed Hameed",
+    date: "20 April 2020",
   },
   {
     place: "A",
     name: "Fikra Space",
     time: "4 week ago",
-    doc: "Dr.Ahmed Hameed|20April2020",
+    doc: "Dr.Ahmed Hameed",
+    date: "20 April 2020",
   },
   {
     place: "B",
     name: "Fikra Space",
     time: "4 week ago",
-    doc: "Dr.Ahmed Hameed|20April2020",
+    doc: "Dr.Ahmed Hameed",
+    date: "20 April 2020",
   },
   {
     place: "C",
     name: "Fikra Space",
     time: "4 week ago",
-    doc: "Dr.Ahmed Hameed|20April2020",
+    doc: "Dr.Ahmed Hameed",
+    date: "20 April 2020",
   },
 ];
 

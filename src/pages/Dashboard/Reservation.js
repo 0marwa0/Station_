@@ -5,10 +5,11 @@ import styled from "styled-components";
 const ReservationItem = styled.div`
   background-color: white;
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 7px;
-  padding-bottom: 3px;
-  padding-top: 7px;
+  grid-template-columns: 30px max-content auto;
+  gap: 9px;
+  padding-bottom: 9px;
+
+  padding-top: 9px;
   font-size: 1vw;
 `;
 const ItemHeader = styled.div`
@@ -18,48 +19,49 @@ const ItemHeader = styled.div`
   align-items: center;
 `;
 const ReservIcon = styled.div`
-  width: 30px;
-  height: 32px;
+  width: 31px;
+  height: 33px;
   border-radius: 7px;
   display: flex;
   align-items: center;
-  font-size: 10px;
+  font-size: 12px;
   justify-content: center;
   background-color: var(--lightBlue);
 `;
 
 const SubA = styled.div`
-  width: 30px;
-  height: 32px;
+  width: 31px;
+  height: 33px;
   border-radius: 7px;
   display: flex;
   align-items: center;
-  font-size: 10px;
+  font-size: 12px;
   justify-content: center;
   background-color: var(--lightRed);
 `;
 const SubB = styled.div`
-  width: 30px;
-  height: 32px;
+  width: 31px;
+  height: 33px;
   border-radius: 7px;
   display: flex;
   align-items: center;
-  font-size: 10px;
+  font-size: 12px;
   justify-content: center;
   background-color: var(--lightOrange);
 `;
 const SubC = styled.div`
-  width: 30px;
-  height: 32px;
+  width: 31px;
+  height: 33px;
   border-radius: 7px;
   display: flex;
   align-items: center;
-  font-size: 10px;
+  font-size: 12px;
   justify-content: center;
   background-color: var(--LightGreen);
 `;
-const GrayText = styled.div`
-  color: var(--lighterGray);
+const GrayText = styled.span`
+  color: var(--textGray);
+  display: flex;
   font-size: 0.7vw;
 `;
 const NumBtn = styled.div`
@@ -73,11 +75,15 @@ const NumBtn = styled.div`
 const SeeAll = styled.div`
   text-align: center;
   padding-top: 5px;
+  display: flex;
+  algin-items: center;
+  justify-content: center;
+
   cursor: pointer;
 `;
 function Index() {
   return (
-    <Widget>
+    <Widget reservation>
       <ItemHeader>
         <span style={{ fontWeight: "bold", fontSize: "1.2vw" }}>
           Pending Reservations
@@ -103,8 +109,22 @@ function Index() {
               )}
 
               <div>
-                {item.name}
-                <GrayText>{item.doc}</GrayText>
+                <span> {item.name}</span>
+                <div style={{ marginTop: "-4px" }}>
+                  <GrayText>
+                    <span>{item.doc} </span>
+                    <span
+                      style={{
+                        width: "7px",
+
+                        textAlign: "center",
+                      }}
+                    >
+                      |
+                    </span>
+                    <span> {item.date}</span>
+                  </GrayText>
+                </div>
               </div>
               <GrayText>{item.time}</GrayText>
             </ReservationItem>

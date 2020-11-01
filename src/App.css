@@ -178,6 +178,11 @@
 .fc-daygrid-body.fc-daygrid-body-unbalanced {
   width: unset !important;
 }
+.fc-toolbar-title {
+  color: #4d4c4c !important;
+  font-weight: 400;
+  font-size: 17px !important;
+}
 .fc-col-header {
   width: 100% !important;
 }
@@ -448,6 +453,7 @@ th:last-child {
 
   --gray: #8a8a8a;
   --darkGray: #a1a1a1;
+  --textGray: #c7c7c7;
   --lighterGray: #e6e6e6;
   --lightGray: #f7f7f7;
   --blue: #3b86ff;

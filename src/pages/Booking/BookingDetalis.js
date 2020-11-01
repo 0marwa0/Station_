@@ -6,7 +6,7 @@ import {
   PageTitle,
 } from "../shared/CustomPage";
 import { DownOutlined } from "@ant-design/icons";
-
+import { useHistory } from "react-router-dom";
 import SideBar from "../Sidebar";
 import { PageBack } from "../Profile";
 import { BsArrowLeft } from "react-icons/bs";
@@ -130,11 +130,14 @@ const menu = (
     </Menu.Item>
   </Menu>
 );
-const Index = () => {
+const Index = (props) => {
+  let history = useHistory();
+
   const [BookingStatus, setBookingStatus] = useState(false);
   const setBooking = (status) => {
     setBookingStatus(status);
   };
+  console.log(history, "should be the prev page");
   return (
     <CustomPageWrapper>
       <GlobalStyle />

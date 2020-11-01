@@ -9,6 +9,8 @@ import { DownOutlined } from "@ant-design/icons";
 import { CustomButton } from "../shared/SharedComponents";
 import FullCalendar from "@fullcalendar/react";
 import { Modal } from "react-responsive-modal";
+
+import NewBooking from "../Booking/NewBooking";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import Tooltip from "react-tooltip";
@@ -37,13 +39,13 @@ const colors = {
 const Data = [
   {
     title: "Fikra Space",
-    start: "2020-10-01",
-    end: "2020-10-1",
+    start: "2020-11-01",
+    end: "2020-11-1",
     data: [
       {
         title: "Fikra Space",
         day: "Sunday",
-        date: "1 Octobar 2020",
+        date: "1 November 2020",
         time: "8:00 Am - 9:00AM",
       },
     ],
@@ -51,13 +53,13 @@ const Data = [
   },
   {
     title: "Fikra Space",
-    start: "2020-10-07",
-    end: "2020-10-06",
+    start: "2020-11-07",
+    end: "2020-11-06",
     data: [
       {
         title: "Fikra Space",
         day: " Wensday",
-        date: "7 Octobar 2020 ",
+        date: "7 November 2020 ",
         time: "8:00 Am - 9:00AM",
       },
     ],
@@ -65,13 +67,13 @@ const Data = [
   },
   {
     title: "Fikra Space",
-    start: "2020-10-13",
-    end: "2020-10-13",
+    start: "2020-11-13",
+    end: "2020-11-13",
     data: [
       {
         title: "Fikra Space",
         day: "Tuesday",
-        date: "13 Octobar 2020",
+        date: "13 November 2020",
         time: "8:00 Am - 9:00AM",
       },
     ],
@@ -79,13 +81,13 @@ const Data = [
   },
   {
     title: "Fikra Space",
-    start: "2020-10-31",
-    end: "2020-10-31",
+    start: "2020-11-31",
+    end: "2020-11-31",
     data: [
       {
         title: "Fikra Space",
         day: "Saturday",
-        date: "31 Octobar 2020",
+        date: "31 November 2020",
         time: "8:00 Am - 9:00AM",
       },
     ],
@@ -93,13 +95,13 @@ const Data = [
   },
   {
     title: "Fikra Space",
-    start: "2020-10-30",
-    end: "2020-10-30",
+    start: "2020-11-30",
+    end: "2020-11-30",
     data: [
       {
         title: "Fikra Space",
         day: "Friday",
-        date: "30 Octobar 2020",
+        date: "30 November 2020",
         time: "8:00 Am - 9:00AM",
       },
     ],
@@ -107,13 +109,13 @@ const Data = [
   },
   {
     title: "Fikra Space",
-    start: "2020-10-18",
-    end: "2020-10-21",
+    start: "2020-11-18",
+    end: "2020-11-21",
     data: [
       {
         title: "Fikra Space",
         day: "Sundey - Wednsday",
-        date: "18 Octobar 2020 -18 Octobar 2020",
+        date: "18 November 2020 -18 November 2020",
         time: "8:00 Am - 9:00AM",
       },
     ],
@@ -121,13 +123,13 @@ const Data = [
   },
   {
     title: "Fikra Space",
-    start: "2020-10-19",
-    end: "2020-10-21",
+    start: "2020-11-19",
+    end: "2020-11-21",
     data: [
       {
         title: "Fikra Space",
         day: "Monday - Tuesday",
-        date: "18 Octobar 2020 -20 Octobar 2020",
+        date: "18 November 2020 -20 November 2020",
         time: "8:00 Am - 9:00AM",
       },
     ],
@@ -135,13 +137,13 @@ const Data = [
   },
   {
     title: "Fikra Space",
-    start: "2020-10-04",
-    end: "2020-10-08",
+    start: "2020-11-04",
+    end: "2020-11-08",
     data: [
       {
         title: "Fikra Space",
         day: "Sundey - Wednsday",
-        date: "4 Octobar 2020 - 8 Octobar 2020",
+        date: "4 November 2020 - 8 November 2020",
         time: "8:00 Am - 9:00AM",
       },
     ],
@@ -149,13 +151,13 @@ const Data = [
   },
   {
     title: "Fikra Space",
-    start: "2020-10-04",
-    end: "2020-10-06",
+    start: "2020-11-04",
+    end: "2020-11-06",
     data: [
       {
         title: "Fikra Space",
         day: "Sundey - Wednsday",
-        date: "4 Octobar 2020 - 6 Octobar 2020",
+        date: "4 November 2020 - 6 November 2020",
         time: "8:00 Am - 9:00AM",
       },
     ],
@@ -186,7 +188,7 @@ export const Widget = styled.div`
 const Clander = styled.div`
   background-color: white;
   border-radius: 7px;
-  padding: 25px;
+  padding: 15px 25px;
   height: 100%;
   border: 1px solid var(--lighterGray);
 `;
@@ -245,14 +247,14 @@ function Booking() {
   const onLeave = (item) => {
     if (document.getElementById("pupup")) {
       item.el.removeChild(document.getElementById("pupup"));
-      console.log(item.el);
-      console.log("onleave true");
     } else {
-      console.log("onleave");
     }
     return item;
   };
-
+  const [open, setOpen] = useState(false);
+  const onOpenModal = (open) => {
+    setOpen(open);
+  };
   return (
     <CustomPageWrapper>
       <GlobalStyle />
@@ -300,7 +302,7 @@ function Booking() {
               <CustomButton lable="Print">
                 <BiExport />
               </CustomButton>
-              <CustomButton Main lable={`New Booking`}>
+              <CustomButton Main onOpen={onOpenModal} lable="New Booking">
                 <AiOutlinePlus />
               </CustomButton>
             </ButtonGroup>
@@ -310,7 +312,7 @@ function Booking() {
         <Row style={{ display: "flex" }}>
           <Col
             style={{
-              width: "75%",
+              width: "73%",
               marginRight: "2%",
               height: "50rem",
               marginBottom: "10%",
@@ -326,12 +328,23 @@ function Booking() {
               />
             </Clander>
           </Col>
-          <Col style={{ width: "23%", height: "100%" }}>
+          <Col style={{ width: "25%", height: "100%" }}>
             <Reservation />
             <Statistic />
           </Col>
         </Row>
       </PageContent>
+      <Modal
+        closeOnOverlayClick={false}
+        open={open}
+        onClose={() => onOpenModal(false)}
+        center
+        classNames={{
+          modal: "customModal",
+        }}
+      >
+        <NewBooking from="Dashboard" />
+      </Modal>
     </CustomPageWrapper>
   );
 }

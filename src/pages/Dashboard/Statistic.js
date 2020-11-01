@@ -26,7 +26,7 @@ const ItemHeader = styled.div`
   align-items: center;
 `;
 const GrayText = styled.div`
-  color: var(--lighterGray);
+  color: var(--textGray);
   font-size: 0.7vw;
 `;
 const menu2 = (
