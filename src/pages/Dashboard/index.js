@@ -181,6 +181,7 @@ export const Widget = styled.div`
   border-radius: 7px;
   border: 1px solid var(--lighterGray);
   display: flex;
+  min-width: 200px;
   padding: 10px 7%;
   flex-direction: column;
   margin-bottom: ${(props) => (props.main ? "0" : "20px")};
@@ -312,7 +313,7 @@ function Booking() {
         <Row style={{ display: "flex" }}>
           <Col
             style={{
-              width: "73%",
+              width: "71%",
               marginRight: "2%",
               height: "50rem",
               marginBottom: "10%",
@@ -328,7 +329,7 @@ function Booking() {
               />
             </Clander>
           </Col>
-          <Col style={{ width: "25%", height: "100%" }}>
+          <Col style={{ width: "27%", height: "100%" }}>
             <Reservation />
             <Statistic />
           </Col>

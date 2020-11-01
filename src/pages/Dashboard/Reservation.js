@@ -5,7 +5,7 @@ import styled from "styled-components";
 const ReservationItem = styled.div`
   background-color: white;
   display: grid;
-  grid-template-columns: 30px max-content auto;
+  grid-template-columns: 30px max-content max-content;
   gap: 9px;
   padding-bottom: 9px;
 
