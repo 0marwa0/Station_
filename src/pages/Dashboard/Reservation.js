@@ -5,10 +5,10 @@ import styled from "styled-components";
 const ReservationItem = styled.div`
   background-color: white;
   display: grid;
-  grid-template-columns: 30px max-content max-content;
+  grid-template-columns: 30px 1fr max-content;
   gap: 9px;
   padding-bottom: 9px;
-
+  align-items: center;
   padding-top: 9px;
   font-size: 1vw;
 `;
