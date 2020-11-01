@@ -9,6 +9,8 @@ import { CustomButton } from "../shared/SharedComponents";
 import { AiOutlinePlus } from "react-icons/ai";
 import SideBar from "../Sidebar";
 import styled from "styled-components";
+import { ReactComponent as Upload } from "../../public/images/solid cloud-upload-alt.svg";
+import { ReactComponent as Notifiy } from "../../public/images/solid bell.svg";
 import { ReactComponent as TableIcon } from "../../public/images/Table.svg";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 
@@ -95,7 +97,7 @@ function CustomPage(props) {
   } else {
     pageTitleName = props.pageTitle.substring(0, props.pageTitle.length - 1);
   }
-
+  console.log(pageTitleName, "show page name");
   return (
     <CustomPageWrapper>
       <SideBar title={props.pageTitle} />
@@ -282,14 +284,35 @@ function CustomPage(props) {
               <CustomButton lable="Export">
                 <BiExport />
               </CustomButton>
-              <CustomButton
-                Main
-                lable={`New ${pageTitleName}`}
-                pageTitle={pageTitle}
-                onOpen={() => props.onOpenModal(true)}
-              >
-                <AiOutlinePlus />
-              </CustomButton>
+              {pageTitleName == "Customer" ? (
+                <CustomButton
+                  Main
+                  lable={`Notify Users`}
+                  pageTitle={pageTitle}
+                  onOpen={() => props.onOpenModal(true)}
+                >
+                  <Notifiy />
+                </CustomButton>
+              ) : pageTitleName === "Resource" ||
+                pageTitleName === "File Uploade" ? (
+                <CustomButton
+                  Main
+                  lable={`Upload`}
+                  pageTitle={pageTitle}
+                  onOpen={() => props.onOpenModal(true)}
+                >
+                  <Upload />
+                </CustomButton>
+              ) : (
+                <CustomButton
+                  Main
+                  lable={`New ${pageTitleName}`}
+                  pageTitle={pageTitle}
+                  onOpen={() => props.onOpenModal(true)}
+                >
+                  <AiOutlinePlus />
+                </CustomButton>
+              )}
             </ButtonGroup>
           </PageBtn>
         </Row>

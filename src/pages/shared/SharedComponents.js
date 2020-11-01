@@ -15,11 +15,7 @@ export const CustomButton = ({
   return (
     <ButtonStyled Main={Main} onClick={Main ? onOpen : fun}>
       {children}
-      {pageTitle === "Resources"
-        ? (lable = "Upload")
-        : pageTitle === "File Uploader"
-        ? (lable = "Upload")
-        : lable}
+      {lable}
       {filter ? <RiArrowDownSFill color="var(--lighterGray)" /> : ""}
     </ButtonStyled>
   );
