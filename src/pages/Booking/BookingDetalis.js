@@ -143,179 +143,167 @@ const Index = (props) => {
       <GlobalStyle />
       <SideBar />
       <PageContent>
-        <Wrapper>
-          <Link to="/Booking">
-            <PageBack>
-              <BsArrowLeft />
-              <div>Booking</div>
-            </PageBack>
-          </Link>
-          <PageActions>
-            <PageTitle>Event 2020 19x</PageTitle>
+        <div style={{ marginTop: "20px" }}>
+          <Wrapper>
+            <Link to="/Booking">
+              <PageBack>
+                <BsArrowLeft />
+                <div>Booking</div>
+              </PageBack>
+            </Link>
+            <PageActions>
+              <PageTitle>Event 2020 19x</PageTitle>
 
-            <div style={{ display: "flex", gap: "10px" }}>
-              <ButtonStyled>Edit</ButtonStyled>
-              {!BookingStatus ? null : (
-                <ButtonStyled Main>View Event</ButtonStyled>
+              <div style={{ display: "flex", gap: "10px" }}>
+                <ButtonStyled>Edit</ButtonStyled>
+                {!BookingStatus ? null : (
+                  <ButtonStyled Main>View Event</ButtonStyled>
+                )}
+              </div>
+            </PageActions>
+
+            <BookingActions>
+              {BookingStatus ? (
+                <div>Published</div>
+              ) : (
+                <Dropdown overlay={menu}>
+                  <Pending>
+                    <spna>
+                      Pending
+                      <DownOutlined
+                        style={{ fontSize: "10px", margin: " 0 5px" }}
+                      />
+                    </spna>
+                  </Pending>
+                </Dropdown>
               )}
-            </div>
-          </PageActions>
-
-          <BookingActions>
-            {BookingStatus ? (
-              <div>Published</div>
-            ) : (
-              <Dropdown overlay={menu}>
-                <Pending>
-                  <spna>
-                    Pending
-                    <DownOutlined
-                      style={{ fontSize: "10px", margin: " 0 5px" }}
-                    />
-                  </spna>
-                </Pending>
-              </Dropdown>
-            )}
-            {!BookingStatus ? (
-              <Reject onClick={() => setBooking(true)}>Reject</Reject>
-            ) : null}
-            {!BookingStatus ? (
-              <Accept onClick={() => setBooking(true)}>Accept</Accept>
-            ) : null}
-          </BookingActions>
-          <Row
-            style={{
-              borderTop: "1px solid var(--lighterGray)",
-              display: "flex",
-              width: "100%",
-            }}
-          >
-            <Col
+              {!BookingStatus ? (
+                <Reject onClick={() => setBooking(true)}>Reject</Reject>
+              ) : null}
+              {!BookingStatus ? (
+                <Accept onClick={() => setBooking(true)}>Accept</Accept>
+              ) : null}
+            </BookingActions>
+            <Row
               style={{
-                width: "70%",
-                paddingTop: "20px",
-                paddingBottom: "30px",
-                paddingRight: "50px",
-                borderRight: "1px solid var(--lighterGray)",
+                borderTop: "1px solid var(--lighterGray)",
+                display: "flex",
+                width: "100%",
               }}
             >
-              <BoldText>Event Details</BoldText>
-              <EventDetails>
-                <DetailItem>
-                  <GrayText> Space</GrayText>
+              <Col
+                style={{
+                  width: "70%",
+                  paddingTop: "20px",
+                  paddingBottom: "30px",
+                  paddingRight: "50px",
+                  borderRight: "1px solid var(--lighterGray)",
+                }}
+              >
+                <BoldText>Event Details</BoldText>
+                <EventDetails>
+                  <DetailItem>
+                    <GrayText> Space</GrayText>
 
-                  <div>Event Hall</div>
-                </DetailItem>
-                <DetailItem>
-                  <GrayText> Cooffee Break</GrayText>
+                    <div>Event Hall</div>
+                  </DetailItem>
+                  <DetailItem>
+                    <GrayText> Cooffee Break</GrayText>
 
-                  <div>5,000 Package</div>
-                </DetailItem>
-                <DetailItem>
-                  <GrayText> Hall Design</GrayText>
+                    <div>5,000 Package</div>
+                  </DetailItem>
+                  <DetailItem>
+                    <GrayText> Hall Design</GrayText>
 
-                  <div>Rounded Table</div>
-                </DetailItem>
-                <DetailItem>
-                  <GrayText> Date</GrayText>
+                    <div>Rounded Table</div>
+                  </DetailItem>
+                  <DetailItem>
+                    <GrayText> Date</GrayText>
 
-                  <div>Event Hall</div>
-                </DetailItem>
-                <DetailItem>
-                  <GrayText> No. of People</GrayText>
+                    <div>Event Hall</div>
+                  </DetailItem>
+                  <DetailItem>
+                    <GrayText> No. of People</GrayText>
 
-                  <div>72</div>
-                </DetailItem>
-                <DetailItem>
-                  <GrayText> Entity Type</GrayText>
+                    <div>72</div>
+                  </DetailItem>
+                  <DetailItem>
+                    <GrayText> Entity Type</GrayText>
 
-                  <div>Enterprises</div>
-                </DetailItem>
-                <DetailItem>
-                  <GrayText> Total Price</GrayText>
+                    <div>Enterprises</div>
+                  </DetailItem>
+                  <DetailItem>
+                    <GrayText> Total Price</GrayText>
 
-                  <div>$ 120,000,00</div>
-                </DetailItem>
-                <DetailItem>
-                  <GrayText>Received</GrayText>
+                    <div>$ 120,000,00</div>
+                  </DetailItem>
+                  <DetailItem>
+                    <GrayText>Received</GrayText>
 
-                  <div>$53,530,00</div>
-                </DetailItem>
-                <DetailItem>
-                  <GrayText>Lunches</GrayText>
+                    <div>$53,530,00</div>
+                  </DetailItem>
+                  <DetailItem>
+                    <GrayText>Lunches</GrayText>
 
-                  <div>No. 5</div>
-                </DetailItem>
-              </EventDetails>
-              <Col>
-                <Date>
-                  <div>Data</div>
-                  <div>Starting Time</div>
-                  <div>Ending Time</div>
-                </Date>
-                <DateInfo>
-                  <Date item>
-                    <GrayText>13 Oct 2020</GrayText>
-                    <GrayText>06:00 PM</GrayText>
-                    <GrayText>09:00 PM</GrayText>
-                    <GrayText>
-                      <BsThreeDotsVertical />
-                    </GrayText>
+                    <div>No. 5</div>
+                  </DetailItem>
+                </EventDetails>
+                <Col>
+                  <Date>
+                    <div>Data</div>
+                    <div>Starting Time</div>
+                    <div>Ending Time</div>
                   </Date>
-                  <Date odd item>
-                    <GrayText>13 Oct 2020</GrayText>
-                    <GrayText>06:00 PM</GrayText>
-                    <GrayText>09:00 PM</GrayText>
-                    <GrayText>
-                      <BsThreeDotsVertical />
-                    </GrayText>
-                  </Date>
-                  <Date item>
-                    <GrayText>13 Oct 2020</GrayText>
-                    <GrayText>06:00 PM</GrayText>
-                    <GrayText>09:00 PM</GrayText>
-                    <GrayText>
-                      <BsThreeDotsVertical />
-                    </GrayText>
-                  </Date>{" "}
-                  <Date odd item>
-                    <GrayText>13 Oct 2020</GrayText>
-                    <GrayText>06:00 PM</GrayText>
-                    <GrayText>09:00 PM</GrayText>
-                    <GrayText>
-                      <BsThreeDotsVertical />
-                    </GrayText>
-                  </Date>
-                </DateInfo>
-                <DetailItem>
-                  <div> Commnets</div>
+                  <DateInfo>
+                    <Date item>
+                      <GrayText>13 Oct 2020</GrayText>
+                      <GrayText>06:00 PM</GrayText>
+                      <GrayText>09:00 PM</GrayText>
+                      <GrayText>
+                        <BsThreeDotsVertical />
+                      </GrayText>
+                    </Date>
+                    <Date odd item>
+                      <GrayText>13 Oct 2020</GrayText>
+                      <GrayText>06:00 PM</GrayText>
+                      <GrayText>09:00 PM</GrayText>
+                      <GrayText>
+                        <BsThreeDotsVertical />
+                      </GrayText>
+                    </Date>
+                    <Date item>
+                      <GrayText>13 Oct 2020</GrayText>
+                      <GrayText>06:00 PM</GrayText>
+                      <GrayText>09:00 PM</GrayText>
+                      <GrayText>
+                        <BsThreeDotsVertical />
+                      </GrayText>
+                    </Date>{" "}
+                    <Date odd item>
+                      <GrayText>13 Oct 2020</GrayText>
+                      <GrayText>06:00 PM</GrayText>
+                      <GrayText>09:00 PM</GrayText>
+                      <GrayText>
+                        <BsThreeDotsVertical />
+                      </GrayText>
+                    </Date>
+                  </DateInfo>
+                  <DetailItem>
+                    <div> Commnets</div>
 
-                  <GrayText>
-                    where this aims to gather youth who have ideas to implement
-                    them as entrepreneurial businesses on the ground{" "}
-                  </GrayText>
-                </DetailItem>
+                    <GrayText>
+                      where this aims to gather youth who have ideas to
+                      implement them as entrepreneurial businesses on the ground{" "}
+                    </GrayText>
+                  </DetailItem>
+                </Col>
               </Col>
-            </Col>
-            <Col style={{ width: "30%" }}>
-              <Activity>
-                <DetailItem>
-                  <BoldText>Activity</BoldText>
-                  <GrayText>Created by</GrayText>
+              <Col style={{ width: "30%" }}>
+                <Activity>
+                  <DetailItem>
+                    <BoldText>Activity</BoldText>
+                    <GrayText>Created by</GrayText>
 
-                  <ActivityItem>
-                    <UserHolder>
-                      <UserImage
-                        src={require("../../public/images/user2.png")}
-                      />
-                      <span> Murtadha</span>
-                    </UserHolder>
-                    <GrayText>a week ago</GrayText>
-                  </ActivityItem>
-                </DetailItem>
-                <DetailItem>
-                  <GrayText>Approved by</GrayText>
-                  {BookingStatus ? (
                     <ActivityItem>
                       <UserHolder>
                         <UserImage
@@ -325,12 +313,26 @@ const Index = (props) => {
                       </UserHolder>
                       <GrayText>a week ago</GrayText>
                     </ActivityItem>
-                  ) : null}
-                </DetailItem>
-              </Activity>
-            </Col>
-          </Row>
-        </Wrapper>
+                  </DetailItem>
+                  <DetailItem>
+                    <GrayText>Approved by</GrayText>
+                    {BookingStatus ? (
+                      <ActivityItem>
+                        <UserHolder>
+                          <UserImage
+                            src={require("../../public/images/user2.png")}
+                          />
+                          <span> Murtadha</span>
+                        </UserHolder>
+                        <GrayText>a week ago</GrayText>
+                      </ActivityItem>
+                    ) : null}
+                  </DetailItem>
+                </Activity>
+              </Col>
+            </Row>
+          </Wrapper>
+        </div>
       </PageContent>
     </CustomPageWrapper>
   );

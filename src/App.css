@@ -224,13 +224,16 @@
   justify-content: center;
   text-align: center;
   width: 100%;
-  border-radius: 3px;
+  border-radius: 7px;
   min-height: 270px;
   margin-bottom: 10px;
   gap: 5%;
-  border: 6px dashed var(--lighterGray);
-  padding-top: 50px;
+  font-size: 17px;
+  border: 3px dashed var(--lighterGray);
+  padding-top: 10px;
   padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 .upload_modal [type="file"] + label {
   color: black;
@@ -247,7 +250,7 @@
   width: 0;
 }
 .active {
-  border: 4px dashed var(--yellow) !important;
+  border: 4px dashed var(--lighterGray) !important;
 }
 /* background-image: linear-gradient(
     transparent,
@@ -393,13 +396,13 @@ a:hover {
   background: none !important;
   border-color: none !important;
 }
-.ant-btn:hover,
+/* .ant-btn:hover,
 .ant-input-number,
 .ant-btn:focus {
   color: var(--black) !important;
   background: #fff;
   border-color: var(--yellow) !important;
-}
+} */
 .ant-btn {
   border-radius: 7px !important;
   text-align: left !important;

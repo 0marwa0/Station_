@@ -17,7 +17,8 @@ function Booking() {
       <CustomPage
         pageTitle="Booking"
         columns={BookingColumns}
-        data={BookingData}
+        // data={BookingData}
+
         onOpenModal={() => onOpenModal(true)}
       />
 

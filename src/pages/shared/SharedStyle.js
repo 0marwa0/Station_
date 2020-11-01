@@ -1,6 +1,11 @@
 import React from "react";
-import { Button } from "antd";
+import { Button, Input } from "antd";
 import styled from "styled-components";
+export const CustomInput = styled(Input)`
+  border-radius: 7px;
+  color: ${(props) => (props.gray ? " var(--darkGray)" : "black")};
+  background-color: ${(props) => (props.gray ? "var(--lightGray)" : "white")};
+`;
 export const ButtonStyled = styled(Button)`
   background-color: ${(props) =>
     props.Main ? "var(--yellow)" : "var(--lightGray)"};

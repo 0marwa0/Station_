@@ -31,10 +31,10 @@ const SideOverlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  -webkit-backdrop-filter: blur(4px);
+
   z-index: 999999999;
-  backdrop-filter: blur(4px);
-  background-color: rgba(0, 0, 0, 0.75);
+
+  background: rgba(0, 0, 0, 0.3);
 `;
 const ModalFooter = styled.div`
   margin-top: 35%;

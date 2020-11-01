@@ -6,6 +6,7 @@ import { GlobalStyle } from "../Dashboard";
 import { Link } from "react-router-dom";
 import { BsArrowLeft } from "react-icons/bs";
 import styled from "styled-components";
+import { CustomInput } from "../shared/SharedStyle";
 import { BsExclamationCircle } from "react-icons/bs";
 const ProfileContetn = styled.div`
   margin: 0 10%;
@@ -105,26 +106,26 @@ const index = () => {
         <ProfileContetn>
           <Form>
             <ProfileImage>BA</ProfileImage>
-            <Space>Profile Photo</Space>
+            <Space>Upload Photo</Space>
 
             <InputItem>
               Full Name
               <span style={{ display: "flex", gap: "5px" }}>
-                <Input /> <Input />
+                <CustomInput value="Bilal" /> <CustomInput value="Al-Aqidi" />
               </span>
             </InputItem>
             <InputItem>
               Email Address
-              <Input />
+              <CustomInput gray value="desbilaliq@gmail.com" />
             </InputItem>
             <InputItem>
               Password
-              <Input type="password" />
+              <CustomInput type="password" gray value={455555555555} />
             </InputItem>
             <Space>Change Password?</Space>
             <InputItem>
               Phone Number
-              <Input />
+              <CustomInput value="07715462845" />
             </InputItem>
             <DeleteAccount>
               Delet Your Account?

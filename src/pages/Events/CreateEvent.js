@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { IoMdRefresh } from "react-icons/io";
 import Editor from "@stfy/react-editor.js";
+import { ReactComponent as RefreshIcon } from "../../public/images/solid undo-right.svg";
+import { ReactComponent as RefreshIconLeft } from "../../public/images/solid undo.svg";
 
 import {
   CustomPageWrapper,
@@ -94,14 +96,17 @@ const Mainoption = (
     <Menu.Item key="2">Arabic</Menu.Item>
   </Menu>
 );
-
+const GrayText = styled.div`
+  color: var(--darkGray);
+  font-size: 1vw;
+`;
 const Index = () => {
   const [Active, setActive] = useState(false);
   const [fileName, setFileName] = useState("");
   const [fileSize, setFileSize] = useState("");
 
   const [Image, setImage] = useState(
-    require("../FileUploader/NewFileUploader/default.png")
+    require("../FileUploader/NewFileUploader/default2.png")
   );
 
   const [allowToChange, setallowToChange] = useState(false);
@@ -137,7 +142,7 @@ const Index = () => {
   };
   const removeImage = () => {
     setActive(false);
-    setImage(require("../FileUploader/NewFileUploader/default.png"));
+    setImage(require("../FileUploader/NewFileUploader/default2.png"));
     setallowToChange(false);
     setFileName("");
     setFileSize("");
@@ -188,7 +193,6 @@ const Index = () => {
               display: "flex",
               height: "70px",
               alignItems: "center",
-
               justifyContent: "space-between",
             }}
           >
@@ -198,12 +202,12 @@ const Index = () => {
             </span>
 
             <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
-              <span style={{ color: "gray" }}>Save as draft</span>
+              <span style={{ color: "var(--darkGray)" }}>Save as draft</span>
               <CustomButton>
-                <IoMdRefresh />
+                <RefreshIconLeft />
               </CustomButton>
               <CustomButton>
-                <IoMdRefresh />
+                <RefreshIcon />
               </CustomButton>
               <CustomButton>Preview</CustomButton>{" "}
               <CustomButton Main>Publish Event </CustomButton>
@@ -213,7 +217,7 @@ const Index = () => {
         <Row style={{ display: "flex", gap: "2%", fontSize: "1vw" }}>
           <Col
             style={{
-              width: "67%",
+              width: "70%",
               height: "560px",
               padding: "40px 50px",
               backgroundColor: "white",
@@ -224,7 +228,7 @@ const Index = () => {
               <div>
                 <Input
                   placeholder="Add event title .."
-                  style={{ width: "400px", height: "60px", fontSize: "20px" }}
+                  style={{ width: "80%", height: "60px", fontSize: "20px" }}
                 />
               </div>
               <div>
@@ -252,7 +256,7 @@ const Index = () => {
           </Col>
           <Col
             style={{
-              width: "30%",
+              width: "27%",
             }}
           >
             <div
@@ -263,7 +267,8 @@ const Index = () => {
                 marginBottom: "5%",
               }}
             >
-              Header Photo
+              <div style={{ padding: "10px 0" }}>Header Photo</div>
+
               <div
                 onDragOver={dragOver}
                 onDragEnter={dragEnter}
@@ -278,11 +283,12 @@ const Index = () => {
                 </div>
                 <span
                   style={{
-                    color: "var(--darkGray)",
+                    color: "#808D93",
+                    fontSize: "1.2vw",
                   }}
                 >
-                  Choose any file form computer or Drag & Drop it here Drop file
-                  here
+                  Choose any file form computer or
+                  <span style={{ color: "black" }}> Drag & Drop</span> it here
                 </span>
                 <span style={{ margin: "20px 0" }}>
                   <input type="file" id="file" onChange={handleImageChange} />
@@ -326,17 +332,28 @@ const Index = () => {
               <LanguageSide>Language</LanguageSide>
               <div>
                 <LanguageOption>
-                  Main Language
+                  <GrayText> Main Language</GrayText>
+
                   <Dropdown overlay={Mainoption}>
-                    <Button style={{ borderRadius: "7px" }}>
+                    <Button
+                      style={{
+                        borderRadius: "7px",
+                        backgroundColor: "var(--lightGray)",
+                      }}
+                    >
                       English <DownOutlined />
                     </Button>
                   </Dropdown>
                 </LanguageOption>
                 <LanguageOption>
-                  Translate to
+                  <GrayText> Translate to</GrayText>
                   <Dropdown overlay={Mainoption}>
-                    <Button style={{ borderRadius: "7px" }}>
+                    <Button
+                      style={{
+                        borderRadius: "7px",
+                        backgroundColor: "var(--lightGray)",
+                      }}
+                    >
                       Arabic
                       <DownOutlined />
                     </Button>
