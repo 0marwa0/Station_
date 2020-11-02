@@ -24,11 +24,12 @@ function Customers() {
         open={open}
         onClose={() => onOpenModal(false)}
         center
+        showCloseIcon={false}
         classNames={{
           modal: "customModal",
         }}
       >
-        <Newcustomer />
+        <Newcustomer Close={() => onOpenModal(false)} />
       </Modal>
     </div>
   );

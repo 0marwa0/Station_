@@ -5,7 +5,10 @@ import { DownOutlined } from "@ant-design/icons";
 import { InputLable, ModleFooter, ModleHeader } from "../../shared/SharedStyle";
 import styled from "styled-components";
 import { GiNorthStarShuriken } from "react-icons/gi";
+import { AiOutlineClose } from "react-icons/ai";
 import { CustomModleButton } from "../../shared/SharedComponents";
+import { CustomInput, CustomInputArea } from "../../shared/SharedStyle";
+
 const { TextArea } = Input;
 
 const optionData = (
@@ -21,17 +24,20 @@ const PageWrapper = styled.div`
   padding: 40px;
 `;
 
-function Index() {
+function Index(props) {
   return (
     <div>
       {" "}
-      <ModleHeader>Send notification</ModleHeader>
+      <ModleHeader>
+        Send notification
+        <AiOutlineClose onClick={props.Close} />
+      </ModleHeader>
       <PageWrapper>
         <InputLable>
           <span>
             Title <GiNorthStarShuriken color="red" size={8} />
           </span>
-          <Input placeholder="write notification title" />
+          <CustomInput placeholder="write notification title" />
         </InputLable>
         <InputLable>
           <span>
@@ -39,7 +45,10 @@ function Index() {
             Message <GiNorthStarShuriken color="red" size={8} />
           </span>
 
-          <TextArea placeholder="write notification message ..." />
+          <CustomInputArea
+            rows={4}
+            placeholder="write notification message ..."
+          />
         </InputLable>{" "}
         <InputLable>
           User filter

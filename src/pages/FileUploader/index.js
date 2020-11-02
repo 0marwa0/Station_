@@ -26,11 +26,12 @@ function FilUploader() {
         open={open}
         onClose={() => onOpenModal(false)}
         center
+        showCloseIcon={false}
         classNames={{
           modal: "customModal",
         }}
       >
-        <NewFileUploader />
+        <NewFileUploader Close={() => onOpenModal(false)} />
       </Modal>
     </div>
   );

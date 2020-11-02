@@ -24,11 +24,12 @@ function Resources() {
         open={open}
         onClose={() => onOpenModal(false)}
         center
+        showCloseIcon={false}
         classNames={{
           modal: "customModal",
         }}
       >
-        <NewResources />
+        <NewResources Close={() => onOpenModal(false)} />
       </Modal>
     </div>
   );

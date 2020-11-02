@@ -5,7 +5,9 @@ import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import { Button } from "antd";
+import { AiOutlineClose } from "react-icons/ai";
 import { Link } from "react-router-dom";
+
 import { FirstPage, SecondPage, ThirdPage, ForthPage } from "./Modle";
 const data = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
 const Dot = styled.span``;
@@ -22,7 +24,7 @@ const ModleFooter = styled.div`
   display: flex;
   transition: all 0.3s ease;
   align-items: center;
-  padding: 20px 40px;
+  padding: 40px;
   justify-content: space-between;
 `;
 class Index extends React.Component {
@@ -59,10 +61,20 @@ class Index extends React.Component {
     return (
       <div>
         <ModleTitle>
-          <div style={{ fontWeight: "bold", fontSize: "20px" }}>
+          <div
+            style={{
+              fontWeight: "bold",
+              fontSize: "20px",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
             New Booking
+            <AiOutlineClose onClick={this.props.Close} />
           </div>
-          <div>Create a booking for a costumer directly from reception</div>
+          <div style={{ color: "var(--textGray)" }}>
+            Create a booking for a costumer directly from reception
+          </div>
         </ModleTitle>
         {pages.map((i) => {
           return (
@@ -99,16 +111,18 @@ class Index extends React.Component {
           </div>
           <span style={{ display: "flex", gap: "5px" }}>
             {this.state.currentPage === 1 ? null : (
-              <CustomModleButton fun={this.prevPage}>back</CustomModleButton>
+              <CustomModleButton fun={this.prevPage} extra>
+                Back
+              </CustomModleButton>
             )}
             {this.state.currentPage === 4 ? (
               <Link to="/BookingDetalis">
-                <CustomModleButton Main fun={this.nextPage}>
+                <CustomModleButton Main extra fun={this.nextPage}>
                   finsh
                 </CustomModleButton>
               </Link>
             ) : (
-              <CustomModleButton Main fun={this.nextPage}>
+              <CustomModleButton Main extra fun={this.nextPage}>
                 Next
               </CustomModleButton>
             )}

@@ -10,7 +10,7 @@ import {
 import styled from "styled-components";
 import { AiOutlineClose } from "react-icons/ai";
 import "../../../App.css";
-
+import { CustomInput } from "../../shared/SharedStyle";
 const option = (
   <Menu>
     <Menu.Item key="1">200</Menu.Item>
@@ -37,7 +37,7 @@ const SideOverlay = styled.div`
   background: rgba(0, 0, 0, 0.3);
 `;
 const ModalFooter = styled.div`
-  margin-top: 35%;
+  height: 5%;
 `;
 const SideModal = styled.div`
   position: absolute;
@@ -58,65 +58,73 @@ const Title = styled.div`
   justify-content: space-between;
   font-size: 25px;
   font-weight: bold;
+  margin-bottom: 40px;
   align-items: center;
 `;
 function Index(props) {
   return (
     <SideOverlay>
       <SideModal>
-        <Title>
-          <div>Add new Admin</div>
-          <AiOutlineClose onClick={() => props.fun(false)} />
-        </Title>
+        <div style={{ height: "95%" }}>
+          <Title>
+            <div>Add new Admin</div>
+            <AiOutlineClose onClick={() => props.fun(false)} />
+          </Title>
 
-        <InputLable>Admin Info</InputLable>
-        <InputLable>
-          Full Name
-          <Input placeholder="Write admin name" />
-        </InputLable>
-        <InputLable>
-          Username
-          <Input placeholder="Write admin username" />
-        </InputLable>
-        <InputLable>
-          Password
-          <Input placeholder="Write admin password" />
-        </InputLable>
-        <InputLable>
-          Branch
-          <Dropdown overlay={option}>
-            <Button style={{ color: "var(--darkGray)" }}>
-              Choose admin branch loaction
-              <DownOutlined
-                style={{
-                  float: "right",
-                  marginTop: "5px",
-                  color: "var(--darkGray)",
-                }}
-              />
-            </Button>
-          </Dropdown>
-        </InputLable>
-        <InputLable>
-          Role
-          <Dropdown overlay={data}>
-            <Button style={{ color: "var(--darkGray)" }}>
-              Choose admin role
-              <DownOutlined
-                style={{
-                  float: "right",
-                  marginTop: "5px",
-                  color: "var(--darkGray)",
-                }}
-              />
-            </Button>
-          </Dropdown>
-        </InputLable>
+          <InputLable>
+            {" "}
+            <div style={{ fontSize: "17px" }}>Admin Info</div>
+          </InputLable>
+          <InputLable>
+            Full Name
+            <CustomInput placeholder="Write admin name" />
+          </InputLable>
+          <InputLable>
+            Username
+            <CustomInput placeholder="Write admin username" />
+          </InputLable>
+          <InputLable>
+            Password
+            <CustomInput placeholder="Write admin password" />
+          </InputLable>
+          <InputLable>
+            Branch
+            <Dropdown overlay={option}>
+              <Button style={{ color: "var(--darkGray)" }}>
+                Choose admin branch loaction
+                <DownOutlined
+                  style={{
+                    float: "right",
+                    marginTop: "5px",
+                    color: "var(--darkGray)",
+                  }}
+                />
+              </Button>
+            </Dropdown>
+          </InputLable>
+          <InputLable>
+            Role
+            <Dropdown overlay={data}>
+              <Button style={{ color: "var(--darkGray)" }}>
+                Choose admin role
+                <DownOutlined
+                  style={{
+                    float: "right",
+                    marginTop: "5px",
+                    color: "var(--darkGray)",
+                  }}
+                />
+              </Button>
+            </Dropdown>
+          </InputLable>
+        </div>
 
         <ModalFooter>
           <div style={{ float: "right" }}>
             {" "}
-            <CustomModleButton Main>Create</CustomModleButton>
+            <CustomModleButton Main extra>
+              Create
+            </CustomModleButton>
           </div>
         </ModalFooter>
       </SideModal>

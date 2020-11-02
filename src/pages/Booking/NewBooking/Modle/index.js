@@ -4,8 +4,11 @@ import { Menu, Dropdown, Button, message, Tooltip } from "antd";
 import { DownOutlined, UserOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 import Draggable from "react-draggable";
+import { ReactComponent as DropIcon } from "../../../../public/images/dropdown.svg";
 import Slider from "react-slick";
 import { FaTrashAlt } from "react-icons/fa";
+import { RiArrowDropDownLine } from "react-icons/ri";
+import { CustomInput, CustomInputArea } from "../../../shared/SharedStyle";
 import { InputLable } from "../../../shared/SharedStyle";
 const { TextArea } = Input;
 
@@ -36,6 +39,7 @@ const CardWrapper = styled.div`
   flex-direction: row;
   gap: 10px;
   cursor: grab;
+  margin-bottom: 10px;
   width: 900px;
 `;
 const PageWrapper = styled.div`
@@ -75,19 +79,31 @@ const Size = styled.span`
   display: flex;
   justify-content: space-between;
 `;
+const GrayBoldText = styled.div`
+  color: var(--textGray);
+`;
 export function FirstPage() {
   return (
     <div className="modleWrapper ">
       <Page1Item>
         <InputLable>
           Booking Title
-          <Input placeholder="write booking title" />
+          <CustomInput placeholder="write booking title" />
         </InputLable>
         <InputLable>
           Space
           <Dropdown overlay={optionData}>
-            <Button style={{ borderRadius: "7px" }}>
-              Choose space <DownOutlined />
+            <Button
+              style={{
+                borderRadius: "7px",
+                display: "flex",
+                alignItems: "center",
+                color: "var(--textGray)",
+                justifyContent: "space-between",
+              }}
+            >
+              Choose space
+              <DropIcon />
             </Button>
           </Dropdown>
         </InputLable>
@@ -95,18 +111,22 @@ export function FirstPage() {
       <Page1Item>
         <InputLable>
           Organizer Name
-          <Input placeholder="write organizer name" />
+          <CustomInput placeholder="write organizer name" />
         </InputLable>{" "}
         <InputLable>
           <Size>
-            No. of People<span>Max 3D</span>{" "}
+            No. of People
+            <span style={{ color: "var(--textGray)" }}>Max 3D</span>{" "}
           </Size>
           <InputNumber style={{ borderRadius: "7px", width: "100%" }} />
         </InputLable>
       </Page1Item>
       <InputLable>
         Comment
-        <TextArea placeholder="write something about booking ..." />
+        <CustomInputArea
+          rows={4}
+          placeholder="write something about booking ..."
+        />
       </InputLable>
     </div>
   );
@@ -118,21 +138,38 @@ export function SecondPage() {
       <SecondPageInput>
         <InputLable>
           Choose Date
-          <DatePicker />
+          <DatePicker adaddonAfter="IQD" />
         </InputLable>
         <InputLable>
           Start
           <Dropdown overlay={optionData}>
-            <Button>
-              00:00Am <DownOutlined />
+            <Button
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "5px",
+                color: "var(--textGray)",
+                justifyContent: "space-between",
+              }}
+            >
+              00:00Am
+              <DropIcon />
             </Button>
           </Dropdown>
         </InputLable>
         <InputLable>
           End
           <Dropdown overlay={optionData}>
-            <Button>
-              00:00Am <DownOutlined />
+            <Button
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "5px",
+                color: "var(--textGray)",
+                justifyContent: "space-between",
+              }}
+            >
+              00:00Am <DropIcon />
             </Button>
           </Dropdown>
         </InputLable>
@@ -141,10 +178,10 @@ export function SecondPage() {
             style={{
               borderRadius: "7px",
               marginTop: "80%",
-              backgroundColor: "var(--lighterGray)",
+              backgroundColor: "var(--lightGray)",
             }}
           >
-            +
+            <GrayBoldText> +</GrayBoldText>
           </Button>
         </InputLable>
       </SecondPageInput>
@@ -156,14 +193,14 @@ export function SecondPage() {
         </BookedItem>
         <BookedItem>
           <div>13 Oct 2020</div>
-          <div>09:00 Am</div>
-          <div>06:00 Am</div>
+          <GrayBoldText>09:00 Am</GrayBoldText>
+          <GrayBoldText>06:00 Am</GrayBoldText>
           <FaTrashAlt color="var(--lighterGray)" />
         </BookedItem>
         <BookedItem>
           <div>15 Oct 2020</div>
-          <div>09:00 Am</div>
-          <div>06:00 Am</div>
+          <GrayBoldText>09:00 Am</GrayBoldText>
+          <GrayBoldText>06:00 Am</GrayBoldText>
           <FaTrashAlt color="var(--lighterGray)" />
         </BookedItem>
       </div>
@@ -276,7 +313,7 @@ export function ForthPage() {
         style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}
       >
         <InputLable>
-          Totle Price
+          Total Price
           <Input addonAfter="IQD" placeholder="0.0" />
         </InputLable>
         <InputLable>

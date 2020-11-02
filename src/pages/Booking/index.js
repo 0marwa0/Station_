@@ -27,11 +27,12 @@ function Booking() {
         open={open}
         onClose={() => onOpenModal(false)}
         center
+        showCloseIcon={false}
         classNames={{
           modal: "customModal",
         }}
       >
-        <NewBooking />
+        <NewBooking Close={() => onOpenModal(false)} />
       </Modal>
     </div>
   );

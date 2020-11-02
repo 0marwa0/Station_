@@ -27,6 +27,7 @@ const Wrapper = styled(Row)`
   width: 100%;
   border: 1px solid var(--lighterGray);
   borderradius: 5px;
+  margin-left: 20px;
   padding: 20px 40px;
 `;
 const GrayText = styled.div`
@@ -143,7 +144,7 @@ const Index = (props) => {
       <GlobalStyle />
       <SideBar />
       <PageContent>
-        <div style={{ marginTop: "20px" }}>
+        <div style={{ marginTop: "40px" }}>
           <Wrapper>
             <Link to="/Booking">
               <PageBack>

@@ -340,11 +340,12 @@ function Booking() {
         open={open}
         onClose={() => onOpenModal(false)}
         center
+        showCloseIcon={false}
         classNames={{
           modal: "customModal",
         }}
       >
-        <NewBooking from="Dashboard" />
+        <NewBooking from="Dashboard" Close={() => onOpenModal(false)} />
       </Modal>
     </CustomPageWrapper>
   );

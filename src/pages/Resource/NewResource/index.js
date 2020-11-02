@@ -1,9 +1,15 @@
 import React, { useState } from "react";
-import { InputLable, ModleFooter, ModleHeader } from "../../shared/SharedStyle";
+import {
+  CustomInputArea,
+  InputLable,
+  ModleFooter,
+  ModleHeader,
+} from "../../shared/SharedStyle";
 import { CustomModleButton } from "../../shared/SharedComponents";
 import styled from "styled-components";
 import { TextNote } from "../../FileUploader/NewFileUploader";
 import { Input } from "antd";
+import { CustomInput } from "../../shared/SharedStyle";
 import { ImAttachment } from "react-icons/im";
 import { AiOutlineClose } from "react-icons/ai";
 
@@ -12,7 +18,7 @@ const PageWrapper = styled.div`
   width: 600px;
   padding: 15px 40px;
 `;
-function Index() {
+function Index(props) {
   const [Active, setActive] = useState(false);
   const [fileName, setFileName] = useState("");
   const [fileSize, setFileSize] = useState("");
@@ -88,15 +94,18 @@ function Index() {
   };
   return (
     <div>
-      <ModleHeader>Upload New Resources</ModleHeader>
+      <ModleHeader>
+        Upload New Resources
+        <AiOutlineClose onClick={props.Close} />
+      </ModleHeader>
       <PageWrapper>
         <InputLable>
           Title
-          <Input placeholder="write file title" />
+          <CustomInput placeholder="write file title" />
         </InputLable>
         <InputLable>
           Description
-          <TextArea placeholder="write file Description ..." />
+          <CustomInputArea rows={3} placeholder="write file Description ..." />
         </InputLable>{" "}
         <div
           onDragOver={dragOver}
@@ -121,7 +130,7 @@ function Index() {
               color: "var(--darkGray)",
             }}
           >
-            Choose any file form computer or Drag & Drop it here Drop file here
+            Choose any file form computer or Drag & Drop it here
           </span>
           <span style={{ margin: "20px 0" }}>
             <input type="file" id="file" onChange={handleImageChange} />

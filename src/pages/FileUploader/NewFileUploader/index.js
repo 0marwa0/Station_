@@ -16,7 +16,7 @@ const PageWrapper = styled.div`
   padding: 40px;
 `;
 
-function Index() {
+function Index(props) {
   const [Active, setActive] = useState(false);
   const [fileName, setFileName] = useState("");
   const [fileSize, setFileSize] = useState("");
@@ -90,7 +90,10 @@ function Index() {
   };
   return (
     <div>
-      <ModleHeader>Upload New Media</ModleHeader>
+      <ModleHeader>
+        Upload New Media
+        <AiOutlineClose onClick={props.Close} />
+      </ModleHeader>
 
       <PageWrapper>
         <div
@@ -116,7 +119,7 @@ function Index() {
               color: "var(--darkGray)",
             }}
           >
-            Choose any file form computer or Drag & Drop it here Drop file here
+            Choose any file form computer or Drag & Drop it here
           </span>
           <span style={{ margin: "20px 0" }}>
             <input type="file" id="file" onChange={handleImageChange} />

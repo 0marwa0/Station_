@@ -2,7 +2,7 @@ import React from "react";
 import { RiArrowDownSFill } from "react-icons/ri";
 import { AiOutlineClose } from "react-icons/ai";
 
-import { ButtonStyled } from "../shared/SharedStyle";
+import { ButtonStyled, ButtonStyledModle } from "../shared/SharedStyle";
 export const CustomButton = ({
   lable,
   children,
@@ -11,19 +11,20 @@ export const CustomButton = ({
   onOpen,
   pageTitle,
   fun,
+  extra,
 }) => {
   return (
-    <ButtonStyled Main={Main} onClick={Main ? onOpen : fun}>
+    <ButtonStyled Main={Main} extra={extra} onClick={Main ? onOpen : fun}>
       {children}
       {lable}
       {filter ? <RiArrowDownSFill color="var(--lighterGray)" /> : ""}
     </ButtonStyled>
   );
 };
-export const CustomModleButton = ({ children, Main, fun }) => {
+export const CustomModleButton = ({ children, Main, fun, extra }) => {
   return (
-    <ButtonStyled Main={Main} onClick={fun}>
+    <ButtonStyledModle Main={Main} extra={extra} onClick={fun}>
       {children}
-    </ButtonStyled>
+    </ButtonStyledModle>
   );
 };

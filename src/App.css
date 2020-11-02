@@ -143,6 +143,30 @@
 
   border: 1px solid var(--lighterGray) !important;
 }
+/******date input white icon*******/
+.ant-picker-focused,
+.ant-picker {
+  border-radius: 7px !important;
+}
+.ant-picker-suffix {
+}
+
+/******input whit icon*****/
+.ant-input-group-addon {
+  border-bottom-right-radius: 7px !important;
+  border-top-right-radius: 7px !important;
+  color: var(--textGray) !important;
+  border-radius: 0 7px 7px 0 !important;
+  border-color: var(--lighterGray) !important;
+}
+.ant-input-group > .ant-input:first-child,
+.ant-input-group-addon:first-child {
+  border-top-right-radius: 0 !important;
+  border-right: none !important;
+  border-color: var(--lighterGray) !important;
+  border-bottom-left-radius: 7px !important;
+  border-top-left-radius: 7px !important;
+}
 /*******Modle setyle*******/
 
 .react-responsive-modal-overlay {
@@ -227,6 +251,7 @@
   border-radius: 7px;
   min-height: 270px;
   margin-bottom: 10px;
+  margin-top: 20px;
   gap: 5%;
   font-size: 17px;
   border: 3px dashed var(--lighterGray);

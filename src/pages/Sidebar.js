@@ -13,7 +13,7 @@ import { RiNewspaperLine } from "react-icons/ri";
 import { Tooltip, Button } from "antd";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
-
+import { BiCalendarWeek } from "react-icons/bi";
 import Notification from "./Notification";
 import { render } from "@testing-library/react";
 
@@ -269,40 +269,7 @@ function SideBar(props) {
             </svg>
           </NavItem>
           <NavItem slug="Events" title={title}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="25.715"
-              height="24.465"
-              viewBox="0 0 25.715 24.465"
-            >
-              <path
-                id="Path_2027"
-                data-name="Path 2027"
-                d="M7.449,6.159v0Zm10.318,0v0ZM6.159,11.318h0Zm-2.579,12.9H21.635a2.579,2.579,0,0,0,2.579-2.579V6.159a2.579,2.579,0,0,0-2.579-2.579H3.579A2.579,2.579,0,0,0,1,6.159V21.635a2.579,2.579,0,0,0,2.579,2.579Z"
-                transform="translate(0.25 -1)"
-                fill="none"
-                stroke="#8a8a8a"
-                stroke-width="2.5"
-              />
-            </svg>
-          </NavItem>
-          <NavItem slug="Customers" title={title}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="22.637"
-              height="22.642"
-              viewBox="0 0 22.637 22.642"
-            >
-              <path
-                id="Path_2024"
-                data-name="Path 2024"
-                d="M11.068,2.515a4.475,4.475,0,1,1,0,5.92m3.356,12.7H1V20.018a6.712,6.712,0,0,1,13.424,0Zm0,0h6.712V20.018A6.712,6.712,0,0,0,11.068,14.2m1.119-8.729a4.475,4.475,0,1,1-1.311-3.164A4.475,4.475,0,0,1,12.187,5.475Z"
-                transform="translate(0.25 0.256)"
-                fill="none"
-                stroke="#8a8a8a"
-                stroke-width="2.5"
-              />
-            </svg>
+            <BiCalendarWeek />
           </NavItem>
           <NavItem slug="Admins" title={title}>
             <FaRegUser />
