@@ -1,9 +1,12 @@
-import React from "react";
-import { DatePicker, Input, InputNumber } from "antd";
+import React, { useState } from "react";
+import { Input, InputNumber, DatePicker } from "antd";
+import { ReactComponent as DatePickerIcon } from "../../../../public/images/solid calendar-alt.svg";
 import { Menu, Dropdown, Button, message, Tooltip } from "antd";
 import { DownOutlined, UserOutlined } from "@ant-design/icons";
 import styled from "styled-components";
-import Draggable from "react-draggable";
+import "react-datepicker/dist/react-datepicker.css";
+
+// import DatePicker from "react-datepicker";
 import { ReactComponent as DropIcon } from "../../../../public/images/dropdown.svg";
 import Slider from "react-slick";
 import { FaTrashAlt } from "react-icons/fa";
@@ -118,7 +121,10 @@ export function FirstPage() {
             No. of People
             <span style={{ color: "var(--textGray)" }}>Max 3D</span>{" "}
           </Size>
-          <InputNumber style={{ borderRadius: "7px", width: "100%" }} />
+          <InputNumber
+            placeholder="00"
+            style={{ borderRadius: "7px", width: "100%" }}
+          />
         </InputLable>
       </Page1Item>
       <InputLable>
@@ -133,12 +139,22 @@ export function FirstPage() {
 }
 
 export function SecondPage() {
+  const [datevalue, setdatevalue] = useState("");
   return (
     <div className="modleWrapper">
       <SecondPageInput>
         <InputLable>
           Choose Date
-          <DatePicker adaddonAfter="IQD" />
+          <div style={{ display: "flex", position: "relative" }}>
+            <DatePicker
+              value={datevalue}
+              style={{ width: "100%" }}
+              onChange={(e) => setdatevalue(e)}
+            />
+            <span className="datePickerIcon">
+              <DatePickerIcon />
+            </span>
+          </div>
         </InputLable>
         <InputLable>
           Start

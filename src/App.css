@@ -10,7 +10,33 @@
 
   /* pointer-events: none; */
 }
-
+/***datepicker***/
+.datePicker {
+  border-radius: 7px;
+  height: 30px;
+}
+.react-datepicker__input-container {
+  border: 1px solid #e1e4e8;
+}
+.react-datepicker__input-container input,
+.react-datepicker__input-container input:focus {
+  border: none !important;
+  width: 180px;
+  outline: none;
+}
+.datePickerIcon {
+  background-color: var(--lightGray);
+  padding: 0 7px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  border: 1px solid var(--lighterGray);
+  border-radius: 0 7px 7px 0;
+  align-items: center;
+}
 .Notification_content {
   position: absolute;
   background-color: white;
