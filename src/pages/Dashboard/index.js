@@ -182,7 +182,10 @@ export const Widget = styled.div`
   border-radius: 7px;
   border: 1px solid var(--lighterGray);
   display: flex;
-  padding: 10px 7%;
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 30px;
+  padding-bottom: 10px;
   flex-direction: column;
   margin-bottom: ${(props) => (props.main ? "0" : "25px")};
 `;

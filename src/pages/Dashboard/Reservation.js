@@ -128,12 +128,12 @@ function Index() {
               </div>
               <div
                 style={{
-                  textAlign: "right",
-                  float: "right",
                   display: "flex",
-                  fontSize: "10.5px",
+                  fontSize: "0.7vw",
                   color: "var(--textGray)",
-                  width: "100%",
+                  width: "max-content",
+                  paddingRight: "2px",
+                  backgroundColor: "white",
                 }}
               >
                 {item.time}
