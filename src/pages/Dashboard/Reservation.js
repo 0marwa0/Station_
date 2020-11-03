@@ -9,7 +9,7 @@ const ReservationItem = styled.div`
   width: auto;
   padding-bottom: 9px;
   align-items: center;
-  gap: 2%;
+  gap: 3%;
   padding-top: 9px;
 `;
 const ItemHeader = styled.div`
@@ -131,12 +131,12 @@ function Index() {
                   textAlign: "right",
                   float: "right",
                   display: "flex",
-                  justifyContent: "flex-end",
+                  fontSize: "10.5px",
+                  color: "var(--textGray)",
                   width: "100%",
                 }}
               >
-                {" "}
-                <GrayText>{item.time}</GrayText>
+                {item.time}
               </div>
             </ReservationItem>
           );
