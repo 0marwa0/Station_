@@ -3,7 +3,6 @@ import { Widget } from "./index";
 import { ReservationsData } from "../../fakeData";
 import styled from "styled-components";
 const ReservationItem = styled.div`
-  background-color: white;
   display: grid;
   grid-template-columns: max-content max-content auto max-content;
   width: auto;
