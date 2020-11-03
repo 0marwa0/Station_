@@ -70,7 +70,7 @@ class Index extends React.Component {
             }}
           >
             New Booking
-            <AiOutlineClose onClick={this.props.Close} />
+            <AiOutlineClose onClick={this.props.Close} cursor="pointer" />
           </div>
           <div style={{ color: "var(--textGray)" }}>
             Create a booking for a costumer directly from reception

@@ -5,12 +5,12 @@ import styled from "styled-components";
 const ReservationItem = styled.div`
   background-color: white;
   display: grid;
-  grid-template-columns: 30px 1fr max-content;
-  gap: 9px;
+  grid-template-columns: max-content max-content auto max-content;
+  width: auto;
   padding-bottom: 9px;
   align-items: center;
+  gap: 2%;
   padding-top: 9px;
-  font-size: 1vw;
 `;
 const ItemHeader = styled.div`
   display: flex;
@@ -19,43 +19,43 @@ const ItemHeader = styled.div`
   align-items: center;
 `;
 const ReservIcon = styled.div`
-  width: 31px;
-  height: 33px;
+  width: 2.8vw;
+  height: 2.8vw;
   border-radius: 7px;
   display: flex;
   align-items: center;
-  font-size: 12px;
+  font-size: 1vw;
   justify-content: center;
   background-color: var(--lightBlue);
 `;
 
 const SubA = styled.div`
-  width: 31px;
-  height: 33px;
+  width: 2.8vw;
+  height: 2.8vw;
   border-radius: 7px;
   display: flex;
   align-items: center;
-  font-size: 12px;
+  font-size: 1vw;
   justify-content: center;
   background-color: var(--lightRed);
 `;
 const SubB = styled.div`
-  width: 31px;
-  height: 33px;
+  width: 2.8vw;
+  height: 2.8vw;
   border-radius: 7px;
   display: flex;
   align-items: center;
-  font-size: 12px;
+  font-size: 1vw;
   justify-content: center;
   background-color: var(--lightOrange);
 `;
 const SubC = styled.div`
-  width: 31px;
-  height: 33px;
+  width: 2.8vw;
+  height: 2.8vw;
   border-radius: 7px;
   display: flex;
   align-items: center;
-  font-size: 12px;
+  font-size: 1vw;
   justify-content: center;
   background-color: var(--LightGreen);
 `;
@@ -126,7 +126,18 @@ function Index() {
                   </GrayText>
                 </div>
               </div>
-              <GrayText>{item.time}</GrayText>
+              <div
+                style={{
+                  textAlign: "right",
+                  float: "right",
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  width: "100%",
+                }}
+              >
+                {" "}
+                <GrayText>{item.time}</GrayText>
+              </div>
             </ReservationItem>
           );
         })}

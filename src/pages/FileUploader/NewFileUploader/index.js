@@ -92,7 +92,7 @@ function Index(props) {
     <div>
       <ModleHeader>
         Upload New Media
-        <AiOutlineClose onClick={props.Close} />
+        <AiOutlineClose onClick={props.Close} cursor="pointer" />
       </ModleHeader>
 
       <PageWrapper>
@@ -107,7 +107,7 @@ function Index(props) {
             {allowToChange ? (
               <AiOutlineClose
                 size="20px"
-                style={{ cursor: "pointer" }}
+                cursor="pointer"
                 onClick={removeImage}
               />
             ) : null}
@@ -142,7 +142,7 @@ function Index(props) {
         </span>
       </PageWrapper>
       <ModleFooter>
-        <CustomModleButton>cancel</CustomModleButton>
+        <CustomModleButton>Cancel</CustomModleButton>
         <CustomModleButton Main>Upload</CustomModleButton>
       </ModleFooter>
     </div>

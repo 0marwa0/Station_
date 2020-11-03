@@ -96,7 +96,7 @@ function Index(props) {
     <div>
       <ModleHeader>
         Upload New Resources
-        <AiOutlineClose onClick={props.Close} />
+        <AiOutlineClose onClick={props.Close} cursor="pointer" />
       </ModleHeader>
       <PageWrapper>
         <InputLable>
@@ -153,7 +153,7 @@ function Index(props) {
         </span>
       </PageWrapper>{" "}
       <ModleFooter>
-        <CustomModleButton>cancel</CustomModleButton>
+        <CustomModleButton>Cancel</CustomModleButton>
         <CustomModleButton Main>Upload</CustomModleButton>
       </ModleFooter>
     </div>

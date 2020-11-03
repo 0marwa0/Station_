@@ -4,6 +4,8 @@ import { Menu, Dropdown, Button } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { InputLable, ModleFooter, ModleHeader } from "../../shared/SharedStyle";
 import styled from "styled-components";
+import { ReactComponent as DropIcon } from "../../../public/images/dropdown.svg";
+
 import { GiNorthStarShuriken } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
 import { CustomModleButton } from "../../shared/SharedComponents";
@@ -30,14 +32,14 @@ function Index(props) {
       {" "}
       <ModleHeader>
         Send notification
-        <AiOutlineClose onClick={props.Close} />
+        <AiOutlineClose onClick={props.Close} cursor="pointer" />
       </ModleHeader>
       <PageWrapper>
         <InputLable>
           <span>
             Title <GiNorthStarShuriken color="red" size={8} />
           </span>
-          <CustomInput placeholder="write notification title" />
+          <CustomInput placeholder="Write notification title" />
         </InputLable>
         <InputLable>
           <span>
@@ -47,15 +49,22 @@ function Index(props) {
 
           <CustomInputArea
             rows={4}
-            placeholder="write notification message ..."
+            placeholder="Write notification message ..."
           />
         </InputLable>{" "}
         <InputLable>
           User filter
           <Dropdown overlay={optionData}>
-            <Button style={{ borderRadius: "7px" }}>
-              All users{" "}
-              <DownOutlined style={{ float: "right", marginTop: "6px" }} />
+            <Button
+              style={{
+                borderRadius: "7px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <div style={{ color: "var(--darkGray)" }}>All users</div>
+              <DropIcon />
             </Button>
           </Dropdown>
         </InputLable>

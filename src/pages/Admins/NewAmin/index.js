@@ -2,6 +2,8 @@ import React from "react";
 import { InputLable } from "../../shared/SharedStyle";
 import { CustomModleButton } from "../../shared/SharedComponents";
 import { Menu, Dropdown, Button, Input } from "antd";
+import { ReactComponent as DropIcon } from "../../../public/images/dropdown.svg";
+
 import {
   DownOutlined,
   PropertySafetyFilled,
@@ -68,7 +70,7 @@ function Index(props) {
         <div style={{ height: "95%" }}>
           <Title>
             <div>Add new Admin</div>
-            <AiOutlineClose onClick={() => props.fun(false)} />
+            <AiOutlineClose onClick={() => props.fun(false)} cursor="pointer" />
           </Title>
 
           <InputLable>
@@ -90,30 +92,45 @@ function Index(props) {
           <InputLable>
             Branch
             <Dropdown overlay={option}>
-              <Button style={{ color: "var(--darkGray)" }}>
+              <Button
+                style={{
+                  color: "var(--darkGray)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
                 Choose admin branch loaction
-                <DownOutlined
+                <DropIcon />
+                {/* <DownOutlined
                   style={{
                     float: "right",
                     marginTop: "5px",
                     color: "var(--darkGray)",
                   }}
-                />
+                /> */}
               </Button>
             </Dropdown>
           </InputLable>
           <InputLable>
             Role
             <Dropdown overlay={data}>
-              <Button style={{ color: "var(--darkGray)" }}>
-                Choose admin role
-                <DownOutlined
+              <Button
+                style={{
+                  color: "var(--darkGray)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                Choose admin role <DropIcon />
+                {/* <DownOutlined
                   style={{
                     float: "right",
                     marginTop: "5px",
                     color: "var(--darkGray)",
                   }}
-                />
+                /> */}
               </Button>
             </Dropdown>
           </InputLable>

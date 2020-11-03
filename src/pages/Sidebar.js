@@ -74,7 +74,7 @@ export const SideItem = styled.li`
   position: relative;
 
   margin-top: 10px;
-  padding: 5px 15px;
+  padding: 8% 15px;
 
   border-left: ${(props) =>
     props.type
@@ -84,7 +84,7 @@ export const SideItem = styled.li`
       : "2px solid var(--black);"};
   font-size: 30px;
   display: flex;
-  stroke: ${(props) => (props.isSelected ? "var(--yellow);" : "var(--gray);")};
+  color: ${(props) => (props.isSelected ? "var(--yellow);" : "var(--gray);")};
   justify-content: center;
   align-items: center;
   &:hover {
@@ -130,14 +130,16 @@ function SideBar(props) {
 
     showPopup(false);
   };
+  const location = useLocation();
 
   let title = props.title;
+  let page = location.pathname.substr(1);
+  console.log(props.title, page, "title and page");
   return (
     <div onClick={(e) => handleClose(e)}>
       <SideWrapper>
         <SideList>
           <Logo src={require("../public/images/Logo.png")} />
-
           <NavItem slug="Dashboard" title={title}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -156,7 +158,7 @@ function SideBar(props) {
                   d="M2651.886-154.763v21.023h22.524"
                   transform="translate(-2651.886 154.763)"
                   fill="none"
-                  stroke="#8a8a8a"
+                  stroke={"Dashboard" != page ? "#8a8a8a" : "var(--yellow)"}
                   stroke-linejoin="round"
                   stroke-width="2.5"
                 />
@@ -166,13 +168,13 @@ function SideBar(props) {
                   d="M2682.514-120.889l6.642-6.642,4.22,4.22,6.669-6.669"
                   transform="translate(-2678.347 134.018)"
                   fill="none"
-                  stroke="#8a8a8a"
+                  stroke={"Dashboard" != page ? "#8a8a8a" : "var(--yellow)"}
                   stroke-width="2.5"
                 />
               </g>
+              {title}
             </svg>
           </NavItem>
-
           <NavItem slug="Booking" title={title}>
             {/* <BiBookAdd /> */}
             <svg
@@ -192,7 +194,7 @@ function SideBar(props) {
                   d="M12306.418,13778.543h-29.5v-4.757a5,5,0,0,0,0-9.988v-4.757h29.5v4.757a5,5,0,0,0,0,9.988v4.756Z"
                   transform="translate(-12249.001 -13560.001)"
                   fill="none"
-                  stroke="#8a8a8a"
+                  stroke={"Booking" != page ? "#8a8a8a" : "var(--yellow)"}
                   stroke-width="2.5"
                 />
                 <g
@@ -206,7 +208,7 @@ function SideBar(props) {
                     y1="8"
                     transform="translate(44.167 205.292)"
                     fill="none"
-                    stroke="#8a8a8a"
+                    stroke={"Booking" != page ? "#8a8a8a" : "var(--yellow)"}
                     stroke-width="2.5"
                   />
                   <line
@@ -215,7 +217,7 @@ function SideBar(props) {
                     y1="8"
                     transform="translate(48.167 209.292) rotate(90)"
                     fill="none"
-                    stroke="#8a8a8a"
+                    stroke={"Booking" != page ? "#8a8a8a" : "var(--yellow)"}
                     stroke-width="2.5"
                   />
                 </g>
@@ -240,7 +242,7 @@ function SideBar(props) {
                   d="M119.857,271.451c-2.367.067-2.008-2.443-2.008-2.443v-13.06a4.3,4.3,0,0,1,3.138,0,2.734,2.734,0,0,1,1.313,2.443v10.617c0,2.949-2.443,2.443-2.443,2.443H103.434c-2.219,0-2.443-1.384-2.443-2.443,0-.01,0-.226,0-.226V255.306s-.2-3.261,2.645-3.224l11.428,0s.276,0,.275,0c1.034,0,2.511.352,2.511,2.791v1.079"
                   transform="translate(0 0)"
                   fill="none"
-                  stroke="#8a8a8a"
+                  stroke={"Articles" != page ? "#8a8a8a" : "var(--yellow)"}
                   stroke-linejoin="round"
                   stroke-width="2.5"
                 />
@@ -251,7 +253,7 @@ function SideBar(props) {
                   height="5.747"
                   transform="translate(104.049 257.763)"
                   fill="none"
-                  stroke="#8a8a8a"
+                  stroke={"Articles" != page ? "#8a8a8a" : "var(--yellow)"}
                   stroke-linejoin="round"
                   stroke-width="2.5"
                 />
@@ -261,7 +263,7 @@ function SideBar(props) {
                   d="M110.441,285.889H117.9"
                   transform="translate(-4.786 -19.176)"
                   fill="none"
-                  stroke="#8a8a8a"
+                  stroke={"Articles" != page ? "#8a8a8a" : "var(--yellow)"}
                   stroke-linejoin="round"
                   stroke-width="2.5"
                 />
@@ -270,6 +272,9 @@ function SideBar(props) {
           </NavItem>
           <NavItem slug="Events" title={title}>
             <BiCalendarWeek />
+          </NavItem>{" "}
+          <NavItem slug="Customers" title={title}>
+            <HiOutlineUsers />
           </NavItem>
           <NavItem slug="Admins" title={title}>
             <FaRegUser />

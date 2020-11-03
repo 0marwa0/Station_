@@ -202,7 +202,7 @@ const Index = () => {
             </span>
 
             <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
-              <span style={{ color: "var(--darkGray)" }}>Save as draft</span>
+              <span style={{ color: "var(--textGray)" }}>Save as draft</span>
               <CustomButton>
                 <RefreshIconLeft />
               </CustomButton>
@@ -228,7 +228,13 @@ const Index = () => {
               <div>
                 <Input
                   placeholder="Add event title .."
-                  style={{ width: "80%", height: "60px", fontSize: "20px" }}
+                  style={{
+                    width: "80%",
+                    height: "60px",
+                    fontSize: "20px",
+                    color: "var(--lighterGray)",
+                    fontWeight: "500",
+                  }}
                 />
               </div>
               <div>

@@ -196,7 +196,7 @@
 .fc-scrollgrid-sync-table {
   width: 100% !important;
   position: relative;
-  height: 100% !important;
+
   background-color: white !important;
 }
 .fc-daygrid-body.fc-daygrid-body-unbalanced {
@@ -337,7 +337,8 @@ a:hover {
 .fc-event-title.fc-sticky {
 }
 .fc-daygrid-day-frame.fc-scrollgrid-sync-inner {
-  padding: 10% !important;
+  padding: 5% 10% !important;
+  height: auto !important;
 }
 .fc .fc-daygrid-day-top {
   display: flex;

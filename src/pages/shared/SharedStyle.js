@@ -5,13 +5,13 @@ import styled from "styled-components";
 const { TextArea } = Input;
 export const CustomInput = styled(Input)`
   border-radius: 7px;
-  border: 1px solid var(--lighterGray);
+  border: 1px solid #e1e4e8;
   color: ${(props) => (props.gray ? " var(--darkGray)" : "black")};
   background-color: ${(props) => (props.gray ? "var(--lighterGray)" : "white")};
 `;
 export const CustomInputArea = styled(TextArea)`
   border-radius: 7px;
-  border: 1px solid var(--lighterGray);
+  border: 1px solid #e1e4e8;
   color: ${(props) => (props.gray ? " var(--darkGray)" : "black")};
   background-color: ${(props) => (props.gray ? "var(--lighterGray)" : "white")};
 `;

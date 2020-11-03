@@ -4,6 +4,9 @@ import { useState } from "react";
 import { Col, Row, Table, Input } from "antd";
 import React from "react";
 import { BiImport, BiExport } from "react-icons/bi";
+import { ReactComponent as ExportIcon } from "../../public/images/export.svg";
+import { ReactComponent as ImportIcon } from "../../public/images/import.svg";
+
 import { FiFilter } from "react-icons/fi";
 import { CustomButton } from "../shared/SharedComponents";
 import { AiOutlinePlus } from "react-icons/ai";
@@ -40,7 +43,8 @@ export const ButtonGroup = styled.div`
   gap: 10px;
   algin-items: cneter;
   justify-content: flex-end;
-  margin-right: ${(props) => (props.space ? "10px" : "0")};
+
+  margin-left: ${(props) => (props.space ? "10px" : "0")};
 `;
 export const PageTitle = styled.div`
   color: var(--black);
@@ -278,11 +282,13 @@ function CustomPage(props) {
                 ""
               ) : (
                 <CustomButton lable="Import">
-                  <BiImport />
+                  {/* <BiImport /> */}
+                  <ImportIcon />
                 </CustomButton>
               )}
               <CustomButton lable="Export">
-                <BiExport />
+                {/* <BiExport /> */}
+                <ExportIcon />
               </CustomButton>
               {pageTitleName == "Customer" ? (
                 <CustomButton

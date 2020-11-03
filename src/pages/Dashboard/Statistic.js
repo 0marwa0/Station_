@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Widget } from "./index";
 import { RiArrowDropDownLine } from "react-icons/ri";
+import { ReactComponent as DropIcon } from "../../public/images/dropdown.svg";
 
 import { MdShowChart } from "react-icons/md";
 import { GiElectric } from "react-icons/gi";
@@ -91,17 +92,18 @@ function Index() {
         <Dropdown overlay={menu2}>
           <Button
             style={{
-              padding: "5px 4px",
+              padding: "6px 8px",
               borderRadius: "10px",
               height: "23px",
-              fontSize: "10px",
+              fontSize: "12px",
               display: "flex",
               alignItems: "center",
-              gap: "10px",
-              justifyContent: "center",
+              width: "65px",
+              justifyContent: "space-between",
             }}
           >
-            Oct <RiArrowDropDownLine size="18px" />
+            Oct
+            <DropIcon />
           </Button>
         </Dropdown>
       </ItemHeader>{" "}

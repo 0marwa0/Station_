@@ -9,6 +9,7 @@ import { DownOutlined } from "@ant-design/icons";
 import { CustomButton } from "../shared/SharedComponents";
 import FullCalendar from "@fullcalendar/react";
 import { Modal } from "react-responsive-modal";
+import { ReactComponent as PrintIcon } from "../../public/images/print.svg";
 
 import NewBooking from "../Booking/NewBooking";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -181,10 +182,9 @@ export const Widget = styled.div`
   border-radius: 7px;
   border: 1px solid var(--lighterGray);
   display: flex;
-  min-width: 200px;
   padding: 10px 7%;
   flex-direction: column;
-  margin-bottom: ${(props) => (props.main ? "0" : "20px")};
+  margin-bottom: ${(props) => (props.main ? "0" : "25px")};
 `;
 const Clander = styled.div`
   background-color: white;
@@ -267,6 +267,7 @@ function Booking() {
             justifyContent: "space-between",
             alignItems: "center",
             height: "70px",
+            width: "100%",
           }}
         >
           <PageTitle>Dashboard</PageTitle>
@@ -279,7 +280,8 @@ function Booking() {
             <ButtonGroup>
               <Dropdown overlay={menu}>
                 <List>
-                  This Month{" "}
+                  <span>This Month</span>
+
                   <RiArrowDropDownLine
                     size="25px"
                     style={{
@@ -299,9 +301,9 @@ function Booking() {
                 placeholder="Advanced Search"
               />
             </ButtonGroup>
-            <ButtonGroup>
+            <ButtonGroup space>
               <CustomButton lable="Print">
-                <BiExport />
+                <PrintIcon />
               </CustomButton>
               <CustomButton Main onOpen={onOpenModal} lable="New Booking">
                 <AiOutlinePlus />
@@ -310,13 +312,16 @@ function Booking() {
           </PageBtn>
         </Row>
 
-        <Row style={{ display: "flex" }}>
+        <Row
+          style={{
+            display: "grid",
+            gap: "25px",
+            gridTemplateColumns: "3fr 1.1fr",
+          }}
+        >
           <Col
             style={{
-              width: "71%",
-              marginRight: "2%",
-              height: "50rem",
-              marginBottom: "10%",
+              height: "100%",
             }}
           >
             <Clander>
@@ -329,7 +334,7 @@ function Booking() {
               />
             </Clander>
           </Col>
-          <Col style={{ width: "27%", height: "100%" }}>
+          <Col style={{ height: "100%" }}>
             <Reservation />
             <Statistic />
           </Col>
