@@ -193,6 +193,7 @@ const Index = () => {
               display: "flex",
               height: "70px",
               alignItems: "center",
+
               justifyContent: "space-between",
             }}
           >
@@ -221,6 +222,7 @@ const Index = () => {
               height: "560px",
               padding: "40px 50px",
               backgroundColor: "white",
+              border: "1px solid var(--lighterGray)",
               borderRadius: "7px",
             }}
           >

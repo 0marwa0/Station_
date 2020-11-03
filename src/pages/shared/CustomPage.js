@@ -28,6 +28,7 @@ export const PageContent = styled.div`
   width: 100%;
   margin-top: 10px;
   margin-left: 123px;
+
   margin-right: 35px;
 `;
 export const PageBtn = styled.div`

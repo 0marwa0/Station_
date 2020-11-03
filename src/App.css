@@ -252,7 +252,7 @@
 }
 .event {
   background-color: var(--lightBlue) !important;
-  border: 2px solid transparent !important;
+  border: 2px solid dashed !important;
 }
 .upload_modal .img {
   height: auto;
@@ -277,7 +277,7 @@
   border-radius: 7px;
   min-height: 270px;
   margin-bottom: 10px;
-  margin-top: 20px;
+  /*margin-top: 20px; */
   gap: 5%;
   font-size: 17px;
   border: 3px dashed var(--lighterGray);
