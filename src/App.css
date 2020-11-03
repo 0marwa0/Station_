@@ -252,7 +252,7 @@
 }
 .event {
   background-color: var(--lightBlue) !important;
-  border: 2px solid dashed !important;
+  border: 2px solid dashed var(--lighterGray);
 }
 .upload_modal .img {
   height: auto;
