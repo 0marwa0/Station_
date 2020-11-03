@@ -329,13 +329,15 @@ a:hover {
   border-radius: 7px;
   /* border: 1px solid var(--lighterGray); */
   display: flex;
+
   width: max-content;
   flex-direction: column;
 }
 .items > div {
-  padding-left: 10%;
-  padding-right: 20px;
+  padding-left: 4%;
+  padding-right: 18px;
   width: max-content;
+
   border-bottom: 1px solid var(--lightGray);
 }
 .items > div:last-child {

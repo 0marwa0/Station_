@@ -183,7 +183,7 @@ export const Widget = styled.div`
   border: 1px solid var(--lighterGray);
   display: flex;
   align-items: ${(props) => (props.reservation ? " center" : "unset")};
-  padding: ${(props) => (props.reservation ? "10px 0" : "10px  5% 10px 10%")};
+  padding: ${(props) => (props.reservation ? "10px 5px" : "10px  7% 10px 9%")};
 
   flex-direction: column;
   margin-bottom: ${(props) => (props.main ? "0" : "25px")};
