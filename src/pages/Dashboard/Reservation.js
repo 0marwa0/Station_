@@ -15,7 +15,9 @@ const ReservationItem = styled.div`
 const ItemHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 10px 0;
+  padding: 10px 7% 10px 10%;
+  width: 100%;
+
   align-items: center;
 `;
 const ReservIcon = styled.div`

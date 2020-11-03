@@ -326,14 +326,17 @@ a:hover {
   color: var(--yellow) !important;
 }
 .items {
-  background-color: white;
+  background-color: rgb(71, 44, 44);
   border-radius: 7px;
   /* border: 1px solid var(--lighterGray); */
   display: flex;
-
+  width: max-content;
   flex-direction: column;
 }
 .items > div {
+  padding-left: 10%;
+  padding-right: 20px;
+  width: max-content;
   border-bottom: 1px solid var(--lightGray);
 }
 .items > div:last-child {
