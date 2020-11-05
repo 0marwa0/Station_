@@ -11,10 +11,16 @@ export const CustomButton = ({
   onOpen,
   pageTitle,
   fun,
+  undo,
   extra,
 }) => {
   return (
-    <ButtonStyled Main={Main} extra={extra} onClick={Main ? onOpen : fun}>
+    <ButtonStyled
+      Main={Main}
+      extra={extra}
+      undo={undo}
+      onClick={Main ? onOpen : fun}
+    >
       {children}
       {lable}
       {filter ? <RiArrowDownSFill color="var(--lighterGray)" /> : ""}

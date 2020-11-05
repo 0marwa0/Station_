@@ -206,10 +206,10 @@ const Index = () => {
               <span style={{ color: "var(--textGray)", marginRight: "8px" }}>
                 Save as draft
               </span>
-              <CustomButton>
+              <CustomButton undo>
                 <RefreshIconLeft />
               </CustomButton>
-              <CustomButton>
+              <CustomButton undo>
                 <RefreshIcon />
               </CustomButton>
               <CustomButton>Preview</CustomButton>{" "}
