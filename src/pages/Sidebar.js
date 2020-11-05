@@ -58,7 +58,7 @@ export const SideWrapper = styled.div`
   height: 100%;
   display: flex;
   position: fixed;
-  padding-top: 30px;
+
   padding-right: 4px;
   z-index: 100;
   flex-direction: column;
@@ -72,10 +72,9 @@ export const SideList = styled.ul`
 `;
 export const SideItem = styled.li`
   position: relative;
-
-  margin-top: 10px;
   padding: 8% 15px;
 
+  margin-bottom: 0.5rem;
   border-left: ${(props) =>
     props.type
       ? "2px solid var(--black);"
@@ -113,7 +112,8 @@ const Active = styled.div`
 const Logo = styled.img`
   width: auto;
   height: 30px;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
   padding: 0 20px;
 `;
 function SideBar(props) {

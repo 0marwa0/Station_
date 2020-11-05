@@ -10,8 +10,6 @@ function Events() {
   const history = useHistory();
   const onOpenModal = (open) => {
     setOpen(open);
-
-    history.push("/createEvent");
   };
   return (
     <div>

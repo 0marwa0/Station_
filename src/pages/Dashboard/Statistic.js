@@ -38,9 +38,9 @@ const menu2 = (
   </Menu>
 );
 const TotleReservationsIcon = styled.div`
-  width: 30px;
-  height: 32px;
-  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  border-radius: 45%;
   display: flex;
   align-items: center;
   font-size: 10px;
@@ -48,9 +48,9 @@ const TotleReservationsIcon = styled.div`
   background-color: var(--LightGreen);
 `;
 const TotlaEvents = styled.div`
-  width: 30px;
-  height: 32px;
-  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  border-radius: 45%;
   display: flex;
   align-items: center;
   font-size: 10px;
@@ -58,9 +58,9 @@ const TotlaEvents = styled.div`
   background-color: var(--lightOrange);
 `;
 const TotlaBooked = styled.div`
-  width: 30px;
-  height: 32px;
-  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  border-radius: 45%;
   display: flex;
   align-items: center;
   font-size: 10px;
@@ -68,9 +68,9 @@ const TotlaBooked = styled.div`
   background-color: var(--lightRed);
 `;
 const TotlaCost = styled.div`
-  width: 30px;
-  height: 32px;
-  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  border-radius: 45%;
   display: flex;
   align-items: center;
   font-size: 10px;

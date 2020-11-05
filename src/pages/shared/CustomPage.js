@@ -36,7 +36,6 @@ export const PageBtn = styled.div`
   flex-cirection: row;
   justify-content: space-between;
   margin-bottom: 17px;
-
   width: 100%;
 `;
 export const ButtonGroup = styled.div`
@@ -44,8 +43,7 @@ export const ButtonGroup = styled.div`
   gap: 10px;
   algin-items: cneter;
   justify-content: flex-end;
-
-  margin-left: ${(props) => (props.space ? "10px" : "0")};
+  margin-right: ${(props) => (props.space ? "10px" : "0")};
 `;
 export const PageTitle = styled.div`
   color: var(--black);
@@ -117,7 +115,11 @@ function CustomPage(props) {
             <ButtonGroup space>
               {props.pageTitle === "Articles" ? (
                 <div
-                  style={{ display: "flex", gap: "6px", alignItems: "center" }}
+                  style={{
+                    display: "flex",
+                    gap: "6px",
+                    alignItems: "center",
+                  }}
                 >
                   <svg
                     cursor="pointer"
@@ -310,7 +312,8 @@ function CustomPage(props) {
                 >
                   <Upload />
                 </CustomButton>
-              ) : (
+              ) : pageTitleName === "Article" ||
+                pageTitleName === "Event" ? null : (
                 <CustomButton
                   Main
                   lable={`New ${pageTitleName}`}

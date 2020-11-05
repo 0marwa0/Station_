@@ -197,6 +197,19 @@ export default class AutoPlayMethods extends React.Component {
                   your revenue
                 </p>{" "}
               </Slide>
+
+              <Slide>
+                <img
+                  src={require("../../public/images/Browser.png")}
+                  style={{ width: "100%", marginBottom: "70px" }}
+                />
+                <BoldText>Trusted & certificated Dashboard System </BoldText>
+                <p>
+                  Turn your smartphone or tablet into powerful POS Manage sales
+                  inventory and employees with ease; engage custommers increase
+                  your revenue
+                </p>{" "}
+              </Slide>
             </Slider>
           </ShortCat>
         </PageWrapper>

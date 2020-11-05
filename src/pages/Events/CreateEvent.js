@@ -203,7 +203,9 @@ const Index = () => {
             </span>
 
             <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
-              <span style={{ color: "var(--textGray)" }}>Save as draft</span>
+              <span style={{ color: "var(--textGray)", marginRight: "8px" }}>
+                Save as draft
+              </span>
               <CustomButton>
                 <RefreshIconLeft />
               </CustomButton>

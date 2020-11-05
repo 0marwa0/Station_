@@ -2,23 +2,24 @@ import React from "react";
 import { Widget } from "./index";
 import { ReservationsData } from "../../fakeData";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 const ReservationItem = styled.div`
   display: grid;
-  grid-template-columns: max-content max-content auto max-content;
-  width: auto;
+  grid-template-columns: 15% max-content auto;
+  width: 100%;
   padding-bottom: 9px;
   align-items: center;
   gap: 3%;
+  cursor: pointer;
   padding-top: 9px;
 `;
 const ItemHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 10px 7% 10px 7%;
-  width: 100%;
-
+  margin-bottom: 10px;
   align-items: center;
 `;
+// padding: 10px 7% 10px 7%;
 const ReservIcon = styled.div`
   width: 2.8vw;
   height: 2.8vw;
@@ -96,50 +97,56 @@ function Index() {
           let place = item.place;
 
           return (
-            <ReservationItem>
-              {place === "Hall" ? (
-                <ReservIcon>{item.place}</ReservIcon>
-              ) : place === "A" ? (
-                <SubA>{item.place}</SubA>
-              ) : place === "B" ? (
-                <SubB>{item.place}</SubB>
-              ) : place === "C" ? (
-                <SubC>{item.place}</SubC>
-              ) : (
-                ""
-              )}
+            <div>
+              <Link to="/BookingDetalis">
+                <ReservationItem>
+                  {place === "Hall" ? (
+                    <ReservIcon>{item.place}</ReservIcon>
+                  ) : place === "A" ? (
+                    <SubA>{item.place}</SubA>
+                  ) : place === "B" ? (
+                    <SubB>{item.place}</SubB>
+                  ) : place === "C" ? (
+                    <SubC>{item.place}</SubC>
+                  ) : (
+                    ""
+                  )}
 
-              <div>
-                <span> {item.name}</span>
-                <div style={{ marginTop: "-4px" }}>
-                  <GrayText>
-                    <span>{item.doc} </span>
-                    <span
-                      style={{
-                        width: "7px",
+                  <div>
+                    <span> {item.name}</span>
+                    <div style={{ marginTop: "-4px" }}>
+                      <GrayText>
+                        <span>{item.doc} </span>
+                        <span
+                          style={{
+                            width: "7px",
 
-                        textAlign: "center",
-                      }}
-                    >
-                      |
-                    </span>
-                    <span> {item.date}</span>
-                  </GrayText>
-                </div>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  fontSize: "0.7vw",
-                  color: "var(--textGray)",
-                  width: "max-content",
-                  paddingRight: "2px",
-                  backgroundColor: "white",
-                }}
-              >
-                {item.time}
-              </div>
-            </ReservationItem>
+                            textAlign: "center",
+                          }}
+                        >
+                          |
+                        </span>
+                        <span> {item.date}</span>
+                      </GrayText>
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      fontSize: "0.8vw",
+                      color: "var(--textGray)",
+
+                      paddingRight: "2px",
+                      justifyContent: "flex-end",
+                      textAlign: "right",
+                      backgroundColor: "white",
+                    }}
+                  >
+                    {item.time}
+                  </div>
+                </ReservationItem>
+              </Link>
+            </div>
           );
         })}
       </div>

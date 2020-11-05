@@ -182,17 +182,17 @@ export const Widget = styled.div`
   border-radius: 7px;
   border: 1px solid var(--lighterGray);
   display: flex;
-  align-items: ${(props) => (props.reservation ? " center" : "unset")};
-  padding: ${(props) => (props.reservation ? "10px 5px" : "10px  7% 10px 9%")};
+  padding: 17px 17px 8px 17px;
 
+  width: 100%;
   flex-direction: column;
-  margin-bottom: ${(props) => (props.main ? "0" : "25px")};
 `;
+
 const Clander = styled.div`
   background-color: white;
   border-radius: 7px;
   padding: 15px 25px;
-  height: 100%;
+
   border: 1px solid var(--lighterGray);
 `;
 const List = styled.div`
@@ -232,6 +232,7 @@ function Booking() {
       title.innerHTML = `${data.title}`;
       titleLable.innerHTML = `Event Title`;
       time.innerHTML = `${data.time}`;
+      time.style.color = "black";
       timeLable.innerHTML = `Time`;
       DayWrap.appendChild(day);
       DayWrap.appendChild(date);
@@ -279,17 +280,12 @@ function Booking() {
         </Row>
         <Row>
           <PageBtn>
-            <ButtonGroup>
+            <ButtonGroup space>
               <Dropdown overlay={menu}>
                 <List>
                   <span>This Month</span>
 
-                  <RiArrowDropDownLine
-                    size="25px"
-                    style={{
-                      height: "23px",
-                    }}
-                  />
+                  <RiArrowDropDownLine size="25px" />
                 </List>
               </Dropdown>
               <Input
@@ -303,7 +299,7 @@ function Booking() {
                 placeholder="Advanced Search"
               />
             </ButtonGroup>
-            <ButtonGroup space>
+            <ButtonGroup>
               <CustomButton lable="Print">
                 <PrintIcon />
               </CustomButton>
@@ -318,12 +314,12 @@ function Booking() {
           style={{
             display: "grid",
             gap: "25px",
-            gridTemplateColumns: "3fr 1.1fr",
+            gridTemplateColumns: "2fr 0.7fr",
           }}
         >
           <Col
             style={{
-              height: "100%",
+              height: "582px",
             }}
           >
             <Clander>
@@ -338,6 +334,7 @@ function Booking() {
           </Col>
           <Col style={{ height: "100%" }}>
             <Reservation />
+            <div style={{ height: "3%" }}></div>
             <Statistic />
           </Col>
         </Row>

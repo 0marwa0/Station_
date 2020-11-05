@@ -158,7 +158,12 @@ const Index = (props) => {
               <div style={{ display: "flex", gap: "10px" }}>
                 <ButtonStyled>Edit</ButtonStyled>
                 {!BookingStatus ? null : (
-                  <ButtonStyled Main>View Event</ButtonStyled>
+                  <ButtonStyled
+                    onClick={() => history.push("/createEvent")}
+                    Main
+                  >
+                    Create Event
+                  </ButtonStyled>
                 )}
               </div>
             </PageActions>
