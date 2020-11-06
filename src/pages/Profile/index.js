@@ -60,6 +60,7 @@ const Form = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
   float: left;
 `;
 const Space = styled.div`

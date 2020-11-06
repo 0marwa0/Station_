@@ -441,7 +441,7 @@ a {
   animation: listFade 0.6s;
 } */
 .ant-table-cell {
-  padding: 5px 7px !important;
+  padding: 2px 15px !important;
 }
 .ant-table-tbody > tr > td {
   padding-top: 7px !important;

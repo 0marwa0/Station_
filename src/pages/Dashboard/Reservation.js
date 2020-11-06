@@ -9,7 +9,7 @@ const ReservationItem = styled.div`
   width: 100%;
   padding-bottom: 9px;
   align-items: center;
-  gap: 3%;
+  gap: 7px;
   cursor: pointer;
   padding-top: 9px;
 `;

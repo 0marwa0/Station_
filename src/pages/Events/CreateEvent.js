@@ -256,11 +256,12 @@ const Index = () => {
                 fontSize: "17px",
               }}
             >
+              <p>Start writing or tap here to add images or videos ..</p>
               <Editor
-                placeholder="Start writing or tap here to add images or videos .."
-                // instanceRef={(instance) => (instanceRef.current = instance)}
-                // tools={EDITOR_JS_TOOLS}
-                // data={data}
+
+              // instanceRef={(instance) => (instanceRef.current = instance)}
+              // tools={EDITOR_JS_TOOLS}
+              // data={data}
               />
             </div>
           </Col>

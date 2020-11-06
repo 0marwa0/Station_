@@ -192,7 +192,8 @@ const Clander = styled.div`
   background-color: white;
   border-radius: 7px;
   padding: 15px 25px;
-
+  height: 100%;
+  margin-bottom: 20px;
   border: 1px solid var(--lighterGray);
 `;
 const List = styled.div`
@@ -319,13 +320,14 @@ function Booking() {
         >
           <Col
             style={{
-              height: "582px",
+              height: "auto",
             }}
           >
             <Clander>
               <FullCalendar
                 plugins={[dayGridPlugin]}
                 initialView="dayGridMonth"
+                height="700px"
                 eventMouseEnter={(item) => onEnter(item)}
                 eventMouseLeave={(item) => onLeave(item)}
                 events={Data}
