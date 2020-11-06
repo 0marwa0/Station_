@@ -9,9 +9,10 @@ import { CustomModleButton } from "../../shared/SharedComponents";
 import styled from "styled-components";
 import { TextNote } from "../../FileUploader/NewFileUploader";
 import { Input } from "antd";
-import { CustomInput } from "../../shared/SharedStyle";
+import { CustomInput, Space } from "../../shared/SharedStyle";
 import { ImAttachment } from "react-icons/im";
 import { AiOutlineClose } from "react-icons/ai";
+import { ReactComponent as Close } from "../../../public/images/close.svg";
 
 const { TextArea } = Input;
 const PageWrapper = styled.div`
@@ -96,17 +97,21 @@ function Index(props) {
     <div>
       <ModleHeader>
         Upload New Resources
-        <AiOutlineClose onClick={props.Close} cursor="pointer" />
+        <Close onClick={props.Close} cursor="pointer" />
+        {/* <AiOutlineClose  /> */}
       </ModleHeader>
       <PageWrapper>
         <InputLable>
           Title
           <CustomInput placeholder="write file title" />
         </InputLable>
+        <Space />
         <InputLable>
           Description
           <CustomInputArea rows={3} placeholder="write file Description ..." />
-        </InputLable>{" "}
+        </InputLable>
+        <Space />
+        <Space />
         <div
           onDragOver={dragOver}
           onDragEnter={dragEnter}

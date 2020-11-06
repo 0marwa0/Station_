@@ -51,7 +51,7 @@ export const ButtonStyled = styled(Button)`
 export const InputLable = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 7px;
   margin-bottom: 10px;
 `;
 export const ModleFooter = styled.div`
@@ -59,7 +59,10 @@ export const ModleFooter = styled.div`
   gap: 10px;
   justify-content: flex-end;
   marign-top: 5px;
-  padding: 20px 40px;
+  padding: 20px 40px 40px 40px;
+`;
+export const Space = styled.div`
+  height: 7px;
 `;
 export const ModleHeader = styled.div`
   display: flex;
@@ -67,6 +70,7 @@ export const ModleHeader = styled.div`
   height: 60px;
   justify-content: space-between;
 
+  align-items: center;
   border-radius: 7px;
   font-size: 20px;
   padding-top: 40px;

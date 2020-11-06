@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { ArticlesData } from "../../fakeData";
 import { BsTrashFill } from "react-icons/bs";
 import { FiEdit } from "react-icons/fi";
@@ -10,6 +10,18 @@ const ListItemWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
+`;
+
+const mm = keyframes`
+ 0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 `;
 const Actions = styled.span`
   display: flex;
@@ -26,11 +38,13 @@ const Item = styled.img`
   cursor: pointer;
   border-radius: 5px;
 `;
+
 const Overlay = styled.div`
   border-radius: 5px;
   width: 100%;
   height: 13rem;
   position: absolute;
+  animation: ${mm} 0.5s ease-in-out;
   top: 0;
   left: 0;
   reight: 0;
@@ -41,6 +55,7 @@ const Overlay = styled.div`
     rgba(2, 2, 2, 0.8)
   );
 `;
+//
 const ImgHolder = styled.div`
   width: 290px;
   height: 30%;
@@ -48,6 +63,7 @@ const ImgHolder = styled.div`
   &:hover ${Actions} {
     visibility: visible;
   }
+
   &:hover ${Overlay} {
     background-image: linear-gradient(
       rgba(2, 2, 2, 0.5),
@@ -108,7 +124,7 @@ const ListItem = () => {
     <ListItemWrapper>
       {ArticlesData.map((item, i) => {
         return (
-          <div>
+          <div className="marwa">
             <ImgHolder>
               <Item src={require(`../../public/${item.image}`)} />
 

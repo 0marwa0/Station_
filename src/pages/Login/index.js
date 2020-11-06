@@ -1,64 +1,70 @@
 import styled from "styled-components";
 import React from "react";
 import { Input, Button, Checkbox } from "antd";
+import { ReactComponent as LogoIcon } from "../../public/images/LogoIcon.svg";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Carousel } from "antd";
-const PageWrapper = styled.span`
+const PageWrapper = styled.div`
   display: flex;
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
+  height: 100vh;
+
+  width: 100%;
 `;
 const LoginForm = styled.div`
   width: 35%;
-  padding: 40px;
-  display: flex;
-  gap: 14px;
-  margin-top: 6%;
-  font-size: 18px;
-  color: var(--darkGray);
-  flex-direction: column;
-  @media (max-width: 768px) {
-    width: 80%;
-    margin: auto;
+
+  position: relative;
+
+  @media (max-width: 900px) {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 99999;
+    background-color: white;
   }
 `;
-const Logo = styled.img`
-  width: 100px;
-  margin: 0 auto;
+const LoginContent = styled.div`
+  position: absolute;
+  left: 50%;
+  font-siz: 18px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 450px;
+`;
+const Logo = styled.div`
+  width: 100%;
+  text-align: center;
 `;
 const ShortCat = styled.div`
   background-color: var(--lightGray);
 
-  height: 100vh;
-
   width: 65%;
 
   color: var(--darkGray);
-  @media (max-width: 768px) {
-    display: none;
-  }
 `;
-const BoldText = styled.div`
-  font-size: 20px;
-  font-weight: bold;
+const BoldText = styled.h3`
+  font-weight: 700;
   color: black;
 `;
 const CopyRights = styled.div`
   font-size: 16px;
   color: var(--yellow);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 70px;
-  gap: 5px;
+  position: absolute;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  bottom: 0;
 `;
 const LoginInfo = styled.div`
   display: flex;
   font-size: 15px;
+
   justify-content: space-between;
 `;
 const Slide = styled.div`
@@ -71,6 +77,14 @@ const Slide = styled.div`
   padding-top: 60px;
   padding-left: 15%;
   padding-right: 15%;
+`;
+const Space = styled.div`
+  height: 15px;
+`;
+const Label = styled.div`
+  color: var(--darkGray);
+  font-size: 18px;
+  height: 22px;
 `;
 const StyledPassword = styled(Input.Password)`
   Input {
@@ -103,14 +117,35 @@ export default class AutoPlayMethods extends React.Component {
       autoplay: true,
       autoplaySpeed: 2000,
     };
-
+    const SlideItem = () => {
+      return (
+        <Slide>
+          <img
+            src={require("../../public/images/Browser.png")}
+            style={{ width: "100%", marginBottom: "70px" }}
+          />
+          <BoldText>Trusted & certificated Dashboard System </BoldText>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <p style={{ width: "60%" }}>
+              Turn your smartphone or tablet into powerful POS Manage sales
+              inventory and employees with ease; engage custommers increase your
+              revenue
+            </p>{" "}
+          </div>
+        </Slide>
+      );
+    };
     return (
-      <div>
-        <PageWrapper>
-          <LoginForm>
-            <Logo src={require("../../public/images/Logo.png")} />
+      <PageWrapper>
+        <LoginForm>
+          <LoginContent>
+            <Logo>
+              <LogoIcon />
+            </Logo>
+            <Space />
             <div>
-              User Name{" "}
+              <Label> User Name</Label>
+
               <Input
                 placeholder="Enter you user name"
                 style={{
@@ -121,8 +156,10 @@ export default class AutoPlayMethods extends React.Component {
                 }}
               />
             </div>
+            <Space />
             <div>
-              Password
+              <Label>Password</Label>
+
               <Input.Password
                 placeholder="Enter you passwrd"
                 style={{
@@ -133,6 +170,7 @@ export default class AutoPlayMethods extends React.Component {
                 }}
               />
             </div>
+            <Space />
             <div>
               <Link to="/Dashboard">
                 <Button
@@ -142,9 +180,10 @@ export default class AutoPlayMethods extends React.Component {
                     border: "none",
                     display: "flex",
                     gap: "5px",
-                    padding: "0 40%",
+
                     width: "100%",
                     alignItems: "center",
+                    justifyContent: "center",
                     fontSize: "18px",
                     height: "60px",
                   }}
@@ -153,54 +192,33 @@ export default class AutoPlayMethods extends React.Component {
                 </Button>
               </Link>
             </div>
+            <Space />
             <LoginInfo>
               <div>
                 <Checkbox /> Remember me
               </div>
               <u>Forgot Password?</u>
             </LoginInfo>
-            <CopyRights>
-              <span style={{ color: "var(--darkGray)", fontSize: "13px" }}>
-                A system by {"  "}
-              </span>
-              Solo Creative Studio
-            </CopyRights>
-          </LoginForm>
-          <ShortCat>
-            <Slider
-              arrows={false}
-              ref={(slider) => (this.slider = slider)}
-              {...settings}
-            >
-              <Slide>
-                <img
-                  src={require("../../public/images/Browser.png")}
-                  style={{ width: "100%", marginBottom: "70px" }}
-                />
-                <BoldText>Trusted & certificated Dashboard System </BoldText>
-                <p>
-                  Turn your smartphone or tablet into powerful POS Manage sales
-                  inventory and employees with ease; engage custommers increase
-                  your revenue
-                </p>{" "}
-              </Slide>
-
-              <Slide>
-                <img
-                  src={require("../../public/images/Browser.png")}
-                  style={{ width: "100%", marginBottom: "70px" }}
-                />
-                <BoldText>Trusted & certificated Dashboard System </BoldText>
-                <p>
-                  Turn your smartphone or tablet into powerful POS Manage sales
-                  inventory and employees with ease; engage custommers increase
-                  your revenue
-                </p>{" "}
-              </Slide>
-            </Slider>
-          </ShortCat>
-        </PageWrapper>
-      </div>
+          </LoginContent>{" "}
+          <CopyRights>
+            <span style={{ color: "var(--darkGray)", fontSize: "13px" }}>
+              A system by {"  "}
+            </span>
+            Solo Creative Studio
+          </CopyRights>
+        </LoginForm>
+        <ShortCat>
+          <Slider
+            arrows={false}
+            ref={(slider) => (this.slider = slider)}
+            {...settings}
+          >
+            <SlideItem />
+            <SlideItem />
+            <SlideItem />
+          </Slider>
+        </ShortCat>
+      </PageWrapper>
     );
   }
 }

@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { Button } from "antd";
 import { AiOutlineClose } from "react-icons/ai";
 import { Link } from "react-router-dom";
-
+import { ReactComponent as Close } from "../../../public/images/close.svg";
 import { FirstPage, SecondPage, ThirdPage, ForthPage } from "./Modle";
 const data = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
 const Dot = styled.span``;
@@ -70,9 +70,10 @@ class Index extends React.Component {
             }}
           >
             New Booking
-            <AiOutlineClose onClick={this.props.Close} cursor="pointer" />
+            <Close onClick={this.props.Close} cursor="pointer" />
+            {/* <AiOutlineClose  /> */}
           </div>
-          <div style={{ color: "var(--textGray)" }}>
+          <div style={{ color: "#8F8F8F" }}>
             Create a booking for a costumer directly from reception
           </div>
         </ModleTitle>

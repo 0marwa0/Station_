@@ -45,7 +45,11 @@ const Text = styled.span`
 function Index() {
   return (
     <div>
-      <div id="/" class="popup">
+      <div
+        id="/"
+        class="popup"
+        style={{ transition: " all 0.3s ease-in-out", transform: "scale(1)" }}
+      >
         <div className="Notification_content">
           <div className="popup_arrow"></div>
           <NotificationsHolder>

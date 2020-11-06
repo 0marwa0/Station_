@@ -5,8 +5,24 @@
   box-sizing: border-box;
   font-family: Px-Grotesk !important;
 }
+html,
+body {
+  height: 100% !important;
+}
 .slick-dots li {
   margin: 0px !important;
+}
+.slick-slider {
+  width: 100% !important;
+
+  height: 100% !important;
+}
+.slick-dots {
+  bottom: 15px !important;
+}
+.slick-list {
+  top: 50% !important;
+  transform: translateY(-50%) !important;
 }
 .Notifications_holder {
   position: relative;
@@ -204,9 +220,11 @@
 
 .modleWrapper {
   width: 580px;
-  margin-bottom: 18px;
+  /*margin-bottom: 18px;*/
   padding: 0px 40px;
+  display: flex;
 
+  flex-direction: column;
   transition: all 10s ease-in-out !important;
   height: 100%;
   -webkit-transition: opacity 0.5s, height 0.5s, width 0.5s !important;
@@ -374,6 +392,10 @@ a {
   display: flex;
   flex-direction: row !important;
 }
+.slick-dots li {
+  width: 10px !important;
+}
+
 #pupup {
   position: absolute;
   top: 0;
@@ -510,6 +532,23 @@ th:last-child {
   color: var(--blue) !important;
   background: var(--lightBlue) !important;
 }
+.ImgHolder div:hover {
+  visibility: visible;
+  background-image: linear-gradient(
+    rgba(2, 2, 2, 0.5),
+    rgba(2, 2, 2, 0.5),
+    rgba(2, 2, 2, 0.5)
+  );
+}
+@keyframes mm {
+  from {
+    background-image: red;
+  }
+  to {
+    background-image: black;
+  }
+}
+
 :root {
   --black: #000000;
   --yellow: #f0e001;

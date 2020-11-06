@@ -2,9 +2,15 @@ import React from "react";
 import { Input, InputNumber } from "antd";
 import { Menu, Dropdown, Button } from "antd";
 import { DownOutlined } from "@ant-design/icons";
-import { InputLable, ModleFooter, ModleHeader } from "../../shared/SharedStyle";
+import {
+  InputLable,
+  ModleFooter,
+  ModleHeader,
+  Space,
+} from "../../shared/SharedStyle";
 import styled from "styled-components";
 import { ReactComponent as DropIcon } from "../../../public/images/dropdown.svg";
+import { ReactComponent as Close } from "../../../public/images/close.svg";
 
 import { GiNorthStarShuriken } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
@@ -32,7 +38,8 @@ function Index(props) {
       {" "}
       <ModleHeader>
         Send notification
-        <AiOutlineClose onClick={props.Close} cursor="pointer" />
+        <Close onClick={props.Close} cursor="pointer" />
+        {/* <AiOutlineClose /> */}
       </ModleHeader>
       <PageWrapper>
         <InputLable>
@@ -41,6 +48,7 @@ function Index(props) {
           </span>
           <CustomInput placeholder="Write notification title" />
         </InputLable>
+        <Space />
         <InputLable>
           <span>
             {" "}
@@ -52,6 +60,7 @@ function Index(props) {
             placeholder="Write notification message ..."
           />
         </InputLable>{" "}
+        <Space />
         <InputLable>
           User filter
           <Dropdown overlay={optionData}>
@@ -70,7 +79,7 @@ function Index(props) {
         </InputLable>
       </PageWrapper>{" "}
       <ModleFooter>
-        <CustomModleButton>cancel</CustomModleButton>
+        <CustomModleButton>Cancel</CustomModleButton>
         <CustomModleButton Main>Send</CustomModleButton>
       </ModleFooter>
     </div>

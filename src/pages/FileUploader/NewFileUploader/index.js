@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { InputLable, ModleFooter, ModleHeader } from "../../shared/SharedStyle";
 import { CustomModleButton } from "../../shared/SharedComponents";
 import styled from "styled-components";
+import { ReactComponent as Close } from "../../../public/images/close.svg";
 
 import { ImAttachment } from "react-icons/im";
 import { AiOutlineClose } from "react-icons/ai";
@@ -92,7 +93,8 @@ function Index(props) {
     <div>
       <ModleHeader>
         Upload New Media
-        <AiOutlineClose onClick={props.Close} cursor="pointer" />
+        <Close onClick={props.Close} cursor="pointer" />
+        {/* <AiOutlineClose  /> */}
       </ModleHeader>
 
       <PageWrapper>

@@ -3,6 +3,7 @@ import { InputLable } from "../../shared/SharedStyle";
 import { CustomModleButton } from "../../shared/SharedComponents";
 import { Menu, Dropdown, Button, Input } from "antd";
 import { ReactComponent as DropIcon } from "../../../public/images/dropdown.svg";
+import { ReactComponent as Close } from "../../../public/images/close.svg";
 
 import {
   DownOutlined,
@@ -63,6 +64,9 @@ const Title = styled.div`
   margin-bottom: 40px;
   align-items: center;
 `;
+const Space = styled.div`
+  height: 8px;
+`;
 function Index(props) {
   return (
     <SideOverlay>
@@ -70,25 +74,29 @@ function Index(props) {
         <div style={{ height: "95%" }}>
           <Title>
             <div>Add new Admin</div>
-            <AiOutlineClose onClick={() => props.fun(false)} cursor="pointer" />
+            <Close onClick={() => props.fun(false)} cursor="pointer" />
+            {/* <AiOutlineClose /> */}
           </Title>
-
           <InputLable>
             {" "}
             <div style={{ fontSize: "17px" }}>Admin Info</div>
-          </InputLable>
+          </InputLable>{" "}
+          <Space />
           <InputLable>
             Full Name
             <CustomInput placeholder="Write admin name" />
           </InputLable>
+          <Space />
           <InputLable>
             Username
             <CustomInput placeholder="Write admin username" />
           </InputLable>
+          <Space />
           <InputLable>
             Password
             <CustomInput placeholder="Write admin password" />
           </InputLable>
+          <Space />
           <InputLable>
             Branch
             <Dropdown overlay={option}>
@@ -112,6 +120,7 @@ function Index(props) {
               </Button>
             </Dropdown>
           </InputLable>
+          <Space />
           <InputLable>
             Role
             <Dropdown overlay={data}>

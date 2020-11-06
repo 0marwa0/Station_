@@ -24,26 +24,31 @@ const optionData = (
 );
 
 const CardItem = styled.div`
-  width: 200px;
-  height: 100px;
+  width: max-content;
+  height: 90px;
   padding: 8px;
   display: flex;
   flex-direction: column;
   border-radius: 5px;
-  courser: pointer;
+
   gap: 5px;
-  border: 1px solid var(--lighterGray);
+  border: 2px solid var(--lighterGray);
   &:hover {
-    border: 1px solid var(--yellow);
+    border: 2px solid var(--yellow);
   }
 `;
+
 const CardWrapper = styled.div`
   display: flex;
-  flex-direction: row;
+  width: 600px;
   gap: 10px;
   cursor: grab;
-  margin-bottom: 10px;
-  width: 900px;
+`;
+const SlidHolder = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  height: 130px;
 `;
 const PageWrapper = styled.div`
   width: 580px;
@@ -85,6 +90,9 @@ const Size = styled.span`
 const GrayBoldText = styled.div`
   color: var(--textGray);
 `;
+const Space = styled.div`
+  height: 5px;
+`;
 export function FirstPage() {
   return (
     <div className="modleWrapper ">
@@ -93,6 +101,7 @@ export function FirstPage() {
           Booking Title
           <CustomInput placeholder="write booking title" />
         </InputLable>
+
         <InputLable>
           Space
           <Dropdown overlay={optionData}>
@@ -113,13 +122,15 @@ export function FirstPage() {
       </Page1Item>
       <Page1Item>
         <InputLable>
+          <Space />
           Organizer Name
           <CustomInput placeholder="write organizer name" />
         </InputLable>{" "}
         <InputLable>
+          <Space />{" "}
           <Size>
             No. of People
-            <span style={{ color: "var(--textGray)" }}>Max 3D</span>{" "}
+            <span style={{ color: "var(--textGray)" }}>Max: 30</span>{" "}
           </Size>
           <InputNumber
             placeholder="00"
@@ -128,6 +139,7 @@ export function FirstPage() {
         </InputLable>
       </Page1Item>
       <InputLable>
+        <Space />
         Comment
         <CustomInputArea
           rows={4}
@@ -207,17 +219,23 @@ export function SecondPage() {
           <div>Start</div>
           <div>End</div>
         </BookedItem>
+        <Space />
         <BookedItem>
           <div>13 Oct 2020</div>
           <GrayBoldText>09:00 Am</GrayBoldText>
           <GrayBoldText>06:00 Am</GrayBoldText>
-          <FaTrashAlt color="var(--lighterGray)" />
+          <div>
+            <FaTrashAlt color="var(--lighterGray)" style={{ float: "right" }} />
+          </div>
         </BookedItem>
+
         <BookedItem>
           <div>15 Oct 2020</div>
           <GrayBoldText>09:00 Am</GrayBoldText>
           <GrayBoldText>06:00 Am</GrayBoldText>
-          <FaTrashAlt color="var(--lighterGray)" />
+          <div>
+            <FaTrashAlt color="var(--lighterGray)" style={{ float: "right" }} />
+          </div>
         </BookedItem>
       </div>
     </div>
@@ -249,8 +267,9 @@ const settings = {
 export function ThirdPage() {
   return (
     <div className="modleWrapper">
-      <InputLable>
-        Coffe Brake Pack
+      <SlidHolder>
+        <span> Coffe Brake Pack</span>
+
         <Slider {...settings}>
           <div>
             <CardWrapper>
@@ -271,8 +290,10 @@ export function ThirdPage() {
           <div></div>
           <div></div>
         </Slider>
-      </InputLable>
-      <InputLable>
+      </SlidHolder>
+      <Space />
+      <Space />
+      <SlidHolder>
         Lunches
         <Slider {...settings}>
           <div>
@@ -294,9 +315,11 @@ export function ThirdPage() {
           <div></div>
           <div></div>
         </Slider>
-      </InputLable>
-      <InputLable>
-        Hall Design{" "}
+      </SlidHolder>
+      <Space />
+      <Space />
+      <SlidHolder>
+        Hall Design
         <Slider {...settings}>
           <div>
             <CardWrapper>
@@ -317,7 +340,7 @@ export function ThirdPage() {
           <div></div>
           <div></div>
         </Slider>
-      </InputLable>
+      </SlidHolder>
     </div>
   );
 }
