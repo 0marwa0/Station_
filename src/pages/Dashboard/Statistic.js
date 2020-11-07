@@ -15,8 +15,10 @@ const ReservationItem = styled.div`
   display: grid;
   grid-template-columns: auto 1fr auto;
   gap: 7px;
-  padding: 5px 0;
+  padding: 7px 0;
+  align-items: center;
   color: var(--darkBlue);
+
   font-size: 1vw;
 `;
 const ItemHeader = styled.div`
@@ -38,8 +40,8 @@ const menu2 = (
   </Menu>
 );
 const TotleReservationsIcon = styled.div`
-  width: 3.2vw;
-  height: 3.3vw;
+  width: 2.6vw;
+  height: 2.5vw;
   border-radius: 45%;
   display: flex;
   align-items: center;
@@ -48,8 +50,8 @@ const TotleReservationsIcon = styled.div`
   background-color: var(--LightGreen);
 `;
 const TotlaEvents = styled.div`
-  width: 3.2vw;
-  height: 3.3vw;
+  width: 2.6vw;
+  height: 2.5vw;
   border-radius: 45%;
   display: flex;
   align-items: center;
@@ -58,8 +60,8 @@ const TotlaEvents = styled.div`
   background-color: var(--lightOrange);
 `;
 const TotlaBooked = styled.div`
-  width: 3.2vw;
-  height: 3.3vw;
+  width: 2.6vw;
+  height: 2.5vw;
 
   border-radius: 45%;
   display: flex;
@@ -69,8 +71,8 @@ const TotlaBooked = styled.div`
   background-color: var(--lightRed);
 `;
 const TotlaCost = styled.div`
-  width: 3.2vw;
-  height: 3.3vw;
+  width: 2.6vw;
+  height: 2.5vw;
   border-radius: 45%;
   display: flex;
   align-items: center;
