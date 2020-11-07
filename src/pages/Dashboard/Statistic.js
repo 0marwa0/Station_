@@ -18,7 +18,6 @@ const ReservationItem = styled.div`
   padding: 7px 0;
   align-items: center;
   color: var(--darkBlue);
-
   font-size: 1vw;
 `;
 const ItemHeader = styled.div`
