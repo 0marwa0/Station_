@@ -217,23 +217,56 @@ body {
 .react-responsive-modal-overlay {
   background: rgba(0, 0, 0, 0.3) !important;
 }
+/* @-webkit-keyframes anim {
+  0% {
+    transform: translateX(100%);
+  }
+  14.28% {
+    transform: translateX(0);
+  }
+  85.71% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+} */
+@keyframes anim {
+  0% {
+    opacity: 0;
+    /* background-color: yellow; */
+    /* transform: translateX(100%); */
+  }
+
+  100% {
+    /* transform: translateX(500px); */
+    opacity: 1;
+    /* background-color: black; */
+    /* transform: translateX(80%); */
+  }
+}
 
 .modleWrapper {
-  width: 580px;
-  /*margin-bottom: 18px;*/
+  width: 550px;
+  height: auto;
   padding: 0px 40px;
   display: flex;
-
+  transition: height 0.4s linear;
+  -webkit-animation: anim 0.5s ease-in;
+  animation: anim 0.5s ease-in;
   flex-direction: column;
-  transition: all 10s ease-in-out !important;
-  height: 100%;
-  -webkit-transition: opacity 0.5s, height 0.5s, width 0.5s !important;
-  -o-transition: opacity 0.5s, height 0.5s, width 0.5s !important;
-  transition: opacity 0.5s, height 0.5s, width 0.5s !important;
-  -webkit-transition-delay: 0.5s, 0.5s, 0s !important;
-  -o-transition-delay: 0.5s, 0.5s, 0s !important;
-  transition-delay: 0.5s, 0.5s, 0s !important;
 }
+
+/* .modleWrapper2 {
+  width: 500px;
+  padding: 0px 40px;
+  height: 100%;
+  display: flex;
+  overflow: hidden !important;
+  transform: translateX(0%);
+  -webkit-animation: anim 0.5s ease-in;
+  animation: anim 0.5s ease-in;
+} */
 .fc-theme-standard .fc-scrollgrid {
   position: relative !important;
   padding-left: 10 !important;

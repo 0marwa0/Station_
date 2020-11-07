@@ -95,7 +95,7 @@ const Space = styled.div`
 `;
 export function FirstPage() {
   return (
-    <div className="modleWrapper ">
+    <div className="modleWrapper">
       <Page1Item>
         <InputLable>
           Booking Title
@@ -202,10 +202,11 @@ export function SecondPage() {
           </Dropdown>
         </InputLable>
         <InputLable>
+          <div style={{ color: "transparent" }}>*</div>
           <Button
             style={{
               borderRadius: "7px",
-              marginTop: "80%",
+
               backgroundColor: "var(--lightGray)",
             }}
           >
@@ -347,7 +348,7 @@ export function ThirdPage() {
 
 export function ForthPage() {
   return (
-    <div className="modleWrapper ">
+    <div className="modleWrapper">
       <div
         style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}
       >
