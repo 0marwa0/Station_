@@ -1,3 +1,4 @@
+// Customer page
 import React, { useState } from "react";
 import CustomPage from "../shared/CustomPage";
 import { CustomersColumns } from "./Config";

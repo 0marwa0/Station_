@@ -1,7 +1,7 @@
 // Admins page config
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import React from "react";
-import { Checkbox, Table, Tooltip, Tag, Space, Button, Input } from "antd";
+import { Checkbox, Tag } from "antd";
 export const AdminsColumns = [
   {
     title: "",
@@ -68,10 +68,7 @@ export const AdminsColumns = [
           let color = "green";
           if (status != "Enabled") {
             color = "green";
-          } // else {
-          //   color = "volcano";
-          //   console.log(status, "mmm");
-          // }
+          }
           return (
             <Tag color={color} key={status}>
               {status.toUpperCase()}

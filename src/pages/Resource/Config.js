@@ -1,3 +1,5 @@
+// Resource Config
+
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { UserImage } from "../Sidebar";
 import { BsTrashFill, BsTrash } from "react-icons/bs";

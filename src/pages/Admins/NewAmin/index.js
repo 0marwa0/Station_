@@ -5,13 +5,8 @@ import { Menu, Dropdown, Button, Input } from "antd";
 import { ReactComponent as DropIcon } from "../../../public/images/dropdown.svg";
 import { ReactComponent as Close } from "../../../public/images/close.svg";
 
-import {
-  DownOutlined,
-  PropertySafetyFilled,
-  UserOutlined,
-} from "@ant-design/icons";
 import styled from "styled-components";
-import { AiOutlineClose } from "react-icons/ai";
+
 import "../../../App.css";
 import { CustomInput } from "../../shared/SharedStyle";
 const option = (
@@ -110,13 +105,6 @@ function Index(props) {
               >
                 Choose admin branch loaction
                 <DropIcon />
-                {/* <DownOutlined
-                  style={{
-                    float: "right",
-                    marginTop: "5px",
-                    color: "var(--darkGray)",
-                  }}
-                /> */}
               </Button>
             </Dropdown>
           </InputLable>
@@ -133,13 +121,6 @@ function Index(props) {
                 }}
               >
                 Choose admin role <DropIcon />
-                {/* <DownOutlined
-                  style={{
-                    float: "right",
-                    marginTop: "5px",
-                    color: "var(--darkGray)",
-                  }}
-                /> */}
               </Button>
             </Dropdown>
           </InputLable>

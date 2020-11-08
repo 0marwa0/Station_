@@ -1,3 +1,5 @@
+// Booking page //
+
 import React, { useState } from "react";
 import CustomPage from "../shared/CustomPage";
 import { BookingColumns } from "./Config";
@@ -17,7 +19,7 @@ function Booking() {
       <CustomPage
         pageTitle="Booking"
         columns={BookingColumns}
-        // data={BookingData}
+        // data={BookingData}  to show no data state
 
         onOpenModal={() => onOpenModal(true)}
       />

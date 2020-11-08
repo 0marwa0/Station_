@@ -1,3 +1,5 @@
+// event page config
+
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { UserImage } from "../Sidebar";
 import { Checkbox, Progress, Tooltip, Tag, Space, Button, Input } from "antd";

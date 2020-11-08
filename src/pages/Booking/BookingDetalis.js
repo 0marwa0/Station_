@@ -138,7 +138,7 @@ const Index = (props) => {
   const setBooking = (status) => {
     setBookingStatus(status);
   };
-  console.log(history, "should be the prev page");
+
   return (
     <CustomPageWrapper>
       <GlobalStyle />

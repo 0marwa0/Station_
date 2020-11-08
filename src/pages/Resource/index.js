@@ -1,3 +1,5 @@
+// Resource page
+
 import React, { useState } from "react";
 import { ResourcesColumns } from "./Config";
 import CustomPage from "../shared/CustomPage";

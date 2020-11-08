@@ -10,7 +10,7 @@ import { CustomButton } from "../shared/SharedComponents";
 import FullCalendar from "@fullcalendar/react";
 import { Modal } from "react-responsive-modal";
 import { ReactComponent as PrintIcon } from "../../public/images/print.svg";
-
+import { Data } from "../../fakeData/DashFakeData";
 import NewBooking from "../Booking/NewBooking";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import { RiArrowDropDownLine } from "react-icons/ri";
@@ -30,141 +30,6 @@ body{
 }
 
 `;
-const colors = {
-  color1: "var(--darkGreen)",
-  color2: "var(--orange)",
-  color3: "var(--blue)",
-  color4: "var(--red)",
-  color5: "var(--purple)",
-};
-const Data = [
-  {
-    title: "Fikra Space",
-    start: "2020-11-01",
-    end: "2020-11-1",
-    data: [
-      {
-        title: "Fikra Space",
-        day: "Sunday",
-        date: "1 November 2020",
-        time: "8:00 Am - 9:00AM",
-      },
-    ],
-    color: `${colors[`color${Math.floor(Math.random() * (5 - 1 + 1)) + 1}`]}`,
-  },
-  {
-    title: "Fikra Space",
-    start: "2020-11-07",
-    end: "2020-11-06",
-    data: [
-      {
-        title: "Fikra Space",
-        day: " Wensday",
-        date: "7 November 2020 ",
-        time: "8:00 Am - 9:00AM",
-      },
-    ],
-    color: `${colors[`color${Math.floor(Math.random() * (5 - 1 + 1)) + 1}`]}`,
-  },
-  {
-    title: "Fikra Space",
-    start: "2020-11-13",
-    end: "2020-11-13",
-    data: [
-      {
-        title: "Fikra Space",
-        day: "Tuesday",
-        date: "13 November 2020",
-        time: "8:00 Am - 9:00AM",
-      },
-    ],
-    color: `${colors[`color${Math.floor(Math.random() * (5 - 1 + 1)) + 1}`]}`,
-  },
-  {
-    title: "Fikra Space",
-    start: "2020-11-31",
-    end: "2020-11-31",
-    data: [
-      {
-        title: "Fikra Space",
-        day: "Saturday",
-        date: "31 November 2020",
-        time: "8:00 Am - 9:00AM",
-      },
-    ],
-    color: `${colors[`color${Math.floor(Math.random() * (5 - 1 + 1)) + 1}`]}`,
-  },
-  {
-    title: "Fikra Space",
-    start: "2020-11-30",
-    end: "2020-11-30",
-    data: [
-      {
-        title: "Fikra Space",
-        day: "Friday",
-        date: "30 November 2020",
-        time: "8:00 Am - 9:00AM",
-      },
-    ],
-    color: `${colors[`color${Math.floor(Math.random() * (5 - 1 + 1)) + 1}`]}`,
-  },
-  {
-    title: "Fikra Space",
-    start: "2020-11-18",
-    end: "2020-11-21",
-    data: [
-      {
-        title: "Fikra Space",
-        day: "Sundey - Wednsday",
-        date: "18 November 2020 -18 November 2020",
-        time: "8:00 Am - 9:00AM",
-      },
-    ],
-    color: `${colors[`color${Math.floor(Math.random() * (5 - 1 + 1)) + 1}`]}`,
-  },
-  {
-    title: "Fikra Space",
-    start: "2020-11-19",
-    end: "2020-11-21",
-    data: [
-      {
-        title: "Fikra Space",
-        day: "Monday - Tuesday",
-        date: "18 November 2020 -20 November 2020",
-        time: "8:00 Am - 9:00AM",
-      },
-    ],
-    color: `${colors[`color${Math.floor(Math.random() * (5 - 1 + 1)) + 1}`]}`,
-  },
-  {
-    title: "Fikra Space",
-    start: "2020-11-04",
-    end: "2020-11-08",
-    data: [
-      {
-        title: "Fikra Space",
-        day: "Sundey - Wednsday",
-        date: "4 November 2020 - 8 November 2020",
-        time: "8:00 Am - 9:00AM",
-      },
-    ],
-    color: `${colors[`color${Math.floor(Math.random() * (5 - 1 + 1)) + 1}`]}`,
-  },
-  {
-    title: "Fikra Space",
-    start: "2020-11-04",
-    end: "2020-11-06",
-    data: [
-      {
-        title: "Fikra Space",
-        day: "Sundey - Wednsday",
-        date: "4 November 2020 - 6 November 2020",
-        time: "8:00 Am - 9:00AM",
-      },
-    ],
-    color: `${colors[`color${Math.floor(Math.random() * (5 - 1 + 1)) + 1}`]}`,
-  },
-];
 
 const menu = (
   <Menu>
@@ -202,6 +67,21 @@ const List = styled.div`
   align-items: cneter;
   margin-top: 4px;
 `;
+const SearchInput = styled(Input)`
+  border-radius: 6px;
+  border: 1px solid var(--lighterGray);
+  height: 30px;
+  color: var(--lighterGray);
+  width: 300px;
+`;
+const PageHeader = styled(Row)`
+  align-items: center;
+  height: 70px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+
 function Booking() {
   const onEnter = (item) => {
     let data;
@@ -265,20 +145,12 @@ function Booking() {
       <GlobalStyle />
       <SideBar />
       <PageContent>
-        <Row
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            height: "70px",
-            width: "100%",
-          }}
-        >
+        <PageHeader>
           <PageTitle>Dashboard</PageTitle>
           <span style={{ marginTop: "20px", color: "var(--darkGray)" }}>
             Welcome Back, <h8 style={{ color: "black" }}>Marwa!</h8>
           </span>
-        </Row>
+        </PageHeader>
         <Row>
           <PageBtn>
             <ButtonGroup space>
@@ -289,16 +161,7 @@ function Booking() {
                   <RiArrowDropDownLine size="25px" />
                 </List>
               </Dropdown>
-              <Input
-                style={{
-                  borderRadius: "6px",
-                  border: "1px solid var(--lighterGray)",
-                  height: "30px",
-                  color: "var(--lighterGray)",
-                  width: "300px",
-                }}
-                placeholder="Advanced Search"
-              />
+              <SearchInput placeholder="Advanced Search" />
             </ButtonGroup>
             <ButtonGroup>
               <CustomButton lable="Print">

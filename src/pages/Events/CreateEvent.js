@@ -4,11 +4,7 @@ import Editor from "@stfy/react-editor.js";
 import { ReactComponent as RefreshIcon } from "../../public/images/solid undo-right.svg";
 import { ReactComponent as RefreshIconLeft } from "../../public/images/solid undo.svg";
 
-import {
-  CustomPageWrapper,
-  PageContent,
-  PageTitle,
-} from "../shared/CustomPage";
+import { CustomPageWrapper, PageContent } from "../shared/CustomPage";
 import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
 import List from "@editorjs/list";
@@ -31,8 +27,11 @@ export const TextNote = styled.div`
 `;
 
 const EventContent = styled(Col)`
+  width: 70%;
+  height: 560px;
+  padding: 40px 50px;
   background-color: white;
-
+  border: 1px solid var(--lighterGray);
   border-radius: 7px;
 `;
 const WidgetCol = styled(Col)`
@@ -68,27 +67,45 @@ const LanguageSide = styled.div`
 
   border-bottom: 1px solid var(--lighterGray);
 `;
-const ImageHolder = styled.div`
-  padding: 20px;
-  background-color: var(--lightBlue);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 7px;
-  border-radius: 7px;
-  margin: 5px 0;
-`;
-const FileImage = styled.img`
-  width: 120px;
-  height: 100px;
-`;
+
 const EventHeader = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
   padding-bottom: 30px;
   border-bottom: 1px solid var(--lighterGray);
+`;
+const UploadContenter = styled.div`
+  background-color: white;
+  padding: 10px 20px;
+  border-radius: 7px;
+  margin-bottom: 5%;
+`;
+
+const LanguageWidget = styled.div`
+  height: 35%;
+  background-color: white;
+  padding: 10px 20px;
+  border-radius: 7px;
+`;
+const InputTitle = styled(Input)`
+  width: 80%;
+  height: 60px;
+  font-size: 20px;
+  color: var(--lighterGray);
+  font-weight: 500;
+`;
+const PageTitle = styled.span`
+  fontsize: 20px;
+  font-weight: bold;
+`;
+const MainLayout = styled(Col)`
+  width: 99%;
+  display: flex;
+  height: 70px;
+  align-items: center;
+
+  justify-content: space-between;
 `;
 const Mainoption = (
   <Menu>
@@ -175,6 +192,66 @@ const Index = () => {
     getFileSize(e.dataTransfer.files[0].size);
   };
 
+  const UplaodWdiget = () => {
+    return (
+      <UploadContenter>
+        <div style={{ padding: "10px 0" }}>Header Photo</div>
+
+        <div
+          onDragOver={dragOver}
+          onDragEnter={dragEnter}
+          onDragLeave={dragLeave}
+          onDrop={fileDrop}
+          className={
+            Active ? "upload_modal event active" : "upload_modal event"
+          }
+        >
+          <div className="upload_img_close">
+            <img src={Image} className="img" />
+          </div>
+          <span
+            style={{
+              color: "#808D93",
+              fontSize: "1.2vw",
+            }}
+          >
+            Choose any file form computer or
+            <span style={{ color: "black" }}> Drag & Drop</span> it here
+          </span>
+          <span style={{ margin: "20px 0" }}>
+            <input type="file" id="file" onChange={handleImageChange} />
+            <label for="file"> ChooseFile</label>
+          </span>
+        </div>
+        <span>
+          {fileName ? (
+            <span style={{ display: "flex", gap: "5px" }}>
+              <TextNote>
+                <ImAttachment />
+              </TextNote>
+
+              {fileName}
+              <TextNote>{fileSize}</TextNote>
+              {allowToChange ? (
+                <FaTrashAlt
+                  size="14px"
+                  style={{
+                    cursor: "pointer",
+                    color: "var(--lighterGray)",
+                    marginLeft: "8px",
+                  }}
+                  onClick={removeImage}
+                />
+              ) : null}
+            </span>
+          ) : (
+            ""
+          )}
+        </span>
+      </UploadContenter>
+    );
+  };
+
   return (
     <CustomPageWrapper>
       <GlobalStyle />
@@ -187,20 +264,8 @@ const Index = () => {
               <div>Events</div>
             </PageBack>
           </Link>
-          <Col
-            style={{
-              width: "99%",
-              display: "flex",
-              height: "70px",
-              alignItems: "center",
-
-              justifyContent: "space-between",
-            }}
-          >
-            <span style={{ fontSize: "20px", fontWeight: "bold" }}>
-              {" "}
-              Create New Event
-            </span>
+          <MainLayout>
+            <PageTitle> Create New Event</PageTitle>
 
             <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
               <span style={{ color: "var(--textGray)", marginRight: "8px" }}>
@@ -215,31 +280,13 @@ const Index = () => {
               <CustomButton>Preview</CustomButton>{" "}
               <CustomButton Main>Publish Event </CustomButton>
             </div>
-          </Col>
+          </MainLayout>
         </Row>
-        <Row style={{ display: "flex", gap: "2%", fontSize: "1vw" }}>
-          <Col
-            style={{
-              width: "70%",
-              height: "560px",
-              padding: "40px 50px",
-              backgroundColor: "white",
-              border: "1px solid var(--lighterGray)",
-              borderRadius: "7px",
-            }}
-          >
+        <Row style={{ display: "flex", gap: "2%" }}>
+          <EventContent>
             <EventHeader>
               <div>
-                <Input
-                  placeholder="Add event title .."
-                  style={{
-                    width: "80%",
-                    height: "60px",
-                    fontSize: "20px",
-                    color: "var(--lighterGray)",
-                    fontWeight: "500",
-                  }}
-                />
+                <InputTitle placeholder="Add event title .." />
               </div>
               <div>
                 {" "}
@@ -264,82 +311,14 @@ const Index = () => {
               // data={data}
               />
             </div>
-          </Col>
+          </EventContent>
           <Col
             style={{
               width: "27%",
             }}
           >
-            <div
-              style={{
-                backgroundColor: "white",
-                padding: "10px 20px",
-                borderRadius: "7px",
-                marginBottom: "5%",
-              }}
-            >
-              <div style={{ padding: "10px 0" }}>Header Photo</div>
-
-              <div
-                onDragOver={dragOver}
-                onDragEnter={dragEnter}
-                onDragLeave={dragLeave}
-                onDrop={fileDrop}
-                className={
-                  Active ? "upload_modal event active" : "upload_modal event"
-                }
-              >
-                <div className="upload_img_close">
-                  <img src={Image} className="img" />
-                </div>
-                <span
-                  style={{
-                    color: "#808D93",
-                    fontSize: "1.2vw",
-                  }}
-                >
-                  Choose any file form computer or
-                  <span style={{ color: "black" }}> Drag & Drop</span> it here
-                </span>
-                <span style={{ margin: "20px 0" }}>
-                  <input type="file" id="file" onChange={handleImageChange} />
-                  <label for="file"> ChooseFile</label>
-                </span>
-              </div>
-              <span>
-                {fileName ? (
-                  <span style={{ display: "flex", gap: "5px" }}>
-                    <TextNote>
-                      <ImAttachment />
-                    </TextNote>
-
-                    {fileName}
-                    <TextNote>{fileSize}</TextNote>
-                    {allowToChange ? (
-                      <FaTrashAlt
-                        size="14px"
-                        style={{
-                          cursor: "pointer",
-                          color: "var(--lighterGray)",
-                          marginLeft: "8px",
-                        }}
-                        onClick={removeImage}
-                      />
-                    ) : null}
-                  </span>
-                ) : (
-                  ""
-                )}
-              </span>
-            </div>
-            <div
-              style={{
-                height: "35%",
-                backgroundColor: "white",
-                padding: "10px 20px",
-                borderRadius: "7px",
-              }}
-            >
+            <UplaodWdiget />
+            <LanguageWidget>
               <LanguageSide>Language</LanguageSide>
               <div>
                 <LanguageOption>
@@ -371,7 +350,7 @@ const Index = () => {
                   </Dropdown>{" "}
                 </LanguageOption>
               </div>
-            </div>
+            </LanguageWidget>
           </Col>
         </Row>
       </PageContent>

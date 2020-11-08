@@ -1,3 +1,4 @@
+// Event page
 import React, { useState } from "react";
 import { EventsColumns } from "./Config";
 import { EventsData } from "../../fakeData";
@@ -19,18 +20,6 @@ function Events() {
         data={EventsData}
         onOpenModal={onOpenModal}
       />
-
-      {/* <Modal
-        closeOnOverlayClick={false}
-        open={open}
-        onClose={() => onOpenModal(false)}
-        center
-        classNames={{
-          modal: "customModal",
-        }}
-      >
-        <div> new event</div>
-      </Modal> */}
     </div>
   );
 }

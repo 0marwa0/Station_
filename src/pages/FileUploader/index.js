@@ -1,3 +1,5 @@
+// File uploader page
+
 import React, { useState } from "react";
 import { FilUploadedColumns } from "./Config";
 import CustomPage from "../shared/CustomPage";
