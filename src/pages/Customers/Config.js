@@ -2,6 +2,20 @@
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import React from "react";
 import { Checkbox, Tag } from "antd";
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 export const CustomersColumns = [
   {
     title: "",
@@ -78,3 +92,28 @@ export const CustomersColumns = [
     ),
   },
 ];
+export const UsersData = (data, callback) => {
+  let Users = [];
+
+  data.map((user) => {
+    Users.push({
+      FullName: user.name,
+      Email: user.email,
+      PhoneNumber: user.phone,
+      Date:
+        user.createdAt.slice(0, 2) +
+        " " +
+        monthNames[
+          user.createdAt.split("-")[1] === 0
+            ? user.createdAt.split("-")[1].slice(1) - 1
+            : user.createdAt.split("-")[1] - 1
+        ] +
+        " " +
+        user.createdAt.split("-")[0],
+
+      Status: true ? ["Enabled"] : ["Disabled"],
+    });
+  });
+
+  callback(Users);
+};

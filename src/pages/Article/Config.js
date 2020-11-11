@@ -5,6 +5,20 @@ import { UserImage } from "../Sidebar";
 import { Checkbox } from "antd";
 import styled from "styled-components";
 import React from "react";
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 const ArticleImage = styled.img`
   width: 55px;
   height: 50px;
@@ -24,10 +38,7 @@ const ArticlesColumns = [
 
     render: (theImageURL) => (
       <div style={{ width: "50px" }}>
-        <ArticleImage
-          alt={theImageURL}
-          src={require(`../../public/${theImageURL}`)}
-        />
+        <ArticleImage alt={theImageURL} src={theImageURL} />
       </div>
     ),
   },
@@ -78,4 +89,29 @@ const ArticlesColumns = [
     ),
   },
 ];
+
+export const ArticlesData = (data, callback) => {
+  let Articles = [];
+
+  data.map((item) => {
+    Articles.push({
+      image: item.image,
+      Title: item.title,
+
+      CreatedDate:
+        item.createdAt.slice(0, 2) +
+        " " +
+        monthNames[
+          item.createdAt.split("-")[1] === 0
+            ? item.createdAt.split("-")[1].slice(1) - 1
+            : item.createdAt.split("-")[1] - 1
+        ] +
+        " " +
+        item.createdAt.split("-")[0],
+      Createdby: "images/user2.png",
+    });
+  });
+
+  callback(Articles);
+};
 export default ArticlesColumns;

@@ -8,7 +8,11 @@ import { ReactComponent as ExportIcon } from "../../public/images/export.svg";
 import { ReactComponent as ImportIcon } from "../../public/images/import.svg";
 
 import { FiFilter } from "react-icons/fi";
-import { CustomButton } from "../shared/SharedComponents";
+import {
+  CustomButton,
+  EmptyText,
+  LoadingText,
+} from "../shared/SharedComponents";
 import { AiOutlinePlus } from "react-icons/ai";
 import SideBar from "../Sidebar";
 import styled from "styled-components";
@@ -53,7 +57,6 @@ export const PageTitle = styled.div`
 `;
 const Pagination = styled.div`
   display: flex;
-
   justify-content: space-between;
   padding: 0px 20px;
   color: var(--darkGray);
@@ -71,13 +74,14 @@ const PageNmber = styled.div`
   gap: 12px;
 `;
 const IconCss = styled.span`
-  color: var(--yellow);
+  color: ${(props) => (props.active ? "var(--yellow)" : "var(--textGray)")};
 `;
-
 function CustomPage(props) {
   let pageTitle = props.pageTitle;
   const columns = props.columns;
   const data = props.data;
+  const [next, setNext] = useState(true);
+  const [prev, setprev] = useState(false);
   const [showList, setShowList] = useState(false);
   const showListItem = () => {
     setShowList(true);
@@ -94,6 +98,24 @@ function CustomPage(props) {
   const hideTableItem = () => {
     setShowTable(false);
   };
+  const [currentPage, setcurrentPage] = useState(1);
+  const [pagePerOnce, setpagePerOnce] = useState(6);
+  const [pageNumber, setpageNumber] = useState(0);
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setcurrentPage(currentPage - 1);
+    }
+  };
+  const totalPge = Math.ceil(props.data.length / pagePerOnce);
+
+  const nextPage = () => {
+    if (currentPage != totalPge) {
+      setcurrentPage(currentPage + 1);
+    }
+  };
+  const indexOfLastPage = currentPage * pagePerOnce;
+  const indexOfFirstPage = indexOfLastPage - pagePerOnce;
+  const Data = props.data.slice(indexOfFirstPage, indexOfLastPage);
   let pageTitleName;
   if (pageTitle === "Booking") {
     pageTitleName = props.pageTitle;
@@ -335,59 +357,42 @@ function CustomPage(props) {
                   columns={columns}
                   rowClassName="tableRow"
                   pagination={false}
-                  dataSource={data}
+                  dataSource={Data}
                   locale={{
-                    emptyText: (
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: "10px",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          margin: "50px 0",
-                        }}
-                      >
-                        <div>
-                          {" "}
-                          <img
-                            src={require("../../public/images/noData.png")}
-                          />
-                        </div>
-                        <div style={{ color: "black" }}>No Event Booking</div>
-                        <div style={{ width: "248px" }}>
-                          You havent't booked any event yet . Tap here to add
-                          your first event now{" "}
-                        </div>
-
-                        <u
-                          style={{
-                            color: "black",
-                            cursor: "pointer",
-                            marginTop: "10px",
-                          }}
-                        >
-                          Add New Event
-                        </u>
-                      </div>
-                    ),
+                    emptyText: EmptyText(props.Loading, props.Item),
                   }}
                 />
                 <Pagination>
                   <PageText>
-                    View search of 12 from 1,232 search we got .
+                    View search of {Data.length} from {props.data.length} search
+                    we got .
                   </PageText>
                   <PageNmber>
-                    <LeftOutlined />
-                    <p style={{ marginTop: "12px" }}> 1/ 12</p>
-                    <IconCss>
-                      <RightOutlined />
+                    <IconCss active={currentPage > 1 ? true : false}>
+                      <LeftOutlined
+                        onClick={prevPage}
+                        style={{
+                          cursor: currentPage > 1 ? "pointer" : "not-allowed",
+                        }}
+                      />
+                    </IconCss>
+                    <p style={{ marginTop: "12px" }}>
+                      {currentPage}/ {totalPge}
+                    </p>
+                    <IconCss active={currentPage != totalPge ? true : false}>
+                      <RightOutlined
+                        onClick={nextPage}
+                        style={{
+                          cursor:
+                            currentPage != totalPge ? "pointer" : "not-allowed",
+                        }}
+                      />
                     </IconCss>
                   </PageNmber>
                 </Pagination>
               </div>
             ) : showList ? (
-              <ListItem />
+              <ListItem data={props.data} />
             ) : (
               ""
             )}

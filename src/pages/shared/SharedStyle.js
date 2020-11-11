@@ -1,7 +1,6 @@
 import React from "react";
 import { Button, Input } from "antd";
 import styled from "styled-components";
-
 const { TextArea } = Input;
 export const CustomInput = styled(Input)`
   border-radius: 7px;
@@ -61,6 +60,15 @@ export const ModleFooter = styled.div`
   marign-top: 5px;
   padding: 20px 40px 40px 40px;
 `;
+// export const NotificationIcon = styled.div`
+//   width: 15px;
+//   height: 15px;
+//   border-radius: 50%;
+//   backgorund-color: ${(props) =>
+//     props.success
+//       ? "var(--green)"
+//       : (props) => (props.failed ? "var(--lightRed)" : "var(--lightOrange")};
+// `;
 export const Space = styled.div`
   height: 7px;
 `;
@@ -102,4 +110,18 @@ export const ButtonStyledModle = styled(Button)`
       props.Main ? "var(--yellow)" : "var(--lightGray)"};
     color: black;
   }
+`;
+export const EmptyTextHolder = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 140px;
+  align-items: center;
+  justify-content: center;
+  margin: 3% 0;
+`;
+export const CreateText = styled.u`
+  color: black;
+  cursor: pointer;
+  margintop: 10px;
 `;

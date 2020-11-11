@@ -4,7 +4,6 @@ import { CustomModleButton } from "../../shared/SharedComponents";
 import { Menu, Dropdown, Button, Input } from "antd";
 import { ReactComponent as DropIcon } from "../../../public/images/dropdown.svg";
 import { ReactComponent as Close } from "../../../public/images/close.svg";
-
 import styled from "styled-components";
 
 import "../../../App.css";

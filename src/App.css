@@ -502,6 +502,29 @@ th:last-child {
 @import "../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css";
 @import "../node_modules/@syncfusion/ej2-react-schedule/styles/material.css";
 
+.ant-notification-notice-close {
+  display: none;
+}
+.ant-notification-notice-description {
+  color: #b9c0ce;
+}
+/********Notification****/
+.NotificationIcon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: var(--lightOrange);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Success {
+  background-color: var(--LightGreen) !important;
+}
+.Failed {
+  background-color: var(--lightRed) !important;
+}
+
 /************* notification popup styles**********/
 .popup {
   position: fixed;

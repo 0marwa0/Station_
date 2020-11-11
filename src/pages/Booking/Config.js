@@ -1,6 +1,7 @@
 // Booinkg page config
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import React from "react";
+import { LoadDataByID } from "../../API";
 import { Checkbox, Table, Tooltip, Tag, Space, Button, Input } from "antd";
 export const BookingColumns = [
   {
@@ -118,3 +119,46 @@ export const BookingColumns = [
     ),
   },
 ];
+const getItem = (id, callback) => {
+  LoadDataByID(
+    `book/${id}`,
+    (err, data) => {
+      callback(data.data);
+      // console.log(item);
+    },
+    (err) => {
+      console.log();
+    }
+  );
+};
+export const BookingData = (data, callback) => {
+  let Booinkg = [];
+  console.log(
+    getItem(282, (info) => info.id),
+    "what now"
+  );
+  data.map((item) => {
+    Booinkg.push({
+      Title: item.title,
+      Status: ["dd"],
+      StartingDate: "05-10-2020",
+      EndingDate: "08-10-2020",
+      Space: ["Event Hall"],
+      CreationDate: "02-10-2020",
+      BookedBy: "Ammar Al-Khatib",
+      // CreatedDate:
+      //   item.createdAt.slice(0, 2) +
+      //   " " +
+      //   monthNames[
+      //     item.createdAt.split("-")[1] === 0
+      //       ? item.createdAt.split("-")[1].slice(1) - 1
+      //       : item.createdAt.split("-")[1] - 1
+      //   ] +
+      //   " " +
+      //   item.createdAt.split("-")[0],
+      // Createdby: "images/user2.png",
+    });
+  });
+
+  callback(Booinkg);
+};

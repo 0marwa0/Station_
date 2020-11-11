@@ -67,7 +67,7 @@ export const AdminsColumns = [
         {Status.map((status) => {
           let color = "green";
           if (status != "Enabled") {
-            color = "green";
+            color = "red";
           }
           return (
             <Tag color={color} key={status}>
@@ -89,3 +89,17 @@ export const AdminsColumns = [
     ),
   },
 ];
+
+export const AdminsData = (data, callback) => {
+  let Admins = [];
+  data.map((admin) => {
+    Admins.push({
+      FullName: admin.name,
+      Username: admin.username,
+      Type: admin.type === 1 ? ["Book Admin"] : ["Book Admin"],
+      Branch: "Baghdad",
+      Status: true ? ["Enabled"] : ["Disabled"],
+    });
+  });
+  callback(Admins);
+};

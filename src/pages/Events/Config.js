@@ -4,7 +4,20 @@ import { BiDotsVerticalRounded } from "react-icons/bi";
 import { UserImage } from "../Sidebar";
 import { Checkbox, Progress, Tooltip, Tag, Space, Button, Input } from "antd";
 import React from "react";
-
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 export const EventsColumns = [
   { key: "1", title: "", dataIndex: "", render: () => <Checkbox /> },
   {
@@ -68,9 +81,9 @@ export const EventsColumns = [
       compare: (a, b) => a.english - b.english,
       multiple: 1,
     },
-    render: () => (
-      <Tooltip title="50/12" placement="bottom">
-        <Progress percent={50} showInfo={false} strokeColor="var(--yellow)" />
+    render: (rate) => (
+      <Tooltip title={rate / 100} placement="bottom">
+        <Progress percent={rate} showInfo={false} strokeColor="var(--yellow)" />
       </Tooltip>
     ),
   },
@@ -102,3 +115,43 @@ export const EventsColumns = [
     ),
   },
 ];
+export const EventsData = (data, callback) => {
+  let Events = [];
+
+  data.map((item) => {
+    Events.push({
+      Organizer: item.organizer,
+      Date:
+        item.createdAt.slice(0, 2) +
+        " " +
+        monthNames[
+          item.date.split("-")[1] === 0
+            ? item.date.split("-")[1].slice(1) - 1
+            : item.date.split("-")[1] - 1
+        ] +
+        " " +
+        item.date.split("-")[0],
+      // Time: "10:0 AM -4:00 PM",
+      Space: [`${item.space.title}`],
+      SoldTickets: item.ticketLeft,
+      Approvedby: "",
+      // Title: item.name,
+      // Descriptions: item.descriptionAr,
+      // Type: ["PDF"],
+      // Size: "12.2mb",
+      // UploadedDate:
+      //   item.createdAt.slice(0, 2) +
+      //   " " +
+      //   monthNames[
+      //     item.createdAt.split("-")[1] === 0
+      //       ? item.createdAt.split("-")[1].slice(1) - 1
+      //       : item.createdAt.split("-")[1] - 1
+      //   ] +
+      //   " " +
+      //   item.createdAt.split("-")[0],
+      // image: "",
+    });
+  });
+
+  callback(Events);
+};

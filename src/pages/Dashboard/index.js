@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SideBar from "../Sidebar";
 import { BiExport, BiDollar } from "react-icons/bi";
 import Reservation from "./Reservation";
@@ -7,14 +7,18 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { Col, Row, Input, Button, Menu, Dropdown } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { CustomButton } from "../shared/SharedComponents";
+import "../../App.css";
 import FullCalendar from "@fullcalendar/react";
 import { Modal } from "react-responsive-modal";
+import { LoadData } from "../../API";
 import { ReactComponent as PrintIcon } from "../../public/images/print.svg";
 import { Data } from "../../fakeData/DashFakeData";
 import NewBooking from "../Booking/NewBooking";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import Tooltip from "react-tooltip";
+import { SuccessMesg, FailedMesg, Mesg } from "../../API/APIMessage";
+import { SmileOutlined } from "@ant-design/icons";
 import {
   CustomPageWrapper,
   PageContent,
@@ -140,6 +144,10 @@ function Booking() {
   const onOpenModal = (open) => {
     setOpen(open);
   };
+
+  useEffect(() => {
+    // LoadData(null, (data) => console.log(data, "our first get"), null);
+  });
   return (
     <CustomPageWrapper>
       <GlobalStyle />
@@ -147,6 +155,8 @@ function Booking() {
       <PageContent>
         <PageHeader>
           <PageTitle>Dashboard</PageTitle>
+          <Button onClick={() => Mesg("bottomRight")}>sucss</Button>
+          {/* <Button onClick={() => FailedMesg("bottomRight")}>go</Button> */}{" "}
           <span style={{ marginTop: "20px", color: "var(--darkGray)" }}>
             Welcome Back, <h8 style={{ color: "black" }}>Marwa!</h8>
           </span>

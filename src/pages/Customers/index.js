@@ -1,24 +1,53 @@
 // Customer page
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CustomPage from "../shared/CustomPage";
-import { CustomersColumns } from "./Config";
-import { CustomersData } from "../../fakeData";
+import { CustomersColumns, UsersData } from "./Config";
+// import { CustomersData } from "../../fakeData";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import Newcustomer from "./NewCustomer";
+import { Mesg, FailedMesg } from "../../API/APIMessage";
+import { LoadData } from "../../API";
 
 function Customers() {
   const [open, setOpen] = useState(false);
+  const [Loading, setLoading] = useState(false);
+  const [users, setusers] = useState([]);
   const onOpenModal = (open) => {
     setOpen(open);
   };
+  useEffect(() => {
+    setLoading(true);
+    LoadData(
+      "users",
+      (err, data) => {
+        setLoading(false);
+
+        UsersData(data.data.rows, (users) => {
+          setusers(users);
+        });
+
+        if (err) {
+          Mesg(err);
+        }
+      },
+      (err) => {
+        setLoading(false);
+        FailedMesg(err, "Something worng happend !");
+        console.log(err, "failed");
+      }
+    );
+  }, []);
+
   return (
     <div>
       <CustomPage
         pageTitle="Customers"
         columns={CustomersColumns}
-        data={CustomersData}
+        data={users}
         onOpenModal={onOpenModal}
+        Loading={Loading}
+        Item="customer"
       />
       <Modal
         closeOnOverlayClick={false}
