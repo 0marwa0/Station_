@@ -510,13 +510,19 @@ th:last-child {
 }
 /********Notification****/
 .NotificationIcon {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background-color: var(--lightOrange);
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 20px;
+}
+.ant-notification-notice-message {
+  margin-left: 30px;
+
+  padding: 10px 0 0 10px;
 }
 .Success {
   background-color: var(--LightGreen) !important;
@@ -524,7 +530,10 @@ th:last-child {
 .Failed {
   background-color: var(--lightRed) !important;
 }
-
+.errorText {
+  color: var(--red);
+  padding-top: 5px;
+}
 /************* notification popup styles**********/
 .popup {
   position: fixed;

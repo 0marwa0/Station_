@@ -47,7 +47,7 @@ function Index() {
     <div>
       <div
         id="/"
-        class="popup"
+        className="popup"
         style={{ transition: " all 0.3s ease-in-out", transform: "scale(1)" }}
       >
         <div className="Notification_content">
@@ -82,7 +82,7 @@ function Index() {
           <CustomButton Main>See All Activity</CustomButton>
         </div>
       </div>
-      <a href="#" class="close-popup"></a>
+      <a href="#" className="close-popup"></a>
     </div>
   );
 }

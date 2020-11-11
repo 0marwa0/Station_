@@ -281,6 +281,7 @@ function CustomPage(props) {
                 ""
               )}
               <Input
+                loading={props.Loading}
                 style={{
                   borderRadius: "6px",
                   border: "1px solid var(--lighterGray)",
@@ -295,7 +296,7 @@ function CustomPage(props) {
               ) : props.pageTitle === "File Uploader" ? (
                 ""
               ) : (
-                <CustomButton lable="Filter" filter>
+                <CustomButton lable="Filter" filter loading={props.Loading}>
                   <FiFilter />
                 </CustomButton>
               )}
@@ -306,12 +307,12 @@ function CustomPage(props) {
               ) : props.pageTitle === "File Uploader" ? (
                 ""
               ) : (
-                <CustomButton lable="Import">
+                <CustomButton lable="Import" loading={props.Loading}>
                   {/* <BiImport /> */}
                   <ImportIcon />
                 </CustomButton>
               )}
-              <CustomButton lable="Export">
+              <CustomButton lable="Export" loading={props.Loading}>
                 {/* <BiExport /> */}
                 <ExportIcon />
               </CustomButton>
@@ -319,6 +320,7 @@ function CustomPage(props) {
                 <CustomButton
                   Main
                   lable={`Notify Users`}
+                  loading={props.Loading}
                   pageTitle={pageTitle}
                   onOpen={() => props.onOpenModal(true)}
                 >
@@ -330,6 +332,7 @@ function CustomPage(props) {
                   Main
                   lable={`Upload`}
                   pageTitle={pageTitle}
+                  loading={props.Loading}
                   onOpen={() => props.onOpenModal(true)}
                 >
                   <Upload />
@@ -340,6 +343,7 @@ function CustomPage(props) {
                   Main
                   lable={`New ${pageTitleName}`}
                   pageTitle={pageTitle}
+                  loading={props.Loading}
                   onOpen={() => props.onOpenModal(true)}
                 >
                   <AiOutlinePlus />

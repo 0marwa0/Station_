@@ -155,8 +155,6 @@ function Booking() {
       <PageContent>
         <PageHeader>
           <PageTitle>Dashboard</PageTitle>
-          <Button onClick={() => Mesg("bottomRight")}>sucss</Button>
-          {/* <Button onClick={() => FailedMesg("bottomRight")}>go</Button> */}{" "}
           <span style={{ marginTop: "20px", color: "var(--darkGray)" }}>
             Welcome Back, <h8 style={{ color: "black" }}>Marwa!</h8>
           </span>

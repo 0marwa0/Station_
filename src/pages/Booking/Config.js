@@ -3,6 +3,20 @@ import { BiDotsVerticalRounded } from "react-icons/bi";
 import React from "react";
 import { LoadDataByID } from "../../API";
 import { Checkbox, Table, Tooltip, Tag, Space, Button, Input } from "antd";
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 export const BookingColumns = [
   {
     title: "",
@@ -31,16 +45,14 @@ export const BookingColumns = [
     render: (Status) => (
       <>
         {Status.map((status) => {
-          let color;
-          if (status === "Rejected") {
+          let color = "gold";
+
+          if (status) {
+            color = "green";
+          } else {
             color = "red";
           }
-          if (status === "Approved") {
-            color = "green";
-          }
-          if (status === "Pending") {
-            color = "gold";
-          }
+
           return (
             <Tag color={color} key={status}>
               {status.toUpperCase()}
@@ -133,18 +145,24 @@ const getItem = (id, callback) => {
 };
 export const BookingData = (data, callback) => {
   let Booinkg = [];
-  console.log(
-    getItem(282, (info) => info.id),
-    "what now"
-  );
+  console.log(data, "bookdata");
   data.map((item) => {
     Booinkg.push({
       Title: item.title,
-      Status: ["dd"],
-      StartingDate: "05-10-2020",
-      EndingDate: "08-10-2020",
-      Space: ["Event Hall"],
-      CreationDate: "02-10-2020",
+      Status: [`${item.status}`],
+      StartingDate: item.bookDates.map((i) => i.start),
+      EndingDate: item.bookDates.map((i) => i.end),
+      Space: [`${item.space.title}`],
+      CreationDate:
+        item.createdAt.slice(0, 2) +
+        " " +
+        monthNames[
+          item.createdAt.split("-")[1] === 0
+            ? item.createdAt.split("-")[1].slice(1) - 1
+            : item.createdAt.split("-")[1] - 1
+        ] +
+        " " +
+        item.createdAt.split("-")[0],
       BookedBy: "Ammar Al-Khatib",
       // CreatedDate:
       //   item.createdAt.slice(0, 2) +

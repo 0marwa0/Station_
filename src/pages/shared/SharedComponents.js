@@ -19,6 +19,7 @@ export const CustomButton = ({
   pageTitle,
   fun,
   undo,
+  loading,
   extra,
 }) => {
   return (
@@ -26,6 +27,7 @@ export const CustomButton = ({
       Main={Main}
       extra={extra}
       undo={undo}
+      loading={loading}
       onClick={Main ? onOpen : fun}
     >
       {children}

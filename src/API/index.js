@@ -10,7 +10,7 @@ export const LoadData = (query, onSuccess, onFailure) => {
     headers: {
       token:
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNTkzNDAzODI2MTQ5LCJpYXQiOjE1OTM0MDM4MjB9.4x1MBn-UnDXl-s83r0U4FBk2lYO9FMzkKBVjfCPUeUQ",
-      //   token: localStorage.getItem("step_token"),
+      //   token: localStorage.getItem("station_token"),
     },
   })
     .then((resp) => resp.json())
@@ -27,7 +27,7 @@ export const LoadDataByID = (query, onSuccess, onFailure) => {
     headers: {
       token:
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNTkzNDAzODI2MTQ5LCJpYXQiOjE1OTM0MDM4MjB9.4x1MBn-UnDXl-s83r0U4FBk2lYO9FMzkKBVjfCPUeUQ",
-      //   token: localStorage.getItem("step_token"),
+      //   token: localStorage.getItem("station_token"),
     },
   })
     .then((resp) => resp.json())
@@ -39,20 +39,61 @@ export const LoadDataByID = (query, onSuccess, onFailure) => {
     });
 };
 
-export const LoadBooking = (onSuccess, onFailure) => {
-  fetch(`${Host}${query}`, {
+export const LoadBooking = (onSuccess) => {
+  let data = [];
+
+  fetch(`${Host}books/home`, {
     headers: {
       token:
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNTkzNDAzODI2MTQ5LCJpYXQiOjE1OTM0MDM4MjB9.4x1MBn-UnDXl-s83r0U4FBk2lYO9FMzkKBVjfCPUeUQ",
-      //   token: localStorage.getItem("step_token"),
+      //   token: localStorage.getItem("station_token"),
     },
   })
     .then((resp) => resp.json())
     .then((jsonData) => {
+      let info = [];
+      jsonData.data.map((item) => {
+        LoadDataByID(
+          `book/${item.id}`,
+          (err, data) => {
+            info.push(data.data);
+
+            onSuccess(info);
+          },
+          () => {}
+        );
+      });
+
       // onSuccess(jsonData.errMsg, jsonData);
     })
     .catch((err) => {
       // onFailure(err.message);
+    });
+};
+export const Login = (data, onSuccess, onFailure) => {
+  let myHeaders = new Headers();
+  let raw = JSON.stringify(data);
+  // console.log(raw, "login data");
+  myHeaders.append("Content-Type", "application/json");
+  let requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+
+    body: raw,
+    redirect: "follow",
+  };
+  fetch(`${Host}/login`, requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      // localStorage.setItem("station_token", result.token);
+
+      onSuccess(result.status, result.errMsg, result);
+      console.log(result, "login success");
+    })
+
+    .catch((error) => {
+      console.log(error.message, "login failed");
+      // onFailure(error.message);
     });
 };
 // export const removeItem = (query, id, onSuccess, onFailure) => {
