@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import SideBar from "../Sidebar";
 import { CustomPageWrapper, PageContent } from "../shared/CustomPage";
 import { Button, Col, Row, Input } from "antd";
@@ -50,10 +50,11 @@ const ProfileImage = styled.div`
   margin-bottom: 15px;
   color: var(--yellow);
 `;
-const InputItem = styled.div`
+const InputLable = styled.div`
   display: grid;
   grid-template-columns: 100px 300px;
-  gap: 5px;
+  text-align: right;
+  gap: 15px;
   margin: 10px 0;
 `;
 const Form = styled.div`
@@ -73,7 +74,15 @@ const DeleteAccount = styled.div`
   align-items: center;
   justify-content: centen;
 `;
-const index = () => {
+// const InputLable = styled.div`
+//   display: flex;
+//   gap: 10px;
+// `;
+function Index(props) {
+  let user = props.admins.filter((i) => i.id === props.id);
+  let data = {};
+  user.map((i) => (data = i));
+
   return (
     <CustomPageWrapper>
       <GlobalStyle />
@@ -106,28 +115,31 @@ const index = () => {
         </ProfileHead>
         <ProfileContetn>
           <Form>
-            <ProfileImage>BA</ProfileImage>
-            <Space>Upload Photo</Space>
+            <div style={{ width: "40%" }}>
+              <ProfileImage>BA</ProfileImage>
 
-            <InputItem>
+              <Space>Upload Photo</Space>
+            </div>
+            <InputLable>
               Full Name
               <span style={{ display: "flex", gap: "5px" }}>
-                <CustomInput value="Bilal" /> <CustomInput value="Al-Aqidi" />
+                <CustomInput value={data.name} />{" "}
+                <CustomInput value={data.username} />
               </span>
-            </InputItem>
-            <InputItem>
+            </InputLable>
+            <InputLable>
               Email Address
-              <CustomInput gray value="desbilaliq@gmail.com" />
-            </InputItem>
-            <InputItem>
+              <CustomInput gray value="" />
+            </InputLable>
+            <InputLable>
               Password
-              <CustomInput type="password" gray value={455555555555} />
-            </InputItem>
+              <CustomInput type="password" gray value="" />
+            </InputLable>
             <Space>Change Password?</Space>
-            <InputItem>
+            <InputLable>
               Phone Number
-              <CustomInput value="07715462845" />
-            </InputItem>
+              <CustomInput value="" />
+            </InputLable>
             <DeleteAccount>
               Delet Your Account?
               <BsExclamationCircle color="var(--lighterGray)" />
@@ -137,6 +149,6 @@ const index = () => {
       </PageContent>
     </CustomPageWrapper>
   );
-};
+}
 
-export default index;
+export default Index;

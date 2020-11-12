@@ -150,8 +150,30 @@ export const BookingData = (data, callback) => {
     Booinkg.push({
       Title: item.title,
       Status: [`${item.status}`],
-      StartingDate: item.bookDates.map((i) => i.start),
-      EndingDate: item.bookDates.map((i) => i.end),
+      StartingDate: item.bookDates.map(
+        (i) =>
+          i.start.slice(0, 2) +
+          " " +
+          monthNames[
+            i.start.split("-")[1] === 0
+              ? i.start.split("-")[1].slice(1) - 1
+              : i.start.split("-")[1] - 1
+          ] +
+          " " +
+          i.start.split("-")[0]
+      ),
+      EndingDate: item.bookDates.map(
+        (i) =>
+          i.end.slice(0, 2) +
+          " " +
+          monthNames[
+            i.end.split("-")[1] === 0
+              ? i.end.split("-")[1].slice(1) - 1
+              : i.end.split("-")[1] - 1
+          ] +
+          " " +
+          i.end.split("-")[0]
+      ),
       Space: [`${item.space.title}`],
       CreationDate:
         item.createdAt.slice(0, 2) +
@@ -163,7 +185,7 @@ export const BookingData = (data, callback) => {
         ] +
         " " +
         item.createdAt.split("-")[0],
-      BookedBy: "Ammar Al-Khatib",
+      BookedBy: item.user.name,
       // CreatedDate:
       //   item.createdAt.slice(0, 2) +
       //   " " +

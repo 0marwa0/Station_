@@ -3,22 +3,12 @@
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { UserImage } from "../Sidebar";
 import { Checkbox } from "antd";
+import { Mesg, FailedMesg } from "../../API/APIMessage";
+
+import { LoadData } from "../../API";
 import styled from "styled-components";
 import React from "react";
-const monthNames = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
+
 const ArticleImage = styled.img`
   width: 55px;
   height: 50px;
@@ -65,14 +55,14 @@ const ArticlesColumns = [
     key: "5",
     title: "Created by",
     dataIndex: "Createdby",
-    render: (theImageURL) => (
-      <div style={{ width: "50px" }}>
-        <UserImage
-          alt={theImageURL}
-          src={require("../../public/images/user2.png")}
-        />
-      </div>
-    ),
+    // render: (theImageURL) => (
+    //   <div style={{ width: "50px" }}>
+    //     <UserImage
+    //       alt={theImageURL}
+    //       src={require("../../public/images/user2.png")}
+    //     />
+    //   </div>
+    // ),
     sorter: {
       compare: (a, b) => a.english - b.english,
       multiple: 1,
@@ -91,27 +81,24 @@ const ArticlesColumns = [
 ];
 
 export const ArticlesData = (data, callback) => {
-  let Articles = [];
-
-  data.map((item) => {
-    Articles.push({
-      image: item.image,
-      Title: item.title,
-
-      CreatedDate:
-        item.createdAt.slice(0, 2) +
-        " " +
-        monthNames[
-          item.createdAt.split("-")[1] === 0
-            ? item.createdAt.split("-")[1].slice(1) - 1
-            : item.createdAt.split("-")[1] - 1
-        ] +
-        " " +
-        item.createdAt.split("-")[0],
-      Createdby: "images/user2.png",
-    });
-  });
-
-  callback(Articles);
+  // let Articles = [];
+  // data.map((item) => {
+  //   Articles.push({
+  //     image: item.image,
+  //     Title: item.title,
+  //     CreatedDate:
+  //       item.createdAt.slice(0, 2) +
+  //       " " +
+  //       monthNames[
+  //         item.createdAt.split("-")[1] === 0
+  //           ? item.createdAt.split("-")[1].slice(1) - 1
+  //           : item.createdAt.split("-")[1] - 1
+  //       ] +
+  //       " " +
+  //       item.createdAt.split("-")[0],
+  //     Createdby: "Admins.map((i) => i.id === item.createdby).username",
+  //   });
+  // });
+  // callback(Articles);
 };
 export default ArticlesColumns;

@@ -136,7 +136,6 @@ export default function Index(props) {
 
     if (username != 0 && Password != 0) {
       setLoading(true);
-
       Login(
         data,
         (status, err) => {

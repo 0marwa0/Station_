@@ -13,8 +13,9 @@ import { ReactComponent as ItemIcon } from "../../public/images/itemIcon.svg";
 
 import { ReactComponent as TrashICon } from "../../public/images/solid trash-alt.svg";
 const ListItemWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+
   gap: 15px;
 `;
 
@@ -29,7 +30,7 @@ const ItemActions = styled.span`
 `;
 const Item = styled.img`
   width: 100%;
-  height: auto;
+  height: 100%;
   cursor: pointer;
   border-radius: 5px;
 `;
@@ -37,7 +38,7 @@ const Item = styled.img`
 const ItemOverlay = styled.div`
   border-radius: 5px;
   width: 100%;
-  height: 13rem;
+  height: auto;
   position: absolute;
 
   top: 0;
@@ -64,8 +65,8 @@ const ItemOverlay = styled.div`
 `;
 
 const ItemHolder = styled.div`
-  width: 290px;
-  height: 30%;
+  width: 100%;
+  height: 215px;
   position: relative;
   cursor: pointer;
   &:hover ${ItemActions} {
@@ -84,9 +85,9 @@ const ListImg = styled.img`
 `;
 const Title = styled.div`
   color: white;
-  font-size: 14px;
+  font-size: 0.9vw;
   font-weight: bold;
-  width: 180px;
+  width: 80%;
   margin-bottom: 7px;
   line-height: 1.3em;
 `;
@@ -125,14 +126,14 @@ const BottomText = styled.div`
   opacity: 1;
   justify-content: space-between;
 `;
-const ListItem = () => {
+const ListItem = (props) => {
+  console.log(props.data, "article list");
   return (
     <ListItemWrapper>
-      {ArticlesData.map((item, i) => {
+      {props.data.map((item, i) => {
         return (
           <ItemHolder>
-            <Item src={require(`../../public/${item.image}`)} />
-
+            <Item src={item.image} />
             <ItemOverlay>
               <ItemActions>
                 <div style={{ marginTop: "9px" }}>

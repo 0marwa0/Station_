@@ -4,6 +4,8 @@ import { AiOutlineClose } from "react-icons/ai";
 import Loader from "react-loader-spinner";
 import PropagateLoader from "react-spinners/PropagateLoader";
 import { css } from "@emotion/core";
+import ContentLoader from "react-content-loader";
+
 import {
   ButtonStyled,
   ButtonStyledModle,
@@ -56,18 +58,53 @@ export const EmptyText = (Loading, Item) => {
     //   color="var(--yellow)"
     //   height={100}
     //   width={100}
-    //   // timeout={6000} //3 secs
+    //   // timeout={6000}
+
     // />
-    <EmptyTextHolder>
-      {" "}
-      <PropagateLoader
-        css={override}
-        size={25}
-        color={"var(--yellow)"}
-        // loading={this.state.loading}
-      />
-    </EmptyTextHolder>
+    //  <PropagateLoader
+    //     css={override}
+    //     size={25}
+    //     color={"var(--yellow)"}
+
+    //   />
+    // <EmptyTextHolder>
+    [1, 2, 3, 4, 5].map((i) => {
+      return (
+        <div
+          style={{
+            display: "flex",
+            width: "50vw",
+          }}
+        >
+          {[1, 2, 3, 4, 5].map((i) => {
+            return (
+              <div
+                style={{
+                  width: "18vw",
+                  height: "40px",
+                  padding: "18px 0",
+                  borderBottom: "1px solid var(--lighterGray)",
+                }}
+              >
+                <ContentLoader
+                  speed={2}
+                  width={600}
+                  height={160}
+                  viewBox="0 0 600 160"
+                  backgroundColor="#f3f3f3"
+                  foregroundColor="#ecebeb"
+                >
+                  <rect x="48" y="5" rx="3" ry="3" width="150" height="5" />
+                </ContentLoader>
+              </div>
+            );
+          })}
+        </div>
+      );
+    })
   ) : (
+    /* </EmptyTextHolder> */
+
     <EmptyTextHolder>
       <div>
         <img src={require("../../public/images/noData.png")} />

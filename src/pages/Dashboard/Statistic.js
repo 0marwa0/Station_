@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Widget } from "./index";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { ReactComponent as DropIcon } from "../../public/images/dropdown.svg";
+import { Mesg, FailedMesg } from "../../API/APIMessage";
+import { LoadData } from "../../API";
+import ContentLoader from "react-content-loader";
 
 import { MdShowChart } from "react-icons/md";
 import { GiElectric } from "react-icons/gi";
@@ -84,7 +87,60 @@ const BoldText = styled.div`
   font-weight: 600;
   font-size: 0.9vw;
 `;
-function Index() {
+const DropBtn = styled.div`
+  padding: 6px 8px;
+  borderradius: 10px;
+  height: 23px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  width: 65px;
+  justify-content: space-between;
+`;
+function Index(props) {
+  const [Loading, setLoading] = useState(false);
+  const [statistics, setstatistics] = useState({});
+  useEffect(() => {
+    setLoading(true);
+    LoadData(
+      "statistics",
+      (err, data) => {
+        setLoading(false);
+
+        setstatistics(data);
+
+        console.log(data, "statices");
+        if (err) {
+          Mesg(err);
+        }
+      },
+      (err) => {
+        setLoading(false);
+        FailedMesg(err, "Something worng happend !");
+        console.log(err, "failed");
+      }
+    );
+  }, []);
+
+  const Lable = (name) => {
+    let Lable = "";
+    switch (name) {
+      case "income":
+        Lable = "";
+        break;
+      case "resevation":
+        Lable = "Total Reservations";
+        break;
+
+      case "timeTotal":
+        Lable = "";
+        break;
+
+      default:
+        break;
+    }
+  };
+
   return (
     <Widget main>
       <ItemHeader>
@@ -92,59 +148,89 @@ function Index() {
           Statistics
         </span>
         <Dropdown overlay={menu2}>
-          <Button
-            style={{
-              padding: "6px 8px",
-              borderRadius: "10px",
-              height: "23px",
-              fontSize: "12px",
-              display: "flex",
-              alignItems: "center",
-              width: "65px",
-              justifyContent: "space-between",
-            }}
-          >
+          <DropBtn>
             Oct
             <DropIcon />
-          </Button>
+          </DropBtn>
         </Dropdown>
       </ItemHeader>{" "}
       <div>
-        {StatisticData.map((item, i) => {
-          let name = item.name;
-          return (
-            <ReservationItem>
-              {name === "Total Reservations" ? (
-                <TotleReservationsIcon>
-                  <GiElectric color="var(--blue)" size={15} />
-                </TotleReservationsIcon>
-              ) : name === "Total Events" ? (
-                <TotlaEvents>
-                  {" "}
-                  <MdShowChart color="var(--orange)" size={20} />
-                </TotlaEvents>
-              ) : name === "Total Booked Hours" ? (
-                <TotlaBooked>
-                  <MdShowChart color="var(--red)" size={20} />
-                </TotlaBooked>
-              ) : name === "Total Cost" ? (
-                <TotlaCost>
-                  <BiDollar color="var(--darkGreen)" size={17} />
-                </TotlaCost>
-              ) : (
-                <TotleReservationsIcon>
-                  <GiElectric color="var(--blue)" size={15} />
-                </TotleReservationsIcon>
-              )}
-
+        {Loading ? (
+          [1, 2, 3].map((i) => {
+            return (
               <div>
-                {item.name}
-                <GrayText>{item.doc}</GrayText>
+                <ContentLoader
+                  speed={1.5}
+                  width="100%"
+                  height="55px"
+                  viewBox="0 0 600 80"
+                  backgroundColor="#f3f3f3"
+                  foregroundColor="#ecebeb"
+                  {...props}
+                >
+                  <circle cx="40" cy="40" r="40" />
+                  <rect x="520" y="8" rx="3" ry="90" width="88" height="15" />
+                </ContentLoader>
               </div>
-              <BoldText>{item.time}</BoldText>
+            );
+          })
+        ) : (
+          <div>
+            <ReservationItem>
+              <TotleReservationsIcon>
+                <GiElectric color="var(--blue)" size={15} />
+              </TotleReservationsIcon>
+              <div>
+                Total Reservations
+                <GrayText></GrayText>
+              </div>
+              <BoldText>{statistics.resevation}</BoldText>
             </ReservationItem>
-          );
-        })}
+
+            <ReservationItem>
+              <TotlaEvents>
+                <MdShowChart color="var(--orange)" size={20} />{" "}
+              </TotlaEvents>
+              <div>
+                Total Time
+                <GrayText></GrayText>
+              </div>
+              <BoldText>{statistics.timeTotal}</BoldText>
+            </ReservationItem>
+
+            <ReservationItem>
+              <TotlaCost>
+                <BiDollar color="var(--darkGreen)" size={17} />
+              </TotlaCost>
+              <div>
+                Income
+                <GrayText></GrayText>
+              </div>
+              <BoldText>{statistics.income}</BoldText>
+            </ReservationItem>
+          </div>
+        )}
+        {/* ) : name === "Total Events" ? (
+            <TotlaEvents>
+              {" "}
+              <MdShowChart color="var(--orange)" size={20} />
+            </TotlaEvents>
+          ) : name === "Total Booked Hours" ? (
+            <TotlaBooked>
+              <MdShowChart color="var(--red)" size={20} />
+            </TotlaBooked>
+          ) : name === "Total Cost" ? (
+            <TotlaCost>
+              <BiDollar color="var(--darkGreen)" size={17} />
+            </TotlaCost>
+          ) : (
+            <TotleReservationsIcon>
+              <GiElectric color="var(--blue)" size={15} />
+            </TotleReservationsIcon>
+          )} */}
+
+        {/* );
+        })} */}
       </div>
     </Widget>
   );

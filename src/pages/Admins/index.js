@@ -11,6 +11,7 @@ import { AdminsColumns, AdminsData } from "./Config";
 
 import NewAdmin from "./NewAmin";
 import { LoadData } from "../../API";
+
 function Admins() {
   const [open, setOpen] = useState(false);
   const [Loading, setLoading] = useState(false);
@@ -40,7 +41,7 @@ function Admins() {
       }
     );
   }, []);
-  console.log(Admins, "to check the no data");
+
   return (
     <div>
       <CustomPage

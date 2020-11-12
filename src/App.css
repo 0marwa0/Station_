@@ -4,6 +4,7 @@
   box-sizing: border-box;
   font-family: Px-Grotesk !important;
 }
+
 html,
 body {
   height: 100% !important;
@@ -533,6 +534,9 @@ th:last-child {
 .errorText {
   color: var(--red);
   padding-top: 5px;
+}
+.ant-popover-arrow {
+  background-color: white !important;
 }
 /************* notification popup styles**********/
 .popup {

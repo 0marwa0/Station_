@@ -9,8 +9,8 @@ export const LoadData = (query, onSuccess, onFailure) => {
   fetch(`${Host}${query}`, {
     headers: {
       token:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNTkzNDAzODI2MTQ5LCJpYXQiOjE1OTM0MDM4MjB9.4x1MBn-UnDXl-s83r0U4FBk2lYO9FMzkKBVjfCPUeUQ",
-      //   token: localStorage.getItem("station_token"),
+        // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNTkzNDAzODI2MTQ5LCJpYXQiOjE1OTM0MDM4MjB9.4x1MBn-UnDXl-s83r0U4FBk2lYO9FMzkKBVjfCPUeUQ",
+        localStorage.getItem("station_token"),
     },
   })
     .then((resp) => resp.json())
@@ -22,12 +22,11 @@ export const LoadData = (query, onSuccess, onFailure) => {
     });
 };
 export const LoadDataByID = (query, onSuccess, onFailure) => {
-  // let data ;spaces
   fetch(`${Host}${query}`, {
     headers: {
       token:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNTkzNDAzODI2MTQ5LCJpYXQiOjE1OTM0MDM4MjB9.4x1MBn-UnDXl-s83r0U4FBk2lYO9FMzkKBVjfCPUeUQ",
-      //   token: localStorage.getItem("station_token"),
+        // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNTkzNDAzODI2MTQ5LCJpYXQiOjE1OTM0MDM4MjB9.4x1MBn-UnDXl-s83r0U4FBk2lYO9FMzkKBVjfCPUeUQ",
+        localStorage.getItem("station_token"),
     },
   })
     .then((resp) => resp.json())
@@ -45,8 +44,8 @@ export const LoadBooking = (onSuccess) => {
   fetch(`${Host}books/home`, {
     headers: {
       token:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNTkzNDAzODI2MTQ5LCJpYXQiOjE1OTM0MDM4MjB9.4x1MBn-UnDXl-s83r0U4FBk2lYO9FMzkKBVjfCPUeUQ",
-      //   token: localStorage.getItem("station_token"),
+        // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNTkzNDAzODI2MTQ5LCJpYXQiOjE1OTM0MDM4MjB9.4x1MBn-UnDXl-s83r0U4FBk2lYO9FMzkKBVjfCPUeUQ",
+        localStorage.getItem("station_token"),
     },
   })
     .then((resp) => resp.json())
@@ -57,7 +56,7 @@ export const LoadBooking = (onSuccess) => {
           `book/${item.id}`,
           (err, data) => {
             info.push(data.data);
-
+            console.log("let see ");
             onSuccess(info);
           },
           () => {}
@@ -85,7 +84,7 @@ export const Login = (data, onSuccess, onFailure) => {
   fetch(`${Host}/login`, requestOptions)
     .then((response) => response.json())
     .then((result) => {
-      // localStorage.setItem("station_token", result.token);
+      localStorage.setItem("station_token", result.token);
 
       onSuccess(result.status, result.errMsg, result);
       console.log(result, "login success");
@@ -96,6 +95,7 @@ export const Login = (data, onSuccess, onFailure) => {
       // onFailure(error.message);
     });
 };
+
 // export const removeItem = (query, id, onSuccess, onFailure) => {
 //   fetch(`${Config.host}${query}/${id}`, {
 //     method: "delete",

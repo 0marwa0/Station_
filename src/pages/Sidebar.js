@@ -10,7 +10,7 @@ import { CloudUploadOutlined } from "@ant-design/icons";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { FaRegUser } from "react-icons/fa";
 import { RiNewspaperLine } from "react-icons/ri";
-import { Tooltip, Button } from "antd";
+import { Tooltip, Button, Popover } from "antd";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { BiCalendarWeek } from "react-icons/bi";
@@ -65,14 +65,23 @@ export const SideWrapper = styled.div`
   justify-content: space-between;
   background-color: var(--black);
 `;
+const NotifiHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 30px;
 
+  font-size: 20px;
+  font-weight: 400;
+  align-items: center;
+  cursor: unset;
+`;
 export const SideList = styled.ul`
    {
   }
 `;
 export const SideItem = styled.li`
   position: relative;
-  padding: 8% 15px;
+  padding: 1.5vh 15px;
 
   margin-bottom: 0.5rem;
   border-left: ${(props) =>
@@ -81,7 +90,7 @@ export const SideItem = styled.li`
       : props.isSelected
       ? "2px solid var(--yellow);"
       : "2px solid var(--black);"};
-  font-size: 30px;
+  font-size: 35px;
   display: flex;
   color: ${(props) => (props.isSelected ? "var(--yellow);" : "var(--gray);")};
   justify-content: center;
@@ -123,20 +132,23 @@ function SideBar(props) {
   const showPopup = (showNotification) => {
     setShow(showNotification);
   };
-  const handleClose = (e) => {
-    if (node.contains(e.target)) {
-      return;
-    }
 
-    showPopup(false);
-  };
+  // const handleClose = (e) => {
+  //   if (node.contains(e.target)) {
+  //     return;
+  //   }
+
+  //   showPopup(false);
+  // };
   const location = useLocation();
 
   let title = props.title;
   let page = location.pathname.substr(1);
   console.log(props.title, page, "title and page");
   return (
-    <div onClick={(e) => handleClose(e)}>
+    <div
+    //  onClick={(e) => handleClose(e)}
+    >
       <SideWrapper>
         <SideList>
           <Logo src={require("../public/images/Logo.png")} />
@@ -305,32 +317,43 @@ function SideBar(props) {
           </SideItem>
 
           <NavItem slug="Home" title={title}>
-            <div
-              className="Notifications_holder"
-              ref={(nods) => {
-                node = nods;
-              }}
-              onClick={() => showPopup(true)}
+            {" "}
+            <Popover
+              content={<Notification />}
+              title={
+                <NotifiHeader>
+                  Notifications{" "}
+                  <u style={{ fontSize: "14px", color: "var(--darkGray)" }}>
+                    Mark all as read
+                  </u>
+                </NotifiHeader>
+              }
+              trigger="click"
+              visible={showNotification}
+              placement="rightBottom"
+              onVisibleChange={showPopup}
             >
-              {" "}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="25"
-                height="25"
-                viewBox="0 0 25 25"
-              >
-                <path
-                  id="Path_688"
-                  data-name="Path 688"
-                  d="M8.04,25.607a3.125,3.125,0,0,0,4.42,0l-4.422-4.42a3.125,3.125,0,0,0,0,4.42Zm7.5-19.3a7.892,7.892,0,0,1,9.934-1,1.436,1.436,0,0,1,.1-.116A1.578,1.578,0,1,1,27.689,7.53a7.887,7.887,0,0,1-1,9.931l-1.133,1.133A23.053,23.053,0,0,0,21.944,23.6l-2.358,4.712a1.072,1.072,0,0,1-1.83.292L4.389,15.242a1.076,1.076,0,0,1,.292-1.831L9.4,11.054A22.988,22.988,0,0,0,14.4,7.442l1.133-1.133Zm4.279,15.046a24.922,24.922,0,0,1,3.678-4.972l1.133-1.134a4.762,4.762,0,0,0,.6-5.992A7.564,7.564,0,0,0,23.89,7.914a4.771,4.771,0,0,0-6,.6L16.407,10a23.018,23.018,0,0,1-5,3.611L8.687,14.974l9.484,9.482,1.645-3.1Z"
-                  transform="translate(-4 -4)"
-                  fill="#8a8a8a"
-                  fill-rule="evenodd"
-                />
-              </svg>
-              <Notification />
-            </div>
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="25"
+                  height="25"
+                  viewBox="0 0 25 25"
+                >
+                  <path
+                    id="Path_688"
+                    data-name="Path 688"
+                    d="M8.04,25.607a3.125,3.125,0,0,0,4.42,0l-4.422-4.42a3.125,3.125,0,0,0,0,4.42Zm7.5-19.3a7.892,7.892,0,0,1,9.934-1,1.436,1.436,0,0,1,.1-.116A1.578,1.578,0,1,1,27.689,7.53a7.887,7.887,0,0,1-1,9.931l-1.133,1.133A23.053,23.053,0,0,0,21.944,23.6l-2.358,4.712a1.072,1.072,0,0,1-1.83.292L4.389,15.242a1.076,1.076,0,0,1,.292-1.831L9.4,11.054A22.988,22.988,0,0,0,14.4,7.442l1.133-1.133Zm4.279,15.046a24.922,24.922,0,0,1,3.678-4.972l1.133-1.134a4.762,4.762,0,0,0,.6-5.992A7.564,7.564,0,0,0,23.89,7.914a4.771,4.771,0,0,0-6,.6L16.407,10a23.018,23.018,0,0,1-5,3.611L8.687,14.974l9.484,9.482,1.645-3.1Z"
+                    transform="translate(-4 -4)"
+                    fill="#8a8a8a"
+                    fill-rule="evenodd"
+                  />
+                </svg>
+                {/* <Notification /> */}
+              </div>{" "}
+            </Popover>
           </NavItem>
+          {/* <Button type="primary"></Button> */}
 
           <NavItem slug="profile" index={true}>
             <UserImage src={require("../public/images/user.png")} />

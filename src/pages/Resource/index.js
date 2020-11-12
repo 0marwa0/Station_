@@ -9,6 +9,7 @@ import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import NewResources from "./NewResource";
 import { LoadData } from "../../API";
+import { monthNames } from "../shared/assets";
 
 import { Mesg, FailedMesg } from "../../API/APIMessage";
 
@@ -25,10 +26,10 @@ function Resources() {
       "resources",
       (err, data) => {
         setLoading(false);
+        setresource(data.data.rows);
+        // ResourcesData(data.data.rows, (item) => {
 
-        ResourcesData(data.data.rows, (item) => {
-          setresource(item);
-        });
+        // });
 
         if (err) {
           Mesg(err);
@@ -41,13 +42,34 @@ function Resources() {
       }
     );
   }, []);
+  let Resources = [];
+  resource.map((item) => {
+    Resources.push({
+      Title: { url: item.url, name: item.name },
 
+      Descriptions: item.descriptionAr,
+      Type: ["PDF"],
+      Size: "12.2mb",
+
+      UploadedDate:
+        item.createdAt.slice(0, 2) +
+        " " +
+        monthNames[
+          item.createdAt.split("-")[1] === 0
+            ? item.createdAt.split("-")[1].slice(1) - 1
+            : item.createdAt.split("-")[1] - 1
+        ] +
+        " " +
+        item.createdAt.split("-")[0],
+      image: "",
+    });
+  });
   return (
     <div>
       <CustomPage
         pageTitle="Resources"
         columns={ResourcesColumns}
-        data={resource}
+        data={Resources}
         onOpenModal={onOpenModal}
         Item="resource"
         Loading={Loading}

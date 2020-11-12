@@ -32,6 +32,7 @@ export const ResourcesColumns = [
     key: "2",
     title: "Title",
     dataIndex: "Title",
+    render: (item) => <a href={item.url}>{item.name}</a>,
     sorter: {
       compare: (a, b) => a.english - b.english,
       multiple: 1,
