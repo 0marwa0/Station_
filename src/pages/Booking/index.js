@@ -3,6 +3,8 @@ import { notification } from "antd";
 import React, { useEffect, useState } from "react";
 import CustomPage from "../shared/CustomPage";
 import { BookingColumns, BookingData } from "./Config";
+import Progress from "react-progress-2";
+
 // import { BookingData } from "../../fakeData/index";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
@@ -21,32 +23,22 @@ function Booking() {
   useEffect(() => {
     setLoading(true);
 
-    LoadBooking((data) => {
-      setLoading(false);
-      BookingData(data, (book) => {
-        // Mesg("hi");
-        setBook(book);
-      });
-      console.log(data, "such stupid one");
-    });
-    // LoadData(
-    //   "books/home",
-    //   (err, data) => {
-    //     setLoading(false);
-    //     BookingData(data.data, (book) => {
-    //       setBook(book);
-    //     });
+    LoadBooking(
+      (mesg, data) => {
+        setLoading(false);
+        if (mesg) {
+          Mesg(mesg);
+        }
+        BookingData(data, (book) => {
+          setBook(book);
+        });
+      },
+      (err) => {
+        setLoading(false);
 
-    //     console.log(data, "book");
-    //     if (err) {
-    //       Mesg(err);
-    //     }
-    //   },
-    //   (err) => {
-    //     setLoading(false);
-    //     FailedMesg(err, "Something worng happend !");
-    //   }
-    // );
+        FailedMesg(err, "Something worng happend !");
+      }
+    );
   }, []);
 
   return (

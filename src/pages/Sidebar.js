@@ -24,7 +24,6 @@ const NavItem = ({ slug, children, index, title }) => {
   let isSelected = false;
   if (index) {
     type = true;
-    console.log(type, "trueee");
   } else {
     type = false;
   }
@@ -144,7 +143,7 @@ function SideBar(props) {
 
   let title = props.title;
   let page = location.pathname.substr(1);
-  console.log(props.title, page, "title and page");
+  // console.log(props.title, page, "title and page");
   return (
     <div
     //  onClick={(e) => handleClose(e)}

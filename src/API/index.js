@@ -38,17 +38,16 @@ export const LoadDataByID = (query, onSuccess, onFailure) => {
     });
 };
 
-export const LoadBooking = (onSuccess) => {
+export const LoadBooking = (onSuccess, onFailure) => {
   let data = [];
 
   fetch(`${Host}books/home`, {
     headers: {
-      token:
-        // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNTkzNDAzODI2MTQ5LCJpYXQiOjE1OTM0MDM4MjB9.4x1MBn-UnDXl-s83r0U4FBk2lYO9FMzkKBVjfCPUeUQ",
-        localStorage.getItem("station_token"),
+      token: localStorage.getItem("station_token"),
     },
   })
     .then((resp) => resp.json())
+    .then((jsonData) => jsonData)
     .then((jsonData) => {
       let info = [];
       jsonData.data.map((item) => {
@@ -56,17 +55,14 @@ export const LoadBooking = (onSuccess) => {
           `book/${item.id}`,
           (err, data) => {
             info.push(data.data);
-            console.log("let see ");
-            onSuccess(info);
+            onSuccess(jsonData.errMsg, info);
           },
           () => {}
         );
       });
-
-      // onSuccess(jsonData.errMsg, jsonData);
     })
     .catch((err) => {
-      // onFailure(err.message);
+      onFailure(err.message);
     });
 };
 export const Login = (data, onSuccess, onFailure) => {
@@ -94,6 +90,55 @@ export const Login = (data, onSuccess, onFailure) => {
       console.log(error.message, "login failed");
       // onFailure(error.message);
     });
+};
+
+// Post request
+
+export const addData = (query, data, onSuccess, onFailure) => {
+  let options = {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+      token: localStorage.getItem("station_token"),
+    },
+    body: JSON.stringify(data),
+  };
+
+  fetch(`${Host}${query}`, options)
+    .then((resp) => resp.json())
+    .then((jsonData) => {
+      console.log(jsonData.errMsg, jsonData, "on Success");
+      onSuccess(jsonData.errMsg, jsonData);
+      // console.log("data sended", data);
+    })
+    .catch((err) => {
+      console.log(err, "add error");
+      onFailure(err.message);
+    });
+};
+
+export const addFile = (query, data, onSuccess, onFailure) => {
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  var requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      token: localStorage.getItem("station_token"),
+    },
+    body: data,
+
+    redirect: "follow",
+  };
+
+  fetch(`${Host}${query}`, requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      onSuccess(result);
+      console.log(result.errMsg, "file");
+    })
+    .catch((error) => onFailure(error));
 };
 
 // export const removeItem = (query, id, onSuccess, onFailure) => {
@@ -131,52 +176,6 @@ export const Login = (data, onSuccess, onFailure) => {
 //     });
 // };
 
-// export const addData = (query, data, onSuccess, onFailure) => {
-//   if (data.price) {
-//     data.price = Number(data.price);
-//   }
-//   // console.log(data,"product data sended ");
-//   let options = {
-//     method: "post",
-//     headers: {
-//       "Content-Type": "application/json",
-//       token: localStorage.getItem("step_token"),
-//     },
-//     body: JSON.stringify(data),
-//   };
-
-//   if (query === "product") {
-//     var formdata = new FormData();
-//     formdata.append("name", data.name);
-//     formdata.append("price", data.price);
-//     formdata.append("description", data.description);
-//     formdata.append("subgroup", data.subgroup);
-//     formdata.append("components", data.components);
-//     formdata.append("image", data.image);
-
-//     options = {
-//       method: "post",
-//       body: formdata,
-//       headers: {
-//         token: localStorage.getItem("step_token"),
-//       },
-//     };
-//   } else {
-//   }
-
-//   fetch(`${Config.host}${query}`, options)
-//     .then((resp) => resp.json())
-//     .then((jsonData) => {
-//       // console.log(jsonData.errMsg, jsonData, "on Success");
-//       onSuccess(jsonData.errMsg, jsonData);
-//       // console.log("data sended", data);
-//     })
-//     .catch((err) => {
-//       // console.log(err, "add error");
-//       onFailure(err.message);
-//     });
-// };
-
 // export const editData = (query, data, id, onSuccess, onFailure) => {
 //   if (data.price) {
 //     data.price = Number(data.price);
@@ -194,8 +193,7 @@ export const Login = (data, onSuccess, onFailure) => {
 //   // if (query === "product") {
 //   //   var formdata = new FormData();
 //   //   formdata.append("name", data.name);
-//   //   formdata.append("price", data.price);
-//   //   formdata.append("components", data.components);
+
 //   //   options = {
 //   //     method: "put",
 //   //     body: formdata,
@@ -242,37 +240,6 @@ export const Login = (data, onSuccess, onFailure) => {
 //     .then((jsonData) => {
 //       onSuccess(jsonData.errMsg, jsonData);
 //       // console.log(jsonData, "change image");
-//     })
-//     .catch((err) => {
-//       onFailure(err.message);
-//     });
-// };
-// export const addProduct = (query, data, onSuccess, onFailure) => {
-//   var myHeaders = new Headers();
-//   myHeaders.append(
-//     "token",
-//     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjEsInR5cGUiOiJhZG1pbiIsImlhdCI6MTU5NTYyNzUwMX0.JWR_qBXWzXyDCQ1tOQBZnMawnSACrd0OdYhrMcbRPJc"
-//   );
-
-//   var formdata = new FormData();
-//   formdata.append("name", "");
-//   formdata.append("image", data.image);
-//   formdata.append("description", "description test");
-//   formdata.append("price", 55);
-//   formdata.append("subgroup", 51);
-//   formdata.append("components", []);
-
-//   var requestOptions = {
-//     method: "POST",
-//     headers: myHeaders,
-//     body: formdata,
-//     redirect: "follow",
-//   };
-
-//   fetch("https://step-copy.herokuapp.com/dash/v1/product", requestOptions)
-//     .then((resp) => resp.json())
-//     .then((jsonData) => {
-//       onSuccess(jsonData.errMsg, jsonData);
 //     })
 //     .catch((err) => {
 //       onFailure(err.message);

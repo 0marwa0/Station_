@@ -5,6 +5,8 @@ import {
   ModleFooter,
   ModleHeader,
 } from "../../shared/SharedStyle";
+import ProgressBar from "@ramonak/react-progress-bar";
+
 import { CustomModleButton } from "../../shared/SharedComponents";
 import styled from "styled-components";
 import { TextNote } from "../../FileUploader/NewFileUploader";
@@ -23,6 +25,7 @@ function Index(props) {
   const [Active, setActive] = useState(false);
   const [fileName, setFileName] = useState("");
   const [fileSize, setFileSize] = useState("");
+  const [Load, setLoad] = useState(0);
 
   const [Image, setImage] = useState(
     require("../../FileUploader/NewFileUploader/default.png")
@@ -103,12 +106,19 @@ function Index(props) {
       <PageWrapper>
         <InputLable>
           Title
-          <CustomInput placeholder="write file title" />
+          <CustomInput
+            onChange={(e) => props.handleInput(e, "name")}
+            placeholder="write file title"
+          />
         </InputLable>
         <Space />
         <InputLable>
           Description
-          <CustomInputArea rows={3} placeholder="write file Description ..." />
+          <CustomInputArea
+            onChange={(e) => props.handleInput(e, "dec")}
+            rows={3}
+            placeholder="write file Description ..."
+          />
         </InputLable>
         <Space />
         <Space />
@@ -142,6 +152,12 @@ function Index(props) {
             <label for="file"> ChooseFile</label>
           </span>
         </div>
+        {/* <ProgressBar
+          completed={20}
+          labelColor="black"
+          bgcolor="var(--yellow)"
+          height="12px"
+        /> */}
         <span>
           {fileName ? (
             <span style={{ display: "flex", gap: "5px" }}>
@@ -158,8 +174,10 @@ function Index(props) {
         </span>
       </PageWrapper>{" "}
       <ModleFooter>
-        <CustomModleButton>Cancel</CustomModleButton>
-        <CustomModleButton Main>Upload</CustomModleButton>
+        <CustomModleButton fun={props.Close}>Cancel</CustomModleButton>
+        <CustomModleButton Main fun={props.handleSubmit}>
+          Upload
+        </CustomModleButton>
       </ModleFooter>
     </div>
   );

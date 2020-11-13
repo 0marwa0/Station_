@@ -78,17 +78,26 @@ function Index(props) {
           <Space />
           <InputLable>
             Full Name
-            <CustomInput placeholder="Write admin name" />
+            <CustomInput
+              onChange={(e) => props.handleInput(e, "name")}
+              placeholder="Write admin name"
+            />
           </InputLable>
           <Space />
           <InputLable>
             Username
-            <CustomInput placeholder="Write admin username" />
+            <CustomInput
+              onChange={(e) => props.handleInput(e, "username")}
+              placeholder="Write admin username"
+            />
           </InputLable>
           <Space />
           <InputLable>
             Password
-            <CustomInput placeholder="Write admin password" />
+            <CustomInput
+              placeholder="Write admin password"
+              onChange={(e) => props.handleInput(e, "password")}
+            />
           </InputLable>
           <Space />
           <InputLable>
@@ -128,7 +137,7 @@ function Index(props) {
         <ModalFooter>
           <div style={{ float: "right" }}>
             {" "}
-            <CustomModleButton Main extra>
+            <CustomModleButton Main extra fun={props.handleSubmit}>
               Create
             </CustomModleButton>
           </div>

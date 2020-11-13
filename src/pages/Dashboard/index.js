@@ -3,6 +3,8 @@ import SideBar from "../Sidebar";
 import { BiExport, BiDollar } from "react-icons/bi";
 import Reservation from "./Reservation";
 import Statistic from "./Statistic";
+import Progress from "react-progress-2";
+
 import { AiOutlinePlus } from "react-icons/ai";
 import { Col, Row, Input, Button, Menu, Dropdown } from "antd";
 import { DownOutlined } from "@ant-design/icons";
@@ -10,13 +12,13 @@ import { CustomButton } from "../shared/SharedComponents";
 import "../../App.css";
 import FullCalendar from "@fullcalendar/react";
 import { Modal } from "react-responsive-modal";
-import { LoadData } from "../../API";
 import { ReactComponent as PrintIcon } from "../../public/images/print.svg";
 import { Data } from "../../fakeData/DashFakeData";
 import NewBooking from "../Booking/NewBooking";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import Tooltip from "react-tooltip";
+import { LoadBooking } from "../../API";
 import { SuccessMesg, FailedMesg, Mesg } from "../../API/APIMessage";
 import { SmileOutlined } from "@ant-design/icons";
 import {
@@ -34,7 +36,13 @@ body{
 }
 
 `;
-
+const colors = {
+  color1: "var(--darkGreen)",
+  color2: "var(--orange)",
+  color3: "var(--blue)",
+  color4: "var(--red)",
+  color5: "var(--purple)",
+};
 const menu = (
   <Menu>
     <Menu.Item>
@@ -90,7 +98,7 @@ function Booking() {
   const onEnter = (item) => {
     let data;
     let color = item.event._def.ui.backgroundColor.replace(/^"(.*)"$/, "$1");
-
+    console.log(item.event._def.ui.backgroundColor, "our color");
     item.event._def.extendedProps.data.map((item) => (data = item));
     let node = document.createElement("div");
     let DayWrap = document.createElement("div");
@@ -108,7 +116,8 @@ function Booking() {
     title.style.color = `${color}`;
     node.setAttribute("id", "pupup");
     item.el.setAttribute("id", "holder");
-
+    let h = document.getElementById("holder");
+    h.style.backgroundColor = color;
     if (item.el.id === "holder") {
       node.style.border = `1px solid ${color}`;
 
@@ -130,7 +139,7 @@ function Booking() {
       node.appendChild(TimeWrap);
 
       item.el.appendChild(node);
-      console.log(item.el);
+      // console.log(item.el);
     }
   };
   const onLeave = (item) => {
@@ -144,10 +153,79 @@ function Booking() {
   const onOpenModal = (open) => {
     setOpen(open);
   };
+  const [Loading, setLoading] = useState(false);
+  const [BookDates, setBookDates] = useState(false);
 
   useEffect(() => {
-    // LoadData(null, (data) => console.log(data, "our first get"), null);
-  });
+    LoadBooking(
+      (mesg, data) => {
+        setLoading(false);
+        if (mesg) {
+          Mesg(mesg);
+        }
+
+        let Dates = [];
+        let el = {};
+        let date = data.map((i) => i.bookDates);
+        date.map((i) => {
+          i.map((ob) => (el = ob));
+          Dates.push(el);
+        });
+
+        ///to remove
+        Dates.map(
+          (obj) =>
+            (obj.title = data
+              .filter((i) => i.id === obj.bookId)
+              .map((i) => i.title)
+              .toString())
+        );
+
+        Dates.map(
+          (obj) =>
+            (obj.time =
+              obj.start.split("T", 2)[1].split(".")[0] +
+              "-" +
+              obj.end.split("T", 2)[1].split(".")[0])
+        );
+
+        Dates.map(
+          (obj) =>
+            (obj.color =
+              colors[`color${Math.floor(Math.random() * (5 - 1 + 1)) + 1}`])
+        );
+        Dates.map((obj) => (obj.end = obj.end.split("T")[0]));
+        Dates.map((obj) => (obj.start = obj.start.split("T")[0]));
+
+        Dates.map(
+          (obj) =>
+            (obj.data = [
+              {
+                title: data
+                  .filter((i) => i.id === obj.bookId)
+                  .map((i) => i.title)
+                  .toString(),
+                day: "no day yet",
+                date: "",
+                time: obj.time,
+              },
+            ])
+        );
+
+        console.log(
+          Dates,
+
+          "shape"
+        );
+        setBookDates(Dates);
+      },
+      (err) => {
+        setLoading(false);
+        FailedMesg(err, "Something worng happend !");
+      }
+    );
+  }, []);
+
   return (
     <CustomPageWrapper>
       <GlobalStyle />
@@ -201,7 +279,7 @@ function Booking() {
                 height="700px"
                 eventMouseEnter={(item) => onEnter(item)}
                 eventMouseLeave={(item) => onLeave(item)}
-                events={Data}
+                events={BookDates}
               />
             </Clander>
           </Col>

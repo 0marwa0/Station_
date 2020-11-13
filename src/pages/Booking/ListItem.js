@@ -1,6 +1,8 @@
 // List item Page //
 
 import React from "react";
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+
 import styled, { keyframes } from "styled-components";
 import { ArticlesData } from "../../fakeData";
 import { BsTrashFill } from "react-icons/bs";
@@ -10,8 +12,9 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { ReactComponent as EditICon } from "../../public/images/solid edit.svg";
 import { ReactComponent as ItemIcon } from "../../public/images/itemIcon.svg";
-
+import { PageText, PageNmber, IconCss, Pagination } from "../shared/CustomPage";
 import { ReactComponent as TrashICon } from "../../public/images/solid trash-alt.svg";
+
 const ListItemWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -32,11 +35,11 @@ const Item = styled.img`
   width: 100%;
   height: 100%;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 7px;
 `;
 
 const ItemOverlay = styled.div`
-  border-radius: 5px;
+  border-radius: 7px;
   width: 100%;
   height: auto;
   position: absolute;
@@ -88,6 +91,8 @@ const Title = styled.div`
   font-size: 0.9vw;
   font-weight: bold;
   width: 80%;
+  height: 33px;
+  overflow: hidden;
   margin-bottom: 7px;
   line-height: 1.3em;
 `;
@@ -117,54 +122,101 @@ const ListBottom = styled.div`
   display: flex;
   flex-direction: column;
   padding: 10px 20px;
-  margin-top: 24%;
-  opacity: 1;
+
+  margin-top: 80px;
 `;
 
 const BottomText = styled.div`
   display: flex;
   opacity: 1;
+
   justify-content: space-between;
 `;
 const ListItem = (props) => {
   console.log(props.data, "article list");
+  const [currentPage, setcurrentPage] = useState(1);
+  const [pagePerOnce, setpagePerOnce] = useState(8);
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setcurrentPage(currentPage - 1);
+    }
+  };
+  const totalPge = Math.ceil(props.data.length / pagePerOnce);
+
+  const nextPage = () => {
+    if (currentPage != totalPge) {
+      setcurrentPage(currentPage + 1);
+    }
+  };
+  const indexOfLastPage = currentPage * pagePerOnce;
+  const indexOfFirstPage = indexOfLastPage - pagePerOnce;
+  const Data = props.data.slice(indexOfFirstPage, indexOfLastPage);
   return (
-    <ListItemWrapper>
-      {props.data.map((item, i) => {
-        return (
-          <ItemHolder>
-            <Item src={item.image} />
-            <ItemOverlay>
-              <ItemActions>
-                <div style={{ marginTop: "9px" }}>
-                  <ItemIcon />
-                </div>
-                <span style={{ display: "flex" }}>
-                  <ListIcon>
-                    <TrashICon />
-                    <div>Delete</div>
-                  </ListIcon>
-                  <ListIcon>
-                    <EditICon />
-                    <div> Edit</div>
-                  </ListIcon>
-                </span>
-              </ItemActions>
-              <ListBottom>
-                <Title>{item.Title}</Title>
-                <BottomText>
-                  <Date>
-                    <FaCalendarAlt color="var(--yellow)" size={8} />
-                    {item.CreatedDate}
-                  </Date>
-                  <ListImg src={require(`../../public/images/user2.png`)} />
-                </BottomText>
-              </ListBottom>
-            </ItemOverlay>
-          </ItemHolder>
-        );
-      })}
-    </ListItemWrapper>
+    <div>
+      <ListItemWrapper>
+        {Data.map((item, i) => {
+          return (
+            <ItemHolder>
+              <Item src={item.image} />
+              <ItemOverlay>
+                <ItemActions>
+                  <div style={{ marginTop: "9px" }}>
+                    <ItemIcon />
+                  </div>
+                  <span style={{ display: "flex" }}>
+                    <ListIcon>
+                      <TrashICon />
+                      <div>Delete</div>
+                    </ListIcon>
+                    <ListIcon>
+                      <EditICon />
+                      <div> Edit</div>
+                    </ListIcon>
+                  </span>
+                </ItemActions>
+                <ListBottom>
+                  <Title>{item.Title}</Title>
+                  <BottomText>
+                    <Date>
+                      <FaCalendarAlt color="var(--yellow)" size={8} />
+                      {item.CreatedDate}
+                    </Date>
+                    <ListImg src={require(`../../public/images/user2.png`)} />
+                  </BottomText>
+                </ListBottom>
+              </ItemOverlay>
+            </ItemHolder>
+          );
+        })}
+      </ListItemWrapper>
+      <Pagination noborder>
+        <PageText>
+          View search of {Data.length} from {props.data.length} search we got .
+        </PageText>
+        <PageNmber>
+          <IconCss active={currentPage > 1 ? true : false}>
+            <LeftOutlined
+              onClick={prevPage}
+              style={{
+                cursor: currentPage > 1 ? "pointer" : "not-allowed",
+              }}
+            />
+          </IconCss>
+          <p style={{ marginTop: "12px" }}>
+            {currentPage}/ {totalPge}
+          </p>
+          <IconCss active={currentPage != totalPge ? true : false}>
+            <RightOutlined
+              onClick={nextPage}
+              style={{
+                cursor: currentPage != totalPge ? "pointer" : "not-allowed",
+              }}
+            />
+          </IconCss>
+        </PageNmber>
+      </Pagination>
+    </div>
   );
 };
 

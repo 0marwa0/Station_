@@ -8,8 +8,8 @@ import { Modal } from "react-responsive-modal";
 import Newcustomer from "./NewCustomer";
 import { Mesg, FailedMesg } from "../../API/APIMessage";
 import { LoadData } from "../../API";
-
-function Customers() {
+import Progress from "react-progress-2";
+function Customers(props) {
   const [open, setOpen] = useState(false);
   const [Loading, setLoading] = useState(false);
   const [users, setusers] = useState([]);
@@ -18,11 +18,12 @@ function Customers() {
   };
   useEffect(() => {
     setLoading(true);
+    // Progress.show();
     LoadData(
       "users",
       (err, data) => {
         setLoading(false);
-
+        // Progress.hide();
         UsersData(data.data.rows, (users) => {
           setusers(users);
         });
@@ -33,6 +34,7 @@ function Customers() {
       },
       (err) => {
         setLoading(false);
+        // Progress.hide();
         FailedMesg(err, "Something worng happend !");
         console.log(err, "failed");
       }
@@ -41,6 +43,8 @@ function Customers() {
 
   return (
     <div>
+      {/* <Progress.Component thumbStyle={{ background: "var(--yellow)" }} /> */}
+
       <CustomPage
         pageTitle="Customers"
         columns={CustomersColumns}
@@ -59,7 +63,7 @@ function Customers() {
           modal: "customModal",
         }}
       >
-        <Newcustomer Close={() => onOpenModal(false)} />
+        <Newcustomer Close={() => onOpenModal(false)} id={props.id} />
       </Modal>
     </div>
   );

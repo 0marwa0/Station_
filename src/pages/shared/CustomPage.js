@@ -1,11 +1,14 @@
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsFillGridFill } from "react-icons/bs";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Col, Row, Table, Input } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
+import LoadingBar from "react-top-loading-bar";
+
 import { BiImport, BiExport } from "react-icons/bi";
 import { ReactComponent as ExportIcon } from "../../public/images/export.svg";
 import { ReactComponent as ImportIcon } from "../../public/images/import.svg";
+import Progress from "react-progress-2";
 
 import { FiFilter } from "react-icons/fi";
 import {
@@ -20,7 +23,6 @@ import { ReactComponent as Upload } from "../../public/images/solid cloud-upload
 import { ReactComponent as Notifiy } from "../../public/images/solid bell.svg";
 import { ReactComponent as TableIcon } from "../../public/images/Table.svg";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-
 import ListItem from "../Booking/ListItem";
 export const CustomPageWrapper = styled.div`
   display: flex;
@@ -30,7 +32,7 @@ export const PageContent = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-top: 10px;
+  margin-top: 25px;
   margin-left: 123px;
 
   margin-right: 35px;
@@ -55,28 +57,31 @@ export const PageTitle = styled.div`
   font-weight: bold;
   padding: 10px 0;
 `;
-const Pagination = styled.div`
+export const Pagination = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 0px 20px;
   color: var(--darkGray);
-  border: 1px solid var(--lighterGray);
+  border: ${(props) =>
+    props.noborder ? "none" : " 1px solid var(--lighterGray)"};
   border-radius: 0 0 10px 10px;
   border-top: none;
 `;
-const PageText = styled.div`
+export const PageText = styled.div`
   color: var(--darkGray);
   margin-top: 12px;
 `;
-const PageNmber = styled.div`
+export const PageNmber = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
 `;
-const IconCss = styled.span`
+export const IconCss = styled.span`
   color: ${(props) => (props.active ? "var(--yellow)" : "var(--textGray)")};
 `;
 function CustomPage(props) {
+  const ref = useRef(null);
+
   let pageTitle = props.pageTitle;
   const columns = props.columns;
   const data = props.data;
@@ -122,9 +127,18 @@ function CustomPage(props) {
   } else {
     pageTitleName = props.pageTitle.substring(0, props.pageTitle.length - 1);
   }
-  console.log(pageTitleName, "show page name");
+  useEffect(() => {
+    if (props.Loading) {
+      ref.current.staticStart();
+    } else {
+      ref.current.complete();
+    }
+  }, []);
+  // console.log(pageTitleName, "show page name");
   return (
     <CustomPageWrapper>
+      <LoadingBar color="var(--yellow)" ref={ref} shadow={true} />
+
       <SideBar title={props.pageTitle} />
       <PageContent>
         <Row>

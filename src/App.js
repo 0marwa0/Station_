@@ -3,6 +3,7 @@ import { Mesg, FailedMesg } from "./API/APIMessage";
 import { LoadData } from "./API";
 import logo from "./logo.svg";
 import "./App.css";
+import "react-progress-2/main.css";
 import Sidebar from "./pages/Sidebar";
 import Dashboard from "./pages/Dashboard";
 import Articles from "./pages/Article";
@@ -87,7 +88,12 @@ function App() {
             exact
             render={(props) => <Events {...props} admins={admins} />}
           />
-          <Route path="/Customers" component={Customers} exact />
+          <Route
+            path="/Customers"
+            // component={Customers}
+            render={(props) => <Customers {...props} id={userId} />}
+            exact
+          />
           <Route path="/Admins" component={Admins} exact />
           <Route
             path="/Resources"
