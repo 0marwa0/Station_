@@ -120,3 +120,23 @@ export const EmptyText = (Loading, Item) => {
     </EmptyTextHolder>
   );
 };
+export function ReservationLoading(props) {
+  let data = [1, 2, 3, 4];
+  return data.map((i) => (
+    <div>
+      <ContentLoader
+        speed={1.5}
+        width="100%"
+        height="55px"
+        viewBox="0 0 600 80"
+        backgroundColor="#f3f3f3"
+        foregroundColor="#ecebeb"
+        {...props}
+      >
+        <rect x="0" y="8" rx="15" ry="15" width="88" height="65" />
+        <rect x="100" y="60" rx="3" ry="90" width="300" height="5" />
+        <rect x="520" y="8" rx="3" ry="90" width="88" height="7" />
+      </ContentLoader>
+    </div>
+  ));
+}

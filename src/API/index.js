@@ -39,8 +39,6 @@ export const LoadDataByID = (query, onSuccess, onFailure) => {
 };
 
 export const LoadBooking = (onSuccess, onFailure) => {
-  let data = [];
-
   fetch(`${Host}books/home`, {
     headers: {
       token: localStorage.getItem("station_token"),
@@ -120,15 +118,14 @@ export const addData = (query, data, onSuccess, onFailure) => {
 export const addFile = (query, data, onSuccess, onFailure) => {
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
-
+  if (query === "resource") {
+    myHeaders.append("Content-Type", "application/json");
+  }
+  myHeaders.append("token", localStorage.getItem("station_token"));
   var requestOptions = {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      token: localStorage.getItem("station_token"),
-    },
+    headers: myHeaders,
     body: data,
-
     redirect: "follow",
   };
 
@@ -136,9 +133,12 @@ export const addFile = (query, data, onSuccess, onFailure) => {
     .then((response) => response.json())
     .then((result) => {
       onSuccess(result);
-      console.log(result.errMsg, "file");
+      console.log(result, "success");
     })
-    .catch((error) => onFailure(error));
+    .catch((error) => {
+      onFailure(error);
+      console.log(error, "failure");
+    });
 };
 
 // export const removeItem = (query, id, onSuccess, onFailure) => {

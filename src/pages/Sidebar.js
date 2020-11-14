@@ -80,7 +80,7 @@ export const SideList = styled.ul`
 `;
 export const SideItem = styled.li`
   position: relative;
-  padding: 1.5vh 15px;
+  padding: 1.5vh 25px;
 
   margin-bottom: 0.5rem;
   border-left: ${(props) =>

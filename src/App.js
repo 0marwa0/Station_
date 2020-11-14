@@ -19,7 +19,7 @@ import CreateEvent from "./pages/Events/CreateEvent";
 import Home from "./pages/Home";
 import BookingDetalis from "./pages/Booking/BookingDetalis";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-function App() {
+function App(props) {
   const [admins, setadmins] = useState([]);
   const [spaces, setspaces] = useState([]);
   const [userId, setuserId] = useState("");
@@ -57,7 +57,6 @@ function App() {
     getAdmins();
     getSpace();
   }, []);
-
   return (
     <div>
       <Router>

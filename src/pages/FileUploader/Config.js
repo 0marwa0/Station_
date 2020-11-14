@@ -26,6 +26,7 @@ export const FilUploadedColumns = [
     key: "2",
     title: "File Title",
     dataIndex: "FileTitle",
+    render: (item) => <a href={item.url}>{item.name}</a>,
     sorter: {
       compare: (a, b) => a.english - b.english,
       multiple: 1,
@@ -44,9 +45,9 @@ export const FilUploadedColumns = [
       <>
         {Type.map((type) => {
           let color;
-          if (type === "PDF") {
+          if (type === "pdf" || type == "PDF") {
             color = "orange";
-          } else if (type === "JPG") {
+          } else if (type === "jpg" || type == "JPG") {
             color = "blue";
           } else {
             color = "green";
@@ -127,8 +128,8 @@ export const FilesData = (data, callback) => {
 
   data.map((file) => {
     Files.push({
-      FileTitle: file.name,
-      Type: ["PDF"],
+      FileTitle: { url: file.link, name: file.name },
+      Type: [`${/[.]/.exec(file.name) ? /[^.]+$/.exec(file.name) : undefined}`],
       Size: "",
       UploadedDate:
         file.createdAt.slice(0, 2) +

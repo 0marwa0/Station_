@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import SideBar from "../Sidebar";
 import { BiExport, BiDollar } from "react-icons/bi";
 import Reservation from "./Reservation";
 import Statistic from "./Statistic";
-import Progress from "react-progress-2";
+import LoadingBar from "react-top-loading-bar";
 
 import { AiOutlinePlus } from "react-icons/ai";
 import { Col, Row, Input, Button, Menu, Dropdown } from "antd";
@@ -18,7 +18,7 @@ import NewBooking from "../Booking/NewBooking";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import Tooltip from "react-tooltip";
-import { LoadBooking } from "../../API";
+import { LoadBooking, LoadData } from "../../API";
 import { SuccessMesg, FailedMesg, Mesg } from "../../API/APIMessage";
 import { SmileOutlined } from "@ant-design/icons";
 import {
@@ -95,10 +95,12 @@ const PageHeader = styled(Row)`
 `;
 
 function Booking() {
+  const ref = useRef(null);
+  const [Reservations, setReservations] = useState([]);
   const onEnter = (item) => {
     let data;
     let color = item.event._def.ui.backgroundColor.replace(/^"(.*)"$/, "$1");
-    console.log(item.event._def.ui.backgroundColor, "our color");
+    //console.log(item.event._def.ui.backgroundColor, "our color");
     item.event._def.extendedProps.data.map((item) => (data = item));
     let node = document.createElement("div");
     let DayWrap = document.createElement("div");
@@ -116,8 +118,7 @@ function Booking() {
     title.style.color = `${color}`;
     node.setAttribute("id", "pupup");
     item.el.setAttribute("id", "holder");
-    let h = document.getElementById("holder");
-    h.style.backgroundColor = color;
+
     if (item.el.id === "holder") {
       node.style.border = `1px solid ${color}`;
 
@@ -157,25 +158,34 @@ function Booking() {
   const [BookDates, setBookDates] = useState(false);
 
   useEffect(() => {
-    LoadBooking(
-      (mesg, data) => {
+    setLoading(true);
+    ref.current.staticStart();
+    LoadData(
+      "books",
+      (mesg, res) => {
         setLoading(false);
+        ref.current.complete();
+
         if (mesg) {
           Mesg(mesg);
         }
+        let PendingBooks = res.data.rows.filter((i) => i.status === "pending");
+        setReservations(PendingBooks);
 
         let Dates = [];
         let el = {};
-        let date = data.map((i) => i.bookDates);
+        let date = res.data.rows
+          .filter((i) => i.approve === true)
+          .map((i) => i.bookDates);
         date.map((i) => {
           i.map((ob) => (el = ob));
           Dates.push(el);
         });
 
-        ///to remove
+        // to remove
         Dates.map(
           (obj) =>
-            (obj.title = data
+            (obj.title = res.data.rows
               .filter((i) => i.id === obj.bookId)
               .map((i) => i.title)
               .toString())
@@ -201,26 +211,23 @@ function Booking() {
           (obj) =>
             (obj.data = [
               {
-                title: data
+                title: res.data.rows
                   .filter((i) => i.id === obj.bookId)
                   .map((i) => i.title)
                   .toString(),
-                day: "no day yet",
+                day: obj.start + "-" + obj.end,
                 date: "",
                 time: obj.time,
               },
             ])
         );
 
-        console.log(
-          Dates,
-
-          "shape"
-        );
         setBookDates(Dates);
       },
       (err) => {
         setLoading(false);
+        ref.current.complete();
+
         FailedMesg(err, "Something worng happend !");
       }
     );
@@ -229,6 +236,8 @@ function Booking() {
   return (
     <CustomPageWrapper>
       <GlobalStyle />
+      <LoadingBar color="var(--yellow)" ref={ref} shadow={true} />
+
       <SideBar />
       <PageContent>
         <PageHeader>
@@ -284,14 +293,14 @@ function Booking() {
             </Clander>
           </Col>
           <Col style={{ height: "100%" }}>
-            <Reservation />
+            <Reservation Reservations={Reservations} Loading={Loading} />
             <div style={{ height: "3%" }}></div>
             <Statistic />
           </Col>
         </Row>
       </PageContent>
       <Modal
-        closeOnOverlayClick={false}
+        closeOnOverlayClick={true}
         open={open}
         onClose={() => onOpenModal(false)}
         center

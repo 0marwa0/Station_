@@ -47,9 +47,9 @@ export const BookingColumns = [
         {Status.map((status) => {
           let color = "gold";
 
-          if (status) {
+          if (status === "approved") {
             color = "green";
-          } else {
+          } else if (status === "rejected") {
             color = "red";
           }
 
@@ -144,61 +144,60 @@ const getItem = (id, callback) => {
   );
 };
 export const BookingData = (data, callback) => {
-  let Booinkg = [];
-  console.log(data, "bookdata");
-  data.map((item) => {
-    Booinkg.push({
-      Title: item.title,
-      Status: [`${item.status}`],
-      StartingDate: item.bookDates.map(
-        (i) =>
-          i.start.slice(0, 2) +
-          " " +
-          monthNames[
-            i.start.split("-")[1] === 0
-              ? i.start.split("-")[1].slice(1) - 1
-              : i.start.split("-")[1] - 1
-          ] +
-          " " +
-          i.start.split("-")[0]
-      ),
-      EndingDate: item.bookDates.map(
-        (i) =>
-          i.end.slice(0, 2) +
-          " " +
-          monthNames[
-            i.end.split("-")[1] === 0
-              ? i.end.split("-")[1].slice(1) - 1
-              : i.end.split("-")[1] - 1
-          ] +
-          " " +
-          i.end.split("-")[0]
-      ),
-      Space: [`${item.space.title}`],
-      CreationDate:
-        item.createdAt.slice(0, 2) +
-        " " +
-        monthNames[
-          item.createdAt.split("-")[1] === 0
-            ? item.createdAt.split("-")[1].slice(1) - 1
-            : item.createdAt.split("-")[1] - 1
-        ] +
-        " " +
-        item.createdAt.split("-")[0],
-      BookedBy: item.user.name,
-      // CreatedDate:
-      //   item.createdAt.slice(0, 2) +
-      //   " " +
-      //   monthNames[
-      //     item.createdAt.split("-")[1] === 0
-      //       ? item.createdAt.split("-")[1].slice(1) - 1
-      //       : item.createdAt.split("-")[1] - 1
-      //   ] +
-      //   " " +
-      //   item.createdAt.split("-")[0],
-      // Createdby: "images/user2.png",
-    });
-  });
-
-  callback(Booinkg);
+  let Booking = [];
+  console.log("consle", Booking);
+  // data.map((item) => {
+  //   Booking.push({
+  //     Title: item.title,
+  //     Status: [`${item.status}`],
+  //     StartingDate: item.bookDates.map(
+  //       (i) =>
+  //         i.start.slice(0, 2) +
+  //         " " +
+  //         monthNames[
+  //           i.start.split("-")[1] === 0
+  //             ? i.start.split("-")[1].slice(1) - 1
+  //             : i.start.split("-")[1] - 1
+  //         ] +
+  //         " " +
+  //         i.start.split("-")[0]
+  //     ),
+  //     EndingDate: item.bookDates.map(
+  //       (i) =>
+  //         i.end.slice(0, 2) +
+  //         " " +
+  //         monthNames[
+  //           i.end.split("-")[1] === 0
+  //             ? i.end.split("-")[1].slice(1) - 1
+  //             : i.end.split("-")[1] - 1
+  //         ] +
+  //         " " +
+  //         i.end.split("-")[0]
+  //     ),
+  //     Space: [`${item.space.title}`],
+  //     CreationDate:
+  //       item.createdAt.slice(0, 2) +
+  //       " " +
+  //       monthNames[
+  //         item.createdAt.split("-")[1] === 0
+  //           ? item.createdAt.split("-")[1].slice(1) - 1
+  //           : item.createdAt.split("-")[1] - 1
+  //       ] +
+  //       " " +
+  //       item.createdAt.split("-")[0],
+  //     BookedBy: item.user.name,
+  //     // CreatedDate:
+  //     //   item.createdAt.slice(0, 2) +
+  //     //   " " +
+  //     //   monthNames[
+  //     //     item.createdAt.split("-")[1] === 0
+  //     //       ? item.createdAt.split("-")[1].slice(1) - 1
+  //     //       : item.createdAt.split("-")[1] - 1
+  //     //   ] +
+  //     //   " " +
+  //     //   item.createdAt.split("-")[0],
+  //     // Createdby: "images/user2.png",
+  //   });
+  // });
+  callback(Booking);
 };

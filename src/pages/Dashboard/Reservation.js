@@ -3,6 +3,10 @@ import { Widget } from "./index";
 import { ReservationsData } from "../../fakeData";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { monthNames } from "../shared/assets";
+
+import { ReservationLoading } from "../shared/SharedComponents";
+import { useState } from "react/cjs/react.development";
 const ReservationItem = styled.div`
   display: grid;
   grid-template-columns: 15% max-content auto;
@@ -10,6 +14,7 @@ const ReservationItem = styled.div`
   padding-bottom: 9px;
   align-items: center;
   gap: 7px;
+
   cursor: pointer;
   padding-top: 9px;
 `;
@@ -83,75 +88,121 @@ const SeeAll = styled.div`
 
   cursor: pointer;
 `;
-function Index() {
+function Index(props) {
+  let Data = [];
+  props.Reservations.map((item) =>
+    Data.push({
+      id: item.id,
+      place: item.space.title,
+      name: item.title,
+      time: "a week ago",
+      doc: item.organizer,
+      date:
+        item.createdAt.slice(0, 2) +
+        " " +
+        monthNames[
+          item.createdAt.split("-")[1] === 0
+            ? item.createdAt.split("-")[1].slice(1) - 1
+            : item.createdAt.split("-")[1] - 1
+        ] +
+        " " +
+        item.createdAt.split("-")[0],
+    })
+  );
+
+  const WidgetInner = styled.div`
+    overflow: hidden;
+    transition: 2s ease;
+    max-height: ${(props) => (props.showall ? "auto" : "300px")};
+  `;
+  const [show, setshow] = useState(false);
+  const ShowAll = () => {
+    setshow(!show);
+  };
+
   return (
     <Widget reservation>
-      <ItemHeader>
-        <span style={{ fontWeight: "bold", fontSize: "1.2vw" }}>
-          Pending Reservations
-        </span>
-        <NumBtn>12</NumBtn>
-      </ItemHeader>{" "}
-      <div className="items">
-        {ReservationsData.map((item, i) => {
-          let place = item.place;
+      <WidgetInner showall={show}>
+        <ItemHeader>
+          <span style={{ fontWeight: "bold", fontSize: "1.2vw" }}>
+            Pending Reservations
+          </span>
+          <NumBtn>{Data.length}</NumBtn>
+        </ItemHeader>
+        <div className="items">
+          {props.Loading ? (
+            <ReservationLoading />
+          ) : (
+            Data.map((item, i) => {
+              let place = item.place;
 
-          return (
-            <div>
-              <Link to="/BookingDetalis">
-                <ReservationItem>
-                  {place === "Hall" ? (
-                    <ReservIcon>{item.place}</ReservIcon>
-                  ) : place === "A" ? (
-                    <SubA>{item.place}</SubA>
-                  ) : place === "B" ? (
-                    <SubB>{item.place}</SubB>
-                  ) : place === "C" ? (
-                    <SubC>{item.place}</SubC>
-                  ) : (
-                    ""
-                  )}
-
-                  <div>
-                    <span> {item.name}</span>
-                    <div style={{ marginTop: "-4px" }}>
-                      <GrayText>
-                        <span>{item.doc} </span>
-                        <span
-                          style={{
-                            width: "7px",
-
-                            textAlign: "center",
-                          }}
-                        >
-                          |
-                        </span>
-                        <span> {item.date}</span>
-                      </GrayText>
-                    </div>
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      fontSize: "0.8vw",
-                      color: "var(--textGray)",
-
-                      paddingRight: "2px",
-                      justifyContent: "flex-end",
-                      textAlign: "right",
-                      backgroundColor: "white",
+              return (
+                <div key={i}>
+                  <Link
+                    to={{
+                      pathname: "/BookingDetalis",
+                      state: {
+                        id: item.id,
+                      },
                     }}
                   >
-                    {item.time}
-                  </div>
-                </ReservationItem>
-              </Link>
-            </div>
-          );
-        })}
-      </div>
+                    <ReservationItem>
+                      {place === "Event Hall" ? (
+                        <ReservIcon> Hall</ReservIcon>
+                      ) : place === "A" ? (
+                        <SubA>{item.place}</SubA>
+                      ) : place === "B" ? (
+                        <SubB>{item.place}</SubB>
+                      ) : place === "C" ? (
+                        <SubC>{item.place}</SubC>
+                      ) : (
+                        ""
+                      )}
+
+                      <div>
+                        <span> {item.name}</span>
+                        <div style={{ marginTop: "-4px" }}>
+                          <GrayText>
+                            <span>{item.doc} </span>
+                            <span
+                              style={{
+                                width: "7px",
+
+                                textAlign: "center",
+                              }}
+                            >
+                              |
+                            </span>
+                            <span> {item.date}</span>
+                          </GrayText>
+                        </div>
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          fontSize: "0.8vw",
+                          color: "var(--textGray)",
+
+                          paddingRight: "2px",
+                          justifyContent: "flex-end",
+                          textAlign: "right",
+                          backgroundColor: "white",
+                        }}
+                      >
+                        {item.time}
+                      </div>
+                    </ReservationItem>
+                  </Link>
+                </div>
+              );
+            })
+          )}
+        </div>
+      </WidgetInner>
       <SeeAll>
-        <GrayText>Show All</GrayText>
+        <GrayText onClick={ShowAll}>
+          {show ? "Show less " : " Show All"}
+        </GrayText>
       </SeeAll>
     </Widget>
   );

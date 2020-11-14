@@ -9,8 +9,10 @@ import Progress from "react-progress-2";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import NewBooking from "./NewBooking";
+import { monthNames } from "../shared/assets";
 import { EmptyText } from "../../pages/shared/SharedComponents";
-import { LoadData, LoadBooking } from "../../API";
+import { LoadData, LoadBooking, LoadDataByID } from "../../API";
+
 import { FailedMesg, Mesg, SuccessMesg } from "../../API/APIMessage";
 function Booking() {
   const [open, setOpen] = useState(false);
@@ -23,15 +25,16 @@ function Booking() {
   useEffect(() => {
     setLoading(true);
 
-    LoadBooking(
+    LoadData(
+      "books",
       (mesg, data) => {
         setLoading(false);
         if (mesg) {
           Mesg(mesg);
         }
-        BookingData(data, (book) => {
-          setBook(book);
-        });
+
+        setBook(data.data.rows);
+        console.log(data.data.rows);
       },
       (err) => {
         setLoading(false);
@@ -40,27 +43,69 @@ function Booking() {
       }
     );
   }, []);
+  let BookData = [];
+  Book.map((item) => {
+    BookData.push({
+      Title: item.title,
+      Status: [`${item.status}`],
+      StartingDate: item.bookDates.map(
+        (i) =>
+          i.start.slice(0, 2) +
+          " " +
+          monthNames[
+            i.start.split("-")[1] === 0
+              ? i.start.split("-")[1].slice(1) - 1
+              : i.start.split("-")[1] - 1
+          ] +
+          " " +
+          i.start.split("-")[0]
+      ),
+      EndingDate: item.bookDates.map(
+        (i) =>
+          i.end.slice(0, 2) +
+          " " +
+          monthNames[
+            i.end.split("-")[1] === 0
+              ? i.end.split("-")[1].slice(1) - 1
+              : i.end.split("-")[1] - 1
+          ] +
+          " " +
+          i.end.split("-")[0]
+      ),
+      Space: [`${item.space.title}`],
+      CreationDate:
+        item.createdAt.slice(0, 2) +
+        " " +
+        monthNames[
+          item.createdAt.split("-")[1] === 0
+            ? item.createdAt.split("-")[1].slice(1) - 1
+            : item.createdAt.split("-")[1] - 1
+        ] +
+        " " +
+        item.createdAt.split("-")[0],
+      BookedBy: "",
+      //item.user.name
+    });
+  });
 
   return (
     <div>
       <CustomPage
         pageTitle="Booking"
         columns={BookingColumns}
-        data={Book}
+        data={BookData}
         Item="event"
         onOpenModal={() => onOpenModal(true)}
         Loading={Loading}
       />
 
       <Modal
-        closeOnOverlayClick={false}
+        closeOnOverlayClick={true}
         open={open}
         onClose={() => onOpenModal(false)}
         center
         showCloseIcon={false}
-        classNames={{
-          modal: "customModal",
-        }}
+        classNames={{ modal: "customModal" }}
       >
         <NewBooking Close={() => onOpenModal(false)} />
       </Modal>

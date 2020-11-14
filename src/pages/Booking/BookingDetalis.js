@@ -1,4 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { SuccessMesg, FailedMesg, Mesg } from "../../API/APIMessage";
+import { LoadData, addData } from "../../API";
+import { monthNames } from "../shared/assets";
+
 import { Col, Row, Menu, Dropdown } from "antd";
 import {
   CustomPageWrapper,
@@ -6,7 +10,7 @@ import {
   PageTitle,
 } from "../shared/CustomPage";
 import { DownOutlined } from "@ant-design/icons";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import SideBar from "../Sidebar";
 import { PageBack } from "../Profile";
 import { BsArrowLeft } from "react-icons/bs";
@@ -133,12 +137,92 @@ const menu = (
 );
 const Index = (props) => {
   let history = useHistory();
+  let location = useLocation();
+  const [Id, setId] = useState("");
+  const [data, setdata] = useState({});
 
+  const [Loading, setLoading] = useState(false);
   const [BookingStatus, setBookingStatus] = useState(false);
   const setBooking = (status) => {
     setBookingStatus(status);
   };
+  useEffect(() => {
+    setId(location.state.id);
+    getDetalis();
+  }, []);
+  const getDetalis = () => {
+    let id = location.state.id;
+    LoadData(
+      `book/${id}`,
+      (err, data) => {
+        setLoading(false);
 
+        //setarticles(data.data.rows);
+        console.log("detalils here", data.data);
+        setdata(data.data);
+        if (err) {
+          Mesg(err);
+        }
+      },
+      (err) => {
+        setLoading(false);
+        FailedMesg(err, "Something worng happend !");
+        // console.log(err, "failed");
+      }
+    );
+  };
+
+  const Recject = () => {
+    let data = {
+      id: Id,
+    };
+
+    setLoading(true);
+    addData(
+      "book/reject",
+      data,
+      (mesg, Data) => {
+        console.log(Data, "came whti the approve");
+        SuccessMesg("Reservation Rejected !");
+        setLoading(false);
+        setId("");
+        props.history.push("/Dashboard");
+      },
+      (err) => {
+        setLoading(false);
+        setId("");
+
+        FailedMesg(err);
+      }
+    );
+  };
+  const Approve = () => {
+    let data = {
+      id: Id,
+    };
+
+    setLoading(true);
+    addData(
+      "book/approve",
+      data,
+      (mesg, Data) => {
+        console.log(Data, "came whti the reject");
+        SuccessMesg("Reservation Approved!");
+        setLoading(false);
+        setId("");
+        setBooking(true);
+      },
+      (err) => {
+        setLoading(false);
+        setId("");
+
+        FailedMesg(err);
+      }
+    );
+  };
+  let Data = data ? data : {};
+
+  console.log(data);
   return (
     <CustomPageWrapper>
       <GlobalStyle />
@@ -153,7 +237,7 @@ const Index = (props) => {
               </PageBack>
             </Link>
             <PageActions>
-              <PageTitle>Event 2020 19x</PageTitle>
+              <PageTitle>{Data.title} </PageTitle>
 
               <div style={{ display: "flex", gap: "10px" }}>
                 <ButtonStyled>Edit</ButtonStyled>
@@ -184,10 +268,10 @@ const Index = (props) => {
                 </Dropdown>
               )}
               {!BookingStatus ? (
-                <Reject onClick={() => setBooking(true)}>Reject</Reject>
+                <Reject onClick={Recject}>Reject</Reject>
               ) : null}
               {!BookingStatus ? (
-                <Accept onClick={() => setBooking(true)}>Accept</Accept>
+                <Accept onClick={Approve}>Accept</Accept>
               ) : null}
             </BookingActions>
             <Row
@@ -211,12 +295,12 @@ const Index = (props) => {
                   <DetailItem>
                     <GrayText> Space</GrayText>
 
-                    <div>Event Hall</div>
+                    <div>{data.space ? data.space.title : ""}</div>
                   </DetailItem>
                   <DetailItem>
                     <GrayText> Cooffee Break</GrayText>
 
-                    <div>5,000 Package</div>
+                    <div>{data.coffeebreak ? data.coffeebreak.title : ""}</div>
                   </DetailItem>
                   <DetailItem>
                     <GrayText> Hall Design</GrayText>
@@ -231,27 +315,27 @@ const Index = (props) => {
                   <DetailItem>
                     <GrayText> No. of People</GrayText>
 
-                    <div>72</div>
+                    <div>{Data.people}</div>
                   </DetailItem>
                   <DetailItem>
                     <GrayText> Entity Type</GrayText>
 
-                    <div>Enterprises</div>
+                    <div>{data.booktype ? data.booktype.name : ""}</div>
                   </DetailItem>
                   <DetailItem>
                     <GrayText> Total Price</GrayText>
 
-                    <div>$ 120,000,00</div>
+                    <div>$ {Data.price}</div>
                   </DetailItem>
                   <DetailItem>
                     <GrayText>Received</GrayText>
 
-                    <div>$53,530,00</div>
+                    <div>${Data.received}</div>
                   </DetailItem>
                   <DetailItem>
                     <GrayText>Lunches</GrayText>
 
-                    <div>No. 5</div>
+                    <div>{data.lunch ? data.lunch.title : ""}</div>
                   </DetailItem>
                 </EventDetails>
                 <Col>
@@ -262,45 +346,71 @@ const Index = (props) => {
                   </Date>
                   <DateInfo>
                     <Date item>
-                      <GrayText>13 Oct 2020</GrayText>
+                      <GrayText>
+                        {data.bookDates
+                          ? data.bookDates
+                              .map((i) => i.createdAt)
+                              .toString()
+
+                              .slice(0, 2) +
+                            " " +
+                            monthNames[
+                              data.bookDates
+                                .map((i) => i.createdAt)
+                                .toString()
+                                .split("-")[1] === 0
+                                ? data.bookDates
+                                    .map((i) => i.createdAt)
+                                    .toString()
+                                    .split("-")[1]
+                                    .slice(1) - 1
+                                : data.bookDates
+                                    .map((i) => i.createdAt)
+                                    .toString()
+                                    .split("-")[1] - 1
+                            ] +
+                            " " +
+                            data.bookDates
+                              .map((i) => i.createdAt)
+                              .toString()
+                              .split("-")[0]
+                          : ""}
+                      </GrayText>
                       <GrayText>06:00 PM</GrayText>
                       <GrayText>09:00 PM</GrayText>
                       <GrayText>
                         <BsThreeDotsVertical />
                       </GrayText>
                     </Date>
-                    <Date odd item>
+                    {/* <Date odd item>
                       <GrayText>13 Oct 2020</GrayText>
                       <GrayText>06:00 PM</GrayText>
                       <GrayText>09:00 PM</GrayText>
                       <GrayText>
                         <BsThreeDotsVertical />
                       </GrayText>
-                    </Date>
-                    <Date item>
+                    </Date> */}
+                    {/* <Date item>
                       <GrayText>13 Oct 2020</GrayText>
                       <GrayText>06:00 PM</GrayText>
                       <GrayText>09:00 PM</GrayText>
                       <GrayText>
                         <BsThreeDotsVertical />
                       </GrayText>
-                    </Date>{" "}
-                    <Date odd item>
+                    </Date>{" "} */}
+                    {/* <Date odd item>
                       <GrayText>13 Oct 2020</GrayText>
                       <GrayText>06:00 PM</GrayText>
                       <GrayText>09:00 PM</GrayText>
                       <GrayText>
                         <BsThreeDotsVertical />
                       </GrayText>
-                    </Date>
+                    </Date> */}
                   </DateInfo>
                   <DetailItem>
                     <div> Commnets</div>
 
-                    <GrayText>
-                      where this aims to gather youth who have ideas to
-                      implement them as entrepreneurial businesses on the ground{" "}
-                    </GrayText>
+                    <GrayText>{Data.comment}</GrayText>
                   </DetailItem>
                 </Col>
               </Col>
@@ -315,7 +425,7 @@ const Index = (props) => {
                         <UserImage
                           src={require("../../public/images/user2.png")}
                         />
-                        <span> Murtadha</span>
+                        <span>{data.admin ? data.admin.name : ""}</span>
                       </UserHolder>
                       <GrayText>a week ago</GrayText>
                     </ActivityItem>
@@ -328,9 +438,9 @@ const Index = (props) => {
                           <UserImage
                             src={require("../../public/images/user2.png")}
                           />
-                          <span> Murtadha</span>
+                          <span>{data.admin ? data.admin.name : ""} </span>
                         </UserHolder>
-                        <GrayText>a week ago</GrayText>
+                        <GrayText>now</GrayText>
                       </ActivityItem>
                     ) : null}
                   </DetailItem>

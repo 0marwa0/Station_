@@ -77,35 +77,35 @@ function Resources() {
     // if (url != "" && title != "") {
     setLoading(true);
     console.log(data, "here what we send");
-    addFile(
-      "resource",
-      data,
-      (data) => {
-        if (data.status) {
-          SuccessMesg("Resource creating done !");
-          onOpenModal(false);
-          getResources();
-          settitle("");
-          setdec("");
-          setimage("");
-          seturl("");
-        } else {
-          Mesg(data.errMsg);
-        }
+    // addFile(
+    //   "resource",
+    //   data,
+    //   (data) => {
+    //     if (data.errMsg) {
+    //       Mesg(data.errMsg);
+    //     } else {
+    //       SuccessMesg("Resource creating done !");
+    //       onOpenModal(false);
+    //       getResources();
+    //       settitle("");
+    //       setdec("");
+    //       setimage("");
+    //       seturl("");
+    //     }
 
-        setLoading(false);
-      },
-      (err) => {
-        onOpenModal(false);
-        setLoading(false);
-        settitle("");
-        setdec("");
-        setimage("");
-        seturl("");
+    //     setLoading(false);
+    //   },
+    //   (err) => {
+    //     onOpenModal(false);
+    //     setLoading(false);
+    //     settitle("");
+    //     setdec("");
+    //     setimage("");
+    //     seturl("");
 
-        FailedMesg(" Resuorces creating failed ", err);
-      }
-    );
+    //     FailedMesg(" Resuorces creating failed ", err);
+    //   }
+    // );
   };
 
   useEffect(() => {
@@ -144,7 +144,7 @@ function Resources() {
         Loading={Loading}
       />
       <Modal
-        closeOnOverlayClick={false}
+        closeOnOverlayClick={true}
         open={open}
         onClose={() => onOpenModal(false)}
         center

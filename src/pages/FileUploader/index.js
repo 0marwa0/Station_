@@ -8,9 +8,9 @@ import { FileUpoaderData } from "../../fakeData";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import NewFileUploader from "./NewFileUploader";
-import { LoadData } from "../../API";
+import { LoadData, addFile } from "../../API";
 
-import { Mesg, FailedMesg } from "../../API/APIMessage";
+import { Mesg, FailedMesg, SuccessMesg } from "../../API/APIMessage";
 function FilUploader() {
   const [open, setOpen] = useState(false);
   const [Loading, setLoading] = useState(false);
@@ -18,8 +18,11 @@ function FilUploader() {
   const onOpenModal = (open) => {
     setOpen(open);
   };
-  useEffect(() => {
-    setLoading(true);
+  const [file, setfile] = useState("");
+  const handleInput = (value) => {
+    setfile(value);
+  };
+  const getFiles = () => {
     LoadData(
       "files",
       (err, data) => {
@@ -39,8 +42,39 @@ function FilUploader() {
         console.log(err, "failed");
       }
     );
+  };
+  useEffect(() => {
+    setLoading(true);
+    getFiles();
   }, []);
+  const handleSubmit = () => {
+    let data = new FormData();
+    data.append("file", file);
 
+    setLoading(true);
+    addFile(
+      "upload/file",
+      data,
+      (data) => {
+        if (data.errMsg) {
+          Mesg(data.errMsg);
+        } else {
+          SuccessMesg("File upload done !");
+          onOpenModal(false);
+          getFiles();
+        }
+        setfile("");
+        setLoading(false);
+      },
+      (err) => {
+        onOpenModal(false);
+        setLoading(false);
+        setfile("");
+
+        FailedMesg(err.toString());
+      }
+    );
+  };
   return (
     <div>
       {" "}
@@ -53,7 +87,7 @@ function FilUploader() {
         Item="file"
       />
       <Modal
-        closeOnOverlayClick={false}
+        closeOnOverlayClick={true}
         open={open}
         onClose={() => onOpenModal(false)}
         center
@@ -62,7 +96,11 @@ function FilUploader() {
           modal: "customModal",
         }}
       >
-        <NewFileUploader Close={() => onOpenModal(false)} />
+        <NewFileUploader
+          handleInput={handleInput}
+          handleSubmit={handleSubmit}
+          Close={() => onOpenModal(false)}
+        />
       </Modal>
     </div>
   );

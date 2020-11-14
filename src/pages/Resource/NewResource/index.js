@@ -107,7 +107,7 @@ function Index(props) {
         <InputLable>
           Title
           <CustomInput
-            onChange={(e) => props.handleInput(e, "name")}
+            onChange={(e) => props.handleInput(e, "title")}
             placeholder="write file title"
           />
         </InputLable>

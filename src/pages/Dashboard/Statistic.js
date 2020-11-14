@@ -109,7 +109,7 @@ function Index(props) {
 
         setstatistics(data);
 
-        console.log(data, "statices");
+        //   console.log(data, "statices");
         if (err) {
           Mesg(err);
         }

@@ -35,8 +35,8 @@ function Index(props) {
       i++;
     }
     var exactSize = Math.round(fileSize * 100) / 100 + " " + Uints[i];
-    console.log("FILE SIZE = ", exactSize);
-    console.log(fileSize, "sizzzzzz");
+    // console.log("FILE SIZE = ", exactSize);
+    // console.log(fileSize, "sizzzzzz");
     setFileSize(exactSize);
   };
 
@@ -46,6 +46,8 @@ function Index(props) {
     setallowToChange(true);
     setActive(true);
     let type = e.target.files[0].type;
+    props.handleInput(e.target.files[0]);
+
     if (type.substring(0, 5) === "image") {
       value = URL.createObjectURL(e.target.files[0]);
       setImage(value);
@@ -80,6 +82,7 @@ function Index(props) {
     let value;
     let type = e.dataTransfer.files[0].type;
     if (type.substring(0, 5) === "image") {
+      props.handleInput(e.dataTransfer.files[0]);
       value = URL.createObjectURL(e.dataTransfer.files[0]);
       setImage(value);
     } else {
@@ -144,8 +147,10 @@ function Index(props) {
         </span>
       </PageWrapper>
       <ModleFooter>
-        <CustomModleButton>Cancel</CustomModleButton>
-        <CustomModleButton Main>Upload</CustomModleButton>
+        <CustomModleButton fun={props.Close}>Cancel</CustomModleButton>
+        <CustomModleButton Main fun={props.handleSubmit}>
+          Upload
+        </CustomModleButton>
       </ModleFooter>
     </div>
   );
