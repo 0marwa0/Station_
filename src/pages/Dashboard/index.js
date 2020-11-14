@@ -94,7 +94,7 @@ const PageHeader = styled(Row)`
   justify-content: space-between;
 `;
 
-function Booking() {
+function Index() {
   const ref = useRef(null);
   const [Reservations, setReservations] = useState([]);
   const onEnter = (item) => {
@@ -315,4 +315,4 @@ function Booking() {
   );
 }
 
-export default Booking;
+export default Index;
