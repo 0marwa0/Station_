@@ -90,8 +90,9 @@ const SeeAll = styled.div`
 `;
 function Index(props) {
   let Data = [];
-  props.Reservations.map((item) =>
+  props.Reservations.map((item, i) =>
     Data.push({
+      key: i,
       id: item.id,
       place: item.space.title,
       name: item.title,

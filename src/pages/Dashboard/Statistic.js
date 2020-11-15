@@ -158,7 +158,7 @@ function Index(props) {
         {Loading ? (
           [1, 2, 3].map((i) => {
             return (
-              <div>
+              <div key={i}>
                 <ContentLoader
                   speed={1.5}
                   width="100%"

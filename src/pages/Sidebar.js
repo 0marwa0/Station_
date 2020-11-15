@@ -170,8 +170,8 @@ function SideBar(props) {
                   transform="translate(-2651.886 154.763)"
                   fill="none"
                   stroke={"Dashboard" != page ? "#8a8a8a" : "var(--yellow)"}
-                  stroke-linejoin="round"
-                  stroke-width="2.5"
+                  strokeLinejoin="round"
+                  strokeWidth="2.5"
                 />
                 <path
                   id="Path_691"
@@ -180,7 +180,7 @@ function SideBar(props) {
                   transform="translate(-2678.347 134.018)"
                   fill="none"
                   stroke={"Dashboard" != page ? "#8a8a8a" : "var(--yellow)"}
-                  stroke-width="2.5"
+                  strokeWidth="2.5"
                 />
               </g>
               {title}
@@ -206,7 +206,7 @@ function SideBar(props) {
                   transform="translate(-12249.001 -13560.001)"
                   fill="none"
                   stroke={"Booking" != page ? "#8a8a8a" : "var(--yellow)"}
-                  stroke-width="2.5"
+                  strokeWidth="2.5"
                 />
                 <g
                   id="Group_37531"
@@ -220,7 +220,7 @@ function SideBar(props) {
                     transform="translate(44.167 205.292)"
                     fill="none"
                     stroke={"Booking" != page ? "#8a8a8a" : "var(--yellow)"}
-                    stroke-width="2.5"
+                    strokeWidth="2.5"
                   />
                   <line
                     id="Line_287"
@@ -229,7 +229,7 @@ function SideBar(props) {
                     transform="translate(48.167 209.292) rotate(90)"
                     fill="none"
                     stroke={"Booking" != page ? "#8a8a8a" : "var(--yellow)"}
-                    stroke-width="2.5"
+                    strokeWidth="2.5"
                   />
                 </g>
               </g>
@@ -254,8 +254,8 @@ function SideBar(props) {
                   transform="translate(0 0)"
                   fill="none"
                   stroke={"Articles" != page ? "#8a8a8a" : "var(--yellow)"}
-                  stroke-linejoin="round"
-                  stroke-width="2.5"
+                  strokeLinejoin="round"
+                  strokeWidth="2.5"
                 />
                 <rect
                   id="Rectangle_6270"
@@ -265,8 +265,8 @@ function SideBar(props) {
                   transform="translate(104.049 257.763)"
                   fill="none"
                   stroke={"Articles" != page ? "#8a8a8a" : "var(--yellow)"}
-                  stroke-linejoin="round"
-                  stroke-width="2.5"
+                  strokeLinejoin="round"
+                  strokeWidth="2.5"
                 />
                 <path
                   id="Path_2026"
@@ -275,8 +275,8 @@ function SideBar(props) {
                   transform="translate(-4.786 -19.176)"
                   fill="none"
                   stroke={"Articles" != page ? "#8a8a8a" : "var(--yellow)"}
-                  stroke-linejoin="round"
-                  stroke-width="2.5"
+                  strokeLinejoin="round"
+                  strokeWidth="2.5"
                 />
               </g>
             </svg>
@@ -345,7 +345,7 @@ function SideBar(props) {
                     d="M8.04,25.607a3.125,3.125,0,0,0,4.42,0l-4.422-4.42a3.125,3.125,0,0,0,0,4.42Zm7.5-19.3a7.892,7.892,0,0,1,9.934-1,1.436,1.436,0,0,1,.1-.116A1.578,1.578,0,1,1,27.689,7.53a7.887,7.887,0,0,1-1,9.931l-1.133,1.133A23.053,23.053,0,0,0,21.944,23.6l-2.358,4.712a1.072,1.072,0,0,1-1.83.292L4.389,15.242a1.076,1.076,0,0,1,.292-1.831L9.4,11.054A22.988,22.988,0,0,0,14.4,7.442l1.133-1.133Zm4.279,15.046a24.922,24.922,0,0,1,3.678-4.972l1.133-1.134a4.762,4.762,0,0,0,.6-5.992A7.564,7.564,0,0,0,23.89,7.914a4.771,4.771,0,0,0-6,.6L16.407,10a23.018,23.018,0,0,1-5,3.611L8.687,14.974l9.484,9.482,1.645-3.1Z"
                     transform="translate(-4 -4)"
                     fill="#8a8a8a"
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                   />
                 </svg>
                 {/* <Notification /> */}
