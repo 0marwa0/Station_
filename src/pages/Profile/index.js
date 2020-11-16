@@ -89,7 +89,7 @@ function Index(props) {
       <SideBar />
       <PageContent>
         <ProfileHead>
-          <Link to="/Dashboard">
+          <Link to="/">
             <PageBack>
               <BsArrowLeft />
               <div>Dashboard</div>

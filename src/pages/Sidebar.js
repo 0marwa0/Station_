@@ -34,14 +34,14 @@ const NavItem = ({ slug, children, index, title }) => {
   if (slug === location.pathname.substr(1)) {
     isSelected = true;
   }
-  if (location.pathname.substr(1) === "BookingDetalis" && slug === "Booking") {
+  if (location.pathname.substr(1) === "bookingDetalis" && slug === "booking") {
     isSelected = true;
   }
-  if (location.pathname.substr(1) === "createEvent" && slug === "Events") {
+  if (location.pathname.substr(1) === "createEvent" && slug === "events") {
     isSelected = true;
   }
 
-  return slug === "Home" ? (
+  return slug === "home" ? (
     <a href="#/">
       <SideItem type={type} isSelected={isSelected}>
         {children}
@@ -156,7 +156,7 @@ function SideBar(props) {
       <SideWrapper>
         <SideList>
           <Logo src={require("../public/images/Logo.png")} />
-          <NavItem slug="Dashboard" title={title}>
+          <NavItem slug="" title={title}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="23.833"
@@ -174,7 +174,7 @@ function SideBar(props) {
                   d="M2651.886-154.763v21.023h22.524"
                   transform="translate(-2651.886 154.763)"
                   fill="none"
-                  stroke={"Dashboard" != page ? "#8a8a8a" : "var(--yellow)"}
+                  stroke={"" != page ? "#8a8a8a" : "var(--yellow)"}
                   strokeLinejoin="round"
                   strokeWidth="2.5"
                 />
@@ -184,14 +184,14 @@ function SideBar(props) {
                   d="M2682.514-120.889l6.642-6.642,4.22,4.22,6.669-6.669"
                   transform="translate(-2678.347 134.018)"
                   fill="none"
-                  stroke={"Dashboard" != page ? "#8a8a8a" : "var(--yellow)"}
+                  stroke={"" != page ? "#8a8a8a" : "var(--yellow)"}
                   strokeWidth="2.5"
                 />
               </g>
               {title}
             </svg>
           </NavItem>
-          <NavItem slug="Booking" title={title}>
+          <NavItem slug="booking" title={title}>
             {/* <BiBookAdd /> */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -210,7 +210,7 @@ function SideBar(props) {
                   d="M12306.418,13778.543h-29.5v-4.757a5,5,0,0,0,0-9.988v-4.757h29.5v4.757a5,5,0,0,0,0,9.988v4.756Z"
                   transform="translate(-12249.001 -13560.001)"
                   fill="none"
-                  stroke={"Booking" != page ? "#8a8a8a" : "var(--yellow)"}
+                  stroke={"booking" != page ? "#8a8a8a" : "var(--yellow)"}
                   strokeWidth="2.5"
                 />
                 <g
@@ -224,7 +224,7 @@ function SideBar(props) {
                     y1="8"
                     transform="translate(44.167 205.292)"
                     fill="none"
-                    stroke={"Booking" != page ? "#8a8a8a" : "var(--yellow)"}
+                    stroke={"booking" != page ? "#8a8a8a" : "var(--yellow)"}
                     strokeWidth="2.5"
                   />
                   <line
@@ -233,14 +233,14 @@ function SideBar(props) {
                     y1="8"
                     transform="translate(48.167 209.292) rotate(90)"
                     fill="none"
-                    stroke={"Booking" != page ? "#8a8a8a" : "var(--yellow)"}
+                    stroke={"booking" != page ? "#8a8a8a" : "var(--yellow)"}
                     strokeWidth="2.5"
                   />
                 </g>
               </g>
             </svg>
           </NavItem>
-          <NavItem slug="Articles" title={title}>
+          <NavItem slug="articles" title={title}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="23.822"
@@ -258,7 +258,7 @@ function SideBar(props) {
                   d="M119.857,271.451c-2.367.067-2.008-2.443-2.008-2.443v-13.06a4.3,4.3,0,0,1,3.138,0,2.734,2.734,0,0,1,1.313,2.443v10.617c0,2.949-2.443,2.443-2.443,2.443H103.434c-2.219,0-2.443-1.384-2.443-2.443,0-.01,0-.226,0-.226V255.306s-.2-3.261,2.645-3.224l11.428,0s.276,0,.275,0c1.034,0,2.511.352,2.511,2.791v1.079"
                   transform="translate(0 0)"
                   fill="none"
-                  stroke={"Articles" != page ? "#8a8a8a" : "var(--yellow)"}
+                  stroke={"articles" != page ? "#8a8a8a" : "var(--yellow)"}
                   strokeLinejoin="round"
                   strokeWidth="2.5"
                 />
@@ -269,7 +269,7 @@ function SideBar(props) {
                   height="5.747"
                   transform="translate(104.049 257.763)"
                   fill="none"
-                  stroke={"Articles" != page ? "#8a8a8a" : "var(--yellow)"}
+                  stroke={"articles" != page ? "#8a8a8a" : "var(--yellow)"}
                   strokeLinejoin="round"
                   strokeWidth="2.5"
                 />
@@ -279,26 +279,26 @@ function SideBar(props) {
                   d="M110.441,285.889H117.9"
                   transform="translate(-4.786 -19.176)"
                   fill="none"
-                  stroke={"Articles" != page ? "#8a8a8a" : "var(--yellow)"}
+                  stroke={"articles" != page ? "#8a8a8a" : "var(--yellow)"}
                   strokeLinejoin="round"
                   strokeWidth="2.5"
                 />
               </g>
             </svg>
           </NavItem>
-          <NavItem slug="Events" title={title}>
+          <NavItem slug="events" title={title}>
             <BiCalendarWeek />
           </NavItem>{" "}
-          <NavItem slug="Customers" title={title}>
+          <NavItem slug="customers" title={title}>
             <HiOutlineUsers />
           </NavItem>
-          <NavItem slug="Admins" title={title}>
+          <NavItem slug="admins" title={title}>
             <FaRegUser />
           </NavItem>
-          <NavItem slug="FileUploader" title={title}>
+          <NavItem slug="fileUploader" title={title}>
             <CloudUploadOutlined />
           </NavItem>
-          <NavItem slug="Resources" title={title}>
+          <NavItem slug="resources" title={title}>
             <VscSourceControl />
           </NavItem>
         </SideList>
@@ -320,7 +320,7 @@ function SideBar(props) {
             </svg>
           </SideItem>
 
-          <NavItem slug="Home" title={title}>
+          <NavItem slug="home" title={title}>
             {" "}
             <Popover
               content={<Notification />}

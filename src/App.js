@@ -63,8 +63,8 @@ function App(props) {
     <div>
       <Router>
         <Switch>
-          <Route path="/" component={Login} exact />
-          <Route path="/Dashboard" component={Dashboard} exact />
+          <Route path="/login" component={Login} exact />
+          <Route path="/" component={Dashboard} exact />
           <Route
             path="/profile"
             // component={Profile}
@@ -76,33 +76,33 @@ function App(props) {
           <Route path="/createEvent" component={CreateEvent} exact />
 
           <Route
-            path="/Articles"
+            path="/articles"
             // component={Articles}
             render={(props) => <Articles {...props} admins={admins} />}
             exact
           />
-          <Route path="/Booking" component={Booking} exact />
-          <Route path="/BookingDetalis" component={BookingDetalis} exact />
-          <Route path="/Home" component={Home} exact />
+          <Route path="/booking" component={Booking} exact />
+          <Route path="/bookingDetalis" component={BookingDetalis} exact />
+          <Route path="/home" component={Home} exact />
           <Route
-            path="/Events"
+            path="/events"
             exact
             render={(props) => <Events {...props} admins={admins} />}
           />
           <Route
-            path="/Customers"
+            path="/customers"
             // component={Customers}
             render={(props) => <Customers {...props} id={userId} />}
             exact
           />
-          <Route path="/Admins" component={Admins} exact />
+          <Route path="/admins" component={Admins} exact />
           <Route
-            path="/Resources"
+            path="/resources"
             exact
             render={(props) => <Resources {...props} admins={admins} />}
           />
           <Route
-            path="/FileUploader"
+            path="/fileUploader"
             exact
             render={(props) => <FilUploader {...props} admins={admins} />}
           />

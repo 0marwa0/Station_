@@ -34,7 +34,6 @@ export const GlobalStyle = createGlobalStyle`
 body{
   background-color:var(--lightGray)
 }
-
 `;
 const colors = {
   color1: "var(--darkGreen)",
@@ -60,7 +59,6 @@ export const Widget = styled.div`
   border: 1px solid var(--lighterGray);
   display: flex;
   padding: 17px 17px 8px 17px;
-
   width: 100%;
   flex-direction: column;
 `;
@@ -232,7 +230,7 @@ function Index() {
     );
   };
   useEffect(() => {
-    //loadApiData();
+    loadApiData();
   }, []);
 
   return (
@@ -283,7 +281,7 @@ function Index() {
               height: "auto",
             }}
           >
-            {/* <Clander>
+            <Clander>
               <FullCalendar
                 plugins={[dayGridPlugin]}
                 initialView="dayGridMonth"
@@ -292,10 +290,10 @@ function Index() {
                 eventMouseLeave={(item) => onLeave(item)}
                 events={BookDates}
               />
-            </Clander> */}
+            </Clander>
           </Col>
           <Col style={{ height: "100%" }}>
-            {/* <Reservation Reservations={Reservations} Loading={Loading} /> */}
+            <Reservation Reservations={Reservations} Loading={Loading} />
             <div style={{ height: "3%" }}></div>
             {/* <Statistic /> */}
           </Col>

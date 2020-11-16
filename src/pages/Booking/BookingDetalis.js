@@ -186,7 +186,7 @@ const Index = (props) => {
         SuccessMesg("Reservation Rejected !");
         setLoading(false);
         setId("");
-        props.history.push("/Dashboard");
+        props.history.push("/");
       },
       (err) => {
         setLoading(false);

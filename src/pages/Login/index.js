@@ -142,7 +142,7 @@ export default function Index(props) {
           console.log(status, "statuslogoin");
           if (status) {
             SuccessMesg("Login Successfully");
-            props.history.push("/Events");
+            props.history.push("/");
             setLoading(false);
           } else {
             FailedMesg(err);
