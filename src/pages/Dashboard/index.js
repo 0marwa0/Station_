@@ -237,7 +237,8 @@ function Index() {
 
   return (
     <CustomPageWrapper>
-      <GlobalStyle />
+      <h1>hi iam woriking </h1>
+      {/* <GlobalStyle />
       <LoadingBar color="var(--yellow)" ref={ref} shadow={true} />
 
       <SideBar />
@@ -312,7 +313,7 @@ function Index() {
         }}
       >
         <NewBooking from="Dashboard" Close={() => onOpenModal(false)} />
-      </Modal>
+      </Modal> */}
     </CustomPageWrapper>
   );
 }
