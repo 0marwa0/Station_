@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { MdEventNote } from "react-icons/md";
 import { BiBookAdd } from "react-icons/bi";
@@ -28,6 +28,9 @@ const NavItem = ({ slug, children, index, title }) => {
     type = false;
   }
 
+  useEffect(() => {
+    console.log(type, "type");
+  }, []);
   if (slug === location.pathname.substr(1)) {
     isSelected = true;
   }
@@ -40,14 +43,14 @@ const NavItem = ({ slug, children, index, title }) => {
 
   return slug === "Home" ? (
     <a href="#/">
-      <SideItem type={type} isSelected={isSelected}>
+      <SideItem type={type.toString()} isSelected={isSelected}>
         {children}
       </SideItem>
     </a>
   ) : (
     <Tooltip title={`${slug}`} placement="right">
       <Link to={url}>
-        <SideItem type={type} isSelected={isSelected}>
+        <SideItem type={type.toString()} isSelected={isSelected}>
           {children}
         </SideItem>
       </Link>
