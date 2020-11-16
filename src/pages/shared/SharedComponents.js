@@ -76,9 +76,10 @@ export const EmptyText = (Loading, Item) => {
             width: "50vw",
           }}
         >
-          {[1, 2, 3, 4, 5].map((i) => {
+          {[1, 2, 3, 4, 5].map((i, index) => {
             return (
               <div
+                key={index}
                 style={{
                   width: "18vw",
                   height: "40px",
@@ -122,8 +123,8 @@ export const EmptyText = (Loading, Item) => {
 };
 export function ReservationLoading(props) {
   let data = [1, 2, 3, 4];
-  return data.map((i) => (
-    <div>
+  return data.map((i, index) => (
+    <div key={index}>
       <ContentLoader
         speed={1.5}
         width="100%"

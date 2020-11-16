@@ -156,8 +156,7 @@ function Index() {
   };
   const [Loading, setLoading] = useState(false);
   const [BookDates, setBookDates] = useState(false);
-
-  useEffect(() => {
+  const loadApiData = () => {
     setLoading(true);
     ref.current.staticStart();
     LoadData(
@@ -231,6 +230,9 @@ function Index() {
         FailedMesg(err, "Something worng happend !");
       }
     );
+  };
+  useEffect(() => {
+    loadApiData();
   }, []);
 
   return (
@@ -243,7 +245,7 @@ function Index() {
         <PageHeader>
           <PageTitle>Dashboard</PageTitle>
           <span style={{ marginTop: "20px", color: "var(--darkGray)" }}>
-            Welcome Back, <h8 style={{ color: "black" }}>Marwa!</h8>
+            Welcome Back, <p style={{ color: "black" }}>Marwa!</p>
           </span>
         </PageHeader>
         <Row>
