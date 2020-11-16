@@ -54,8 +54,10 @@ function App(props) {
     );
   };
   useEffect(() => {
-    getAdmins();
-    getSpace();
+    if (localStorage.getItem("station_token")) {
+      getAdmins();
+      getSpace();
+    }
   }, []);
   return (
     <div>
