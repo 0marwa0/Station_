@@ -245,7 +245,7 @@ function Index() {
         <PageHeader>
           <PageTitle>Dashboard</PageTitle>
           <span style={{ marginTop: "20px", color: "var(--darkGray)" }}>
-            Welcome Back, <p style={{ color: "black" }}>Marwa!</p>
+            Welcome Back, <h8 style={{ color: "black" }}>Marwa!</h8>
           </span>
         </PageHeader>
         <Row>

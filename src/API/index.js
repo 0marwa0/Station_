@@ -81,12 +81,12 @@ export const Login = (data, onSuccess, onFailure) => {
       localStorage.setItem("station_token", result.token);
 
       onSuccess(result.status, result.errMsg, result);
-      console.log(result, "login success");
+      //console.log(result, "login success");
     })
 
     .catch((error) => {
-      console.log(error.message, "login failed");
-      // onFailure(error.message);
+      //console.log(error.message, "login failed");
+      onFailure(error.message);
     });
 };
 
