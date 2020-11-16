@@ -15,7 +15,7 @@ import {
 export const CustomButton = ({
   lable,
   children,
-  Main,
+  main,
   filter,
   onOpen,
   pageTitle,
@@ -26,11 +26,11 @@ export const CustomButton = ({
 }) => {
   return (
     <ButtonStyled
-      Main={Main}
+      main={main}
       extra={extra}
       undo={undo}
       loading={loading}
-      onClick={Main ? onOpen : fun}
+      onClick={main ? onOpen : fun}
     >
       {children}
       {lable}
@@ -38,9 +38,9 @@ export const CustomButton = ({
     </ButtonStyled>
   );
 };
-export const CustomModleButton = ({ children, Main, fun, extra }) => {
+export const CustomModleButton = ({ children, main, fun, extra }) => {
   return (
-    <ButtonStyledModle Main={Main} extra={extra} onClick={fun}>
+    <ButtonStyledModle main={main} extra={extra} onClick={fun}>
       {children}
     </ButtonStyledModle>
   );

@@ -232,7 +232,7 @@ function Index() {
     );
   };
   useEffect(() => {
-    loadApiData();
+    //loadApiData();
   }, []);
 
   return (
@@ -264,7 +264,7 @@ function Index() {
               <CustomButton lable="Print">
                 <PrintIcon />
               </CustomButton>
-              <CustomButton Main onOpen={onOpenModal} lable="New Booking">
+              <CustomButton main onOpen={onOpenModal} lable="New Booking">
                 <AiOutlinePlus />
               </CustomButton>
             </ButtonGroup>

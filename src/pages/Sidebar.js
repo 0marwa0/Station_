@@ -43,14 +43,14 @@ const NavItem = ({ slug, children, index, title }) => {
 
   return slug === "Home" ? (
     <a href="#/">
-      <SideItem type={type.toString()} isSelected={isSelected}>
+      <SideItem type={type} isSelected={isSelected}>
         {children}
       </SideItem>
     </a>
   ) : (
     <Tooltip title={`${slug}`} placement="right">
       <Link to={url}>
-        <SideItem type={type.toString()} isSelected={isSelected}>
+        <SideItem type={type} isSelected={isSelected}>
           {children}
         </SideItem>
       </Link>
