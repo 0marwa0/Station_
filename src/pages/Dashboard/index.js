@@ -156,89 +156,88 @@ function Index() {
   };
   const [Loading, setLoading] = useState(false);
   const [BookDates, setBookDates] = useState(false);
-  // const loadApiData = () => {
-  //   setLoading(true);
-  //   ref.current.staticStart();
-  //   LoadData(
-  //     "books",
-  //     (mesg, res) => {
-  //       setLoading(false);
-  //       ref.current.complete();
+  const loadApiData = () => {
+    setLoading(true);
+    ref.current.staticStart();
+    LoadData(
+      "books",
+      (mesg, res) => {
+        setLoading(false);
+        ref.current.complete();
 
-  //       if (mesg) {
-  //         Mesg(mesg);
-  //       }
-  //       let PendingBooks = res.data.rows.filter((i) => i.status === "pending");
-  //       setReservations(PendingBooks);
+        if (mesg) {
+          Mesg(mesg);
+        }
+        let PendingBooks = res.data.rows.filter((i) => i.status === "pending");
+        setReservations(PendingBooks);
 
-  //       let Dates = [];
-  //       let el = {};
-  //       let date = res.data.rows
-  //         .filter((i) => i.approve === true)
-  //         .map((i) => i.bookDates);
-  //       date.map((i) => {
-  //         i.map((ob) => (el = ob));
-  //         Dates.push(el);
-  //       });
+        let Dates = [];
+        let el = {};
+        let date = res.data.rows
+          .filter((i) => i.approve === true)
+          .map((i) => i.bookDates);
+        date.map((i) => {
+          i.map((ob) => (el = ob));
+          Dates.push(el);
+        });
 
-  //       // to remove
-  //       Dates.map(
-  //         (obj) =>
-  //           (obj.title = res.data.rows
-  //             .filter((i) => i.id === obj.bookId)
-  //             .map((i) => i.title)
-  //             .toString())
-  //       );
+        // to remove
+        Dates.map(
+          (obj) =>
+            (obj.title = res.data.rows
+              .filter((i) => i.id === obj.bookId)
+              .map((i) => i.title)
+              .toString())
+        );
 
-  //       Dates.map(
-  //         (obj) =>
-  //           (obj.time =
-  //             obj.start.split("T", 2)[1].split(".")[0] +
-  //             "-" +
-  //             obj.end.split("T", 2)[1].split(".")[0])
-  //       );
+        Dates.map(
+          (obj) =>
+            (obj.time =
+              obj.start.split("T", 2)[1].split(".")[0] +
+              "-" +
+              obj.end.split("T", 2)[1].split(".")[0])
+        );
 
-  //       Dates.map(
-  //         (obj) =>
-  //           (obj.color =
-  //             colors[`color${Math.floor(Math.random() * (5 - 1 + 1)) + 1}`])
-  //       );
-  //       Dates.map((obj) => (obj.end = obj.end.split("T")[0]));
-  //       Dates.map((obj) => (obj.start = obj.start.split("T")[0]));
+        Dates.map(
+          (obj) =>
+            (obj.color =
+              colors[`color${Math.floor(Math.random() * (5 - 1 + 1)) + 1}`])
+        );
+        Dates.map((obj) => (obj.end = obj.end.split("T")[0]));
+        Dates.map((obj) => (obj.start = obj.start.split("T")[0]));
 
-  //       Dates.map(
-  //         (obj) =>
-  //           (obj.data = [
-  //             {
-  //               title: res.data.rows
-  //                 .filter((i) => i.id === obj.bookId)
-  //                 .map((i) => i.title)
-  //                 .toString(),
-  //               day: obj.start + "-" + obj.end,
-  //               date: "",
-  //               time: obj.time,
-  //             },
-  //           ])
-  //       );
+        Dates.map(
+          (obj) =>
+            (obj.data = [
+              {
+                title: res.data.rows
+                  .filter((i) => i.id === obj.bookId)
+                  .map((i) => i.title)
+                  .toString(),
+                day: obj.start + "-" + obj.end,
+                date: "",
+                time: obj.time,
+              },
+            ])
+        );
 
-  //       setBookDates(Dates);
-  //     },
-  //     (err) => {
-  //       setLoading(false);
-  //       ref.current.complete();
+        setBookDates(Dates);
+      },
+      (err) => {
+        setLoading(false);
+        ref.current.complete();
 
-  //       FailedMesg(err, "Something worng happend !");
-  //     }
-  //   );
-  // };
-  // useEffect(() => {
-  //   loadApiData();
-  // }, []);
+        FailedMesg(err, "Something worng happend !");
+      }
+    );
+  };
+  useEffect(() => {
+    loadApiData();
+  }, []);
 
   return (
     <CustomPageWrapper>
-      <h1>hi iam woriking </h1>
-      {/* <GlobalStyle />
+      <GlobalStyle />
       <LoadingBar color="var(--yellow)" ref={ref} shadow={true} />
 
       <SideBar />
@@ -246,7 +245,7 @@ function Index() {
         <PageHeader>
           <PageTitle>Dashboard</PageTitle>
           <span style={{ marginTop: "20px", color: "var(--darkGray)" }}>
-            Welcome Back, <h8 style={{ color: "black" }}>Marwa!</h8>
+            Welcome Back, <p style={{ color: "black" }}>Marwa!</p>
           </span>
         </PageHeader>
         <Row>
@@ -313,7 +312,7 @@ function Index() {
         }}
       >
         <NewBooking from="Dashboard" Close={() => onOpenModal(false)} />
-      </Modal> */}
+      </Modal>
     </CustomPageWrapper>
   );
 }
