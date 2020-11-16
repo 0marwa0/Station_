@@ -283,7 +283,7 @@ function Index() {
               height: "auto",
             }}
           >
-            <Clander>
+            {/* <Clander>
               <FullCalendar
                 plugins={[dayGridPlugin]}
                 initialView="dayGridMonth"
@@ -292,7 +292,7 @@ function Index() {
                 eventMouseLeave={(item) => onLeave(item)}
                 events={BookDates}
               />
-            </Clander>
+            </Clander> */}
           </Col>
           <Col style={{ height: "100%" }}>
             <Reservation Reservations={Reservations} Loading={Loading} />
