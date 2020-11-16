@@ -295,9 +295,9 @@ function Index() {
             </Clander> */}
           </Col>
           <Col style={{ height: "100%" }}>
-            <Reservation Reservations={Reservations} Loading={Loading} />
+            {/* <Reservation Reservations={Reservations} Loading={Loading} /> */}
             <div style={{ height: "3%" }}></div>
-            <Statistic />
+            {/* <Statistic /> */}
           </Col>
         </Row>
       </PageContent>
