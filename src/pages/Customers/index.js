@@ -53,7 +53,7 @@ function Customers(props) {
       {/* <Progress.Component thumbStyle={{ background: "var(--yellow)" }} /> */}
 
       <CustomPage
-        pageTitle="Customers"
+        pageTitle="customers"
         columns={CustomersColumns}
         data={users}
         onOpenModal={onOpenModal}

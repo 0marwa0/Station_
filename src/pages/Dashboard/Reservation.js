@@ -90,26 +90,26 @@ const SeeAll = styled.div`
 `;
 function Index(props) {
   let Data = [];
-  props.Reservations.map((item, i) =>
-    Data.push({
-      key: i,
-      id: item.id,
-      place: item.space.title,
-      name: item.title,
-      time: "a week ago",
-      doc: item.organizer,
-      date:
-        item.createdAt.slice(0, 2) +
-        " " +
-        monthNames[
-          item.createdAt.split("-")[1] === 0
-            ? item.createdAt.split("-")[1].slice(1) - 1
-            : item.createdAt.split("-")[1] - 1
-        ] +
-        " " +
-        item.createdAt.split("-")[0],
-    })
-  );
+  // props.Reservations.map((item, i) =>
+  //   Data.push({
+  //     key: i,
+  //     id: item.id,
+  //     place: item.space.title,
+  //     name: item.title,
+  //     time: "a week ago",
+  //     doc: item.organizer,
+  //     date:
+  //       item.createdAt.slice(0, 2) +
+  //       " " +
+  //       monthNames[
+  //         item.createdAt.split("-")[1] === 0
+  //           ? item.createdAt.split("-")[1].slice(1) - 1
+  //           : item.createdAt.split("-")[1] - 1
+  //       ] +
+  //       " " +
+  //       item.createdAt.split("-")[0],
+  //   })
+  // );
 
   const WidgetInner = styled.div`
     overflow: hidden;

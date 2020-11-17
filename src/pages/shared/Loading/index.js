@@ -1,6 +1,6 @@
 import React from "react";
 import { Skeleton, Space, Divider, Switch, Form, Radio } from "antd";
-import { CardItem, GrayText } from "../../Booking/NewBooking/Modle";
+import { CardItem, GrayText } from "../../Booking/NewBooking/Modal";
 import { CreateText, EmptyTextHolder } from "../../shared/SharedStyle";
 const StatisticLoading = () => {
   return (
@@ -50,7 +50,6 @@ export const BookItemLoading = () => {
   });
 };
 export const TableLoading = (Loading, Item) => {
-  console.log(Item, " the true story");
   return Loading ? (
     [1, 2, 3, 3, 4].map((i, index) => {
       return (

@@ -134,7 +134,7 @@ function CustomPage(props) {
       ref.current.complete();
     }
   }, []);
-  // console.log(pageTitleName, "show page name");
+  console.log(pageTitleName, "show page name");
   return (
     <CustomPageWrapper>
       <LoadingBar color="var(--yellow)" ref={ref} shadow={true} />
@@ -143,7 +143,10 @@ function CustomPage(props) {
       <PageContent>
         <Row>
           <Col>
-            <PageTitle>{props.pageTitle}</PageTitle>
+            <PageTitle>
+              {props.pageTitle.charAt(0).toUpperCase() +
+                props.pageTitle.slice(1)}
+            </PageTitle>
           </Col>
         </Row>
         <Row>

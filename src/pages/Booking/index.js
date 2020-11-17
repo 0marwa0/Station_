@@ -42,6 +42,118 @@ function Booking(props) {
       }
     );
   };
+
+  const handleInput = (e, key) => {
+    let value = e.target.value;
+    switch (key) {
+      case "title":
+        settitle(value);
+        break;
+      case "organizer":
+        setorganizer(value);
+        break;
+      case "description":
+        setdescription(value);
+        break;
+      case "people":
+        setpeople(value);
+        break;
+      case "comment":
+        setcomment(value);
+        break;
+      case "typeId":
+        settypeId(value);
+        break;
+      case "spaceId":
+        setspaceId(value);
+        break;
+      case "designId":
+        setdesignId(value);
+        break;
+      case "coffeebreakId":
+        setcoffeebreakId(value);
+        break;
+      case "lunchId":
+        setlunchId(value);
+        break;
+
+      default:
+        break;
+    }
+  };
+  const clearState = () => {
+    settitle("");
+    setorganizer("");
+    setdescription("");
+    setpeople("");
+    setcomment("");
+    settypeId("");
+    setspaceId("");
+    setdesignId("");
+    setcoffeebreakId("");
+    setlunchId("");
+  };
+  const [title, settitle] = useState("");
+  const [organizer, setorganizer] = useState("");
+  const [description, setdescription] = useState("");
+  const [people, setpeople] = useState("");
+  const [comment, setcomment] = useState("");
+  const [typeId, settypeId] = useState("");
+  const [spaceId, setspaceId] = useState("");
+  const [designId, setdesignId] = useState("");
+  const [coffeebreakId, setcoffeebreakId] = useState("");
+  const [lunchId, setlunchId] = useState("");
+  const [days, setdays] = useState("");
+  const handleSubmit = () => {
+    let data = {
+      title: title,
+      organizer: organizer,
+      description: description,
+      people: people,
+      comment: comment,
+      days: [
+        {
+          start: {
+            dateTime: "",
+          },
+          end: {
+            dateTime: "",
+          },
+        },
+      ],
+      spaceId: spaceId,
+      typeId: typeId,
+      designId: designId,
+      coffeebreakId: coffeebreakId,
+      lunchId: lunchId,
+    };
+
+    console.log(data, "book data sended");
+    // if (name != "" && password != "") {
+    setLoading(true);
+    // addData(
+    //   "book/add",
+    //   data,
+    //   (mesg, Data) => {
+    //     SuccessMesg("Booking done !");
+
+    //     setLoading(false);
+    //     onOpenModal(false);
+    //     loadBook();
+    //     clearState();
+    //   },
+    //   (err) => {
+    //     onOpenModal(false);
+    //     setLoading(false);
+    //     clearState();
+    //     FailedMesg(err);
+    //   }
+    // );
+    // } else {
+    //   onOpenModal(false);
+    //   FailedMesg("Booking failed ", "Empty fileds");
+    // }
+  };
   useEffect(() => {
     if (localStorage.getItem("station_token")) {
       loadBook();
@@ -97,7 +209,7 @@ function Booking(props) {
   return (
     <div>
       <CustomPage
-        pageTitle="Booking"
+        pageTitle="booking"
         columns={BookingColumns}
         data={BookData}
         Item="event"
@@ -113,7 +225,11 @@ function Booking(props) {
         showCloseIcon={false}
         classNames={{ modal: "customModal" }}
       >
-        <NewBooking Close={() => onOpenModal(false)} />
+        <NewBooking
+          handleInput={handleInput}
+          handleSubmit={handleSubmit}
+          Close={() => onOpenModal(false)}
+        />
       </Modal>
     </div>
   );

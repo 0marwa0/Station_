@@ -29,7 +29,7 @@ const NavItem = ({ slug, children, index, title }) => {
   }
 
   useEffect(() => {
-    console.log(type, "type");
+    // console.log(type, "type");
   }, []);
   if (slug === location.pathname.substr(1)) {
     isSelected = true;
@@ -41,14 +41,22 @@ const NavItem = ({ slug, children, index, title }) => {
     isSelected = true;
   }
 
-  return slug === "home" ? (
-    <a href="#/">
-      <SideItem type={type} isSelected={isSelected}>
-        {children}
-      </SideItem>
-    </a>
-  ) : (
-    <Tooltip title={`${slug}`} placement="right">
+  // slug === "home" ? (
+  //   <a href="#/">
+  //     <SideItem type={type} isSelected={isSelected}>
+  //       {children}
+  //     </SideItem>
+  //   </a>
+
+  // ) : (
+  if (slug === "") {
+    slug = "Dashboard";
+  }
+  return (
+    <Tooltip
+      title={`${slug.charAt(0).toUpperCase() + slug.slice(1)}`}
+      placement="right"
+    >
       <Link to={url}>
         <SideItem type={type} isSelected={isSelected}>
           {children}
@@ -159,7 +167,7 @@ function SideBar(props) {
           <NavItem slug="" title={title}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="23.833"
+              width="32"
               height="22.273"
               viewBox="0 0 23.833 22.273"
             >
@@ -320,7 +328,7 @@ function SideBar(props) {
             </svg>
           </SideItem>
 
-          <NavItem slug="home" title={title}>
+          <NavItem slug="Notifications" title={title}>
             {" "}
             <Popover
               content={<Notification />}

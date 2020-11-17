@@ -140,7 +140,7 @@ function Resources(props) {
   return (
     <div>
       <CustomPage
-        pageTitle="Resources"
+        pageTitle="resources"
         columns={ResourcesColumns}
         data={Resources}
         onOpenModal={onOpenModal}

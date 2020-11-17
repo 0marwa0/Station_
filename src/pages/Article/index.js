@@ -64,7 +64,7 @@ function Aritcle(props) {
   return (
     <div>
       <CustomPage
-        pageTitle="Articles"
+        pageTitle="articles"
         columns={ArticlesColumns}
         data={Articles}
         Loading={Loading}

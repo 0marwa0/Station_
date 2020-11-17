@@ -36,7 +36,7 @@ function Events(props) {
       (err) => {
         setLoading(false);
         FailedMesg(err, "Something worng happend !");
-        console.log(err, "failed");
+        // console.log(err, "failed");
       }
     );
   };
@@ -49,7 +49,7 @@ function Events(props) {
   }, []);
   let Events = [];
   events.map((item) => {
-    console.log(item.approvedBy, "event admin");
+    // console.log(item.approvedBy, "event admin");
 
     Events.push({
       Organizer: item.organizer,
@@ -75,7 +75,7 @@ function Events(props) {
   return (
     <div>
       <CustomPage
-        pageTitle="Events"
+        pageTitle="events"
         columns={EventsColumns}
         data={Events}
         Item="event"

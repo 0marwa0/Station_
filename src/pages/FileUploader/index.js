@@ -83,7 +83,7 @@ function FilUploader(props) {
     <div>
       {" "}
       <CustomPage
-        pageTitle="File Uploader"
+        pageTitle="file Uploader"
         columns={FilUploadedColumns}
         data={files}
         onOpenModal={onOpenModal}

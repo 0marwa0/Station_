@@ -50,6 +50,7 @@ function Index(props) {
   const handleImageChange = (e) => {
     e.preventDefault();
     let value;
+    setLoad(100);
     setallowToChange(true);
     setActive(true);
     let type = e.target.files[0].type;
@@ -67,6 +68,7 @@ function Index(props) {
     setImage(require("../../FileUploader/NewFileUploader/default.png"));
     setallowToChange(false);
     setFileName("");
+    setLoad(0);
     setFileSize("");
   };
 
@@ -92,6 +94,7 @@ function Index(props) {
     } else {
       setImage(require("../../FileUploader/NewFileUploader/file2.webp"));
     }
+    setLoad(100);
     setallowToChange(true);
     setFileName(e.dataTransfer.files[0].name);
     getFileSize(e.dataTransfer.files[0].size);
@@ -153,11 +156,12 @@ function Index(props) {
           </span>
         </div>
         {/* <ProgressBar
-          completed={20}
+          completed={Load}
           labelColor="black"
           bgcolor="var(--yellow)"
           height="12px"
         /> */}
+
         <span>
           {fileName ? (
             <span style={{ display: "flex", gap: "5px" }}>

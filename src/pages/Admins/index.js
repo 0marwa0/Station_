@@ -114,7 +114,7 @@ function Admins(props) {
   return (
     <div>
       <CustomPage
-        pageTitle="Admins"
+        pageTitle="admins"
         columns={AdminsColumns}
         data={Admins}
         onOpenModal={onOpenModal}
