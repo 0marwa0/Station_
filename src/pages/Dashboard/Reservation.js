@@ -134,7 +134,7 @@ function Index(props) {
           {props.Loading ? (
             <ReservationLoading />
           ) : (
-            Data.map((item, i) => {
+            [1, 2, 3].map((item, i) => {
               let place = item.place;
 
               return (
