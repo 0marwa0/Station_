@@ -92,7 +92,7 @@ const PageHeader = styled(Row)`
   justify-content: space-between;
 `;
 
-function Index() {
+function Index(props) {
   const ref = useRef(null);
   const [Reservations, setReservations] = useState([]);
   const onEnter = (item) => {
@@ -154,6 +154,8 @@ function Index() {
   };
   const [Loading, setLoading] = useState(false);
   const [BookDates, setBookDates] = useState(false);
+  const [statistics, setstatistics] = useState({});
+
   const loadApiData = () => {
     setLoading(true);
     ref.current.staticStart();
@@ -229,8 +231,34 @@ function Index() {
       }
     );
   };
+
+  const getStatistic = () => {
+    LoadData(
+      "statistics",
+      (err, data) => {
+        setLoading(false);
+
+        setstatistics(data);
+
+        //   console.log(data, "statices");
+        if (err) {
+          Mesg(err);
+        }
+      },
+      (err) => {
+        setLoading(false);
+        FailedMesg(err, "Something worng happend !");
+        console.log(err, "failed");
+      }
+    );
+  };
   useEffect(() => {
-    loadApiData();
+    if (localStorage.getItem("station_token")) {
+      loadApiData();
+      getStatistic();
+    } else {
+      props.history.push("/login");
+    }
   }, []);
 
   return (
@@ -293,9 +321,9 @@ function Index() {
             </Clander>
           </Col>
           <Col style={{ height: "100%" }}>
-            {/* <Reservation Reservations={Reservations} Loading={Loading} /> */}
+            <Reservation Reservations={Reservations} Loading={Loading} />
             <div style={{ height: "3%" }}></div>
-            <Statistic />
+            <Statistic Loading={Loading} statistics={statistics} />
           </Col>
         </Row>
       </PageContent>

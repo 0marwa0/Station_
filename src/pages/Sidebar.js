@@ -243,7 +243,7 @@ function SideBar(props) {
           <NavItem slug="articles" title={title}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="23.822"
+              width="33"
               height="21.917"
               viewBox="0 0 23.822 21.917"
             >

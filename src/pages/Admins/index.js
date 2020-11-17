@@ -41,8 +41,12 @@ function Admins(props) {
     );
   };
   useEffect(() => {
-    setLoading(true);
-    getAdmins();
+    if (localStorage.getItem("station_token")) {
+      setLoading(true);
+      getAdmins();
+    } else {
+      props.history.push("/login");
+    }
   }, []);
   const [name, setname] = useState("");
   const [username, setusername] = useState("");

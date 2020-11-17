@@ -16,16 +16,16 @@ export const CustomInputArea = styled(TextArea)`
 `;
 export const ButtonStyled = styled(Button)`
   background-color: ${(props) =>
-    props.Main ? "var(--yellow)" : "var(--lightGray)"};
+    props.main ? "var(--yellow)" : "var(--lightGray)"};
   border-radius: ${(props) => (props.extra ? "2px" : "7px")};
-  border: ${(props) => (props.Main ? "none" : "1px solid var(--lighterGray)")};
+  border: ${(props) => (props.main ? "none" : "1px solid var(--lighterGray)")};
   display: flex;
   gap: 5px;
 
   width: ${(props) => (props.extra ? "80px" : "auto")};
   height: ${(props) => (props.extra ? "110px" : "auto")};
   padding: ${(props) =>
-    props.Main
+    props.main
       ? "0 15px"
       : props.extra
       ? "0 50px"
@@ -37,12 +37,12 @@ export const ButtonStyled = styled(Button)`
   justify-content: center;
   &:hover {
     background-color: ${(props) =>
-      props.Main ? "var(--yellow)" : "var(--lightGray)"};
+      props.main ? "var(--yellow)" : "var(--lightGray)"};
     color: black;
   }
   &:focus {
     background-color: ${(props) =>
-      props.Main ? "var(--yellow)" : "var(--lightGray)"};
+      props.main ? "var(--yellow)" : "var(--lightGray)"};
     color: black;
   }
   height: 30px;
@@ -88,9 +88,9 @@ export const ModleHeader = styled.div`
 export const ButtonStyledModle = styled(Button)`
   height: 40px;
   background-color: ${(props) =>
-    props.Main ? "var(--yellow)" : "var(--lightGray)"};
+    props.main ? "var(--yellow)" : "var(--lightGray)"};
   border-radius: ${(props) => (props.extra ? "2px" : "7px")};
-  border: ${(props) => (props.Main ? "none" : "1px solid var(--lighterGray)")};
+  border: ${(props) => (props.main ? "none" : "1px solid var(--lighterGray)")};
   display: flex;
   gap: 5px;
 
@@ -102,12 +102,12 @@ export const ButtonStyledModle = styled(Button)`
   justify-content: center;
   &:hover {
     background-color: ${(props) =>
-      props.Main ? "var(--yellow)" : "var(--lightGray)"};
+      props.main ? "var(--yellow)" : "var(--lightGray)"};
     color: black;
   }
   &:focus {
     background-color: ${(props) =>
-      props.Main ? "var(--yellow)" : "var(--lightGray)"};
+      props.main ? "var(--yellow)" : "var(--lightGray)"};
     color: black;
   }
 `;

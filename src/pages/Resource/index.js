@@ -14,7 +14,7 @@ import { monthNames } from "../shared/assets";
 
 import { Mesg, FailedMesg, SuccessMesg } from "../../API/APIMessage";
 
-function Resources() {
+function Resources(props) {
   const [open, setOpen] = useState(false);
   const onOpenModal = (open) => {
     setOpen(open);
@@ -109,7 +109,11 @@ function Resources() {
   };
 
   useEffect(() => {
-    getResources();
+    if (localStorage.getItem("station_token")) {
+      getResources();
+    } else {
+      props.history.push("/login");
+    }
   }, []);
   let Resources = [];
   resource.map((item) => {

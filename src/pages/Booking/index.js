@@ -14,15 +14,14 @@ import { EmptyText } from "../../pages/shared/SharedComponents";
 import { LoadData, LoadBooking, LoadDataByID } from "../../API";
 
 import { FailedMesg, Mesg, SuccessMesg } from "../../API/APIMessage";
-function Booking() {
+function Booking(props) {
   const [open, setOpen] = useState(false);
   const [Loading, setLoading] = useState(false);
   const [Book, setBook] = useState([]);
   const onOpenModal = (open) => {
     setOpen(open);
   };
-
-  useEffect(() => {
+  const loadBook = () => {
     setLoading(true);
 
     LoadData(
@@ -42,6 +41,13 @@ function Booking() {
         FailedMesg(err, "Something worng happend !");
       }
     );
+  };
+  useEffect(() => {
+    if (localStorage.getItem("station_token")) {
+      loadBook();
+    } else {
+      props.history.push("/login");
+    }
   }, []);
   let BookData = [];
   Book.map((item) => {

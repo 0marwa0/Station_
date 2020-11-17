@@ -46,81 +46,81 @@ export const CustomModleButton = ({ children, main, fun, extra }) => {
   );
 };
 
-export const EmptyText = (Loading, Item) => {
-  const override = css`
-    display: block;
-    margin: 0 auto;
-    border-color: red;
-  `;
-  return Loading ? (
-    // <Loader
-    //   type="ThreeDots"
-    //   color="var(--yellow)"
-    //   height={100}
-    //   width={100}
-    //   // timeout={6000}
+// export const EmptyText = (Loading, Item) => {
+//   const override = css`
+//     display: block;
+//     margin: 0 auto;
+//     border-color: red;
+//   `;
+//   return Loading ? (
+//     // <Loader
+//     //   type="ThreeDots"
+//     //   color="var(--yellow)"
+//     //   height={100}
+//     //   width={100}
+//     //   // timeout={6000}
 
-    // />
-    //  <PropagateLoader
-    //     css={override}
-    //     size={25}
-    //     color={"var(--yellow)"}
+//     // />
+//     //  <PropagateLoader
+//     //     css={override}
+//     //     size={25}
+//     //     color={"var(--yellow)"}
 
-    //   />
-    // <EmptyTextHolder>
-    [1, 2, 3, 4, 5].map((i) => {
-      return (
-        <div
-          style={{
-            display: "flex",
-            width: "50vw",
-          }}
-        >
-          {[1, 2, 3, 4, 5].map((i, index) => {
-            return (
-              <div
-                key={index}
-                style={{
-                  width: "18vw",
-                  height: "40px",
-                  padding: "18px 0",
-                  borderBottom: "1px solid var(--lighterGray)",
-                }}
-              >
-                <ContentLoader
-                  speed={2}
-                  width={600}
-                  height={160}
-                  viewBox="0 0 600 160"
-                  backgroundColor="#f3f3f3"
-                  foregroundColor="#ecebeb"
-                >
-                  <rect x="48" y="5" rx="3" ry="3" width="150" height="5" />
-                </ContentLoader>
-              </div>
-            );
-          })}
-        </div>
-      );
-    })
-  ) : (
-    /* </EmptyTextHolder> */
+//     //   />
+//     // <EmptyTextHolder>
+//     [1, 2, 3, 4, 5].map((i) => {
+//       return (
+//         <div
+//           style={{
+//             display: "flex",
+//             width: "50vw",
+//           }}
+//         >
+//           {[1, 2, 3, 4, 5].map((i, index) => {
+//             return (
+//               <div
+//                 key={index}
+//                 style={{
+//                   width: "18vw",
+//                   height: "40px",
+//                   padding: "18px 0",
+//                   borderBottom: "1px solid var(--lighterGray)",
+//                 }}
+//               >
+//                 <ContentLoader
+//                   speed={2}
+//                   width={600}
+//                   height={160}
+//                   viewBox="0 0 600 160"
+//                   backgroundColor="#f3f3f3"
+//                   foregroundColor="#ecebeb"
+//                 >
+//                   <rect x="48" y="5" rx="3" ry="3" width="150" height="5" />
+//                 </ContentLoader>
+//               </div>
+//             );
+//           })}
+//         </div>
+//       );
+//     })
+//   ) : (
+//     /* </EmptyTextHolder> */
 
-    <EmptyTextHolder>
-      <div>
-        <img src={require("../../public/images/noData.png")} />
-      </div>
-      <div style={{ color: "black" }}>No {Item + "s"} found</div>
-      <div style={{ width: "248px" }}>
-        You havent't add any {Item} yet . Tap here to add your first {Item}
-      </div>
+//     <EmptyTextHolder>
+//       <div>
+//         <img src={require("../../public/images/noData.png")} />
+//       </div>
+//       <div style={{ color: "black" }}>No {Item + "s"} found</div>
+//       <div style={{ width: "248px" }}>
+//         You havent't add any {Item} yet . Tap here to add your first {Item}
+//       </div>
 
-      <CreateText>
-        Add New {Item.charAt(0).toUpperCase() + Item.slice(1)}
-      </CreateText>
-    </EmptyTextHolder>
-  );
-};
+//       <CreateText>
+//         Add New {Item.charAt(0).toUpperCase() + Item.slice(1)}
+//       </CreateText>
+//     </EmptyTextHolder>
+//   );
+// };
 export function ReservationLoading(props) {
   let data = [1, 2, 3, 4];
   return data.map((i, index) => (

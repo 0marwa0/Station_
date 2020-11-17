@@ -17,8 +17,7 @@ function Events(props) {
   };
   const [Loading, setLoading] = useState(false);
   const [events, setevents] = useState([]);
-
-  useEffect(() => {
+  const loadEvent = () => {
     setLoading(true);
     LoadData(
       "events",
@@ -40,6 +39,13 @@ function Events(props) {
         console.log(err, "failed");
       }
     );
+  };
+  useEffect(() => {
+    if (localStorage.getItem("station_token")) {
+      loadEvent();
+    } else {
+      props.history.push("/login");
+    }
   }, []);
   let Events = [];
   events.map((item) => {

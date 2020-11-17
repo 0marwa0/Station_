@@ -16,7 +16,7 @@ function Customers(props) {
   const onOpenModal = (open) => {
     setOpen(open);
   };
-  useEffect(() => {
+  const loadCustomers = () => {
     setLoading(true);
     // Progress.show();
     LoadData(
@@ -39,6 +39,13 @@ function Customers(props) {
         console.log(err, "failed");
       }
     );
+  };
+  useEffect(() => {
+    if (localStorage.getItem("station_token")) {
+      loadCustomers();
+    } else {
+      props.history.push("/login");
+    }
   }, []);
 
   return (

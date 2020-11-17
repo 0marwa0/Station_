@@ -6,7 +6,7 @@ import { ReactComponent as DropIcon } from "../../public/images/dropdown.svg";
 import { Mesg, FailedMesg } from "../../API/APIMessage";
 import { LoadData } from "../../API";
 import ContentLoader from "react-content-loader";
-
+import StatisticLoading from "../shared/Loading";
 import { MdShowChart } from "react-icons/md";
 import { GiElectric } from "react-icons/gi";
 import { StatisticData } from "../../fakeData";
@@ -98,29 +98,7 @@ const DropBtn = styled.div`
   justify-content: space-between;
 `;
 function Index(props) {
-  const [Loading, setLoading] = useState(false);
-  const [statistics, setstatistics] = useState({});
-  useEffect(() => {
-    setLoading(true);
-    LoadData(
-      "statistics",
-      (err, data) => {
-        setLoading(false);
-
-        setstatistics(data);
-
-        //   console.log(data, "statices");
-        if (err) {
-          Mesg(err);
-        }
-      },
-      (err) => {
-        setLoading(false);
-        FailedMesg(err, "Something worng happend !");
-        console.log(err, "failed");
-      }
-    );
-  }, []);
+  useEffect(() => {}, []);
 
   const Lable = (name) => {
     let Lable = "";
@@ -140,6 +118,7 @@ function Index(props) {
         break;
     }
   };
+  let statistics = props.statistics;
 
   return (
     <Widget main>
@@ -155,24 +134,9 @@ function Index(props) {
         </Dropdown>
       </ItemHeader>{" "}
       <div>
-        {Loading ? (
-          [1, 2, 3].map((i) => {
-            return (
-              <div key={i}>
-                <ContentLoader
-                  speed={1.5}
-                  width="100%"
-                  height="55px"
-                  viewBox="0 0 600 80"
-                  backgroundColor="#f3f3f3"
-                  foregroundColor="#ecebeb"
-                  {...props}
-                >
-                  <circle cx="40" cy="40" r="40" />
-                  <rect x="520" y="8" rx="3" ry="90" width="88" height="15" />
-                </ContentLoader>
-              </div>
-            );
+        {props.Loading ? (
+          [1, 2, 3, 4, 5].map((i) => {
+            return <StatisticLoading />;
           })
         ) : (
           <div>
@@ -186,13 +150,23 @@ function Index(props) {
               </div>
               <BoldText>{statistics.resevation}</BoldText>
             </ReservationItem>
-
             <ReservationItem>
               <TotlaEvents>
-                <MdShowChart color="var(--orange)" size={20} />{" "}
+                {" "}
+                <MdShowChart color="var(--orange)" size={20} />
               </TotlaEvents>
               <div>
-                Total Time
+                Total Events
+                <GrayText></GrayText>
+              </div>
+              <BoldText>{/* {statistics.resevation} */}</BoldText>
+            </ReservationItem>
+            <ReservationItem>
+              <TotlaBooked>
+                <MdShowChart color="var(--red)" size={20} />
+              </TotlaBooked>
+              <div>
+                Total Booked Hours
                 <GrayText></GrayText>
               </div>
               <BoldText>{statistics.timeTotal}</BoldText>
@@ -203,34 +177,23 @@ function Index(props) {
                 <BiDollar color="var(--darkGreen)" size={17} />
               </TotlaCost>
               <div>
-                Income
+                Total Cost
+                <GrayText></GrayText>
+              </div>
+              <BoldText>{/* {statistics.income} */}</BoldText>
+            </ReservationItem>
+            <ReservationItem>
+              <TotleReservationsIcon>
+                <GiElectric color="var(--blue)" size={15} />
+              </TotleReservationsIcon>
+              <div>
+                Total Income
                 <GrayText></GrayText>
               </div>
               <BoldText>{statistics.income}</BoldText>
             </ReservationItem>
           </div>
         )}
-        {/* ) : name === "Total Events" ? (
-            <TotlaEvents>
-              {" "}
-              <MdShowChart color="var(--orange)" size={20} />
-            </TotlaEvents>
-          ) : name === "Total Booked Hours" ? (
-            <TotlaBooked>
-              <MdShowChart color="var(--red)" size={20} />
-            </TotlaBooked>
-          ) : name === "Total Cost" ? (
-            <TotlaCost>
-              <BiDollar color="var(--darkGreen)" size={17} />
-            </TotlaCost>
-          ) : (
-            <TotleReservationsIcon>
-              <GiElectric color="var(--blue)" size={15} />
-            </TotleReservationsIcon>
-          )} */}
-
-        {/* );
-        })} */}
       </div>
     </Widget>
   );

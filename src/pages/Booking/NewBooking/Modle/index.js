@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Input, InputNumber, DatePicker } from "antd";
+import { Mesg, FailedMesg } from "../../../../API/APIMessage";
+import { BookItemLoading } from "../../../shared/Loading";
 import { ReactComponent as DatePickerIcon } from "../../../../public/images/solid calendar-alt.svg";
 import { Menu, Dropdown, Button, message, Tooltip } from "antd";
 import { DownOutlined, UserOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 import "react-datepicker/dist/react-datepicker.css";
+import { LoadData } from "../../../../API";
 
 // import DatePicker from "react-datepicker";
 import { ReactComponent as DropIcon } from "../../../../public/images/dropdown.svg";
@@ -23,10 +26,10 @@ const optionData = (
   </Menu>
 );
 
-const CardItem = styled.div`
-  width: max-content;
-  height: 90px;
-  padding: 8px;
+export const CardItem = styled.div`
+  height: 120px;
+  min-width: 200px;
+  padding: 11px;
   display: flex;
   flex-direction: column;
   border-radius: 5px;
@@ -38,7 +41,7 @@ const CardItem = styled.div`
   }
 `;
 
-const CardWrapper = styled.div`
+export const CardWrapper = styled.div`
   display: flex;
   width: 600px;
   gap: 10px;
@@ -46,9 +49,8 @@ const CardWrapper = styled.div`
 `;
 const SlidHolder = styled.div`
   display: flex;
+  height: 180px;
   flex-direction: column;
-
-  height: 130px;
 `;
 const PageWrapper = styled.div`
   width: 580px;
@@ -80,8 +82,8 @@ const SecondPageInput = styled.div`
   gap: 15px;
   grid-template-columns: 1.2fr 0.1fr 0.1fr auto;
 `;
-const GrayText = styled.div`
-  color: var(--lighterGray);
+export const GrayText = styled.div`
+  color: var(--textGray);
 `;
 const Size = styled.span`
   display: flex;
@@ -266,28 +268,93 @@ const settings = {
 };
 
 export function ThirdPage() {
+  const [Loading, setLoading] = useState(false);
+  const [coffees, setCoffees] = useState([]);
+  const [lunches, setLunches] = useState([]);
+  const [Designs, setDesigns] = useState([]);
+
+  const loadDesigns = () => {
+    LoadData(
+      "space/designs",
+      (err, data) => {
+        setLoading(false);
+        setDesigns(data.data);
+        console.log(data.data, "design");
+        if (err) {
+          Mesg(err);
+        }
+      },
+      (err) => {
+        setLoading(false);
+        FailedMesg(err, "Something worng happend !");
+      }
+    );
+  };
+  const loadLunches = () => {
+    LoadData(
+      "lunches",
+      (err, data) => {
+        setLoading(false);
+        setLunches(data.data);
+        console.log(data, "our lunches");
+        if (err) {
+          Mesg(err);
+        }
+      },
+      (err) => {
+        setLoading(false);
+        FailedMesg(err, "Something worng happend !");
+      }
+    );
+  };
+  const loadCoffees = () => {
+    LoadData(
+      "/coffees",
+      (err, data) => {
+        setLoading(false);
+        setCoffees(data.data);
+        if (err) {
+          Mesg(err);
+        }
+      },
+      (err) => {
+        setLoading(false);
+        FailedMesg(err, "Something worng happend !");
+      }
+    );
+  };
+  useEffect(() => {
+    loadCoffees();
+    loadLunches();
+    loadDesigns();
+  }, []);
   return (
     <div className="modleWrapper">
       <SlidHolder>
         <span> Coffe Brake Pack</span>
-
         <Slider {...settings}>
           <div>
             <CardWrapper>
-              <CardItem>
-                <div>5,000 IQD</div>
-                <GrayText>Water coffe 3 cupcakes,Tea with cookies</GrayText>
-              </CardItem>
-              <CardItem>
-                <div>5,000 IQD</div>
-                <GrayText>Water coffe 3 cupcakes,Tea with cookies</GrayText>
-              </CardItem>
-              <CardItem>
-                <div>5,000 IQD</div>
-                <GrayText>Water coffe 3 cupcakes,Tea with cookies</GrayText>
-              </CardItem>
+              {Loading ? (
+                <BookItemLoading />
+              ) : (
+                coffees.map((item, i) => {
+                  return (
+                    <CardItem key={i}>
+                      <div>{item.price}</div>
+                      <GrayText>
+                        <div style={{ textAlign: "right" }}>
+                          {item.description}
+                        </div>
+                      </GrayText>
+                    </CardItem>
+                  );
+                })
+              )}
             </CardWrapper>
           </div>
+          {/* below divs placed to show empty space at the end of item */}
+          <div></div>
           <div></div>
           <div></div>
         </Slider>
@@ -299,20 +366,36 @@ export function ThirdPage() {
         <Slider {...settings}>
           <div>
             <CardWrapper>
-              <CardItem>
-                <div>5,000 IQD</div>
-                <GrayText>Water coffe 3 cupcakes,Tea with cookies</GrayText>
-              </CardItem>
-              <CardItem>
-                <div>5,000 IQD</div>
-                <GrayText>Water coffe 3 cupcakes,Tea with cookies</GrayText>
-              </CardItem>
-              <CardItem>
-                <div>5,000 IQD</div>
-                <GrayText>Water coffe 3 cupcakes,Tea with cookies</GrayText>
-              </CardItem>
+              <CardWrapper>
+                {lunches.map((item, i) => {
+                  return (
+                    <CardItem key={i}>
+                      <div>{item.price} IQD</div>
+                      <GrayText>
+                        <div style={{ textAlign: "right" }}>
+                          {item.description}
+                        </div>
+                      </GrayText>
+                    </CardItem>
+                  );
+                })}
+              </CardWrapper>
             </CardWrapper>
           </div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
           <div></div>
           <div></div>
         </Slider>
@@ -324,20 +407,28 @@ export function ThirdPage() {
         <Slider {...settings}>
           <div>
             <CardWrapper>
-              <CardItem>
-                <div>5,000 IQD</div>
-                <GrayText>Water coffe 3 cupcakes,Tea with cookies</GrayText>
-              </CardItem>
-              <CardItem>
-                <div>5,000 IQD</div>
-                <GrayText>Water coffe 3 cupcakes,Tea with cookies</GrayText>
-              </CardItem>
-              <CardItem>
-                <div>5,000 IQD</div>
-                <GrayText>Water coffe 3 cupcakes,Tea with cookies</GrayText>
-              </CardItem>
+              {Designs.map((item, i) => {
+                return (
+                  <CardItem key={i}>
+                    <div>{item.name} </div>
+                    <GrayText>
+                      <div style={{ textAlign: "right" }}>
+                        {item.description}
+                      </div>
+                    </GrayText>
+                  </CardItem>
+                );
+              })}
             </CardWrapper>
           </div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
           <div></div>
           <div></div>
         </Slider>

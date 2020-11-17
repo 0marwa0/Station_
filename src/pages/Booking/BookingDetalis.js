@@ -147,8 +147,12 @@ const Index = (props) => {
     setBookingStatus(status);
   };
   useEffect(() => {
-    setId(location.state.id);
-    getDetalis();
+    if (localStorage.getItem("station_token")) {
+      setId(location.state.id);
+      getDetalis();
+    } else {
+      props.history.push("/login");
+    }
   }, []);
   const getDetalis = () => {
     let id = location.state.id;

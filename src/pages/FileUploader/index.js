@@ -11,7 +11,7 @@ import NewFileUploader from "./NewFileUploader";
 import { LoadData, addFile } from "../../API";
 
 import { Mesg, FailedMesg, SuccessMesg } from "../../API/APIMessage";
-function FilUploader() {
+function FilUploader(props) {
   const [open, setOpen] = useState(false);
   const [Loading, setLoading] = useState(false);
   const [files, setfiles] = useState([]);
@@ -44,8 +44,12 @@ function FilUploader() {
     );
   };
   useEffect(() => {
-    setLoading(true);
-    getFiles();
+    if (localStorage.getItem("station_token")) {
+      setLoading(true);
+      getFiles();
+    } else {
+      props.history.push("/login");
+    }
   }, []);
   const handleSubmit = () => {
     let data = new FormData();

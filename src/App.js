@@ -3,6 +3,8 @@ import { Mesg, FailedMesg } from "./API/APIMessage";
 import { LoadData } from "./API";
 import logo from "./logo.svg";
 import "./App.css";
+import { useHistory } from "react-router";
+
 import "react-progress-2/main.css";
 import Sidebar from "./pages/Sidebar";
 import Dashboard from "./pages/Dashboard";
@@ -23,6 +25,7 @@ function App(props) {
   const [admins, setadmins] = useState([]);
   const [spaces, setspaces] = useState([]);
   const [userId, setuserId] = useState("");
+  const history = useHistory();
 
   const getAdmins = () => {
     LoadData(
@@ -57,6 +60,9 @@ function App(props) {
     if (localStorage.getItem("station_token")) {
       getAdmins();
       getSpace();
+    } else {
+      //history.push("/login");
+      //.log(props.history);
     }
   }, []);
   return (

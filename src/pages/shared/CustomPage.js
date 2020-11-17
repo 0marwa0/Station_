@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import { Col, Row, Table, Input } from "antd";
 import React, { useEffect } from "react";
 import LoadingBar from "react-top-loading-bar";
-
+import { TableLoading } from "../shared/Loading";
 import { BiImport, BiExport } from "react-icons/bi";
 import { ReactComponent as ExportIcon } from "../../public/images/export.svg";
 import { ReactComponent as ImportIcon } from "../../public/images/import.svg";
@@ -122,7 +122,7 @@ function CustomPage(props) {
   const indexOfFirstPage = indexOfLastPage - pagePerOnce;
   const Data = props.data.slice(indexOfFirstPage, indexOfLastPage);
   let pageTitleName;
-  if (pageTitle === "Booking") {
+  if (pageTitle === "booking") {
     pageTitleName = props.pageTitle;
   } else {
     pageTitleName = props.pageTitle.substring(0, props.pageTitle.length - 1);
@@ -149,7 +149,7 @@ function CustomPage(props) {
         <Row>
           <PageBtn>
             <ButtonGroup space>
-              {props.pageTitle === "Articles" ? (
+              {props.pageTitle === "articles" ? (
                 <div
                   style={{
                     display: "flex",
@@ -305,9 +305,9 @@ function CustomPage(props) {
                 }}
                 placeholder="Search"
               />
-              {props.pageTitle === "Resources" ? (
+              {props.pageTitle === "resources" ? (
                 ""
-              ) : props.pageTitle === "File Uploader" ? (
+              ) : props.pageTitle === "file Uploader" ? (
                 ""
               ) : (
                 <CustomButton lable="Filter" filter loading={props.Loading}>
@@ -316,9 +316,9 @@ function CustomPage(props) {
               )}
             </ButtonGroup>
             <ButtonGroup>
-              {props.pageTitle === "Resources" ? (
+              {props.pageTitle === "resources" ? (
                 ""
-              ) : props.pageTitle === "File Uploader" ? (
+              ) : props.pageTitle === "file Uploader" ? (
                 ""
               ) : (
                 <CustomButton lable="Import" loading={props.Loading}>
@@ -330,9 +330,9 @@ function CustomPage(props) {
                 {/* <BiExport /> */}
                 <ExportIcon />
               </CustomButton>
-              {pageTitleName == "Customer" ? (
+              {pageTitleName == "customer" ? (
                 <CustomButton
-                  Main
+                  main
                   lable={`Notify Users`}
                   loading={props.Loading}
                   pageTitle={pageTitle}
@@ -340,10 +340,10 @@ function CustomPage(props) {
                 >
                   <Notifiy />
                 </CustomButton>
-              ) : pageTitleName === "Resource" ||
-                pageTitleName === "File Uploade" ? (
+              ) : pageTitleName === "resource" ||
+                pageTitleName === "file Uploade" ? (
                 <CustomButton
-                  Main
+                  main
                   lable={`Upload`}
                   pageTitle={pageTitle}
                   loading={props.Loading}
@@ -351,10 +351,10 @@ function CustomPage(props) {
                 >
                   <Upload />
                 </CustomButton>
-              ) : pageTitleName === "Article" ||
-                pageTitleName === "Event" ? null : (
+              ) : pageTitleName === "article" ||
+                pageTitleName === "event" ? null : (
                 <CustomButton
-                  Main
+                  main
                   lable={`New ${pageTitleName}`}
                   pageTitle={pageTitle}
                   loading={props.Loading}
@@ -377,7 +377,9 @@ function CustomPage(props) {
                   pagination={false}
                   dataSource={Data}
                   locale={{
-                    emptyText: EmptyText(props.Loading, props.Item),
+                    emptyText: TableLoading(props.Loading, props.Item),
+
+                    //EmptyText(props.Loading, props.Item),
                   }}
                 />
                 <Pagination>

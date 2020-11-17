@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SideBar from "../Sidebar";
 import { CustomPageWrapper, PageContent } from "../shared/CustomPage";
 import { Button, Col, Row, Input } from "antd";
@@ -82,7 +82,12 @@ function Index(props) {
   let user = props.admins.filter((i) => i.id === props.id);
   let data = {};
   user.map((i) => (data = i));
-
+  useEffect(() => {
+    if (localStorage.getItem("station_token")) {
+    } else {
+      props.history.push("/login");
+    }
+  }, []);
   return (
     <CustomPageWrapper>
       <GlobalStyle />

@@ -141,7 +141,7 @@ function Index(props) {
                 <div key={i}>
                   <Link
                     to={{
-                      pathname: "/BookingDetalis",
+                      pathname: "/bookingDetalis",
                       state: {
                         id: item.id,
                       },

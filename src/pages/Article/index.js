@@ -11,7 +11,7 @@ import { monthNames } from "../shared/assets";
 function Aritcle(props) {
   const [Loading, setLoading] = useState(false);
   const [articles, setarticles] = useState([]);
-  const loadAdmin = () => {
+  const loadArticle = () => {
     setLoading(true);
     LoadData(
       "articles",
@@ -32,7 +32,11 @@ function Aritcle(props) {
     );
   };
   useEffect(() => {
-    loadAdmin();
+    if (localStorage.getItem("station_token")) {
+      loadArticle();
+    } else {
+      props.history.push("/login");
+    }
   }, []);
   let Articles = [];
   articles.map((item) => {
