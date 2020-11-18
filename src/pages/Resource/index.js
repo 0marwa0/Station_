@@ -48,6 +48,7 @@ function Resources(props) {
 
   const handleInput = (e, key) => {
     let value = e.target.value;
+    let file = e;
     switch (key) {
       case "title":
         settitle(value);
@@ -59,7 +60,7 @@ function Resources(props) {
         seturl(value);
         break;
       case "image":
-        setimage(value);
+        setimage(file);
         break;
       default:
         break;

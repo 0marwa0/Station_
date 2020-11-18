@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Widget } from "./index";
 import { ReservationsData } from "../../fakeData";
 import styled from "styled-components";
@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import { monthNames } from "../shared/assets";
 
 import { ReservationLoading } from "../shared/SharedComponents";
-import { useState } from "react/cjs/react.development";
 const ReservationItem = styled.div`
   display: grid;
   grid-template-columns: 15% max-content auto;

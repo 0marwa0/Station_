@@ -60,6 +60,7 @@ function Index(props) {
     } else {
       setImage(require("../../FileUploader/NewFileUploader/file2.webp"));
     }
+    props.handleInput(e.target.files[0], "image");
     setFileName(e.target.files[0].name);
     getFileSize(e.target.files[0].size);
   };
@@ -85,7 +86,7 @@ function Index(props) {
   };
   const fileDrop = (e) => {
     e.preventDefault();
-    console.log("doregedd");
+    // console.log("doregedd");
     let value;
     let type = e.dataTransfer.files[0].type;
     if (type.substring(0, 5) === "image") {
@@ -95,6 +96,8 @@ function Index(props) {
       setImage(require("../../FileUploader/NewFileUploader/file2.webp"));
     }
     setLoad(100);
+    props.prohandleInput(e.dataTransfer.files[0], "image");
+
     setallowToChange(true);
     setFileName(e.dataTransfer.files[0].name);
     getFileSize(e.dataTransfer.files[0].size);
