@@ -131,7 +131,7 @@ function Index(props) {
           <NumBtn>{Data.length}</NumBtn>
         </ItemHeader>
         <div className="items">
-          {props.Loading ? (
+          {/* {props.Loading ? (
             <ReservationLoading />
           ) : (
             [1, 2, 3].map((item, i) => {
@@ -197,7 +197,7 @@ function Index(props) {
                 </div>
               );
             })
-          )}
+          )} */}
         </div>
       </WidgetInner>
       <SeeAll>
