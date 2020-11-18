@@ -120,7 +120,7 @@ function Resources(props) {
     Resources.push({
       Title: { url: item.url, name: item.name },
 
-      Descriptions: item.descriptionAr,
+      Descriptions: item.description,
       Type: ["PDF"],
       Size: "12.2mb",
 
