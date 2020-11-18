@@ -321,7 +321,11 @@ function Index(props) {
             </Clander>
           </Col>
           <Col style={{ height: "100%" }}>
-            <Reservation Reservations={Reservations} Loading={Loading} />
+            <Reservation
+              // Reservations={Reservations}
+
+              Loading={Loading}
+            />
             <div style={{ height: "3%" }}></div>
             <Statistic Loading={Loading} statistics={statistics} />
           </Col>
