@@ -4,7 +4,7 @@ import { BiExport, BiDollar } from "react-icons/bi";
 import Reservation from "./Reservation";
 import Statistic from "./Statistic";
 import LoadingBar from "react-top-loading-bar";
-
+import ReservationWidget from "./ReservationWidget";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Col, Row, Input, Button, Menu, Dropdown } from "antd";
 import { DownOutlined } from "@ant-design/icons";
@@ -321,11 +321,9 @@ function Index(props) {
             </Clander>
           </Col>
           <Col style={{ height: "100%" }}>
-            <Reservation
-              // Reservations={Reservations}
+            <Reservation Reservations={Reservations} Loading={Loading} />
 
-              Loading={Loading}
-            />
+            {/* <ReservationWidget /> */}
             <div style={{ height: "3%" }}></div>
             <Statistic Loading={Loading} statistics={statistics} />
           </Col>
