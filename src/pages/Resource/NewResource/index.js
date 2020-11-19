@@ -55,12 +55,13 @@ function Index(props) {
     setActive(true);
     let type = e.target.files[0].type;
     if (type.substring(0, 5) === "image") {
+      console.log(e.target.files[0], "file uplaoded");
       value = URL.createObjectURL(e.target.files[0]);
       setImage(value);
     } else {
       setImage(require("../../FileUploader/NewFileUploader/file2.webp"));
     }
-    props.handleInput(e.target.files[0], "image");
+    props.handleFile(e.target.files[0]);
     setFileName(e.target.files[0].name);
     getFileSize(e.target.files[0].size);
   };
@@ -91,12 +92,14 @@ function Index(props) {
     let type = e.dataTransfer.files[0].type;
     if (type.substring(0, 5) === "image") {
       value = URL.createObjectURL(e.dataTransfer.files[0]);
+
       setImage(value);
     } else {
       setImage(require("../../FileUploader/NewFileUploader/file2.webp"));
     }
     setLoad(100);
-    props.prohandleInput(e.dataTransfer.files[0], "image");
+
+    props.handleFile(e.dataTransfer.files[0]);
 
     setallowToChange(true);
     setFileName(e.dataTransfer.files[0].name);
@@ -182,7 +185,7 @@ function Index(props) {
       </PageWrapper>{" "}
       <ModleFooter>
         <CustomModleButton fun={props.Close}>Cancel</CustomModleButton>
-        <CustomModleButton Main fun={props.handleSubmit}>
+        <CustomModleButton main fun={props.handleSubmit}>
           Upload
         </CustomModleButton>
       </ModleFooter>

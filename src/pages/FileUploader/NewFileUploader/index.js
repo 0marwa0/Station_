@@ -148,7 +148,7 @@ function Index(props) {
       </PageWrapper>
       <ModleFooter>
         <CustomModleButton fun={props.Close}>Cancel</CustomModleButton>
-        <CustomModleButton Main fun={props.handleSubmit}>
+        <CustomModleButton main fun={props.handleSubmit}>
           Upload
         </CustomModleButton>
       </ModleFooter>

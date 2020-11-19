@@ -34,7 +34,11 @@ const NavItem = ({ slug, children, index, title }) => {
   if (slug === location.pathname.substr(1)) {
     isSelected = true;
   }
-  if (location.pathname.substr(1) === "bookingDetalis" && slug === "booking") {
+
+  if (
+    location.pathname.substr(1).slice(0, 14) === "bookingDetalis" &&
+    slug === "booking"
+  ) {
     isSelected = true;
   }
   if (location.pathname.substr(1) === "createEvent" && slug === "events") {
@@ -49,14 +53,15 @@ const NavItem = ({ slug, children, index, title }) => {
   //   </a>
 
   // ) : (
+  let dash = false;
   if (slug === "") {
     slug = "Dashboard";
+    dash = true;
   }
+
+  let text = slug.charAt(0).toUpperCase() + slug.slice(1);
   return (
-    <Tooltip
-      title={`${slug.charAt(0).toUpperCase() + slug.slice(1)}`}
-      placement="right"
-    >
+    <Tooltip title={dash ? "Dashboard" : text} placement="right">
       <Link to={url}>
         <SideItem type={type} isSelected={isSelected}>
           {children}
@@ -125,7 +130,7 @@ const Active = styled.div`
   height: 9px;
   border-radius: 50%;
   position: absolute;
-  bottom: 7px;
+  bottom: 14px;
   right: 30%;
   border: 2px solid var(--black);
   background-color: var(--RayGreen);
@@ -156,7 +161,7 @@ function SideBar(props) {
 
   let title = props.title;
   let page = location.pathname.substr(1);
-  // console.log(props.title, page, "title and page");
+  // console.log(page === "booking", "should be flase");
   return (
     <div
     //  onClick={(e) => handleClose(e)}
@@ -218,9 +223,12 @@ function SideBar(props) {
                   d="M12306.418,13778.543h-29.5v-4.757a5,5,0,0,0,0-9.988v-4.757h29.5v4.757a5,5,0,0,0,0,9.988v4.756Z"
                   transform="translate(-12249.001 -13560.001)"
                   fill="none"
-                  stroke={"booking" != page ? "#8a8a8a" : "var(--yellow)"}
+                  stroke={
+                    page.slice(0, 14) === page ? "#8a8a8a" : "var(--yellow)"
+                  }
                   strokeWidth="2.5"
                 />
+                ;
                 <g
                   id="Group_37531"
                   data-name="Group 37531"
@@ -232,7 +240,9 @@ function SideBar(props) {
                     y1="8"
                     transform="translate(44.167 205.292)"
                     fill="none"
-                    stroke={"booking" != page ? "#8a8a8a" : "var(--yellow)"}
+                    stroke={
+                      page.slice(0, 14) === page ? "#8a8a8a" : "var(--yellow)"
+                    }
                     strokeWidth="2.5"
                   />
                   <line
@@ -241,7 +251,9 @@ function SideBar(props) {
                     y1="8"
                     transform="translate(48.167 209.292) rotate(90)"
                     fill="none"
-                    stroke={"booking" != page ? "#8a8a8a" : "var(--yellow)"}
+                    stroke={
+                      page.slice(0, 14) === page ? "#8a8a8a" : "var(--yellow)"
+                    }
                     strokeWidth="2.5"
                   />
                 </g>

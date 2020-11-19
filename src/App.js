@@ -88,7 +88,7 @@ function App(props) {
             exact
           />
           <Route path="/booking" component={Booking} exact />
-          <Route path="/bookingDetalis" component={BookingDetalis} exact />
+          <Route path="/bookingDetalis/:id" component={BookingDetalis} exact />
           <Route path="/home" component={Home} exact />
           <Route
             path="/events"

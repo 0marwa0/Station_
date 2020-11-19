@@ -5,6 +5,9 @@ import { UserImage } from "../Sidebar";
 import { BsTrashFill, BsTrash } from "react-icons/bs";
 import { FaCopy } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
+import { Popconfirm } from "antd";
+import { Mesg, FailedMesg, SuccessMesg } from "../../API/APIMessage";
+import { removeItem } from "../../API";
 import React from "react";
 import { Checkbox, Progress, Tooltip, Tag, Space, Button, Input } from "antd";
 const monthNames = [
@@ -32,7 +35,7 @@ export const ResourcesColumns = [
     key: "2",
     title: "Title",
     dataIndex: "Title",
-    render: (item) => <a href={item.url}>{item.name}</a>,
+    render: (item) => item,
     sorter: {
       compare: (a, b) => a.english - b.english,
       multiple: 1,
@@ -114,47 +117,64 @@ export const ResourcesColumns = [
   {
     key: "8",
     title: "",
-    dataIndex: "",
-    render: () => (
+    dataIndex: "id",
+    render: (item) => (
       <div className="ResourcesIcon">
         <div className="icon">
           <FaCopy fontSize="16" />
         </div>
         <div className="icon">
-          <FiEdit fontSize="16" />
+          <a href={item.url} target="_blank">
+            <FiEdit fontSize="16" />
+          </a>
         </div>
         <div className="icon">
-          <BsTrashFill fontSize="16" />
+          <Popconfirm
+            title="Are you sure？"
+            okText="Yes"
+            placement="left"
+            onConfirm={() => item.delete()}
+            cancelText="No"
+          >
+            <BsTrashFill fontSize="16" style={{ cursor: "pointer" }} />
+          </Popconfirm>
         </div>
       </div>
     ),
   },
 ];
 
-export const ResourcesData = (data, callback) => {
-  let Resources = [];
-
-  data.map((item) => {
-    Resources.push({
-      Title: item.name,
-
-      Descriptions: item.descriptionAr,
-      Type: ["PDF"],
-      Size: "12.2mb",
-
-      UploadedDate:
-        item.createdAt.slice(0, 2) +
-        " " +
-        monthNames[
-          item.createdAt.split("-")[1] === 0
-            ? item.createdAt.split("-")[1].slice(1) - 1
-            : item.createdAt.split("-")[1] - 1
-        ] +
-        " " +
-        item.createdAt.split("-")[0],
-      image: "",
-    });
-  });
-
-  callback(Resources);
+const onCopy = (id) => {
+  console.log(id, "id to copy");
 };
+// export const ResourcesData = (data, callback) => {
+//   let Resources = [];
+
+//   data.map((item) => {
+//     Resources.push({
+//       id: {
+//         url: item.url,
+//         id: item.id,
+//       },
+//       Title: item.name,
+
+//       Descriptions: item.descriptionAr,
+//       Type: ["PDF"],
+//       Size: "12.2mb",
+
+//       UploadedDate:
+//         item.createdAt.slice(0, 2) +
+//         " " +
+//         monthNames[
+//           item.createdAt.split("-")[1] === 0
+//             ? item.createdAt.split("-")[1].slice(1) - 1
+//             : item.createdAt.split("-")[1] - 1
+//         ] +
+//         " " +
+//         item.createdAt.split("-")[0],
+//       image: "",
+//     });
+//   });
+
+//   callback(Resources);
+// };

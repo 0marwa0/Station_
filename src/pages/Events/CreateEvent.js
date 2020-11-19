@@ -278,7 +278,7 @@ const Index = () => {
                 <RefreshIcon />
               </CustomButton>
               <CustomButton>Preview</CustomButton>{" "}
-              <CustomButton Main>Publish Event </CustomButton>
+              <CustomButton main>Publish Event </CustomButton>
             </div>
           </MainLayout>
         </Row>

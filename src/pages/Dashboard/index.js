@@ -4,7 +4,6 @@ import { BiExport, BiDollar } from "react-icons/bi";
 import Reservation from "./Reservation";
 import Statistic from "./Statistic";
 import LoadingBar from "react-top-loading-bar";
-import ReservationWidget from "./ReservationWidget";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Col, Row, Input, Button, Menu, Dropdown } from "antd";
 import { DownOutlined } from "@ant-design/icons";
@@ -271,7 +270,7 @@ function Index(props) {
         <PageHeader>
           <PageTitle>Dashboard</PageTitle>
           <span style={{ marginTop: "20px", color: "var(--darkGray)" }}>
-            Welcome Back, <p style={{ color: "black" }}>Marwa!</p>
+            Welcome Back, <span style={{ color: "black" }}>!</span>
           </span>
         </PageHeader>
         <Row>
@@ -323,7 +322,6 @@ function Index(props) {
           <Col style={{ height: "100%" }}>
             <Reservation Reservations={Reservations} Loading={Loading} />
 
-            {/* <ReservationWidget /> */}
             <div style={{ height: "3%" }}></div>
             <Statistic Loading={Loading} statistics={statistics} />
           </Col>

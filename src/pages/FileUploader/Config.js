@@ -2,10 +2,12 @@ import { BiDotsVerticalRounded } from "react-icons/bi";
 import { UserImage } from "../Sidebar";
 import { BsTrashFill, BsTrash } from "react-icons/bs";
 import { FaCopy } from "react-icons/fa";
+import { Popconfirm } from "antd";
 import { FiEdit } from "react-icons/fi";
 import React from "react";
+import { Mesg, FailedMesg, SuccessMesg } from "../../API/APIMessage";
 
-import { Checkbox, Progress, Tooltip, Tag, Space, Button, Input } from "antd";
+import { Checkbox, Tag } from "antd";
 const monthNames = [
   "January",
   "February",
@@ -26,7 +28,7 @@ export const FilUploadedColumns = [
     key: "2",
     title: "File Title",
     dataIndex: "FileTitle",
-    render: (item) => <a href={item.url}>{item.name}</a>,
+    render: (item) => item,
     sorter: {
       compare: (a, b) => a.english - b.english,
       multiple: 1,
@@ -99,36 +101,48 @@ export const FilUploadedColumns = [
   {
     key: "7",
     title: "",
-    dataIndex: "",
-    render: () => (
+    dataIndex: "id",
+    render: (item) => (
       <div className="ResourcesIcon">
         <div className="icon">
-          <FaCopy fontSize="16" />
+          <FaCopy
+            fontSize="16"
+            onClick={() => console.log(item.url, "file url")}
+          />
         </div>
         <div className="icon">
-          <FiEdit fontSize="16" />
+          <a href={item.url} target="_blank">
+            <FiEdit fontSize="16" />
+          </a>
         </div>
         <div className="icon">
-          <BsTrashFill fontSize="16" />
+          <Popconfirm
+            title="Are you sure？"
+            okText="Yes"
+            onConfirm={() => item.delete()}
+            cancelText="No"
+          >
+            <BsTrashFill fontSize="16" style={{ cursor: "pointer" }} />
+          </Popconfirm>
         </div>
       </div>
     ),
   },
 ];
-// FilesData;{
-//     FileTitle: "thestation_profile_arabic_version.pdf",
-//     Type: ["PDF"],
-//     Size: "12.3mb",
-//     UploadedDate: "23 September 2020",
-//     image: "",
-//   },
+const onDelete = (id) => {
+  console.log(id, "id to deleted");
+};
+const onCopy = (id) => {
+  console.log(id, "id to copy");
+};
 
 export const FilesData = (data, callback) => {
   let Files = [];
 
   data.map((file) => {
     Files.push({
-      FileTitle: { url: file.link, name: file.name },
+      id: { url: file.link, id: file.id },
+      FileTitle: file.name,
       Type: [`${/[.]/.exec(file.name) ? /[^.]+$/.exec(file.name) : undefined}`],
       Size: "",
       UploadedDate:

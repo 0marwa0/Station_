@@ -137,7 +137,7 @@ function Index(props) {
         <ModalFooter>
           <div style={{ float: "right" }}>
             {" "}
-            <CustomModleButton Main extra fun={props.handleSubmit}>
+            <CustomModleButton main extra fun={props.handleSubmit}>
               Create
             </CustomModleButton>
           </div>

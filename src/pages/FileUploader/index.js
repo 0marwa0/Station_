@@ -8,8 +8,8 @@ import { FileUpoaderData } from "../../fakeData";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import NewFileUploader from "./NewFileUploader";
-import { LoadData, addFile } from "../../API";
-
+import { LoadData, addFile, removeItem } from "../../API";
+import { monthNames } from "../shared/assets";
 import { Mesg, FailedMesg, SuccessMesg } from "../../API/APIMessage";
 function FilUploader(props) {
   const [open, setOpen] = useState(false);
@@ -27,10 +27,10 @@ function FilUploader(props) {
       "files",
       (err, data) => {
         setLoading(false);
+        setfiles(data.data.rows);
+        // FilesData(data.data.rows, (item) => {
 
-        FilesData(data.data.rows, (item) => {
-          setfiles(item);
-        });
+        // });
 
         if (err) {
           Mesg(err);
@@ -79,13 +79,60 @@ function FilUploader(props) {
       }
     );
   };
+  const onDelete = (id) => {
+    setLoading(true);
+    removeItem(
+      "file",
+      id,
+      (err, data) => {
+        if (err) {
+          setLoading(false);
+          Mesg(err);
+        } else {
+          setLoading(false);
+          getFiles();
+          SuccessMesg("Delete File Done !");
+        }
+      },
+      (err) => {
+        setLoading(false);
+        FailedMesg("Delete File Faild!", err);
+      }
+    );
+    console.log(id, "id to deleted");
+  };
+  let Files = [];
+  files.map((file) => {
+    Files.push({
+      id: {
+        url: file.link,
+        id: file.id,
+        delete: () => onDelete(file.id),
+      },
+      FileTitle: file.name,
+      Type: [`${/[.]/.exec(file.name) ? /[^.]+$/.exec(file.name) : undefined}`],
+      Size: "",
+      UploadedDate:
+        file.createdAt.slice(0, 2) +
+        " " +
+        monthNames[
+          file.createdAt.split("-")[1] === 0
+            ? file.createdAt.split("-")[1].slice(1) - 1
+            : file.createdAt.split("-")[1] - 1
+        ] +
+        " " +
+        file.createdAt.split("-")[0],
+      image: "",
+      // Status: true ? ["Enabled"] : ["Disabled"],
+    });
+  });
   return (
     <div>
       {" "}
       <CustomPage
         pageTitle="file Uploader"
         columns={FilUploadedColumns}
-        data={files}
+        data={Files}
         onOpenModal={onOpenModal}
         Loading={Loading}
         Item="file"

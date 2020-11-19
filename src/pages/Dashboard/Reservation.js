@@ -89,26 +89,26 @@ const SeeAll = styled.div`
 `;
 function Index(props) {
   let Data = [];
-  // props.Reservations.map((item, i) =>
-  //   Data.push({
-  //     key: i,
-  //     id: item.id,
-  //     place: item.space.title,
-  //     name: item.title,
-  //     time: "a week ago",
-  //     doc: item.organizer,
-  //     date:
-  //       item.createdAt.slice(0, 2) +
-  //       " " +
-  //       monthNames[
-  //         item.createdAt.split("-")[1] === 0
-  //           ? item.createdAt.split("-")[1].slice(1) - 1
-  //           : item.createdAt.split("-")[1] - 1
-  //       ] +
-  //       " " +
-  //       item.createdAt.split("-")[0],
-  //   })
-  // );
+  props.Reservations.map((item, i) =>
+    Data.push({
+      key: i,
+      id: item.id,
+      place: item.space.title,
+      name: item.title,
+      time: "a week ago",
+      doc: item.organizer,
+      date:
+        item.createdAt.slice(0, 2) +
+        " " +
+        monthNames[
+          item.createdAt.split("-")[1] === 0
+            ? item.createdAt.split("-")[1].slice(1) - 1
+            : item.createdAt.split("-")[1] - 1
+        ] +
+        " " +
+        item.createdAt.split("-")[0],
+    })
+  );
 
   const WidgetInner = styled.div`
     overflow: hidden;
@@ -133,17 +133,14 @@ function Index(props) {
           {props.Loading ? (
             <ReservationLoading />
           ) : (
-            [1, 2, 3].map((item, i) => {
+            Data.map((item, i) => {
               let place = item.place;
 
               return (
                 <div key={i}>
                   <Link
                     to={{
-                      pathname: "/bookingDetalis",
-                      state: {
-                        id: item.id,
-                      },
+                      pathname: `/bookingDetalis/${item.id}`,
                     }}
                   >
                     <ReservationItem>
@@ -199,11 +196,11 @@ function Index(props) {
           )}
         </div>
       </WidgetInner>
-      {/* <SeeAll>
+      <SeeAll>
         <GrayText onClick={ShowAll}>
           {show ? "Show less " : " Show All"}
         </GrayText>
-      </SeeAll> */}
+      </SeeAll>
     </Widget>
   );
 }

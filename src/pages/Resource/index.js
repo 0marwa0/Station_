@@ -9,7 +9,7 @@ import "../../styles/globals.css";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import NewResources from "./NewResource";
-import { LoadData, addFile } from "../../API";
+import { LoadData, addFile, removeItem } from "../../API";
 import { monthNames } from "../shared/assets";
 
 import { Mesg, FailedMesg, SuccessMesg } from "../../API/APIMessage";
@@ -59,54 +59,57 @@ function Resources(props) {
       case "url":
         seturl(value);
         break;
-      case "image":
-        setimage(file);
-        break;
+
       default:
         break;
     }
   };
-
+  const handleFile = (file) => {
+    setimage(file);
+  };
   const handleSubmit = () => {
-    let data = JSON.stringify({
-      name: title,
-      description: dec,
-      url: url,
-      image: image,
-    });
+    let data = new FormData();
+    data.append("name", title);
+    data.append("description", dec);
+    data.append("nameAr", title);
+    data.append("descriptionAr", dec);
+    data.append("url", "file url");
+    data.append("image", "image file");
 
+    console.log(data, "sended data");
     // if (url != "" && title != "") {
     setLoading(true);
-    console.log(data, "here what we send");
-    // addFile(
-    //   "resource",
-    //   data,
-    //   (data) => {
-    //     if (data.errMsg) {
-    //       Mesg(data.errMsg);
-    //     } else {
-    //       SuccessMesg("Resource creating done !");
-    //       onOpenModal(false);
-    //       getResources();
-    //       settitle("");
-    //       setdec("");
-    //       setimage("");
-    //       seturl("");
-    //     }
+    addFile(
+      "resource",
+      data,
+      (data) => {
+        console.log(data, "whn file succes");
+        if (data.errMsg) {
+          Mesg(data.errMsg);
+        } else {
+          SuccessMesg("Resource creating done !");
 
-    //     setLoading(false);
-    //   },
-    //   (err) => {
-    //     onOpenModal(false);
-    //     setLoading(false);
-    //     settitle("");
-    //     setdec("");
-    //     setimage("");
-    //     seturl("");
+          getResources();
+        }
+        settitle("");
+        onOpenModal(false);
+        setdec("");
+        setimage("");
+        seturl("");
+        setLoading(false);
+      },
+      (err) => {
+        onOpenModal(false);
+        setLoading(false);
+        settitle("");
+        setdec("");
+        setimage("");
+        seturl("");
+        console.log(err, "whn file succes");
 
-    //     FailedMesg(" Resuorces creating failed ", err);
-    //   }
-    // );
+        FailedMesg(" Resuorces creating failed ", err);
+      }
+    );
   };
 
   useEffect(() => {
@@ -116,10 +119,37 @@ function Resources(props) {
       props.history.push("/login");
     }
   }, []);
+  const onDelete = (id) => {
+    setLoading(true);
+    removeItem(
+      "resource",
+      id,
+      (err, data) => {
+        if (err) {
+          setLoading(false);
+          Mesg(err);
+        } else {
+          setLoading(false);
+          getResources();
+          SuccessMesg("Delete File Done !");
+        }
+      },
+      (err) => {
+        setLoading(false);
+        FailedMesg("Delete File Faild!", err);
+      }
+    );
+    console.log(id, "id to deleted");
+  };
   let Resources = [];
   resource.map((item) => {
     Resources.push({
-      Title: { url: item.url, name: item.name },
+      id: {
+        url: item.url,
+        id: item.id,
+        delete: () => onDelete(item.id),
+      },
+      Title: item.name,
 
       Descriptions: item.description,
       Type: ["PDF"],
@@ -159,6 +189,7 @@ function Resources(props) {
         }}
       >
         <NewResources
+          handleFile={handleFile}
           handleInput={handleInput}
           handleSubmit={handleSubmit}
           Close={() => onOpenModal(false)}

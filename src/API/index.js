@@ -117,10 +117,9 @@ export const addData = (query, data, onSuccess, onFailure) => {
 
 export const addFile = (query, data, onSuccess, onFailure) => {
   var myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-  if (query === "resource") {
-    myHeaders.append("Content-Type", "application/json");
-  }
+  // if (query === "resource") {
+  //   myHeaders.append("Content-Type", "application/json");
+  // }
   myHeaders.append("token", localStorage.getItem("station_token"));
   var requestOptions = {
     method: "POST",
@@ -141,22 +140,22 @@ export const addFile = (query, data, onSuccess, onFailure) => {
     });
 };
 
-// export const removeItem = (query, id, onSuccess, onFailure) => {
-//   fetch(`${Config.host}${query}/${id}`, {
-//     method: "delete",
-//     headers: {
-//       token: localStorage.getItem("step_token"),
-//       "Content-Type": "application/json",
-//     },
-//   })
-//     .then((resp) => resp.json())
-//     .then((jsonData) => {
-//       onSuccess(jsonData.errMsg, jsonData);
-//     })
-//     .catch((err) => {
-//       onFailure(err.message);
-//     });
-// };
+export const removeItem = (query, id, onSuccess, onFailure) => {
+  fetch(`${Host}${query}/${id}`, {
+    method: "delete",
+    headers: {
+      token: localStorage.getItem("station_token"),
+      "Content-Type": "application/json",
+    },
+  })
+    .then((resp) => resp.json())
+    .then((jsonData) => {
+      onSuccess(jsonData.errMsg, jsonData);
+    })
+    .catch((err) => {
+      onFailure(err.message);
+    });
+};
 
 // export const removeItems = (query, ids, onSuccess, onFailure) => {
 //   fetch(`${Config.host}${query}`, {

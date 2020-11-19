@@ -10,7 +10,7 @@ import {
   PageTitle,
 } from "../shared/CustomPage";
 import { DownOutlined } from "@ant-design/icons";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import SideBar from "../Sidebar";
 import { PageBack } from "../Profile";
 import { BsArrowLeft } from "react-icons/bs";
@@ -146,23 +146,25 @@ const Index = (props) => {
   const setBooking = (status) => {
     setBookingStatus(status);
   };
+  let { id } = useParams();
+
   useEffect(() => {
+    // console.log(id, "detales loacton");
     if (localStorage.getItem("station_token")) {
-      setId(location.state.id);
+      setId(id);
       getDetalis();
     } else {
       props.history.push("/login");
     }
   }, []);
   const getDetalis = () => {
-    let id = location.state.id;
     LoadData(
       `book/${id}`,
       (err, data) => {
         setLoading(false);
 
         //setarticles(data.data.rows);
-        console.log("detalils here", data.data);
+        // console.log("detalils here", data.data);
         setdata(data.data);
         if (err) {
           Mesg(err);
@@ -186,7 +188,6 @@ const Index = (props) => {
       "book/reject",
       data,
       (mesg, Data) => {
-        console.log(Data, "came whti the approve");
         SuccessMesg("Reservation Rejected !");
         setLoading(false);
         setId("");
@@ -210,7 +211,7 @@ const Index = (props) => {
       "book/approve",
       data,
       (mesg, Data) => {
-        console.log(Data, "came whti the reject");
+        // console.log(Data, "came whti the reject");
         SuccessMesg("Reservation Approved!");
         setLoading(false);
         setId("");
@@ -226,7 +227,7 @@ const Index = (props) => {
   };
   let Data = data ? data : {};
 
-  console.log(data);
+  // console.log(data);
   return (
     <CustomPageWrapper>
       <GlobalStyle />
@@ -234,7 +235,7 @@ const Index = (props) => {
       <PageContent>
         <div style={{ marginTop: "40px" }}>
           <Wrapper>
-            <Link to="/Booking">
+            <Link to="/booking">
               <PageBack>
                 <BsArrowLeft />
                 <div>Booking</div>
@@ -248,7 +249,7 @@ const Index = (props) => {
                 {!BookingStatus ? null : (
                   <ButtonStyled
                     onClick={() => history.push("/createEvent")}
-                    Main
+                    main
                   >
                     Create Event
                   </ButtonStyled>

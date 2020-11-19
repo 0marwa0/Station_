@@ -108,12 +108,12 @@ function Index(props) {
           )}
           {currentPage === 4 ? (
             <Link to="/BookingDetalis">
-              <CustomModleButton Main extra>
+              <CustomModleButton main extra>
                 finsh
               </CustomModleButton>
             </Link>
           ) : (
-            <CustomModleButton Main extra fun={nextPage}>
+            <CustomModleButton main extra fun={nextPage}>
               Next
             </CustomModleButton>
           )}

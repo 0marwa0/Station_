@@ -143,7 +143,7 @@ function Index(props) {
       </PageWrapper>{" "}
       <ModleFooter>
         <CustomModleButton fun={props.Close}>Cancel</CustomModleButton>
-        <CustomModleButton Main fun={handleSubmit}>
+        <CustomModleButton main fun={handleSubmit}>
           Send
         </CustomModleButton>
       </ModleFooter>

@@ -168,7 +168,7 @@ function Index(props) {
           justifyContent: "center",
         }}
       >
-        <CustomButton Main>See All Activity</CustomButton>
+        <CustomButton main>See All Activity</CustomButton>
       </div>
     </div>
   );

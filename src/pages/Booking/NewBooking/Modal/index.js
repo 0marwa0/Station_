@@ -129,7 +129,7 @@ export function FirstPage() {
           <CustomInput placeholder="write organizer name" />
         </InputLable>{" "}
         <InputLable>
-          <Space />{" "}
+          <Space />
           <Size>
             No. of People
             <span style={{ color: "var(--textGray)" }}>Max: 30</span>{" "}
@@ -280,7 +280,7 @@ export function ThirdPage() {
       (err, data) => {
         setLoading(false);
         setDesigns(data.data);
-        console.log(data.data, "design");
+        // console.log(data.data, "design");
         if (err) {
           Mesg(err);
         }
@@ -298,7 +298,7 @@ export function ThirdPage() {
       (err, data) => {
         setLoading(false);
         setLunches(data.data);
-        console.log(data, "our lunches");
+        // console.log(data, " lunches");
         if (err) {
           Mesg(err);
         }
@@ -441,6 +441,40 @@ export function ThirdPage() {
 }
 
 export function ForthPage() {
+  const [Loading, setLoading] = useState(false);
+  const [Types, setTypes] = useState([]);
+  const getTypes = () => {
+    LoadData(
+      "book/types",
+      (err, data) => {
+        setLoading(false);
+        setTypes(data.data);
+        // console.log(data.data, "type of api");
+        if (err) {
+          Mesg(err);
+        }
+      },
+      (err) => {
+        setLoading(false);
+        FailedMesg(err, "Something worng happend !");
+      }
+    );
+  };
+  useEffect(() => {
+    getTypes();
+  }, []);
+  // const Option = () =>
+  //   Types.map((item) => <Menu.Item key="1">{item.name}</Menu.Item>);
+
+  const TypeData = (
+    <Menu>
+      {Types.map((item) => {
+        return <Menu.Item key="1">{item.name}</Menu.Item>;
+      })}
+    </Menu>
+  );
+
+  console.log("boooooook type");
   return (
     <div className="modleWrapper">
       <div
@@ -455,11 +489,21 @@ export function ForthPage() {
           <Input addonAfter="IQD" placeholder="0.0" />
         </InputLable>
       </div>
+      <Dropdown overlay={TypeData}>
+        <Button
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "5px",
+            color: "var(--textGray)",
+            justifyContent: "space-between",
+          }}
+        >
+          Book Type <DropIcon />
+        </Button>
+      </Dropdown>
     </div>
   );
 }
-function Index() {
-  return <div></div>;
-}
 
-export default Index;
+// export default Index;
