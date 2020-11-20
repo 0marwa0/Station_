@@ -35,11 +35,12 @@ export const NotifiImage = styled.img`
   height: 45px;
   border-radius: 50%;
 `;
-const Text = styled.span`
+export const Text = styled.span`
   display: inline-block;
   width: 100%;
   color: var(--darkGray);
   white-space: nowrap;
+
   overflow: hidden !important;
   text-overflow: ellipsis;
 `;
@@ -89,13 +90,13 @@ function Index(props) {
   return (
     <div>
       <NotificationsHolder>
-        <Scrollbars style={{ width: "400px", height: "100%" }}>
+        <Scrollbars style={{ width: "420px", height: "380px" }}>
           {Loading
-            ? [1, 2, 3].map((i) => {
+            ? [1, 2].map((i) => {
                 return (
                   <div
                     style={{
-                      width: "398px",
+                      width: "420px",
                       height: "85px",
                       padding: "10px 0",
                       borderBottom: "1px solid var(--lighterGray)",
@@ -103,7 +104,7 @@ function Index(props) {
                   >
                     <ContentLoader
                       speed={2}
-                      width={600}
+                      width={400}
                       height={160}
                       viewBox="0 0 600 160"
                       backgroundColor="#f3f3f3"
@@ -120,14 +121,14 @@ function Index(props) {
                       />
 
                       <rect
-                        x="350"
+                        x="580"
                         y="26"
                         rx="3"
                         ry="3"
                         width="25"
                         height="4"
                       />
-                      <circle cx="335" cy="27" r="3" />
+                      <circle cx="565" cy="27" r="3" />
                       <circle cx="47" cy="30" r="27" />
                     </ContentLoader>
                   </div>

@@ -27,6 +27,51 @@ const StatisticLoading = () => {
     </div>
   );
 };
+export const ReservationLoading = () => {
+  return (
+    <div>
+      <Space
+        style={{
+          height: "70px",
+
+          borderBottom: "1px solid var(--LighterGray)",
+        }}
+      >
+        {/* <Skeleton.Image /> */}
+        <Divider />
+        <div
+          style={{
+            display: "flex",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+            }}
+          >
+            <Skeleton.Input
+              active="active"
+              style={{ width: "3vw", height: "3vw", borderRadius: "7px" }}
+              shape="circle"
+            />{" "}
+            <Skeleton.Input
+              style={{ width: 70, height: 3 }}
+              active="active"
+              size="default"
+            />
+          </div>
+          {/* <Skeleton.Input
+            style={{ width: 20, height: 3 }}
+            active="active"
+            size="default"
+          /> */}
+        </div>
+      </Space>
+    </div>
+  );
+};
 export const BookItemLoading = () => {
   return [1, 2, 3].map((item, i) => {
     return (

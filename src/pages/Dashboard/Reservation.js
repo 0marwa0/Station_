@@ -4,18 +4,18 @@ import { ReservationsData } from "../../fakeData";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { monthNames } from "../shared/assets";
-
-import { ReservationLoading } from "../shared/SharedComponents";
+import { Text } from "../Notification";
+import { ReservationLoading } from "../shared/Loading";
 const ReservationItem = styled.div`
   display: grid;
-  grid-template-columns: 15% max-content auto;
+  grid-template-columns: 15% 55% auto;
   width: 100%;
-  padding-bottom: 9px;
+  padding-bottom: 3%;
   align-items: center;
-  gap: 7px;
+  gap: 12px;
 
   cursor: pointer;
-  padding-top: 9px;
+  padding-top: 3%;
 `;
 const ItemHeader = styled.div`
   display: flex;
@@ -26,8 +26,8 @@ const ItemHeader = styled.div`
 // padding: 10px 7% 10px 7%;
 const ReservIcon = styled.div`
   width: 2.8vw;
-  height: 2.8vw;
-  border-radius: 7px;
+  height: 2.7vw;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   font-size: 1vw;
@@ -37,8 +37,8 @@ const ReservIcon = styled.div`
 
 const SubA = styled.div`
   width: 2.8vw;
-  height: 2.8vw;
-  border-radius: 7px;
+  height: 2.7vw;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   font-size: 1vw;
@@ -47,8 +47,8 @@ const SubA = styled.div`
 `;
 const SubB = styled.div`
   width: 2.8vw;
-  height: 2.8vw;
-  border-radius: 7px;
+  height: 2.7vw;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   font-size: 1vw;
@@ -57,8 +57,8 @@ const SubB = styled.div`
 `;
 const SubC = styled.div`
   width: 2.8vw;
-  height: 2.8vw;
-  border-radius: 7px;
+  height: 2.7vw;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   font-size: 1vw;
@@ -73,9 +73,9 @@ const GrayText = styled.span`
 const NumBtn = styled.div`
   background-color: var(--yellow);
   padding-top: 2px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-radius: 5px;
+  padding-left: 6px;
+  padding-right: 6px;
+  border-radius: 7px;
   font-size: 0.8vw;
 `;
 const SeeAll = styled.div`
@@ -109,11 +109,16 @@ function Index(props) {
         item.createdAt.split("-")[0],
     })
   );
-
+  const Name = styled.div`
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 200px;
+  `;
   const WidgetInner = styled.div`
     overflow: hidden;
     transition: 2s ease;
-    max-height: ${(props) => (props.showall ? "auto" : "300px")};
+    max-height: ${(props) => (props.showall ? "auto" : "18vw")};
   `;
   const [show, setshow] = useState(false);
   const ShowAll = () => {
@@ -124,76 +129,83 @@ function Index(props) {
     <Widget reservation>
       <WidgetInner showall={show}>
         <ItemHeader>
-          <span style={{ fontWeight: "bold", fontSize: "1.2vw" }}>
+          <span style={{ fontWeight: "bold", fontSize: "1.1vw" }}>
             Pending Reservations
           </span>
           <NumBtn>{Data.length}</NumBtn>
         </ItemHeader>
         <div className="items">
-          {props.Loading ? (
-            <ReservationLoading />
-          ) : (
-            Data.map((item, i) => {
-              let place = item.place;
+          {props.Loading
+            ? [1, 2, 3, 4].map((item, i) => {
+                return <ReservationLoading />;
+              })
+            : Data.map((item, i) => {
+                let place = item.place;
 
-              return (
-                <div key={i}>
-                  <Link
-                    to={{
-                      pathname: `/bookingDetalis/${item.id}`,
-                    }}
-                  >
-                    <ReservationItem>
-                      {place === "Event Hall" ? (
-                        <ReservIcon> Hall</ReservIcon>
-                      ) : place === "A" ? (
-                        <SubA>{item.place}</SubA>
-                      ) : place === "B" ? (
-                        <SubB>{item.place}</SubB>
-                      ) : place === "C" ? (
-                        <SubC>{item.place}</SubC>
-                      ) : (
-                        ""
-                      )}
+                return (
+                  <div key={i}>
+                    <Link
+                      to={{
+                        pathname: `/bookingDetalis/${item.id}`,
+                      }}
+                    >
+                      <ReservationItem>
+                        {place === "Event Hall" ? (
+                          <ReservIcon> Hall</ReservIcon>
+                        ) : place === "A" ? (
+                          <SubA>{item.place}</SubA>
+                        ) : place === "B" ? (
+                          <SubB>{item.place}</SubB>
+                        ) : place === "C" ? (
+                          <SubC>{item.place}</SubC>
+                        ) : (
+                          ""
+                        )}
 
-                      <div>
-                        <span> {item.name}</span>
-                        <div style={{ marginTop: "-4px" }}>
-                          <GrayText>
-                            <span>{item.doc} </span>
-                            <span
-                              style={{
-                                width: "7px",
+                        <div>
+                          {" "}
+                          <div
+                            style={{
+                              fontSize: "1vw",
+                            }}
+                          >
+                            <Name>{item.name}</Name>
+                          </div>
+                          <div style={{ marginTop: "-4px" }}>
+                            <GrayText>
+                              <span>{item.doc} </span>
+                              <span
+                                style={{
+                                  width: "7px",
 
-                                textAlign: "center",
-                              }}
-                            >
-                              |
-                            </span>
-                            <span> {item.date}</span>
-                          </GrayText>
+                                  textAlign: "center",
+                                }}
+                              >
+                                |
+                              </span>
+                              <span> {item.date}</span>
+                            </GrayText>
+                          </div>
                         </div>
-                      </div>
-                      <div
-                        style={{
-                          display: "flex",
-                          fontSize: "0.8vw",
-                          color: "var(--textGray)",
+                        <div
+                          style={{
+                            display: "flex",
+                            fontSize: "0.8vw",
+                            color: "var(--textGray)",
 
-                          paddingRight: "2px",
-                          justifyContent: "flex-end",
-                          textAlign: "right",
-                          backgroundColor: "white",
-                        }}
-                      >
-                        {item.time}
-                      </div>
-                    </ReservationItem>
-                  </Link>
-                </div>
-              );
-            })
-          )}
+                            paddingRight: "2px",
+                            justifyContent: "flex-end",
+                            textAlign: "right",
+                            backgroundColor: "white",
+                          }}
+                        >
+                          {item.time}
+                        </div>
+                      </ReservationItem>
+                    </Link>
+                  </div>
+                );
+              })}
         </div>
       </WidgetInner>
       <SeeAll>

@@ -134,7 +134,7 @@ function CustomPage(props) {
       ref.current.complete();
     }
   }, []);
-  console.log(pageTitleName, "show page name");
+  // console.log(pageTitleName, "show page name");
   return (
     <CustomPageWrapper>
       <LoadingBar color="var(--yellow)" ref={ref} shadow={true} />

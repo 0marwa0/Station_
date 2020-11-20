@@ -88,11 +88,12 @@ const BoldText = styled.div`
   font-size: 0.9vw;
 `;
 const DropBtn = styled.div`
-  padding: 6px 8px;
-  borderradius: 10px;
-  height: 23px;
+  padding: 8px 8px;
+  border-radius: 8px;
+  height: 28px;
   font-size: 12px;
   display: flex;
+  border: 1px solid var(--lighterGray);
   align-items: center;
   width: 65px;
   justify-content: space-between;

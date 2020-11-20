@@ -60,7 +60,11 @@ const NavItem = ({ slug, children, index, title }) => {
   }
 
   let text = slug.charAt(0).toUpperCase() + slug.slice(1);
-  return (
+  return slug === "Notifications" ? (
+    <SideItem type={type} isSelected={isSelected}>
+      {children}
+    </SideItem>
+  ) : (
     <Tooltip title={dash ? "Dashboard" : text} placement="right">
       <Link to={url}>
         <SideItem type={type} isSelected={isSelected}>
@@ -224,7 +228,9 @@ function SideBar(props) {
                   transform="translate(-12249.001 -13560.001)"
                   fill="none"
                   stroke={
-                    page.slice(0, 14) === page ? "#8a8a8a" : "var(--yellow)"
+                    page.slice(0, 14) === page && page != "booking"
+                      ? "#8a8a8a"
+                      : "var(--yellow)"
                   }
                   strokeWidth="2.5"
                 />
@@ -241,7 +247,9 @@ function SideBar(props) {
                     transform="translate(44.167 205.292)"
                     fill="none"
                     stroke={
-                      page.slice(0, 14) === page ? "#8a8a8a" : "var(--yellow)"
+                      page.slice(0, 14) === page && page != "booking"
+                        ? "#8a8a8a"
+                        : "var(--yellow)"
                     }
                     strokeWidth="2.5"
                   />
@@ -252,7 +260,9 @@ function SideBar(props) {
                     transform="translate(48.167 209.292) rotate(90)"
                     fill="none"
                     stroke={
-                      page.slice(0, 14) === page ? "#8a8a8a" : "var(--yellow)"
+                      page.slice(0, 14) === page && page != "booking"
+                        ? "#8a8a8a"
+                        : "var(--yellow)"
                     }
                     strokeWidth="2.5"
                   />

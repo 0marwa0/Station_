@@ -1,7 +1,7 @@
 {
   "name": "station",
   "version": "0.1.0",
-     "homepage": ".",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.2.2",
@@ -28,6 +28,7 @@
     "react-icons": "^3.11.0",
     "react-js-loading-progress-bar": "^0.3.1",
     "react-loader-spinner": "^3.1.14",
+    "react-moment": "^1.0.0",
     "react-progress-2": "^4.4.3",
     "react-responsive-modal": "^5.1.1",
     "react-router-dom": "^5.2.0",

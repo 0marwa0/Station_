@@ -7,7 +7,14 @@ import { Button } from "antd";
 import { AiOutlineClose } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { ReactComponent as Close } from "../../../public/images/close.svg";
-import { FirstPage, SecondPage, ThirdPage, ForthPage } from "./Modal";
+import { Mesg, FailedMesg } from "../../../API/APIMessage";
+import { LoadData } from "../../../API";
+
+import FirstPage from "./Modal/FirstPage";
+import SecondPage from "./Modal/SecondPage";
+import ThirdPage from "./Modal/ThirdPage";
+import ForthPage from "./Modal/ForthPage";
+import { useEffect } from "react/cjs/react.development";
 const data = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
 const Dot = styled.span``;
 const CurrentDot = styled.span``;
@@ -26,7 +33,7 @@ const ModleFooter = styled.div`
   padding: 40px;
   justify-content: space-between;
 `;
-function Index(props) {
+function NewBooking(props) {
   const [currentPage, setcurrentPage] = useState(1);
   const [pagePerOnce, setpagePerOnce] = useState(1);
   const [pageNumber, setpageNumber] = useState(0);
@@ -46,8 +53,70 @@ function Index(props) {
   const indexOfLastPage = currentPage * pagePerOnce;
   const indexOfFirstPage = indexOfLastPage - pagePerOnce;
   const pages = data.slice(indexOfFirstPage, indexOfLastPage);
-  console.log(currentPage);
+  const [Loading, setLoading] = useState(false);
+  const [coffees, setCoffees] = useState([]);
+  const [lunches, setLunches] = useState([]);
+  const [Designs, setDesigns] = useState([]);
 
+  const loadDesigns = () => {
+    setLoading(true);
+    LoadData(
+      "space/designs",
+      (err, data) => {
+        setLoading(false);
+        setDesigns(data.data);
+        // console.log(data.data, "design");
+        if (err) {
+          Mesg(err);
+        }
+      },
+      (err) => {
+        setLoading(false);
+        FailedMesg(err, "Something worng happend !");
+      }
+    );
+  };
+  const loadLunches = () => {
+    setLoading(true);
+    LoadData(
+      "lunches",
+      (err, data) => {
+        setLoading(false);
+        setLunches(data.data);
+        // console.log(data, " lunches");
+        if (err) {
+          Mesg(err);
+        }
+      },
+      (err) => {
+        setLoading(false);
+        FailedMesg(err, "Something worng happend !");
+      }
+    );
+  };
+  const loadCoffees = () => {
+    setLoading(true);
+    LoadData(
+      "/coffees",
+      (err, data) => {
+        setLoading(false);
+        setCoffees(data.data);
+        if (err) {
+          Mesg(err);
+        }
+      },
+      (err) => {
+        setLoading(false);
+        FailedMesg(err, "Something worng happend !");
+      }
+    );
+  };
+  //  console.log(currentPage);
+  useEffect(() => {
+    loadCoffees();
+    loadLunches();
+    loadDesigns();
+  }, []);
   return (
     <div>
       <ModleTitle>
@@ -71,13 +140,28 @@ function Index(props) {
         return (
           <div>
             {i.id === 1 ? (
-              <FirstPage handleInput={props.handleInput} />
+              <FirstPage
+                handleInput={props.handleInput}
+                handleselect={props.handleselect}
+              />
             ) : i.id === 2 ? (
-              <SecondPage handleInput={props.handleInput} />
+              <SecondPage
+                handleInput={props.handleInput}
+                handleselect={props.handleselect}
+              />
             ) : i.id === 3 ? (
-              <ThirdPage handleInput={props.handleInput} />
+              <ThirdPage
+                coffees={coffees}
+                lunches={lunches}
+                Designs={Designs}
+                Loading={Loading}
+                handleselect={props.handleselect}
+              />
             ) : i.id === 4 ? (
-              <ForthPage handleInput={props.handleInput} />
+              <ForthPage
+                handleInput={props.handleInput}
+                handleselect={props.handleselect}
+              />
             ) : (
               ""
             )}
@@ -107,12 +191,12 @@ function Index(props) {
             </CustomModleButton>
           )}
           {currentPage === 4 ? (
-            <Link to="/BookingDetalis">
-              <CustomModleButton main extra>
-                finsh
-              </CustomModleButton>
-            </Link>
+            // <Link to="/BookingDetalis">
+            <CustomModleButton fun={props.handleSubmit} main extra>
+              Finsh
+            </CustomModleButton>
           ) : (
+            // </Link>
             <CustomModleButton main extra fun={nextPage}>
               Next
             </CustomModleButton>
@@ -123,4 +207,4 @@ function Index(props) {
   );
 }
 
-export default Index;
+export default NewBooking;

@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import SideBar from "../Sidebar";
 import { BiExport, BiDollar } from "react-icons/bi";
 import Reservation from "./Reservation";
+import moment from "moment";
 import Statistic from "./Statistic";
 import LoadingBar from "react-top-loading-bar";
 import { AiOutlinePlus } from "react-icons/ai";
@@ -13,10 +14,10 @@ import FullCalendar from "@fullcalendar/react";
 import { Modal } from "react-responsive-modal";
 import { ReactComponent as PrintIcon } from "../../public/images/print.svg";
 import { Data } from "../../fakeData/DashFakeData";
-import NewBooking from "../Booking/NewBooking";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import Tooltip from "react-tooltip";
+import BookingModal from "./BookingModal";
 import { LoadBooking, LoadData } from "../../API";
 import { SuccessMesg, FailedMesg, Mesg } from "../../API/APIMessage";
 import { SmileOutlined } from "@ant-design/icons";
@@ -57,6 +58,8 @@ export const Widget = styled.div`
   border-radius: 7px;
   border: 1px solid var(--lighterGray);
   display: flex;
+  overflow: hidden;
+  transition: 2s ease;
   padding: 17px 17px 8px 17px;
   width: 100%;
   flex-direction: column;
@@ -154,7 +157,27 @@ function Index(props) {
   const [Loading, setLoading] = useState(false);
   const [BookDates, setBookDates] = useState(false);
   const [statistics, setstatistics] = useState({});
-
+  const getDate = (date) => {
+    let result = moment(date, "YYYY-MM-DD HH:mm:ss").format("yyyy-MM-DD");
+    return result;
+  };
+  const getDay = (date) => {
+    let result = moment(date, "YYYY-MM-DD HH:mm:ss").format("dddd");
+    return result;
+  };
+  const DateName = (date) => {
+    let result = moment(date, "YYYY-MM-DD HH:mm:ss")
+      .format("D-MMMM-yyy")
+      .replace("-", " ")
+      .replace("-", " ");
+    return result;
+  };
+  const getTime = (date) => {
+    let result = moment(date, "YYYY-MM-DD HH:mm:ss A")
+      .format("h-mm A")
+      .replace("-", ":");
+    return result;
+  };
   const loadApiData = () => {
     setLoading(true);
     ref.current.staticStart();
@@ -190,11 +213,7 @@ function Index(props) {
         );
 
         Dates.map(
-          (obj) =>
-            (obj.time =
-              obj.start.split("T", 2)[1].split(".")[0] +
-              "-" +
-              obj.end.split("T", 2)[1].split(".")[0])
+          (obj) => (obj.time = getTime(obj.start) + " - " + getTime(obj.end))
         );
 
         Dates.map(
@@ -202,8 +221,9 @@ function Index(props) {
             (obj.color =
               colors[`color${Math.floor(Math.random() * (5 - 1 + 1)) + 1}`])
         );
-        Dates.map((obj) => (obj.end = obj.end.split("T")[0]));
-        Dates.map((obj) => (obj.start = obj.start.split("T")[0]));
+
+        Dates.map((obj) => (obj.end = getDate(obj.end)));
+        Dates.map((obj) => (obj.start = getDate(obj.start)));
 
         Dates.map(
           (obj) =>
@@ -213,13 +233,22 @@ function Index(props) {
                   .filter((i) => i.id === obj.bookId)
                   .map((i) => i.title)
                   .toString(),
-                day: obj.start + "-" + obj.end,
-                date: "",
+                day:
+                  obj.start === obj.end
+                    ? getDay(obj.start)
+                    : getDay(obj.start) + " - " + getDay(obj.end),
+                date:
+                  obj.start === obj.end
+                    ? DateName(obj.start)
+                    : DateName(obj.start) + " - " + DateName(obj.end),
                 time: obj.time,
               },
             ])
         );
-
+        console.log(
+          Dates.map((obj) => getTime("2019-12-31T09:30:00.000")),
+          "sofosfshf"
+        );
         setBookDates(Dates);
       },
       (err) => {
@@ -300,7 +329,7 @@ function Index(props) {
           style={{
             display: "grid",
             gap: "25px",
-            gridTemplateColumns: "2fr 0.7fr",
+            gridTemplateColumns: "auto 23vw",
           }}
         >
           <Col
@@ -327,18 +356,7 @@ function Index(props) {
           </Col>
         </Row>
       </PageContent>
-      <Modal
-        closeOnOverlayClick={true}
-        open={open}
-        onClose={() => onOpenModal(false)}
-        center
-        showCloseIcon={false}
-        classNames={{
-          modal: "customModal",
-        }}
-      >
-        <NewBooking from="Dashboard" Close={() => onOpenModal(false)} />
-      </Modal>
+      <BookingModal open={open} onOpenModal={onOpenModal} />
     </CustomPageWrapper>
   );
 }
