@@ -37,7 +37,6 @@ function FilUploader(props) {
         setLoading(false);
         setfiles(data.data.rows);
         // FilesData(data.data.rows, (item) => {
-
         // });
 
         if (err) {
@@ -72,6 +71,8 @@ function FilUploader(props) {
           Mesg(data.errMsg);
         } else {
           SuccessMesg("File upload done !");
+
+          // console.log("link", data.data.link);
           onOpenModal(false);
           getFiles();
         }

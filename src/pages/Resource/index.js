@@ -9,7 +9,7 @@ import "../../styles/globals.css";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import NewResources from "./NewResource";
-import { LoadData, addFile, removeItem } from "../../API";
+import { LoadData, addData, addFile, removeItem } from "../../API";
 import { monthNames } from "../shared/assets";
 
 import { Mesg, FailedMesg, SuccessMesg } from "../../API/APIMessage";
@@ -45,6 +45,7 @@ function Resources(props) {
   const [dec, setdec] = useState("");
   const [url, seturl] = useState("");
   const [image, setimage] = useState("");
+  const [file, setfile] = useState("");
 
   const handleInput = (e, key) => {
     let value = e.target.value;
@@ -56,9 +57,6 @@ function Resources(props) {
       case "dec":
         setdec(value);
         break;
-      case "url":
-        seturl(value);
-        break;
 
       default:
         break;
@@ -68,59 +66,58 @@ function Resources(props) {
     setimage(file);
   };
   const handleSubmit = () => {
-    console.log(image, "image ");
-    // let form = new FormData();
-    // form.append("name", title);
-    // form.append("description", dec);
-    // form.append("nameAr", title);
-    // form.append("descriptionAr", dec);
-    // form.append("url", "url");
-    // form.append("image", image.toString());
-    var raw = JSON.stringify({
-      name: title,
-      description: dec,
-      url: image.name,
-      image: image.file,
-
-      nameAr: title,
-      descriptionAr: dec,
-    });
-
-    // if (url != "" && title != "") {
     setLoading(true);
+    let File = new FormData();
+    File.append("file", image);
     addFile(
-      "resource",
-      raw,
+      "upload/file",
+      File,
       (data) => {
-        // console.log(data, "whn file succes");
         if (data.errMsg) {
           Mesg(data.errMsg);
         } else {
-          SuccessMesg("Resource creating done !");
+          var resource = {
+            name: title,
+            description: dec,
+            url: data.data.link,
+            image: data.data.link,
+            nameAr: title,
+            descriptionAr: dec,
+          };
 
-          getResources();
+          addData(
+            "resource",
+            resource,
+            (data) => {
+              if (data.errMsg) {
+                Mesg(data.errMsg);
+              } else {
+                SuccessMesg("Resource creating done !");
+                getResources();
+              }
+              onOpenModal(false);
+              ClearState();
+            },
+            (err) => {
+              onOpenModal(false);
+              ClearState();
+              FailedMesg(" Resuorces creating failed ", err);
+            }
+          );
         }
-        settitle("");
-        onOpenModal(false);
-        setdec("");
-        setimage("");
-        seturl("");
-        setLoading(false);
       },
       (err) => {
-        onOpenModal(false);
-        setLoading(false);
-        settitle("");
-        setdec("");
-        setimage("");
-        seturl("");
-        console.log(err, "whn file fail");
-
-        FailedMesg(" Resuorces creating failed ", err);
+        FailedMesg(err.toString());
       }
     );
   };
-
+  const ClearState = () => {
+    setLoading(false);
+    settitle("");
+    setdec("");
+    setimage("");
+    seturl("");
+  };
   useEffect(() => {
     if (localStorage.getItem("station_token")) {
       getResources();

@@ -107,7 +107,7 @@ function CustomPage(props) {
     setShowTable(false);
   };
   const [currentPage, setcurrentPage] = useState(1);
-  const [pagePerOnce, setpagePerOnce] = useState(6);
+  const [pagePerOnce, setpagePerOnce] = useState(20);
   const [pageNumber, setpageNumber] = useState(0);
   const prevPage = () => {
     if (currentPage > 1) {

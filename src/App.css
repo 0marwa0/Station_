@@ -269,6 +269,12 @@ body {
     opacity: 1;
   }
 }
+
+.fc-daygrid-day-frame:before,
+.fc-daygrid-day-events:before,
+.fc-daygrid-event-harness:before {
+  border: 1px solid transparent !important;
+}
 /* .slide {
   padding-bottom: 10px !important;
   background-color: rebeccapurple !important;
@@ -306,6 +312,7 @@ body {
   padding: 15px;
   pointer-events: none;
 }
+
 .upload_img_close {
   display: flex;
   flex-direction: column;
@@ -318,7 +325,7 @@ body {
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  width: 100%;
+  width: 520px;
   border-radius: 7px;
   min-height: 270px;
   margin-bottom: 10px;
@@ -481,6 +488,7 @@ th:last-child {
   color: var(--blue) !important;
   background: var(--lightBlue) !important;
 }
+
 /***************************************************************/
 :root {
   --black: #1d1d1d;

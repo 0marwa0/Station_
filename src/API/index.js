@@ -128,12 +128,10 @@ export const addFile = (query, data, onSuccess, onFailure) => {
     body: data,
     redirect: "follow",
   };
-
   fetch(`${Host}${query}`, requestOptions)
     .then((response) => response.json())
     .then((result) => {
       onSuccess(result);
-      console.log(result, "success");
     })
     .catch((error) => {
       onFailure(error);
