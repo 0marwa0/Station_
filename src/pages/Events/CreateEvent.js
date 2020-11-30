@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { IoMdRefresh } from "react-icons/io";
 import Editor from "@stfy/react-editor.js";
+import { useParams } from "react-router-dom";
+import { LoadData, addData } from "../../API";
+import { SuccessMesg, FailedMesg, Mesg } from "../../API/APIMessage";
 import { ReactComponent as RefreshIcon } from "../../public/images/solid undo-right.svg";
 import { ReactComponent as RefreshIconLeft } from "../../public/images/solid undo.svg";
-
+import { ReactComponent as DropIcon } from "../../public/images/dropdown.svg";
 import { CustomPageWrapper, PageContent } from "../shared/CustomPage";
 import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
@@ -14,12 +17,13 @@ import { PageBack } from "../Profile";
 import { Menu, Dropdown, message, Tooltip } from "antd";
 import { DownOutlined, UserOutlined } from "@ant-design/icons";
 import SideBar from "../Sidebar";
-import { Button, Row, Col, Input } from "antd";
+import { Button, Row, Col, Input, Select } from "antd";
 import { GlobalStyle } from "../Dashboard";
 import styled from "styled-components";
 import { ImAttachment } from "react-icons/im";
 import { FaTrashAlt } from "react-icons/fa";
 import { CustomButton } from "../shared/SharedComponents";
+const { Option } = Select;
 
 export const TextNote = styled.div`
   color: var(--darkGray);
@@ -28,7 +32,7 @@ export const TextNote = styled.div`
 
 const EventContent = styled(Col)`
   width: 70%;
-  height: 560px;
+  height: auto;
   padding: 40px 50px;
   background-color: white;
   border: 1px solid var(--lighterGray);
@@ -107,18 +111,20 @@ const MainLayout = styled(Col)`
 
   justify-content: space-between;
 `;
-const Mainoption = (
-  <Menu>
-    <Menu.Item key="1">English</Menu.Item>
-    <Menu.Item key="2">Arabic</Menu.Item>
-  </Menu>
-);
+
 const GrayText = styled.div`
   color: var(--darkGray);
   font-size: 1vw;
 `;
 const Index = () => {
+  let { id } = useParams();
   const [Active, setActive] = useState(false);
+  const [title, settitle] = useState("");
+  const [price, setprice] = useState("");
+  const [description, setdescription] = useState("");
+  const [Loading, setLoading] = useState(false);
+  const [file, setfile] = useState("");
+
   const [fileName, setFileName] = useState("");
   const [fileSize, setFileSize] = useState("");
 
@@ -148,8 +154,10 @@ const Index = () => {
     setallowToChange(true);
     setActive(true);
     let type = e.target.files[0].type;
+    setfile(e.target.files[0]);
     if (type.substring(0, 5) === "image") {
       value = URL.createObjectURL(e.target.files[0]);
+
       setImage(value);
     } else {
       setImage(require("../FileUploader/NewFileUploader/file2.webp"));
@@ -178,8 +186,9 @@ const Index = () => {
   };
   const fileDrop = (e) => {
     e.preventDefault();
-    console.log("doregedd");
+
     let value;
+    setfile(e.dataTransfer.files[0]);
     let type = e.dataTransfer.files[0].type;
     if (type.substring(0, 5) === "image") {
       value = URL.createObjectURL(e.dataTransfer.files[0]);
@@ -192,6 +201,53 @@ const Index = () => {
     getFileSize(e.dataTransfer.files[0].size);
   };
 
+  const createEvent = () => {
+    let data = {
+      id: id,
+      image: file,
+      title,
+      description,
+      lang: "ar",
+      ticketPrice: price,
+    };
+    console.log(data, "envet publish");
+    // setLoading(true);
+    // addData(
+    //   "toevent",
+    //   data,
+    //   (mesg, Data) => {
+    //     SuccessMesg("Create Event Done!");
+    //     setLoading(false);
+    //   },
+    //   (err) => {
+    //     setLoading(false);
+
+    //     FailedMesg(err);
+    //   }
+    // );
+  };
+  const [t, sett] = useState("");
+  const handletext = (e, key) => {
+    let text = "";
+    e.map((i) => (text += i.data.text));
+    setdescription(text);
+    console.log(text);
+    // sett(text);
+  };
+  const handleselect = (e, key) => {
+    let value = e;
+    switch (key) {
+      case "title":
+        settitle(value);
+        break;
+
+      case "price":
+        setprice(value);
+        break;
+      default:
+        break;
+    }
+  };
   const UplaodWdiget = () => {
     return (
       <UploadContenter>
@@ -204,8 +260,7 @@ const Index = () => {
           onDrop={fileDrop}
           className={
             Active ? "upload_modal event active" : "upload_modal event"
-          }
-        >
+          }>
           <div className="upload_img_close">
             <img src={Image} className="img" />
           </div>
@@ -213,8 +268,7 @@ const Index = () => {
             style={{
               color: "#808D93",
               fontSize: "1.2vw",
-            }}
-          >
+            }}>
             Choose any file form computer or
             <span style={{ color: "black" }}> Drag & Drop</span> it here
           </span>
@@ -278,20 +332,30 @@ const Index = () => {
                 <RefreshIcon />
               </CustomButton>
               <CustomButton>Preview</CustomButton>{" "}
-              <CustomButton main>Publish Event </CustomButton>
+              <CustomButton main onOpen={createEvent}>
+                Publish Event{" "}
+              </CustomButton>
             </div>
           </MainLayout>
         </Row>
-        <Row style={{ display: "flex", gap: "2%" }}>
+        <Row
+          style={{
+            display: "flex",
+            gap: "2%",
+          }}>
           <EventContent>
             <EventHeader>
               <div>
-                <InputTitle placeholder="Add event title .." />
+                <InputTitle
+                  placeholder="Add event title .."
+                  onChange={(e) => handleselect(e, "title")}
+                />
               </div>
               <div>
                 {" "}
                 <Input
                   placeholder="Add event Price"
+                  onChange={(e) => handleselect(e, "price")}
                   style={{ width: "200px" }}
                 />
               </div>{" "}
@@ -301,22 +365,21 @@ const Index = () => {
               style={{
                 padding: "20px 0",
                 fontSize: "17px",
-              }}
-            >
+              }}>
               <p>Start writing or tap here to add images or videos ..</p>
+              {t}
               <Editor
-
-              // instanceRef={(instance) => (instanceRef.current = instance)}
-              // tools={EDITOR_JS_TOOLS}
-              // data={data}
+                onData={(e) => handletext(e.blocks)}
+                // instanceRef={(instance) => (instanceRef.current = instance)}
+                // tools={EDITOR_JS_TOOLS}
+                // data={data}
               />
             </div>
           </EventContent>
           <Col
             style={{
               width: "27%",
-            }}
-          >
+            }}>
             <UplaodWdiget />
             <LanguageWidget>
               <LanguageSide>Language</LanguageSide>
@@ -324,7 +387,7 @@ const Index = () => {
                 <LanguageOption>
                   <GrayText> Main Language</GrayText>
 
-                  <Dropdown overlay={Mainoption}>
+                  {/* <Dropdown overlay={Mainoption}>
                     <Button
                       style={{
                         borderRadius: "7px",
@@ -333,21 +396,31 @@ const Index = () => {
                     >
                       English <DownOutlined />
                     </Button>
-                  </Dropdown>
+                  </Dropdown> */}
+                  <Select
+                    suffixIcon={<DropIcon />}
+                    value="English"
+                    className="stylecss"
+                    // style={{ backgroundColor: "var(--lighterGray)" }}
+                    // onChange={(e) => handleselect(e, "end")}
+                  >
+                    <Option key="English">English</Option>
+                    <Option key="Arabic">Arabic</Option>
+                  </Select>
                 </LanguageOption>
                 <LanguageOption>
                   <GrayText> Translate to</GrayText>
-                  <Dropdown overlay={Mainoption}>
-                    <Button
-                      style={{
-                        borderRadius: "7px",
-                        backgroundColor: "var(--lightGray)",
-                      }}
-                    >
-                      Arabic
-                      <DownOutlined />
-                    </Button>
-                  </Dropdown>{" "}
+                  <Select
+                    suffixIcon={<DropIcon />}
+                    value="Arabic"
+                    className="stylecss"
+                    // onChange={(e) => handleselect(e, "end")}
+                  >
+                    <Option key="English" def>
+                      English
+                    </Option>
+                    <Option key="Arabic">Arabic</Option>
+                  </Select>
                 </LanguageOption>
               </div>
             </LanguageWidget>

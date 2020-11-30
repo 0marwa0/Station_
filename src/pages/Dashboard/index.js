@@ -10,6 +10,8 @@ import { Col, Row, Input, Button, Menu, Dropdown } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { CustomButton } from "../shared/SharedComponents";
 import "../../App.css";
+import { ReactComponent as PlusIcon } from "../../public/images/plus.svg";
+
 import FullCalendar from "@fullcalendar/react";
 import { Modal } from "react-responsive-modal";
 import { ReactComponent as PrintIcon } from "../../public/images/print.svg";
@@ -58,6 +60,7 @@ export const Widget = styled.div`
   border-radius: 7px;
   border: 1px solid var(--lighterGray);
   display: flex;
+
   overflow: hidden;
   transition: 2s ease;
   padding: 17px 17px 8px 17px;
@@ -93,9 +96,22 @@ const PageHeader = styled(Row)`
   display: flex;
   justify-content: space-between;
 `;
-
+export const DateName = (date) => {
+  let result = moment(date, "YYYY-MM-DD HH:mm:ss")
+    .format("D-MMMM-yyy")
+    .replace("-", " ")
+    .replace("-", " ");
+  return result;
+};
+export const getTime = (date) => {
+  let result = moment(date, "YYYY-MM-DD HH:mm:ss")
+    .format("h-mm")
+    .replace("-", ":");
+  return result;
+};
 function Index(props) {
   const ref = useRef(null);
+  const [ID, setID] = useState(localStorage.getItem("Station_id"));
   const [Reservations, setReservations] = useState([]);
   const onEnter = (item) => {
     let data;
@@ -153,6 +169,7 @@ function Index(props) {
   const [open, setOpen] = useState(false);
   const onOpenModal = (open) => {
     setOpen(open);
+    //callback()
   };
   const [Loading, setLoading] = useState(false);
   const [BookDates, setBookDates] = useState(false);
@@ -165,19 +182,7 @@ function Index(props) {
     let result = moment(date, "YYYY-MM-DD HH:mm:ss").format("dddd");
     return result;
   };
-  const DateName = (date) => {
-    let result = moment(date, "YYYY-MM-DD HH:mm:ss")
-      .format("D-MMMM-yyy")
-      .replace("-", " ")
-      .replace("-", " ");
-    return result;
-  };
-  const getTime = (date) => {
-    let result = moment(date, "YYYY-MM-DD HH:mm:ss A")
-      .format("h-mm A")
-      .replace("-", ":");
-    return result;
-  };
+
   const loadApiData = () => {
     setLoading(true);
     ref.current.staticStart();
@@ -198,12 +203,13 @@ function Index(props) {
         let date = res.data.rows
           .filter((i) => i.approve === true)
           .map((i) => i.bookDates);
-        date.map((i) => {
-          i.map((ob) => (el = ob));
-          Dates.push(el);
-        });
 
-        // to remove
+        for (let i = 0; i < date.length; i++) {
+          date[i].map((item) => {
+            Dates.push(item);
+          });
+        }
+        // set title
         Dates.map(
           (obj) =>
             (obj.title = res.data.rows
@@ -212,10 +218,7 @@ function Index(props) {
               .toString())
         );
 
-        Dates.map(
-          (obj) => (obj.time = getTime(obj.start) + " - " + getTime(obj.end))
-        );
-
+        // set event color
         Dates.map(
           (obj) =>
             (obj.color =
@@ -241,14 +244,11 @@ function Index(props) {
                   obj.start === obj.end
                     ? DateName(obj.start)
                     : DateName(obj.start) + " - " + DateName(obj.end),
-                time: obj.time,
+                time: getTime(obj.start) + " - " + getTime(obj.end),
               },
             ])
         );
-        console.log(
-          Dates.map((obj) => getTime("2019-12-31T09:30:00.000")),
-          "sofosfshf"
-        );
+
         setBookDates(Dates);
       },
       (err) => {
@@ -288,7 +288,7 @@ function Index(props) {
       props.history.push("/login");
     }
   }, []);
-
+  let id = localStorage.getItem("Station_id");
   return (
     <CustomPageWrapper>
       <GlobalStyle />
@@ -297,9 +297,16 @@ function Index(props) {
       <SideBar />
       <PageContent>
         <PageHeader>
-          <PageTitle>Dashboard</PageTitle>
+          <PageTitle> Dashboard</PageTitle>
           <span style={{ marginTop: "20px", color: "var(--darkGray)" }}>
-            Welcome Back, <span style={{ color: "black" }}>!</span>
+            Welcome Back ,{" "}
+            <span style={{ color: "black" }}>
+              {props.admins
+                .filter((i) => i.id === Number(id))
+                .map((i) => i.username)
+                .toString()}
+              !
+            </span>
           </span>
         </PageHeader>
         <Row>
@@ -319,7 +326,7 @@ function Index(props) {
                 <PrintIcon />
               </CustomButton>
               <CustomButton main onOpen={onOpenModal} lable="New Booking">
-                <AiOutlinePlus />
+                <PlusIcon />
               </CustomButton>
             </ButtonGroup>
           </PageBtn>
@@ -330,13 +337,11 @@ function Index(props) {
             display: "grid",
             gap: "25px",
             gridTemplateColumns: "auto 23vw",
-          }}
-        >
+          }}>
           <Col
             style={{
               height: "auto",
-            }}
-          >
+            }}>
             <Clander>
               <FullCalendar
                 plugins={[dayGridPlugin]}

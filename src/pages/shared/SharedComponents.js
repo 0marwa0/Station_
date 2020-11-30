@@ -30,8 +30,7 @@ export const CustomButton = ({
       extra={extra}
       undo={undo}
       loading={loading}
-      onClick={main ? onOpen : fun}
-    >
+      onClick={main ? onOpen : fun}>
       {children}
       {lable}
       {filter ? <RiArrowDownSFill color="var(--lighterGray)" /> : ""}
@@ -132,12 +131,32 @@ export function ReservationLoading(props) {
         viewBox="0 0 600 80"
         backgroundColor="#f3f3f3"
         foregroundColor="#ecebeb"
-        {...props}
-      >
+        {...props}>
         <rect x="0" y="8" rx="15" ry="15" width="88" height="65" />
         <rect x="100" y="60" rx="3" ry="90" width="300" height="5" />
         <rect x="520" y="8" rx="3" ry="90" width="88" height="7" />
       </ContentLoader>
     </div>
   ));
+}
+
+export function TextLoadS(props) {
+  return (
+    <div
+      style={{
+        textAlign: "left",
+        width: "60px",
+      }}>
+      <ContentLoader
+        speed={1}
+        // width="100%"
+        height="15px"
+        viewBox="0 0 600 80"
+        backgroundColor="#f3f3f3"
+        foregroundColor="#ecebeb"
+        {...props}>
+        <rect x="0" y="8" rx="3" ry="90" width="350" height="30" />
+      </ContentLoader>
+    </div>
+  );
 }

@@ -23,6 +23,7 @@ const ModleTitle = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
+
   padding: 40px;
 `;
 
@@ -32,6 +33,9 @@ const ModleFooter = styled.div`
   align-items: center;
   padding: 40px;
   justify-content: space-between;
+`;
+const Space = styled.div`
+  width: 10px;
 `;
 function NewBooking(props) {
   const [currentPage, setcurrentPage] = useState(1);
@@ -116,6 +120,7 @@ function NewBooking(props) {
     loadCoffees();
     loadLunches();
     loadDesigns();
+    return () => {};
   }, []);
   return (
     <div>
@@ -125,9 +130,10 @@ function NewBooking(props) {
             fontWeight: "bold",
             fontSize: "20px",
             display: "flex",
+
+            alignItems: "center",
             justifyContent: "space-between",
-          }}
-        >
+          }}>
           New Booking
           <Close onClick={props.Close} cursor="pointer" />
           {/* <AiOutlineClose  /> */}
@@ -146,7 +152,7 @@ function NewBooking(props) {
               />
             ) : i.id === 2 ? (
               <SecondPage
-                handleInput={props.handleInput}
+                // handleInput={props.handleInput}
                 handleselect={props.handleselect}
               />
             ) : i.id === 3 ? (
@@ -160,6 +166,7 @@ function NewBooking(props) {
             ) : i.id === 4 ? (
               <ForthPage
                 handleInput={props.handleInput}
+                edit={props.edit}
                 handleselect={props.handleselect}
               />
             ) : (
@@ -174,8 +181,7 @@ function NewBooking(props) {
             <span
               style={{
                 width: "200px",
-              }}
-            >
+              }}>
               {i.id === currentPage ? (
                 <span className="cDot"></span>
               ) : (
@@ -190,13 +196,12 @@ function NewBooking(props) {
               Back
             </CustomModleButton>
           )}
+          <Space />
           {currentPage === 4 ? (
-            // <Link to="/BookingDetalis">
             <CustomModleButton fun={props.handleSubmit} main extra>
               Finsh
             </CustomModleButton>
           ) : (
-            // </Link>
             <CustomModleButton main extra fun={nextPage}>
               Next
             </CustomModleButton>

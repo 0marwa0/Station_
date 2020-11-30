@@ -66,6 +66,15 @@ export const BookingColumns = [
   {
     title: "Starting Data",
     dataIndex: "StartingDate",
+    render: (item) =>
+      item.map((i) => {
+        return (
+          <div>
+            {i}
+            <br />
+          </div>
+        );
+      }),
     sorter: {
       compare: (a, b) => a.math - b.math,
       multiple: 2,
@@ -74,6 +83,15 @@ export const BookingColumns = [
   {
     title: "Ending Data",
     dataIndex: "EndingDate",
+    render: (item) =>
+      item.map((i) => {
+        return (
+          <div>
+            {i}
+            <br />
+          </div>
+        );
+      }),
     sorter: {
       compare: (a, b) => a.english - b.english,
       multiple: 1,

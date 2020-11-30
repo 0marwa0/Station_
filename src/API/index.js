@@ -79,6 +79,7 @@ export const Login = (data, onSuccess, onFailure) => {
     .then((response) => response.json())
     .then((result) => {
       localStorage.setItem("station_token", result.token);
+      localStorage.setItem("Station_id", result.user.id);
 
       onSuccess(result.status, result.errMsg, result);
       //console.log(result, "login success");
@@ -117,9 +118,9 @@ export const addData = (query, data, onSuccess, onFailure) => {
 
 export const addFile = (query, data, onSuccess, onFailure) => {
   var myHeaders = new Headers();
-  // if (query === "resource") {
-  //   myHeaders.append("Content-Type", "application/json");
-  // }
+  if (query === "resource") {
+    myHeaders.append("Content-Type", "application/json");
+  }
   myHeaders.append("token", localStorage.getItem("station_token"));
   var requestOptions = {
     method: "POST",

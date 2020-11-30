@@ -34,6 +34,7 @@ function App(props) {
         setadmins(data.data);
         if (err) {
           Mesg(err);
+          console.log(data, "admin whti current one plase");
         }
       },
       (err) => {
@@ -70,7 +71,11 @@ function App(props) {
       <Router>
         <Switch>
           <Route path="/login" component={Login} exact />
-          <Route path="/" component={Dashboard} exact />
+          <Route
+            path="/"
+            exact
+            render={(props) => <Dashboard {...props} admins={admins} />}
+          />
           <Route
             path="/profile"
             // component={Profile}
@@ -79,7 +84,7 @@ function App(props) {
             )}
             exact
           />
-          <Route path="/createEvent" component={CreateEvent} exact />
+          <Route path="/createEvent/:id" component={CreateEvent} exact />
 
           <Route
             path="/articles"

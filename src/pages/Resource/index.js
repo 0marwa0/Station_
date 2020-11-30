@@ -68,22 +68,31 @@ function Resources(props) {
     setimage(file);
   };
   const handleSubmit = () => {
-    let data = new FormData();
-    data.append("name", title);
-    data.append("description", dec);
-    data.append("nameAr", title);
-    data.append("descriptionAr", dec);
-    data.append("url", "file url");
-    data.append("image", "image file");
+    console.log(image, "image ");
+    // let form = new FormData();
+    // form.append("name", title);
+    // form.append("description", dec);
+    // form.append("nameAr", title);
+    // form.append("descriptionAr", dec);
+    // form.append("url", "url");
+    // form.append("image", image.toString());
+    var raw = JSON.stringify({
+      name: title,
+      description: dec,
+      url: image.name,
+      image: image.file,
 
-    console.log(data, "sended data");
+      nameAr: title,
+      descriptionAr: dec,
+    });
+
     // if (url != "" && title != "") {
     setLoading(true);
     addFile(
       "resource",
-      data,
+      raw,
       (data) => {
-        console.log(data, "whn file succes");
+        // console.log(data, "whn file succes");
         if (data.errMsg) {
           Mesg(data.errMsg);
         } else {
@@ -105,7 +114,7 @@ function Resources(props) {
         setdec("");
         setimage("");
         seturl("");
-        console.log(err, "whn file succes");
+        console.log(err, "whn file fail");
 
         FailedMesg(" Resuorces creating failed ", err);
       }
@@ -125,6 +134,8 @@ function Resources(props) {
       "resource",
       id,
       (err, data) => {
+        setLoading(false);
+
         if (err) {
           setLoading(false);
           Mesg(err);
@@ -186,8 +197,7 @@ function Resources(props) {
         showCloseIcon={false}
         classNames={{
           modal: "customModal",
-        }}
-      >
+        }}>
         <NewResources
           handleFile={handleFile}
           handleInput={handleInput}

@@ -8,6 +8,7 @@ import { DownOutlined, UserOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 import "react-datepicker/dist/react-datepicker.css";
 import { Select } from "antd";
+import { Values } from "../../index";
 
 import {
   CardItem,
@@ -66,32 +67,47 @@ export default function ForthPage(props) {
   );
 
   return (
-    <div className="modleWrapper">
-      <div
-        style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}
-      >
-        <InputLable>
-          Total Price
-          <Input addonAfter="IQD" placeholder="0.0" />
-        </InputLable>
-        <InputLable>
-          Received
-          <Input addonAfter="IQD" placeholder="0.0" />
-        </InputLable>
-      </div>
-      <Space />
-      <Space />
-      <InputLable>
-        <Select
-          suffixIcon={<DropIcon />}
-          onChange={(e) => props.handleselect(e, "typeId")}
-          placeholder="Book Type"
-        >
-          {Types.map((item) => (
-            <Option key={item.id}>{item.name}</Option>
-          ))}
-        </Select>
-        {/* <Dropdown overlay={TypeData}>
+    <Values.Consumer>
+      {({ typeId, price, received }) => (
+        <div className="modleWrapper">
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "10px",
+            }}>
+            <InputLable>
+              Total Price
+              <Input
+                defaultValue={price}
+                addonAfter="IQD"
+                onChange={(e) => props.handleInput(e, "price")}
+                placeholder="0.0"
+              />
+            </InputLable>
+            <InputLable>
+              Received
+              <Input
+                defaultValue={received}
+                onChange={(e) => props.handleInput(e, "received")}
+                addonAfter="IQD"
+                placeholder="0.0"
+              />
+            </InputLable>
+          </div>
+          <Space />
+          <Space />
+          <InputLable>
+            <Select
+              suffixIcon={<DropIcon />}
+              defaultValue={typeId}
+              onChange={(e) => props.handleselect(e, "typeId")}
+              placeholder="Book Type">
+              {Types.map((item) => (
+                <Option key={item.id}>{item.name}</Option>
+              ))}
+            </Select>
+            {/* <Dropdown overlay={TypeData}>
           <Button
             style={{
               display: "flex",
@@ -105,7 +121,9 @@ export default function ForthPage(props) {
             <DropIcon />
           </Button>
         </Dropdown> */}
-      </InputLable>
-    </div>
+          </InputLable>
+        </div>
+      )}
+    </Values.Consumer>
   );
 }

@@ -4,12 +4,22 @@
   box-sizing: border-box;
   font-family: Px-Grotesk !important;
 }
+
+.stylecss .ant-select-selector {
+  width: 100px !important;
+  background-color: var(--lightGray) !important;
+}
 .ant-select-selector {
   border-radius: 7px !important;
 }
 html,
 body {
   height: 100% !important;
+}
+.SkeletonCss {
+  width: 70;
+  background-color: rebeccapurple;
+  height: 3;
 }
 /*******************************  slick styles ******************/
 .slick-dots li {
@@ -259,12 +269,17 @@ body {
     opacity: 1;
   }
 }
+/* .slide {
+  padding-bottom: 10px !important;
+  background-color: rebeccapurple !important;
+} */
 
 .modleWrapper {
-  width: 550px;
+  width: 670px;
   height: auto;
   padding: 0px 40px;
   display: flex;
+
   transition: height 0.4s linear;
   -webkit-animation: anim 0.5s ease-in;
   animation: anim 0.5s ease-in;
@@ -273,7 +288,11 @@ body {
 
 .customModal {
   border-radius: 7px;
-
+  /* width: 700px; */
+  overflow: hidden;
+  transition: height 0.4s linear;
+  -webkit-animation: anim 0.5s ease-in;
+  animation: anim 0.5s ease-in;
   padding: 0 !important;
 }
 .event {
@@ -610,10 +629,12 @@ th:last-child {
 /***********book modal third page modal****/
 
 .cardItem {
-  height: 120px;
-  min-width: 200px;
+  height: 110px;
+  min-width: 205px;
   padding: 11px;
   display: flex;
+  margin-right: 20px;
+  margin-bottom: 5px;
   flex-direction: column;
   border-radius: 5px;
 }

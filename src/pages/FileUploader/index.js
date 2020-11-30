@@ -8,6 +8,7 @@ import { FileUpoaderData } from "../../fakeData";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import NewFileUploader from "./NewFileUploader";
+
 import { LoadData, addFile, removeItem } from "../../API";
 import { monthNames } from "../shared/assets";
 import { Mesg, FailedMesg, SuccessMesg } from "../../API/APIMessage";
@@ -19,6 +20,13 @@ function FilUploader(props) {
     setOpen(open);
   };
   const [file, setfile] = useState("");
+  const [copied, setcopy] = useState(false);
+  const [copiedUlr, setcopiedUlr] = useState("");
+  const handleCopy = (url, value) => {
+    setcopy(value);
+    setcopiedUlr(url);
+    console.log(url, "from handle");
+  };
   const handleInput = (value) => {
     setfile(value);
   };
@@ -73,6 +81,7 @@ function FilUploader(props) {
       (err) => {
         onOpenModal(false);
         setLoading(false);
+
         setfile("");
 
         FailedMesg(err.toString());
@@ -99,7 +108,7 @@ function FilUploader(props) {
         FailedMesg("Delete File Faild!", err);
       }
     );
-    console.log(id, "id to deleted");
+    // console.log(id, "id to deleted");
   };
   let Files = [];
   files.map((file) => {
@@ -108,6 +117,9 @@ function FilUploader(props) {
         url: file.link,
         id: file.id,
         delete: () => onDelete(file.id),
+        copy: handleCopy,
+        copied: copied,
+        copiedUlr: copiedUlr,
       },
       FileTitle: file.name,
       Type: [`${/[.]/.exec(file.name) ? /[^.]+$/.exec(file.name) : undefined}`],
@@ -145,8 +157,7 @@ function FilUploader(props) {
         showCloseIcon={false}
         classNames={{
           modal: "customModal",
-        }}
-      >
+        }}>
         <NewFileUploader
           handleInput={handleInput}
           handleSubmit={handleSubmit}

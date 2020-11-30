@@ -118,8 +118,8 @@ function Index(props) {
   const WidgetInner = styled.div`
     overflow: hidden;
     transition: 2s ease;
-    max-height: ${(props) => (props.showall ? "auto" : "18vw")};
   `;
+  // max-height: ${(props) => (props.showall ? "auto" : "18vw")};
   const [show, setshow] = useState(false);
   const ShowAll = () => {
     setshow(!show);
@@ -127,7 +127,13 @@ function Index(props) {
 
   return (
     <Widget reservation>
-      <WidgetInner showall={show}>
+      <div
+        style={{
+          overflow: "hidden",
+          transition: "2s ease",
+
+          height: show ? "auto" : "330px",
+        }}>
         <ItemHeader>
           <span style={{ fontWeight: "bold", fontSize: "1.1vw" }}>
             Pending Reservations
@@ -147,8 +153,7 @@ function Index(props) {
                     <Link
                       to={{
                         pathname: `/bookingDetalis/${item.id}`,
-                      }}
-                    >
+                      }}>
                       <ReservationItem>
                         {place === "Event Hall" ? (
                           <ReservIcon> Hall</ReservIcon>
@@ -159,7 +164,7 @@ function Index(props) {
                         ) : place === "C" ? (
                           <SubC>{item.place}</SubC>
                         ) : (
-                          ""
+                          <ReservIcon>{item.place}</ReservIcon>
                         )}
 
                         <div>
@@ -167,8 +172,7 @@ function Index(props) {
                           <div
                             style={{
                               fontSize: "1vw",
-                            }}
-                          >
+                            }}>
                             <Name>{item.name}</Name>
                           </div>
                           <div style={{ marginTop: "-4px" }}>
@@ -179,8 +183,7 @@ function Index(props) {
                                   width: "7px",
 
                                   textAlign: "center",
-                                }}
-                              >
+                                }}>
                                 |
                               </span>
                               <span> {item.date}</span>
@@ -197,8 +200,7 @@ function Index(props) {
                             justifyContent: "flex-end",
                             textAlign: "right",
                             backgroundColor: "white",
-                          }}
-                        >
+                          }}>
                           {item.time}
                         </div>
                       </ReservationItem>
@@ -207,7 +209,7 @@ function Index(props) {
                 );
               })}
         </div>
-      </WidgetInner>
+      </div>
       <SeeAll>
         <GrayText onClick={ShowAll}>
           {show ? "Show less " : " Show All"}

@@ -65,7 +65,7 @@ function Events(props) {
         item.date.split("-")[0],
       // Time: "10:0 AM -4:00 PM",
       Space: [`${item.space.title}`],
-      SoldTickets: item.ticketLeft,
+      SoldTickets: item.people - item.ticketLeft,
       Approvedby: props.admins
         .filter((i) => i.id === item.approvedBy)
         .map((i) => i.username)

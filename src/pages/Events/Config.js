@@ -82,7 +82,7 @@ export const EventsColumns = [
       multiple: 1,
     },
     render: (rate) => (
-      <Tooltip title={rate / 100} placement="bottom">
+      <Tooltip title={rate} placement="bottom">
         <Progress percent={rate} showInfo={false} strokeColor="var(--yellow)" />
       </Tooltip>
     ),

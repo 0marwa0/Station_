@@ -6,8 +6,8 @@ import { Popconfirm } from "antd";
 import { FiEdit } from "react-icons/fi";
 import React from "react";
 import { Mesg, FailedMesg, SuccessMesg } from "../../API/APIMessage";
-
-import { Checkbox, Tag } from "antd";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import { Checkbox, Tag, Tooltip, Popover } from "antd";
 const monthNames = [
   "January",
   "February",
@@ -105,10 +105,17 @@ export const FilUploadedColumns = [
     render: (item) => (
       <div className="ResourcesIcon">
         <div className="icon">
-          <FaCopy
-            fontSize="16"
-            onClick={() => console.log(item.url, "file url")}
-          />
+          {/* <Popover
+            content={<div>Copied !</div>}
+            // title={}
+            onVisibleChange={(e) => item.copy(e,)}
+            trigger="click"
+            visible={item.url === item.copiedUlr && item.copied ? true : false}
+            placement="top"> */}
+          <CopyToClipboard text={item.url} onCopy={(e) => item.copy(e)}>
+            <FaCopy fontSize="16" style={{ cursor: "pointer" }} />
+          </CopyToClipboard>{" "}
+          {/* </Popover> */}
         </div>
         <div className="icon">
           <a href={item.url} target="_blank">
@@ -120,8 +127,7 @@ export const FilUploadedColumns = [
             title="Are you sure？"
             okText="Yes"
             onConfirm={() => item.delete()}
-            cancelText="No"
-          >
+            cancelText="No">
             <BsTrashFill fontSize="16" style={{ cursor: "pointer" }} />
           </Popconfirm>
         </div>

@@ -139,7 +139,7 @@ export default function Index(props) {
       Login(
         data,
         (status, err) => {
-          console.log(status, "statuslogoin");
+          // console.log(status, "statuslogoin");
           if (status) {
             SuccessMesg("Login Successfully");
             props.history.push("/");
@@ -253,8 +253,7 @@ export default function Index(props) {
                 justifyContent: "center",
                 fontSize: "18px",
                 height: "60px",
-              }}
-            >
+              }}>
               Login
             </Button>
             {/* </Link> */}
@@ -278,8 +277,7 @@ export default function Index(props) {
         <Slider
           arrows={false}
           // ref={(slider) => (this.slider = slider)}
-          {...settings}
-        >
+          {...settings}>
           <SlideItem />
           <SlideItem />
           <SlideItem />

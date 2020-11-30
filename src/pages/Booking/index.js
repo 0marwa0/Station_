@@ -4,22 +4,26 @@ import React, { useEffect, useState } from "react";
 import CustomPage from "../shared/CustomPage";
 import { BookingColumns, BookingData } from "./Config";
 import Progress from "react-progress-2";
-
 // import { BookingData } from "../../fakeData/index";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import NewBooking from "./NewBooking/NewBooking";
 import { monthNames } from "../shared/assets";
 import { EmptyText } from "../../pages/shared/SharedComponents";
-import { LoadData, LoadBooking, LoadDataByID } from "../../API";
-
+import { LoadData, LoadBooking, LoadDataByID, addData } from "../../API";
 import { FailedMesg, Mesg, SuccessMesg } from "../../API/APIMessage";
+import { DateName } from "../Dashboard";
+export const Values = React.createContext();
+
 function Booking(props) {
   const [open, setOpen] = useState(false);
   const [Loading, setLoading] = useState(false);
   const [Book, setBook] = useState([]);
+  const [DateValues, setDateValues] = useState([]);
+
   const onOpenModal = (open) => {
     setOpen(open);
+    clearState();
   };
   const loadBook = () => {
     setLoading(true);
@@ -49,11 +53,14 @@ function Booking(props) {
       case "title":
         settitle(value);
         break;
+      case "price":
+        setprice(value);
+        break;
+      case "received":
+        setrecived(value);
+        break;
       case "organizer":
         setorganizer(value);
-        break;
-      case "description":
-        setdescription(value);
         break;
 
       case "comment":
@@ -64,7 +71,7 @@ function Booking(props) {
         break;
     }
   };
-  const handleselect = (e, key) => {
+  const handleselect = (e, key, daysValues) => {
     // console.log("select is passed alredy");
     let value = e;
     switch (key) {
@@ -86,6 +93,10 @@ function Booking(props) {
       case "people":
         setpeople(value);
         break;
+      case "days":
+        setDateValues(daysValues);
+        setdays(value);
+        break;
       default:
         break;
     }
@@ -93,75 +104,70 @@ function Booking(props) {
   const clearState = () => {
     settitle("");
     setorganizer("");
-    setdescription("");
-    setpeople(0);
+    setpeople();
     setcomment("");
-    settypeId(0);
-    setspaceId(0);
-    setdesignId(0);
-    setcoffeebreakId(0);
-    setlunchId(0);
+    settypeId();
+    setspaceId();
+    setdesignId();
+    setcoffeebreakId();
+    setlunchId();
+    setprice("");
+    setrecived("");
+    setdays([]);
   };
   const [title, settitle] = useState("");
+  const [price, setprice] = useState("");
+  const [received, setrecived] = useState("");
   const [organizer, setorganizer] = useState("");
-  const [description, setdescription] = useState("");
-  const [people, setpeople] = useState(0);
+  const [people, setpeople] = useState();
   const [comment, setcomment] = useState("");
-  const [typeId, settypeId] = useState(0);
-  const [spaceId, setspaceId] = useState(0);
-  const [designId, setdesignId] = useState(0);
-  const [coffeebreakId, setcoffeebreakId] = useState(0);
-  const [lunchId, setlunchId] = useState(0);
-  const [days, setdays] = useState("");
+  const [typeId, settypeId] = useState();
+  const [spaceId, setspaceId] = useState();
+  const [designId, setdesignId] = useState();
+  const [coffeebreakId, setcoffeebreakId] = useState();
+  const [lunchId, setlunchId] = useState();
+  const [days, setdays] = useState([]);
   const handleSubmit = () => {
     let data = {
       title: title,
       organizer: organizer,
-      //  description: description,
       people: people,
       comment: comment,
-      days: [
-        {
-          start: {
-            dateTime: "",
-          },
-          end: {
-            dateTime: "",
-          },
-        },
-      ],
+      days: days,
       spaceId: spaceId,
       typeId: typeId,
       designId: designId,
       coffeebreakId: coffeebreakId,
       lunchId: lunchId,
     };
+
+    // onOpenModal(false);
+    console.log(data, "book data sended");
     onOpenModal(false);
-    //console.log(data, "book data sended");
-    // if (name != "" && password != "") {
-    //setLoading(true);
+    setLoading(true);
     // addData(
     //   "book/add",
     //   data,
     //   (mesg, Data) => {
-    //     SuccessMesg("Booking done !");
-
-    //     setLoading(false);
-    //     onOpenModal(false);
-    //     loadBook();
-    //     clearState();
+    //     if (mesg) {
+    //       //clearState();
+    //       Mesg(mesg);
+    //       setLoading(false);
+    //       loadBook();
+    //     } else {
+    //       SuccessMesg("Booking done !");
+    //       setLoading(false);
+    //       onOpenModal(false);
+    //       loadBook();
+    //     }
     //   },
     //   (err) => {
     //     onOpenModal(false);
     //     setLoading(false);
-    //     clearState();
+
     //     FailedMesg(err);
     //   }
     // );
-    // } else {
-    //   onOpenModal(false);
-    //   FailedMesg("Booking failed ", "Empty fileds");
-    // }
   };
   useEffect(() => {
     if (localStorage.getItem("station_token")) {
@@ -175,41 +181,15 @@ function Booking(props) {
     BookData.push({
       Title: item.title,
       Status: [`${item.status}`],
-      StartingDate: item.bookDates.map(
-        (i) =>
-          i.start.slice(0, 2) +
-          " " +
-          monthNames[
-            i.start.split("-")[1] === 0
-              ? i.start.split("-")[1].slice(1) - 1
-              : i.start.split("-")[1] - 1
-          ] +
-          " " +
-          i.start.split("-")[0]
-      ),
-      EndingDate: item.bookDates.map(
-        (i) =>
-          i.end.slice(0, 2) +
-          " " +
-          monthNames[
-            i.end.split("-")[1] === 0
-              ? i.end.split("-")[1].slice(1) - 1
-              : i.end.split("-")[1] - 1
-          ] +
-          " " +
-          i.end.split("-")[0]
-      ),
+      StartingDate: item.bookDates
+        .filter((i, index) => index === 0)
+        .map((i) => DateName(i.start)),
+      EndingDate: item.bookDates
+        .filter((i, index) => index === 0)
+        .map((i) => DateName(i.end)),
       Space: [`${item.space.title}`],
-      CreationDate:
-        item.createdAt.slice(0, 2) +
-        " " +
-        monthNames[
-          item.createdAt.split("-")[1] === 0
-            ? item.createdAt.split("-")[1].slice(1) - 1
-            : item.createdAt.split("-")[1] - 1
-        ] +
-        " " +
-        item.createdAt.split("-")[0],
+      CreationDate: DateName(item.createdAt),
+
       BookedBy: "",
       //item.user.name
     });
@@ -225,22 +205,37 @@ function Booking(props) {
         onOpenModal={() => onOpenModal(true)}
         Loading={Loading}
       />
-
-      <Modal
-        closeOnOverlayClick={true}
-        open={open}
-        onClose={() => onOpenModal(false)}
-        center
-        showCloseIcon={false}
-        classNames={{ modal: "customModal" }}
-      >
-        <NewBooking
-          handleInput={handleInput}
-          handleselect={handleselect}
-          handleSubmit={handleSubmit}
-          Close={() => onOpenModal(false)}
-        />
-      </Modal>
+      <Values.Provider
+        value={{
+          title,
+          organizer,
+          people,
+          comment,
+          spaceId,
+          coffeebreakId,
+          lunchId,
+          designId,
+          typeId,
+          price,
+          received,
+          days,
+          DateValues,
+        }}>
+        <Modal
+          closeOnOverlayClick={true}
+          open={open}
+          onClose={() => onOpenModal(false)}
+          center
+          showCloseIcon={false}
+          classNames={{ modal: "customModal" }}>
+          <NewBooking
+            handleInput={handleInput}
+            handleselect={handleselect}
+            handleSubmit={handleSubmit}
+            Close={() => onOpenModal(false)}
+          />
+        </Modal>
+      </Values.Provider>
     </div>
   );
 }

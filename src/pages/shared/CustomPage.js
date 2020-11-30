@@ -5,9 +5,12 @@ import { Col, Row, Table, Input } from "antd";
 import React, { useEffect } from "react";
 import LoadingBar from "react-top-loading-bar";
 import { TableLoading } from "../shared/Loading";
+
 import { BiImport, BiExport } from "react-icons/bi";
 import { ReactComponent as ExportIcon } from "../../public/images/export.svg";
 import { ReactComponent as ImportIcon } from "../../public/images/import.svg";
+import { ReactComponent as PlusIcon } from "../../public/images/plus.svg";
+
 import Progress from "react-progress-2";
 
 import { FiFilter } from "react-icons/fi";
@@ -158,21 +161,18 @@ function CustomPage(props) {
                     display: "flex",
                     gap: "6px",
                     alignItems: "center",
-                  }}
-                >
+                  }}>
                   <svg
                     cursor="pointer"
                     onClick={showTableItem}
                     xmlns="http://www.w3.org/2000/svg"
                     width="22.5"
                     height="22.5"
-                    viewBox="0 0 22.5 22.5"
-                  >
+                    viewBox="0 0 22.5 22.5">
                     <g
                       id="Group_8468"
                       data-name="Group 8468"
-                      transform="translate(0.431 1.074)"
-                    >
+                      transform="translate(0.431 1.074)">
                       <rect
                         id="Rectangle_6614"
                         data-name="Rectangle 6614"
@@ -212,13 +212,11 @@ function CustomPage(props) {
                     xmlns="http://www.w3.org/2000/svg"
                     width="32.011"
                     height="32.011"
-                    viewBox="0 0 32.011 32.011"
-                  >
+                    viewBox="0 0 32.011 32.011">
                     <g
                       id="Group_8458"
                       data-name="Group 8458"
-                      transform="translate(32.011 32.011) rotate(180)"
-                    >
+                      transform="translate(32.011 32.011) rotate(180)">
                       <path
                         id="Path_2839"
                         data-name="Path 2839"
@@ -228,8 +226,7 @@ function CustomPage(props) {
                       <g
                         id="Group_8459"
                         data-name="Group 8459"
-                        transform="translate(5.335 5.335)"
-                      >
+                        transform="translate(5.335 5.335)">
                         <rect
                           id="Rectangle_6614"
                           data-name="Rectangle 6614"
@@ -339,8 +336,7 @@ function CustomPage(props) {
                   lable={`Notify Users`}
                   loading={props.Loading}
                   pageTitle={pageTitle}
-                  onOpen={() => props.onOpenModal(true)}
-                >
+                  onOpen={() => props.onOpenModal(true)}>
                   <Notifiy />
                 </CustomButton>
               ) : pageTitleName === "resource" ||
@@ -350,8 +346,7 @@ function CustomPage(props) {
                   lable={`Upload`}
                   pageTitle={pageTitle}
                   loading={props.Loading}
-                  onOpen={() => props.onOpenModal(true)}
-                >
+                  onOpen={() => props.onOpenModal(true)}>
                   <Upload />
                 </CustomButton>
               ) : pageTitleName === "article" ||
@@ -361,9 +356,8 @@ function CustomPage(props) {
                   lable={`New ${pageTitleName}`}
                   pageTitle={pageTitle}
                   loading={props.Loading}
-                  onOpen={() => props.onOpenModal(true)}
-                >
-                  <AiOutlinePlus />
+                  onOpen={() => props.onOpenModal(true)}>
+                  <PlusIcon />
                 </CustomButton>
               )}
             </ButtonGroup>
