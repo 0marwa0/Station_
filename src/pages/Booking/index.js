@@ -36,8 +36,32 @@ function Booking(props) {
           Mesg(mesg);
         }
 
-        setBook(data.data.rows);
         // console.log(data.data.rows);
+        let BookData = [];
+
+        data.data.rows.map((item) => {
+          BookData.push({
+            Title: { title: item.title, id: item.id },
+            Status: [`${item.status}`],
+            StartingDate: item.bookDates
+              .filter((i, index) => index === 0)
+              .map((i) => DateName(i.start)),
+            EndingDate: item.bookDates
+              .filter((i, index) => index === 0)
+              .map((i) => DateName(i.end)),
+            Space: [`${item.space.title}`],
+            CreationDate: DateName(item.createdAt),
+
+            BookedBy: props.admins
+              .filter((i) => i.id === item.approvedBy)
+              .map((i) => i.username)
+              .toString(),
+          });
+        });
+
+        let sorted = BookData.sort(sortFunction);
+        setBook(sorted);
+        setFilterdData(sorted);
       },
       (err) => {
         setLoading(false);
@@ -95,6 +119,7 @@ function Booking(props) {
         break;
       case "days":
         setDateValues(daysValues);
+
         setdays(value);
         break;
       default:
@@ -139,35 +164,36 @@ function Booking(props) {
       designId: designId,
       coffeebreakId: coffeebreakId,
       lunchId: lunchId,
+      price: Number(price),
+      received: Number(received),
     };
 
     // onOpenModal(false);
     console.log(data, "book data sended");
     onOpenModal(false);
     setLoading(true);
-    // addData(
-    //   "book/add",
-    //   data,
-    //   (mesg, Data) => {
-    //     if (mesg) {
-    //       //clearState();
-    //       Mesg(mesg);
-    //       setLoading(false);
-    //       loadBook();
-    //     } else {
-    //       SuccessMesg("Booking done !");
-    //       setLoading(false);
-    //       onOpenModal(false);
-    //       loadBook();
-    //     }
-    //   },
-    //   (err) => {
-    //     onOpenModal(false);
-    //     setLoading(false);
+    addData(
+      "book/add",
+      data,
+      (mesg, Data) => {
+        if (mesg) {
+          Mesg(mesg);
+          setLoading(false);
+          loadBook();
+        } else {
+          SuccessMesg("Booking done !");
+          setLoading(false);
+          onOpenModal(false);
+          loadBook();
+        }
+      },
+      (err) => {
+        onOpenModal(false);
+        setLoading(false);
 
-    //     FailedMesg(err);
-    //   }
-    // );
+        FailedMesg(err);
+      }
+    );
   };
   useEffect(() => {
     if (localStorage.getItem("station_token")) {
@@ -176,38 +202,46 @@ function Booking(props) {
       props.history.push("/login");
     }
   }, []);
-  let BookData = [];
-  Book.map((item) => {
-    BookData.push({
-      Title: item.title,
-      Status: [`${item.status}`],
-      StartingDate: item.bookDates
-        .filter((i, index) => index === 0)
-        .map((i) => DateName(i.start)),
-      EndingDate: item.bookDates
-        .filter((i, index) => index === 0)
-        .map((i) => DateName(i.end)),
-      Space: [`${item.space.title}`],
-      CreationDate: DateName(item.createdAt),
+  const [FilterdData, setFilterdData] = useState([]);
 
-      BookedBy: "",
-      //item.user.name
-    });
-  });
+  function sortFunction(a, b) {
+    var dateA = new Date(a.createdAt).getTime();
+    var dateB = new Date(b.createdAt).getTime();
+    return dateA > dateB ? -1 : 1;
+  }
+
+  const [searchText, setsearchText] = useState("");
+  const HandleSearch = (e) => {
+    let value = e.target.value;
+    setsearchText(value);
+    if (value) {
+      setFilterdData(Book);
+    }
+  };
+  const Filter = () => {
+    let newData = Book.filter((item) =>
+      item.Title.title.toLowerCase().includes(searchText.toLowerCase())
+    );
+
+    newData.sort(sortFunction);
+    setFilterdData(newData);
+  };
 
   return (
     <div>
       <CustomPage
         pageTitle="booking"
         columns={BookingColumns}
-        data={BookData}
+        data={FilterdData}
         Item="event"
+        HandleSearch={HandleSearch}
+        filter={Filter}
         onOpenModal={() => onOpenModal(true)}
         Loading={Loading}
       />
       <Values.Provider
         value={{
-          title,
+          title: title,
           organizer,
           people,
           comment,

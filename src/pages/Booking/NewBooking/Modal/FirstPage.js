@@ -50,7 +50,7 @@ export default function FirstPage(props) {
 
   return (
     <Values.Consumer>
-      {({ title, organizer, people, comment, spaceId }) => (
+      {({ title, organizer, people, comment, spaceId, data }) => (
         <div className="modleWrapper">
           <Page1Item>
             <InputLable>

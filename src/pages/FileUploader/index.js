@@ -1,9 +1,18 @@
 // File uploader page
+import { UserImage } from "../Sidebar";
+import { BsTrashFill, BsTrash } from "react-icons/bs";
+import { FaCopy } from "react-icons/fa";
+import { Popconfirm } from "antd";
+import { FiEdit } from "react-icons/fi";
 
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import { Checkbox, Tag, Tooltip, Popover } from "antd";
 import React, { useState, useEffect } from "react";
-import { FilUploadedColumns, FilesData } from "./Config";
+// import { FilUploadedColumns, FilesData } from "./Config";
 import CustomPage from "../shared/CustomPage";
 import "../../styles/globals.css";
+import { DateName } from "../Dashboard";
+
 import { FileUpoaderData } from "../../fakeData";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
@@ -16,17 +25,25 @@ function FilUploader(props) {
   const [open, setOpen] = useState(false);
   const [Loading, setLoading] = useState(false);
   const [files, setfiles] = useState([]);
+  const [data, setdata] = useState([]);
+  const [Filterdata, setFilterdata] = useState([]);
   const onOpenModal = (open) => {
     setOpen(open);
   };
   const [file, setfile] = useState("");
   const [copied, setcopy] = useState(false);
   const [copiedUlr, setcopiedUlr] = useState("");
-  const handleCopy = (url, value) => {
-    setcopy(value);
+  const handleCopy = (url, id) => {
+    setcopy(true);
     setcopiedUlr(url);
-    console.log(url, "from handle");
+    seturl(id);
+    console.log(url, id);
   };
+  const [showNotification, setShow] = useState(false);
+  const showPopup = (showNotification) => {
+    setShow(showNotification);
+  };
+
   const handleInput = (value) => {
     setfile(value);
   };
@@ -35,12 +52,34 @@ function FilUploader(props) {
       "files",
       (err, data) => {
         setLoading(false);
-        setfiles(data.data.rows);
-        // FilesData(data.data.rows, (item) => {
-        // });
-
+        // setfiles(data.data.rows);
         if (err) {
           Mesg(err);
+        } else {
+          let Files = [];
+          data.data.rows.map((file) => {
+            Files.push({
+              id: {
+                url: file.link,
+                id: file.id,
+                delete: () => onDelete(file.id),
+                copy: handleCopy,
+                copied: copied,
+                copiedUlr: copiedUlr,
+              },
+              FileTitle: file.name,
+              Type: [
+                `${
+                  /[.]/.exec(file.name) ? /[^.]+$/.exec(file.name) : undefined
+                }`,
+              ],
+              Size: "",
+              UploadedDate: DateName(file.createdAt),
+              image: "",
+            });
+          });
+          setdata(Files);
+          setFilterdata(Files);
         }
       },
       (err) => {
@@ -111,41 +150,148 @@ function FilUploader(props) {
     );
     // console.log(id, "id to deleted");
   };
-  let Files = [];
-  files.map((file) => {
-    Files.push({
-      id: {
-        url: file.link,
-        id: file.id,
-        delete: () => onDelete(file.id),
-        copy: handleCopy,
-        copied: copied,
-        copiedUlr: copiedUlr,
+  const [searchText, setsearchText] = useState("");
+
+  const HandleSearch = (e) => {
+    let value = e.target.value;
+    setsearchText(value);
+    if (value) {
+      //setFilterdata(data);
+      let newData = data.filter((item) =>
+        item.FileTitle.toLowerCase().includes(searchText.toLowerCase())
+      );
+
+      setFilterdata(newData);
+    } else {
+      setFilterdata(data);
+    }
+  };
+  const [url, seturl] = useState("");
+  const FilUploadedColumns = [
+    { key: "1", title: "", dataIndex: "", render: () => <Checkbox /> },
+    {
+      key: "2",
+      title: "File Title",
+      dataIndex: "FileTitle",
+      render: (item) => item,
+      sorter: {
+        compare: (a, b) => a.english - b.english,
+        multiple: 1,
       },
-      FileTitle: file.name,
-      Type: [`${/[.]/.exec(file.name) ? /[^.]+$/.exec(file.name) : undefined}`],
-      Size: "",
-      UploadedDate:
-        file.createdAt.slice(0, 2) +
-        " " +
-        monthNames[
-          file.createdAt.split("-")[1] === 0
-            ? file.createdAt.split("-")[1].slice(1) - 1
-            : file.createdAt.split("-")[1] - 1
-        ] +
-        " " +
-        file.createdAt.split("-")[0],
-      image: "",
-      // Status: true ? ["Enabled"] : ["Disabled"],
-    });
-  });
+    },
+
+    {
+      key: "3",
+      title: "Type",
+      dataIndex: "Type",
+      sorter: {
+        compare: (a, b) => a.chinese - b.chinese,
+        multiple: 3,
+      },
+      render: (Type) => (
+        <>
+          {Type.map((type) => {
+            let color;
+            if (type === "pdf" || type == "PDF") {
+              color = "orange";
+            } else if (type === "jpg" || type == "JPG") {
+              color = "blue";
+            } else {
+              color = "green";
+            }
+            return (
+              <Tag color={color} key={type}>
+                {type.toUpperCase()}
+              </Tag>
+            );
+          })}
+        </>
+      ),
+    },
+    {
+      key: "4",
+      title: "Size",
+      dataIndex: "Size",
+      sorter: {
+        compare: (a, b) => a.math - b.math,
+        multiple: 2,
+      },
+    },
+    {
+      key: "5",
+      title: "Uploaded Date",
+      dataIndex: "UploadedDate",
+      sorter: {
+        compare: (a, b) => a.english - b.english,
+        multiple: 1,
+      },
+    },
+    {
+      key: "6",
+      title: "Uploaded by",
+      dataIndex: "image",
+      render: (theImageURL) => (
+        <div style={{ width: "50px" }}>
+          <UserImage
+            alt={theImageURL}
+            src={require("../../public/images/user2.png")}
+          />
+        </div>
+      ),
+      sorter: {
+        compare: (a, b) => a.english - b.english,
+        multiple: 1,
+      },
+    },
+    {
+      key: "7",
+      title: "",
+      dataIndex: "id",
+      render: (item) => (
+        <div className="ResourcesIcon">
+          <div className="icon">
+            <Popover
+              content={<div>Copied !</div>}
+              // title={}
+              // onVisibleChange={(e) => item.copy(e, null)}
+              trigger="click"
+              visible={showNotification && item.id === url}
+              onVisibleChange={showPopup}
+              placement="top">
+              {/* {item.url + "m" + url} */}
+              <CopyToClipboard
+                text={item.url}
+                onCopy={(e) => item.copy(e, item.id)}>
+                <FaCopy fontSize="16" style={{ cursor: "pointer" }} />
+              </CopyToClipboard>{" "}
+            </Popover>
+          </div>
+          <div className="icon">
+            <a href={item.url} target="_blank">
+              <FiEdit fontSize="16" />
+            </a>
+          </div>
+          <div className="icon">
+            <Popconfirm
+              title="Are you sure？"
+              okText="Yes"
+              onConfirm={() => item.delete()}
+              cancelText="No">
+              <BsTrashFill fontSize="16" style={{ cursor: "pointer" }} />
+            </Popconfirm>
+          </div>
+        </div>
+      ),
+    },
+  ];
+
   return (
     <div>
-      {" "}
       <CustomPage
         pageTitle="file Uploader"
         columns={FilUploadedColumns}
-        data={Files}
+        data={Filterdata}
+        HandleSearch={HandleSearch}
         onOpenModal={onOpenModal}
         Loading={Loading}
         Item="file"

@@ -92,7 +92,13 @@ function App(props) {
             render={(props) => <Articles {...props} admins={admins} />}
             exact
           />
-          <Route path="/booking" component={Booking} exact />
+          <Route
+            path="/booking"
+            render={(props) => (
+              <Booking {...props} admins={admins} id={userId} />
+            )}
+            exact
+          />
           <Route path="/bookingDetalis/:id" component={BookingDetalis} exact />
           <Route path="/home" component={Home} exact />
           <Route

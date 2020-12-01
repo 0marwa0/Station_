@@ -11,6 +11,7 @@ import { Modal } from "react-responsive-modal";
 import NewResources from "./NewResource";
 import { LoadData, addData, addFile, removeItem } from "../../API";
 import { monthNames } from "../shared/assets";
+import { DateName } from "../Dashboard";
 
 import { Mesg, FailedMesg, SuccessMesg } from "../../API/APIMessage";
 
@@ -21,18 +22,40 @@ function Resources(props) {
   };
   const [Loading, setLoading] = useState(false);
   const [resource, setresource] = useState([]);
-
+  const [data, setdata] = useState([]);
+  const [Filterdata, setFilterdata] = useState([]);
   const getResources = () => {
     setLoading(true);
     LoadData(
       "resources",
       (err, data) => {
         setLoading(false);
-        setresource(data.data.rows);
-
         if (err) {
           Mesg(err);
         }
+        let Resources = [];
+        data.data.rows.map((item) => {
+          Resources.push({
+            id: {
+              url: item.url,
+              id: item.id,
+              delete: () => onDelete(item.id),
+            },
+            Title: item.name,
+
+            Descriptions: item.description,
+            Type: [
+              `${/[.]/.exec(item.name) ? /[^.]+$/.exec(item.name) : undefined}`,
+            ],
+            Size: "",
+
+            UploadedDate: DateName(item.createdAt),
+            image: "",
+          });
+        });
+
+        setdata(Resources);
+        setFilterdata(Resources);
       },
       (err) => {
         setLoading(false);
@@ -149,39 +172,29 @@ function Resources(props) {
     );
     console.log(id, "id to deleted");
   };
-  let Resources = [];
-  resource.map((item) => {
-    Resources.push({
-      id: {
-        url: item.url,
-        id: item.id,
-        delete: () => onDelete(item.id),
-      },
-      Title: item.name,
+  const [searchText, setsearchText] = useState("");
 
-      Descriptions: item.description,
-      Type: ["PDF"],
-      Size: "12.2mb",
+  const HandleSearch = (e) => {
+    let value = e.target.value;
+    setsearchText(value);
+    if (value) {
+      //setFilterdata(data);
+      let newData = data.filter((item) =>
+        item.Title.toLowerCase().includes(searchText.toLowerCase())
+      );
 
-      UploadedDate:
-        item.createdAt.slice(0, 2) +
-        " " +
-        monthNames[
-          item.createdAt.split("-")[1] === 0
-            ? item.createdAt.split("-")[1].slice(1) - 1
-            : item.createdAt.split("-")[1] - 1
-        ] +
-        " " +
-        item.createdAt.split("-")[0],
-      image: "",
-    });
-  });
+      setFilterdata(newData);
+    } else {
+      setFilterdata(data);
+    }
+  };
   return (
     <div>
       <CustomPage
         pageTitle="resources"
         columns={ResourcesColumns}
-        data={Resources}
+        data={Filterdata}
+        HandleSearch={HandleSearch}
         onOpenModal={onOpenModal}
         Item="resource"
         Loading={Loading}

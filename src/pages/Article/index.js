@@ -4,24 +4,41 @@ import React, { useState, useEffect } from "react";
 import ArticlesColumns, { ArticlesData } from "./Config.js";
 // import { ArticlesData } from "../../fakeData";
 import CustomPage from "../shared/CustomPage";
+import { DateName } from "../Dashboard";
+
 import "react-responsive-modal/styles.css";
 import { Mesg, FailedMesg } from "../../API/APIMessage";
 import { LoadData } from "../../API";
 import { monthNames } from "../shared/assets";
 function Aritcle(props) {
   const [Loading, setLoading] = useState(false);
-  const [articles, setarticles] = useState([]);
+  const [data, setdata] = useState([]);
+  const [Filterdata, setFilterdata] = useState([]);
+
   const loadArticle = () => {
     setLoading(true);
     LoadData(
       "articles",
       (err, data) => {
-        setLoading(false);
-        // ArticlesData(data.data.rows, (item) => { });
-        setarticles(data.data.rows);
-
         if (err) {
           Mesg(err);
+        } else {
+          setLoading(false);
+          let Articles = [];
+          data.data.rows.map((item) => {
+            Articles.push({
+              image: item.image,
+              Title: item.title,
+              CreatedDate: DateName(item.createdAt),
+              Createdby: props.admins
+                .filter((i) => i.id === item.adminId)
+                .map((i) => i.username)
+                .toString(),
+            });
+          });
+
+          setdata(Articles);
+          setFilterdata(Articles);
         }
       },
       (err) => {
@@ -31,6 +48,8 @@ function Aritcle(props) {
       }
     );
   };
+  const [FilterdData, setFilterdData] = useState([]);
+
   useEffect(() => {
     if (localStorage.getItem("station_token")) {
       loadArticle();
@@ -38,37 +57,34 @@ function Aritcle(props) {
       props.history.push("/login");
     }
   }, []);
-  let Articles = [];
-  articles.map((item) => {
-    Articles.push({
-      image: item.image,
-      Title: item.title,
+  const [searchText, setsearchText] = useState("");
 
-      CreatedDate:
-        item.createdAt.slice(0, 2) +
-        " " +
-        monthNames[
-          item.createdAt.split("-")[1] === 0
-            ? item.createdAt.split("-")[1].slice(1) - 1
-            : item.createdAt.split("-")[1] - 1
-        ] +
-        " " +
-        item.createdAt.split("-")[0],
-      Createdby: props.admins
-        .filter((i) => i.id === item.adminId)
-        .map((i) => i.username)
-        .toString(),
-    });
-  });
+  const HandleSearch = (e) => {
+    let value = e.target.value;
+    setsearchText(value);
+    if (value) {
+      setFilterdata(data);
+    }
+  };
 
+  const Filter = () => {
+    let newData = data.filter((item) =>
+      item.Title.toLowerCase().includes(searchText.toLowerCase())
+    );
+    console.log(data, searchText);
+
+    setFilterdata(newData);
+  };
   return (
     <div>
       <CustomPage
         pageTitle="articles"
         columns={ArticlesColumns}
-        data={Articles}
-        Loading={Loading}
         Item="aritcle"
+        Loading={Loading}
+        data={Filterdata}
+        HandleSearch={HandleSearch}
+        filter={Filter}
       />
     </div>
   );

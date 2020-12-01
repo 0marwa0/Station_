@@ -9,8 +9,8 @@ function Index(props) {
   const [Loading, setLoading] = useState(false);
   const [Book, setBook] = useState([]);
   const [DateValues, setDateValues] = useState([]);
-  let edit = props.Edit;
-  let data = props.data ? props.data : [];
+
+  let data = props.data;
   let Design = props.Designs
     ? props.Designs.filter((item) => item.id != data.designId)
     : [];
@@ -87,7 +87,7 @@ function Index(props) {
     setrecived("");
     setdays([]);
   };
-  const [title, settitle] = useState(data.title);
+  const [title, settitle] = useState(props.data.title);
   const [price, setprice] = useState(data.price);
   const [received, setrecived] = useState(data.received);
   const [organizer, setorganizer] = useState(data.organizer);
@@ -99,7 +99,9 @@ function Index(props) {
   const [coffeebreakId, setcoffeebreakId] = useState(coffee);
   const [lunchId, setlunchId] = useState(lunch);
   const [days, setdays] = useState([]);
-  const handleEdit = () => {
+  useEffect(() => {}, []);
+
+  const handleSubmit = () => {
     let data = {
       title: title,
       organizer: organizer,
@@ -120,68 +122,52 @@ function Index(props) {
         delete data[key];
       }
     });
-  };
-  const handleSubmit = () => {
-    let data = {
-      title: title,
-      organizer: organizer,
-      people: people,
-      comment: comment,
-      days: days,
-      spaceId: spaceId,
-      typeId: typeId,
-      designId: designId,
-      coffeebreakId: coffeebreakId,
-      lunchId: lunchId,
-      price: Number(price),
-      received: Number(received),
-    };
     props.onOpenModal(false);
 
     // onOpenModal(false);
-    console.log(data, "book data sended");
+    //  console.log(data, "book data sended");
     setLoading(true);
-    addData(
-      "book/add",
-      data,
-      (mesg, Data) => {
-        if (mesg) {
-          clearState();
-          Mesg(mesg);
-          setLoading(false);
-        } else {
-          SuccessMesg("Booking done !");
-          setLoading(false);
-          props.onOpenModal(false);
-          props.getData();
-          clearState();
-        }
-      },
-      (err) => {
-        props.onOpenModal(false);
-        setLoading(false);
-        clearState();
-        FailedMesg(err);
-      }
-    );
+    // addData(
+    //   "book/add",
+    //   data,
+    //   (mesg, Data) => {
+    //     if (mesg) {
+    //       clearState();
+    //       Mesg(mesg);
+    //       setLoading(false);
+    //     } else {
+    //       SuccessMesg("Booking done !");
+    //       setLoading(false);
+    //       props.onOpenModal(false);
+    //       clearState();
+    //     }
+    //   },
+    //   (err) => {
+    //     props.onOpenModal(false);
+    //     setLoading(false);
+    //     clearState();
+    //     FailedMesg(err);
+    //   }
+    // );
   };
   return (
     <div>
       <Values.Provider
         value={{
-          title: edit ? data.title : title,
-          organizer: edit ? data.organizer : organizer,
-          people: edit ? data.people : people,
-          comment: edit ? data.comment : comment,
-          spaceId: edit ? space : spaceId,
-          coffeebreakId: edit ? coffee : coffeebreakId,
-          lunchId: edit ? lunch : lunchId,
-          designId: edit ? design : designId,
-          typeId: edit ? type : typeId,
-          price: edit ? data.price : price,
-          received: edit ? data.received : received,
-          days: edit ? data.bookDates : days,
-          DateValues: edit ? data.bookDates : days,
+          data: data,
+          title: title,
+          organizer: organizer,
+          people: people,
+          comment: comment,
+          spaceId: spaceId,
+          coffeebreakId: coffeebreakId,
+          lunchId: lunchId,
+          designId: designId,
+          typeId: typeId,
+          price: price,
+          received: received,
+          days: days,
+          DateValues: days,
         }}>
         <Modal
           closeOnOverlayClick={true}
@@ -198,8 +184,7 @@ function Index(props) {
           <NewBooking
             handleInput={handleInput}
             handleselect={handleselect}
-            edit={edit ? true : false}
-            handleSubmit={edit ? handleEdit : handleSubmit}
+            handleSubmit={handleSubmit}
             Close={() => {
               props.onOpenModal(false);
               clearState();

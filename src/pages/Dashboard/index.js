@@ -11,7 +11,7 @@ import { DownOutlined } from "@ant-design/icons";
 import { CustomButton } from "../shared/SharedComponents";
 import "../../App.css";
 import { ReactComponent as PlusIcon } from "../../public/images/plus.svg";
-
+import { useHistory } from "react-router-dom";
 import FullCalendar from "@fullcalendar/react";
 import { Modal } from "react-responsive-modal";
 import { ReactComponent as PrintIcon } from "../../public/images/print.svg";
@@ -44,16 +44,6 @@ const colors = {
   color4: "var(--red)",
   color5: "var(--purple)",
 };
-const menu = (
-  <Menu>
-    <Menu.Item>
-      <a>Next month</a>
-    </Menu.Item>
-    <Menu.Item>
-      <a>Previous month</a>
-    </Menu.Item>
-  </Menu>
-);
 
 export const Widget = styled.div`
   background-color: white;
@@ -118,6 +108,7 @@ function Index(props) {
     let color = item.event._def.ui.backgroundColor.replace(/^"(.*)"$/, "$1");
     //console.log(item.event._def.ui.backgroundColor, "our color");
     item.event._def.extendedProps.data.map((item) => (data = item));
+
     let node = document.createElement("div");
     let DayWrap = document.createElement("div");
     let TimeWrap = document.createElement("div");
@@ -156,6 +147,7 @@ function Index(props) {
       node.appendChild(TimeWrap);
 
       item.el.appendChild(node);
+
       // console.log(item.el);
     }
   };
@@ -289,6 +281,41 @@ function Index(props) {
     }
   }, []);
   let id = localStorage.getItem("Station_id");
+  let NowDate = new Date();
+  let month = NowDate.getMonth();
+  if (month === 12) {
+    month = 1;
+  } else {
+    month = month + 1;
+  }
+  let year = NowDate.getFullYear();
+  const setNextMonth = () => {
+    setchange(true);
+    // if (month === 12) {
+    //   setCurrentMonth("01");
+    // } else {
+    //   setCurrentMonth(month + 1);
+    // }
+  };
+  const setPrevMonth = () => {
+    setCurrentMonth(month - 1);
+    console.log("doooooooooo");
+  };
+  // year + "-" + CurrentMonth.toString() + "-01T00:00:00.000Z"
+  const [change, setchange] = useState(false);
+  const [CurrentMonth, setCurrentMonth] = useState("2020-11-01T00:00:00.000Z");
+  const menu = (
+    <Menu>
+      <Menu.Item>
+        <a onClick={setNextMonth}>Next month</a>
+      </Menu.Item>
+      <Menu.Item>
+        <a onClick={setPrevMonth}>Previous month</a>
+      </Menu.Item>
+    </Menu>
+  );
+
+  // let d = "2020-11-05T00:00:00.000Z";
   return (
     <CustomPageWrapper>
       <GlobalStyle />
@@ -319,12 +346,12 @@ function Index(props) {
                   <RiArrowDropDownLine size="25px" />
                 </List>
               </Dropdown>
-              <SearchInput placeholder="Advanced Search" />
+              {/* <SearchInput placeholder="Advanced Search" /> */}
             </ButtonGroup>
             <ButtonGroup>
-              <CustomButton lable="Print">
+              {/* <CustomButton lable="Print">
                 <PrintIcon />
-              </CustomButton>
+              </CustomButton> */}
               <CustomButton main onOpen={onOpenModal} lable="New Booking">
                 <PlusIcon />
               </CustomButton>
@@ -347,8 +374,14 @@ function Index(props) {
                 plugins={[dayGridPlugin]}
                 initialView="dayGridMonth"
                 height="700px"
+                eventClick={(e) =>
+                  props.history.push(
+                    `/bookingDetalis/${e.event._def.extendedProps.bookId}`
+                  )
+                }
                 eventMouseEnter={(item) => onEnter(item)}
                 eventMouseLeave={(item) => onLeave(item)}
+                // initialDate={change ? "2020-12-01T00:00:00.000Z" : CurrentMonth}
                 events={BookDates}
               />
             </Clander>
@@ -361,7 +394,11 @@ function Index(props) {
           </Col>
         </Row>
       </PageContent>
-      <BookingModal open={open} onOpenModal={onOpenModal} />
+      <BookingModal
+        open={open}
+        onOpenModal={onOpenModal}
+        getData={loadApiData}
+      />
     </CustomPageWrapper>
   );
 }

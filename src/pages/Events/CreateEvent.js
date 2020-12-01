@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { IoMdRefresh } from "react-icons/io";
 import Editor from "@stfy/react-editor.js";
 import { useParams } from "react-router-dom";
-import { LoadData, addData } from "../../API";
+import { LoadData, addData, addFile } from "../../API";
 import { SuccessMesg, FailedMesg, Mesg } from "../../API/APIMessage";
 import { ReactComponent as RefreshIcon } from "../../public/images/solid undo-right.svg";
 import { ReactComponent as RefreshIconLeft } from "../../public/images/solid undo.svg";
@@ -17,7 +17,7 @@ import { PageBack } from "../Profile";
 import { Menu, Dropdown, message, Tooltip } from "antd";
 import { DownOutlined, UserOutlined } from "@ant-design/icons";
 import SideBar from "../Sidebar";
-import { Button, Row, Col, Input, Select } from "antd";
+import { Button, Row, Col, Input, Select, Upload } from "antd";
 import { GlobalStyle } from "../Dashboard";
 import styled from "styled-components";
 import { ImAttachment } from "react-icons/im";
@@ -31,7 +31,7 @@ export const TextNote = styled.div`
 `;
 
 const EventContent = styled(Col)`
-  width: 70%;
+  width: 75%;
   height: auto;
   padding: 40px 50px;
   background-color: white;
@@ -96,7 +96,7 @@ const InputTitle = styled(Input)`
   width: 80%;
   height: 60px;
   font-size: 20px;
-  color: var(--lighterGray);
+
   font-weight: 500;
 `;
 const PageTitle = styled.span`
@@ -116,7 +116,7 @@ const GrayText = styled.div`
   color: var(--darkGray);
   font-size: 1vw;
 `;
-const Index = () => {
+const Index = (props) => {
   let { id } = useParams();
   const [Active, setActive] = useState(false);
   const [title, settitle] = useState("");
@@ -128,114 +128,60 @@ const Index = () => {
   const [fileName, setFileName] = useState("");
   const [fileSize, setFileSize] = useState("");
 
-  const [Image, setImage] = useState(
-    require("../FileUploader/NewFileUploader/default2.png")
-  );
+  const [Image, setImage] = useState();
 
+  const HandleFile = (e) => {
+    setImage(e);
+    console.log(e, "whatttttttt");
+  };
   const [allowToChange, setallowToChange] = useState(false);
 
-  const getFileSize = (e) => {
-    let fileSize = e;
-    var Uints = new Array("Bytes", "KB", "MB", "GB"),
-      i = 0;
-    while (fileSize > 900) {
-      fileSize /= 1024;
-      i++;
-    }
-    var exactSize = Math.round(fileSize * 100) / 100 + " " + Uints[i];
-    console.log("FILE SIZE = ", exactSize);
-    console.log(fileSize, "sizzzzzz");
-    setFileSize(exactSize);
-  };
-
-  const handleImageChange = (e) => {
-    e.preventDefault();
-    let value;
-    setallowToChange(true);
-    setActive(true);
-    let type = e.target.files[0].type;
-    setfile(e.target.files[0]);
-    if (type.substring(0, 5) === "image") {
-      value = URL.createObjectURL(e.target.files[0]);
-
-      setImage(value);
-    } else {
-      setImage(require("../FileUploader/NewFileUploader/file2.webp"));
-    }
-    setFileName(e.target.files[0].name);
-    getFileSize(e.target.files[0].size);
-  };
-  const removeImage = () => {
-    setActive(false);
-    setImage(require("../FileUploader/NewFileUploader/default2.png"));
-    setallowToChange(false);
-    setFileName("");
-    setFileSize("");
-  };
-
-  const dragEnter = (e) => {
-    e.preventDefault();
-  };
-  const dragLeave = (e) => {
-    e.preventDefault();
-    setActive(false);
-  };
-  const dragOver = (e) => {
-    setActive(true);
-    e.preventDefault();
-  };
-  const fileDrop = (e) => {
-    e.preventDefault();
-
-    let value;
-    setfile(e.dataTransfer.files[0]);
-    let type = e.dataTransfer.files[0].type;
-    if (type.substring(0, 5) === "image") {
-      value = URL.createObjectURL(e.dataTransfer.files[0]);
-      setImage(value);
-    } else {
-      setImage(require("../FileUploader/NewFileUploader/file2.webp"));
-    }
-    setallowToChange(true);
-    setFileName(e.dataTransfer.files[0].name);
-    getFileSize(e.dataTransfer.files[0].size);
-  };
-
   const createEvent = () => {
-    let data = {
-      id: id,
-      image: file,
-      title,
-      description,
-      lang: "ar",
-      ticketPrice: price,
-    };
-    console.log(data, "envet publish");
-    // setLoading(true);
-    // addData(
-    //   "toevent",
-    //   data,
-    //   (mesg, Data) => {
-    //     SuccessMesg("Create Event Done!");
-    //     setLoading(false);
-    //   },
-    //   (err) => {
-    //     setLoading(false);
+    let File = new FormData();
+    File.append("file", Image);
+    addFile(
+      "upload/file",
+      File,
+      (data) => {
+        if (data.errMsg) {
+          Mesg(data.errMsg);
+        } else {
+          let event = {
+            id: id,
+            image: data.data.link,
+            title,
+            description,
+            lang: "ar",
+            ticketPrice: price,
+          };
+          console.log(event);
 
-    //     FailedMesg(err);
-    //   }
-    // );
+          addData(
+            "toevent",
+            event,
+            (mesg, Data) => {
+              SuccessMesg("Create Event Done!");
+              setLoading(false);
+            },
+            (err) => {
+              setLoading(false);
+
+              FailedMesg(err);
+            }
+          );
+        }
+      },
+      (err) => {
+        FailedMesg(err.toString());
+      }
+    );
   };
   const [t, sett] = useState("");
   const handletext = (e, key) => {
-    let text = "";
-    e.map((i) => (text += i.data.text));
-    setdescription(text);
-    console.log(text);
-    // sett(text);
+    setdescription(e);
   };
   const handleselect = (e, key) => {
-    let value = e;
+    let value = e.target.value;
     switch (key) {
       case "title":
         settitle(value);
@@ -248,62 +194,15 @@ const Index = () => {
         break;
     }
   };
-  const UplaodWdiget = () => {
-    return (
-      <UploadContenter>
-        <div style={{ padding: "10px 0" }}>Header Photo</div>
 
-        <div
-          onDragOver={dragOver}
-          onDragEnter={dragEnter}
-          onDragLeave={dragLeave}
-          onDrop={fileDrop}
-          className={
-            Active ? "upload_modal event active" : "upload_modal event"
-          }>
-          <div className="upload_img_close">
-            <img src={Image} className="img" />
-          </div>
-          <span
-            style={{
-              color: "#808D93",
-              fontSize: "1.2vw",
-            }}>
-            Choose any file form computer or
-            <span style={{ color: "black" }}> Drag & Drop</span> it here
-          </span>
-          <span style={{ margin: "20px 0" }}>
-            <input type="file" id="file" onChange={handleImageChange} />
-            <label for="file"> ChooseFile</label>
-          </span>
-        </div>
-        <span>
-          {fileName ? (
-            <span style={{ display: "flex", gap: "5px" }}>
-              <TextNote>
-                <ImAttachment />
-              </TextNote>
+  const Props = {
+    multiple: false,
 
-              {fileName}
-              <TextNote>{fileSize}</TextNote>
-              {allowToChange ? (
-                <FaTrashAlt
-                  size="14px"
-                  style={{
-                    cursor: "pointer",
-                    color: "var(--lighterGray)",
-                    marginLeft: "8px",
-                  }}
-                  onClick={removeImage}
-                />
-              ) : null}
-            </span>
-          ) : (
-            ""
-          )}
-        </span>
-      </UploadContenter>
-    );
+    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
+
+    onChange({ file, fileList }) {
+      HandleFile(file.originFileObj);
+    },
   };
 
   return (
@@ -378,25 +277,33 @@ const Index = () => {
           </EventContent>
           <Col
             style={{
-              width: "27%",
+              width: "22%",
             }}>
-            <UplaodWdiget />
+            <UploadContenter>
+              <div style={{ padding: "10px 0" }}>Header Photo</div>
+
+              <Upload {...Props}>
+                <div className="upload_modal_event">
+                  <img src={require("./default2.png")} className="img" />
+
+                  <span
+                    style={{
+                      color: "var(--darkGray)",
+                    }}>
+                    Choose any file form computer or Drag & Drop it here
+                  </span>
+                  <span style={{ margin: "20px 0" }}>
+                    <Button>Choose File</Button>
+                  </span>
+                </div>
+              </Upload>
+            </UploadContenter>
             <LanguageWidget>
               <LanguageSide>Language</LanguageSide>
               <div>
                 <LanguageOption>
                   <GrayText> Main Language</GrayText>
 
-                  {/* <Dropdown overlay={Mainoption}>
-                    <Button
-                      style={{
-                        borderRadius: "7px",
-                        backgroundColor: "var(--lightGray)",
-                      }}
-                    >
-                      English <DownOutlined />
-                    </Button>
-                  </Dropdown> */}
                   <Select
                     suffixIcon={<DropIcon />}
                     value="English"

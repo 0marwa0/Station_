@@ -1,6 +1,7 @@
 // Booinkg page config
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import React from "react";
+import { Link } from "react-router-dom";
 import { LoadDataByID } from "../../API";
 import { Checkbox, Table, Tooltip, Tag, Space, Button, Input } from "antd";
 const monthNames = [
@@ -30,6 +31,9 @@ export const BookingColumns = [
   {
     title: "Title",
     dataIndex: "Title",
+    render: (item) => (
+      <Link to={`/bookingDetalis/${item.id}`}>{item.title}</Link>
+    ),
     sorter: {
       compare: (a, b) => a.english - b.english,
       multiple: 1,

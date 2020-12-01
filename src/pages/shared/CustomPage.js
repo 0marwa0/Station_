@@ -88,8 +88,9 @@ function CustomPage(props) {
   let pageTitle = props.pageTitle;
   const columns = props.columns;
   const data = props.data;
-  const [next, setNext] = useState(true);
-  const [prev, setprev] = useState(false);
+  // const [next, setNext] = useState(true);
+  // const [prev, setprev] = useState(false);
+
   const [showList, setShowList] = useState(false);
   const showListItem = () => {
     setShowList(true);
@@ -123,13 +124,14 @@ function CustomPage(props) {
   };
   const indexOfLastPage = currentPage * pagePerOnce;
   const indexOfFirstPage = indexOfLastPage - pagePerOnce;
-  const Data = props.data.slice(indexOfFirstPage, indexOfLastPage);
+  let Data = props.data.slice(indexOfFirstPage, indexOfLastPage);
   let pageTitleName;
   if (pageTitle === "booking") {
     pageTitleName = props.pageTitle;
   } else {
     pageTitleName = props.pageTitle.substring(0, props.pageTitle.length - 1);
   }
+
   useEffect(() => {
     if (props.Loading) {
       ref.current.staticStart();
@@ -137,7 +139,7 @@ function CustomPage(props) {
       ref.current.complete();
     }
   }, []);
-  // console.log(pageTitleName, "show page name");
+
   return (
     <CustomPageWrapper>
       <LoadingBar color="var(--yellow)" ref={ref} shadow={true} />
@@ -296,11 +298,12 @@ function CustomPage(props) {
               )}
               <Input
                 loading={props.Loading}
+                onChange={(e) => props.HandleSearch(e)}
                 style={{
                   borderRadius: "6px",
                   border: "1px solid var(--lighterGray)",
                   height: "30px",
-                  color: "var(--lighterGray)",
+
                   width: "220px",
                 }}
                 placeholder="Search"
@@ -310,7 +313,11 @@ function CustomPage(props) {
               ) : props.pageTitle === "file Uploader" ? (
                 ""
               ) : (
-                <CustomButton lable="Filter" filter loading={props.Loading}>
+                <CustomButton
+                  lable="Filter"
+                  filter
+                  loading={props.Loading}
+                  fun={props.filter}>
                   <FiFilter />
                 </CustomButton>
               )}

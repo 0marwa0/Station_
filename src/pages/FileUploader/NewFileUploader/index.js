@@ -40,7 +40,6 @@ export default function NewFileUploader(props) {
     // },
     onChange({ file, fileList }) {
       props.handleInput(file.originFileObj);
-      console.log(file, "file hcoosng");
 
       //   if (file.status !== "uploading") {
       //     console.log(file, fileList);

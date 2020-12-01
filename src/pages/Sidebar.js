@@ -178,13 +178,11 @@ function SideBar(props) {
               xmlns="http://www.w3.org/2000/svg"
               width="32"
               height="22.273"
-              viewBox="0 0 23.833 22.273"
-            >
+              viewBox="0 0 23.833 22.273">
               <g
                 id="Group_631"
                 data-name="Group 631"
-                transform="translate(1.25)"
-              >
+                transform="translate(1.25)">
                 <path
                   id="Path_690"
                   data-name="Path 690"
@@ -214,13 +212,11 @@ function SideBar(props) {
               xmlns="http://www.w3.org/2000/svg"
               width="32"
               height="22.002"
-              viewBox="0 0 32 22.002"
-            >
+              viewBox="0 0 32 22.002">
               <g
                 id="Group_37532"
                 data-name="Group 37532"
-                transform="translate(-26.667 -197.79)"
-              >
+                transform="translate(-26.667 -197.79)">
                 <path
                   id="Subtraction_1"
                   data-name="Subtraction 1"
@@ -238,8 +234,7 @@ function SideBar(props) {
                 <g
                   id="Group_37531"
                   data-name="Group 37531"
-                  transform="translate(-1)"
-                >
+                  transform="translate(-1)">
                   <line
                     id="Line_286"
                     data-name="Line 286"
@@ -275,13 +270,11 @@ function SideBar(props) {
               xmlns="http://www.w3.org/2000/svg"
               width="33"
               height="21.917"
-              viewBox="0 0 23.822 21.917"
-            >
+              viewBox="0 0 23.822 21.917">
               <g
                 id="Group_6688"
                 data-name="Group 6688"
-                transform="translate(-99.733 -250.828)"
-              >
+                transform="translate(-99.733 -250.828)">
                 <path
                   id="Path_2025"
                   data-name="Path 2025"
@@ -338,8 +331,7 @@ function SideBar(props) {
               xmlns="http://www.w3.org/2000/svg"
               width="25"
               height="24.941"
-              viewBox="0 0 25 24.941"
-            >
+              viewBox="0 0 25 24.941">
               <path
                 id="Path_695"
                 data-name="Path 695"
@@ -363,17 +355,15 @@ function SideBar(props) {
                 </NotifiHeader>
               }
               trigger="click"
-              visible={showNotification}
               placement="rightBottom"
-              onVisibleChange={showPopup}
-            >
+              visible={showNotification}
+              onVisibleChange={showPopup}>
               <div>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="25"
                   height="25"
-                  viewBox="0 0 25 25"
-                >
+                  viewBox="0 0 25 25">
                   <path
                     id="Path_688"
                     data-name="Path 688"

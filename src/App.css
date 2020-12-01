@@ -4,7 +4,26 @@
   box-sizing: border-box;
   font-family: Px-Grotesk !important;
 }
-
+.upload_modal_event {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  border-radius: 7px;
+  min-height: 270px;
+  margin-bottom: 10px;
+  background-color: var(--lightBlue);
+  /*margin-top: 20px; */
+  gap: 5%;
+  font-size: 17px;
+  border: 3px dashed var(--lighterGray);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
 .stylecss .ant-select-selector {
   width: 100px !important;
   background-color: var(--lightGray) !important;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { SuccessMesg, FailedMesg, Mesg } from "../../API/APIMessage";
 import { LoadData, addData } from "../../API";
+import EditBooking from "../../pages/Booking/EditBooking";
 import { monthNames } from "../shared/assets";
 import { Skeleton, Input } from "antd";
 import "../../App.css";
@@ -261,6 +262,7 @@ const Index = (props) => {
   };
   let Data = data ? data : {};
   let design = Designs.filter((item) => item.id != data.designId);
+  console.log(Data, "deeeeeeetalils");
 
   return (
     <CustomPageWrapper>
@@ -282,13 +284,13 @@ const Index = (props) => {
 
               <div style={{ display: "flex", gap: "10px" }}>
                 <ButtonStyled onClick={onOpenModal}>Edit</ButtonStyled>
-                {!BookingStatus ? null : (
+                {Data.status === "approved" ? (
                   <ButtonStyled
                     onClick={() => history.push(`/createEvent/${id}`)}
                     main>
                     Create Event
                   </ButtonStyled>
-                )}
+                ) : null}
               </div>
             </PageActions>
 
@@ -299,7 +301,7 @@ const Index = (props) => {
                 <Dropdown overlay={menu}>
                   <Pending>
                     <spna>
-                      Pending
+                      {Data.status}
                       <DownOutlined
                         style={{ fontSize: "10px", margin: " 0 5px" }}
                       />
@@ -496,7 +498,7 @@ const Index = (props) => {
           </Wrapper>
         </div>
       </PageContent>
-      <BookingModal
+      <EditBooking
         open={open}
         onOpenModal={onOpenModal}
         Edit={true}

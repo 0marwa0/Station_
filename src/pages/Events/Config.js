@@ -23,7 +23,7 @@ export const EventsColumns = [
   {
     key: "2",
     title: "#",
-    dataIndex: "num",
+    dataIndex: "id",
     sorter: {
       compare: (a, b) => a.english - b.english,
       multiple: 1,
@@ -91,14 +91,15 @@ export const EventsColumns = [
     key: "7",
     title: "Approved by",
     dataIndex: "Approvedby",
-    // render: (theImageURL) => (
-    //   <div style={{ width: "50px" }}>
-    //     <UserImage
-    //       alt={theImageURL}
-    //       src={require("../../public/images/user2.png")}
-    //     />
-    //   </div>
-    // ),
+    render: (theImageURL) => (
+      <div style={{ width: "50px" }}>
+        {theImageURL}
+        {/* <UserImage
+          alt={theImageURL}
+          src={require("../../public/images/user2.png")}
+        /> */}
+      </div>
+    ),
 
     sorter: {
       compare: (a, b) => a.english - b.english,

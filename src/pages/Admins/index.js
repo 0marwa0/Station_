@@ -16,7 +16,8 @@ function Admins(props) {
   const [open, setOpen] = useState(false);
   const [Loading, setLoading] = useState(false);
   const [Admins, setAdmins] = useState([]);
-
+  const [data, setdata] = useState([]);
+  const [Filterdata, setFilterdata] = useState([]);
   const onOpenModal = (open) => {
     setOpen(open);
   };
@@ -25,12 +26,25 @@ function Admins(props) {
       "Admins",
       (err, data) => {
         setLoading(false);
-        AdminsData(data.data, (Admins) => {
-          setAdmins(Admins);
-        });
-
         if (err) {
           Mesg(err);
+        } else {
+          //     AdminsData(data.data, (Admins) => {
+          //   setAdmins(Admins);
+          // });
+
+          let Admins = [];
+          data.data.map((admin) => {
+            Admins.push({
+              FullName: admin.name,
+              Username: admin.username,
+              Type: admin.type === 1 ? ["Book Admin"] : ["Book Admin"],
+              Branch: "Baghdad",
+              Status: true ? ["Enabled"] : ["Disabled"],
+            });
+          });
+          setdata(Admins);
+          setFilterdata(Admins);
         }
       },
       (err) => {
@@ -72,6 +86,13 @@ function Admins(props) {
         break;
     }
   };
+  const ClearState = () => {
+    setLoading(false);
+
+    setname("");
+    setusername("");
+    setpassword("");
+  };
   const handleSubmit = () => {
     let data = {
       name: name,
@@ -85,24 +106,14 @@ function Admins(props) {
         "admin/add",
         data,
         (mesg, Data) => {
-          // if (!Data.status) {
-          //   Mesg(mesg);
-          // }
           SuccessMesg("Account creating done !");
-
-          setLoading(false);
           onOpenModal(false);
           getAdmins();
-          setname("");
-          setusername("");
-          setpassword("");
+          ClearState();
         },
         (err) => {
           onOpenModal(false);
-          setLoading(false);
-          setname("");
-          setusername("");
-          setpassword("");
+          ClearState();
           FailedMesg(err);
         }
       );
@@ -111,12 +122,31 @@ function Admins(props) {
       FailedMesg(" Account creating failed ", "Empty fileds");
     }
   };
+  const [searchText, setsearchText] = useState("");
+
+  const HandleSearch = (e) => {
+    let value = e.target.value;
+    setsearchText(value);
+    if (value) {
+      setFilterdata(data);
+    }
+  };
+
+  const Filter = () => {
+    let newData = data.filter((item) =>
+      item.FullName.toLowerCase().includes(searchText.toLowerCase())
+    );
+
+    setFilterdata(newData);
+  };
   return (
     <div>
       <CustomPage
         pageTitle="admins"
         columns={AdminsColumns}
-        data={Admins}
+        data={Filterdata}
+        HandleSearch={HandleSearch}
+        filter={Filter}
         onOpenModal={onOpenModal}
         EmptyTitle="No Admins found"
         Item="Admin"

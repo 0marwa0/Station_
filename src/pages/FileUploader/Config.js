@@ -5,9 +5,10 @@ import { FaCopy } from "react-icons/fa";
 import { Popconfirm } from "antd";
 import { FiEdit } from "react-icons/fi";
 import React from "react";
-import { Mesg, FailedMesg, SuccessMesg } from "../../API/APIMessage";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Checkbox, Tag, Tooltip, Popover } from "antd";
+import { Mesg, FailedMesg, SuccessMesg } from "../../API/APIMessage";
+
 const monthNames = [
   "January",
   "February",
@@ -105,17 +106,18 @@ export const FilUploadedColumns = [
     render: (item) => (
       <div className="ResourcesIcon">
         <div className="icon">
-          {/* <Popover
+          <Popover
             content={<div>Copied !</div>}
             // title={}
-            onVisibleChange={(e) => item.copy(e,)}
+            onVisibleChange={(e) => item.copy(e, null)}
             trigger="click"
             visible={item.url === item.copiedUlr && item.copied ? true : false}
-            placement="top"> */}
-          <CopyToClipboard text={item.url} onCopy={(e) => item.copy(e)}>
-            <FaCopy fontSize="16" style={{ cursor: "pointer" }} />
-          </CopyToClipboard>{" "}
-          {/* </Popover> */}
+            placement="top">
+            {item.copiedUlr + "m" + item.copied}
+            <CopyToClipboard text={item.url} onCopy={(e) => item.copy(e)}>
+              <FaCopy fontSize="16" style={{ cursor: "pointer" }} />
+            </CopyToClipboard>{" "}
+          </Popover>
         </div>
         <div className="icon">
           <a href={item.url} target="_blank">
