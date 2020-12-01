@@ -327,6 +327,10 @@ function CustomPage(props) {
                 ""
               ) : props.pageTitle === "file Uploader" ? (
                 ""
+              ) : props.pageTitle === "customers" ? (
+                ""
+              ) : props.pageTitle === "admins" ? (
+                ""
               ) : (
                 <CustomButton lable="Import" loading={props.Loading}>
                   {/* <BiImport /> */}
