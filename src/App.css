@@ -559,7 +559,7 @@ th:last-child {
 }
 /********Notification****/
 .NotificationIcon {
-  width: 40px;
+  width: 30px;
   height: 40px;
   border-radius: 50%;
   background-color: var(--lightOrange);
