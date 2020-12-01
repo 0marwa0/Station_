@@ -28,7 +28,13 @@ const ArticlesColumns = [
 
     render: (theImageURL) => (
       <div style={{ width: "50px" }}>
-        <ArticleImage alt={theImageURL} src={theImageURL} />
+        <ArticleImage
+          alt="Article image"
+          src={theImageURL}
+          onError={(e) =>
+            (e.target.src = require("../../public/images/defaultImg.jpg"))
+          }
+        />
       </div>
     ),
   },

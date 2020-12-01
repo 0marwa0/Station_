@@ -2,7 +2,13 @@ import React, { useState, useEffect, useContext } from "react";
 import { Modal } from "react-responsive-modal";
 import NewBooking from "../Booking/NewBooking/NewBooking";
 import { FailedMesg, Mesg, SuccessMesg } from "../../API/APIMessage";
-import { LoadData, LoadBooking, LoadDataByID, addData } from "../../API";
+import {
+  LoadData,
+  LoadBooking,
+  LoadDataByID,
+  addData,
+  editData,
+} from "../../API";
 //export const Values = React.createContext();
 import { Values } from "../Booking/index";
 function Index(props) {
@@ -87,6 +93,7 @@ function Index(props) {
     setrecived("");
     setdays([]);
   };
+
   const [title, settitle] = useState(props.data.title);
   const [price, setprice] = useState(data.price);
   const [received, setrecived] = useState(data.received);
@@ -99,7 +106,43 @@ function Index(props) {
   const [coffeebreakId, setcoffeebreakId] = useState(coffee);
   const [lunchId, setlunchId] = useState(lunch);
   const [days, setdays] = useState([]);
-  useEffect(() => {}, []);
+  const [Designs, setDesigns] = useState([]);
+  const getDetalis = () => {
+    setLoading(true);
+
+    LoadData(
+      `book/${props.id}`,
+      (err, data) => {
+        setLoading(false);
+        if (err) {
+          Mesg(err);
+        } else {
+          let info = data.data;
+
+          settitle(info.title);
+          setorganizer(info.organizer);
+          setpeople(info.people);
+          setcomment(info.comment);
+          setspaceId(info.spaceId);
+          setlunchId(info.lunchId);
+          setcoffeebreakId(info.coffeebreakId);
+          settypeId(info.typeId);
+          setprice(info.price);
+          setrecived(info.received);
+          setdays(info.bookDates);
+
+          setdesignId(info.designId);
+        }
+      },
+      (err) => {
+        setLoading(false);
+        FailedMesg(err, "Something worng happend !");
+      }
+    );
+  };
+  useEffect(() => {
+    getDetalis();
+  }, []);
 
   const handleSubmit = () => {
     let data = {
@@ -107,7 +150,7 @@ function Index(props) {
       organizer: organizer,
       people: people,
       comment: comment,
-      days: days,
+      // days: days,
       spaceId: spaceId,
       typeId: typeId,
       designId: designId,
@@ -117,38 +160,39 @@ function Index(props) {
       received: received,
     };
     props.onOpenModal(false);
-    Object.keys(data).forEach(function (key) {
-      if (data[key] === undefined || data[key] === "" || data[key] === []) {
-        delete data[key];
-      }
-    });
+    // Object.keys(data).forEach(function (key) {
+    //   if (data[key] === undefined || data[key] === "" || data[key] === []) {
+    //     delete data[key];
+    //   }
+    // });
     props.onOpenModal(false);
 
     // onOpenModal(false);
-    //  console.log(data, "book data sended");
+    console.log(data, "book data sended", props.id);
     setLoading(true);
-    // addData(
-    //   "book/add",
-    //   data,
-    //   (mesg, Data) => {
-    //     if (mesg) {
-    //       clearState();
-    //       Mesg(mesg);
-    //       setLoading(false);
-    //     } else {
-    //       SuccessMesg("Booking done !");
-    //       setLoading(false);
-    //       props.onOpenModal(false);
-    //       clearState();
-    //     }
-    //   },
-    //   (err) => {
-    //     props.onOpenModal(false);
-    //     setLoading(false);
-    //     clearState();
-    //     FailedMesg(err);
-    //   }
-    // );
+    editData(
+      "book/update",
+      data,
+      props.id,
+      (mesg, Data) => {
+        if (mesg && mesg != undefined) {
+          Mesg(mesg);
+          setLoading(false);
+        } else {
+          // console.log(mesg, Data);
+          SuccessMesg("Edit Booking done !");
+          setLoading(false);
+          props.onOpenModal(false);
+          props.getData();
+        }
+      },
+      (err) => {
+        props.onOpenModal(false);
+        setLoading(false);
+        clearState();
+        FailedMesg(err);
+      }
+    );
   };
   return (
     <div>
@@ -166,7 +210,7 @@ function Index(props) {
           typeId: typeId,
           price: price,
           received: received,
-          days: days,
+          days: DateValues,
           DateValues: days,
         }}>
         <Modal
@@ -174,7 +218,7 @@ function Index(props) {
           open={props.open}
           onClose={() => {
             props.onOpenModal(false);
-            clearState();
+            //clearState();
           }}
           center
           showCloseIcon={false}

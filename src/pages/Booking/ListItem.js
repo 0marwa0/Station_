@@ -69,7 +69,7 @@ const ItemOverlay = styled.div`
 
 const ItemHolder = styled.div`
   width: 100%;
-  height: 215px;
+  height: 227px;
   position: relative;
   cursor: pointer;
   &:hover ${ItemActions} {
@@ -158,7 +158,12 @@ const ListItem = (props) => {
         {Data.map((item, i) => {
           return (
             <ItemHolder>
-              <Item src={item.image} />
+              <Item
+                src={item.image}
+                onError={(e) =>
+                  (e.target.src = require("../../public/images/defaultImg.jpg"))
+                }
+              />
               <ItemOverlay>
                 <ItemActions>
                   <div style={{ marginTop: "9px" }}>
@@ -182,7 +187,12 @@ const ListItem = (props) => {
                       <FaCalendarAlt color="var(--yellow)" size={8} />
                       {item.CreatedDate}
                     </Date>
-                    <ListImg src={require(`../../public/images/user2.png`)} />
+                    <ListImg
+                      src={require(`../../public/images/user2.png`)}
+                      onError={(e) =>
+                        (e.target.src = require("../../public/images/defaultImg.jpg"))
+                      }
+                    />
                   </BottomText>
                 </ListBottom>
               </ItemOverlay>

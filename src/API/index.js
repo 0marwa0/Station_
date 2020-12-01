@@ -156,90 +156,27 @@ export const removeItem = (query, id, onSuccess, onFailure) => {
     });
 };
 
-// export const removeItems = (query, ids, onSuccess, onFailure) => {
-//   fetch(`${Config.host}${query}`, {
-//     method: "delete",
-//     headers: {
-//       token: localStorage.getItem("step_token"),
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(ids),
-//   })
-//     .then((resp) => resp.json())
-//     .then((jsonData) => {
-//       onSuccess(jsonData.errMsg, jsonData);
-//     })
-//     .catch((err) => {
-//       onFailure(err.message);
-//     });
-// };
+export const editData = (query, data, id, onSuccess, onFailure) => {
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  myHeaders.append(
+    "token",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNTkzNDAzODI2MTQ5LCJpYXQiOjE1OTM0MDM4MjB9.4x1MBn-UnDXl-s83r0U4FBk2lYO9FMzkKBVjfCPUeUQ"
+  );
 
-// export const editData = (query, data, id, onSuccess, onFailure) => {
-//   if (data.price) {
-//     data.price = Number(data.price);
-//   }
+  var raw = JSON.stringify(data);
 
-//   let options = {
-//     method: "put",
-//     headers: {
-//       "Content-Type": "application/json",
-//       token: localStorage.getItem("step_token"),
-//     },
-//     body: JSON.stringify(data),
-//   };
-//   // console.log(data, "editable data");
-//   // if (query === "product") {
-//   //   var formdata = new FormData();
-//   //   formdata.append("name", data.name);
+  var requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow",
+  };
 
-//   //   options = {
-//   //     method: "put",
-//   //     body: formdata,
-//   //     headers: {
-//   //       token: localStorage.getItem("step_token"),
-//   //     },
-//   //   };
-//   // } else {
-//   // }
-//   fetch(`${Config.host}${query}/${id}`, options)
-//     .then((resp) => resp.json())
-//     .then((jsonData) => {
-//       // console.log(jsonData);
-//       onSuccess(jsonData.errMsg, jsonData);
-//     })
-
-//     .catch((err) => {
-//       console.log(err);
-//       onFailure(err.message);
-//     });
-// };
-
-// export const changeImage = (query, data, id, onSuccess, onFailure) => {
-//   // var formdata = new FormData();
-//   // formdata.append("image", data.image);
-//   // let options = {
-//   //   method: "put",
-//   //   body: formdata,
-//   //   headers: {
-//   //     token: localStorage.getItem("step_token"),
-//   //   },
-//   // };
-//   let options = {
-//     method: "put",
-//     headers: {
-//       "Content-Type": "application/json",
-//       token: localStorage.getItem("step_token"),
-//     },
-//     body: JSON.stringify(data),
-//   };
-
-//   fetch(`${Config.host}${query}/${id}`, options)
-//     .then((resp) => resp.json())
-//     .then((jsonData) => {
-//       onSuccess(jsonData.errMsg, jsonData);
-//       // console.log(jsonData, "change image");
-//     })
-//     .catch((err) => {
-//       onFailure(err.message);
-//     });
-// };
+  fetch(`${Host}${query}/${id}`, requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      onSuccess(result.errMsg, result.data);
+    })
+    .catch((error) => onFailure(error.toString()));
+};

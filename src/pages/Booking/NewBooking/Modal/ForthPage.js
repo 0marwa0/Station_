@@ -104,7 +104,7 @@ export default function ForthPage(props) {
               onChange={(e) => props.handleselect(e, "typeId")}
               placeholder="Book Type">
               {Types.map((item) => (
-                <Option key={item.id}>{item.name}</Option>
+                <Option value={item.id}>{item.name}</Option>
               ))}
             </Select>
             {/* <Dropdown overlay={TypeData}>

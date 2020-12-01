@@ -262,8 +262,6 @@ const Index = (props) => {
   };
   let Data = data ? data : {};
   let design = Designs.filter((item) => item.id != data.designId);
-  console.log(Data, "deeeeeeetalils");
-
   return (
     <CustomPageWrapper>
       <LoadingBar color="var(--yellow)" ref={ref} shadow={true} />
@@ -500,9 +498,11 @@ const Index = (props) => {
       </PageContent>
       <EditBooking
         open={open}
+        id={id}
         onOpenModal={onOpenModal}
         Edit={true}
         Designs={Designs}
+        getData={getDetalis}
         data={Data}
       />
     </CustomPageWrapper>

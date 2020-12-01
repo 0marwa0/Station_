@@ -33,6 +33,7 @@ export default function SecondPage(props) {
   const add = () => {
     if (Editeddate != "" && start != "" && end != "") {
       setcount(count + 1);
+
       Dayshow.push({ id: count, data: Editeddate, StTime: start, EnTime: end });
       setsDayshow(Dayshow);
       let Days = [];
@@ -60,7 +61,6 @@ export default function SecondPage(props) {
       }
       setPrivew(privew);
       props.handleselect(Days, "days", privew);
-      console.log(Dayshow, Days, Privew);
     } else {
     }
   };
@@ -90,7 +90,52 @@ export default function SecondPage(props) {
     setdate(date);
   };
   useEffect(() => {
-    console.log(dayValues.DateValues, "what should be done");
+    if (
+      dayValues.DateValues.map((item) => {
+        if (typeof item.start === "object") {
+          Dayshow.push({
+            id: count,
+            data:
+              item.start.dateTime.split("-")[0] +
+              "-" +
+              item.start.dateTime.split("-")[1] +
+              "-" +
+              item.start.dateTime.substring(0, 2),
+            StTime: item.start.dateTime.split("T")[1].substring(0, 5),
+            EnTime: item.end.dateTime.split("T")[1].substring(0, 5),
+          });
+          let privew = [];
+          for (let i = 0; i < dayValues.DateValues.length; i++) {
+            privew.push({
+              start: dayValues.DateValues[i].start.dateTime,
+              end: dayValues.DateValues[i].end.dateTime,
+            });
+          }
+          setPrivew(privew);
+        } else {
+          if (dayValues.DateValues.length != 0) {
+            // dayValues.DateValues.map((item) => {
+            Dayshow.push({
+              id: count,
+              data:
+                item.start.split("-")[0] +
+                "-" +
+                item.start.split("-")[1] +
+                "-" +
+                item.start.substring(0, 2),
+              StTime: item.start.split("T")[1].substring(0, 5),
+              EnTime: item.end.split("T")[1].substring(0, 5),
+            });
+            //setsDayshow(Dayshow);
+            //});
+          }
+        }
+      })
+    ) {
+      // if (typeof item.start === "object") {console.log("its object")};
+      // else {
+      // }
+    }
   }, []);
   return (
     <div className="modleWrapper">
