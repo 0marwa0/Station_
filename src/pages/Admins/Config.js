@@ -2,13 +2,13 @@
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import React from "react";
 import { Checkbox, Tag } from "antd";
+import { HiLockClosed } from "react-icons/hi";
+import { Popconfirm } from "antd";
+
 export const AdminsColumns = [
+  { key: 1, title: "", dataIndex: "", render: () => <Checkbox /> },
   {
-    title: "",
-    dataIndex: "",
-    render: () => <Checkbox />,
-  },
-  {
+    key: 2,
     title: "Full Name",
     dataIndex: "FullName",
     sorter: {
@@ -17,6 +17,21 @@ export const AdminsColumns = [
     },
   },
   {
+    key: 3,
+    title: "",
+    dataIndex: "pass",
+
+    render: (item) => (
+      <div onClick={() => item.onOpen(item.id, true)}>
+        <HiLockClosed
+          color="var(--lighterGray)"
+          style={{ cursor: "pointer" }}
+        />
+      </div>
+    ),
+  },
+  {
+    key: 4,
     title: "User name",
     dataIndex: "Username",
     sorter: {
@@ -25,6 +40,7 @@ export const AdminsColumns = [
     },
   },
   {
+    key: 5,
     title: "Type",
     dataIndex: "Type",
     sorter: {
@@ -48,6 +64,7 @@ export const AdminsColumns = [
     ),
   },
   {
+    key: 6,
     title: "Branch",
     dataIndex: "Branch",
     sorter: {
@@ -56,6 +73,7 @@ export const AdminsColumns = [
     },
   },
   {
+    key: 7,
     title: "Status",
     dataIndex: "Status",
     sorter: {
@@ -80,12 +98,23 @@ export const AdminsColumns = [
   },
 
   {
+    key: 8,
     title: "",
-    dataIndex: "",
-    render: () => (
-      <BiDotsVerticalRounded
-        style={{ fontSize: "20px", color: "var(--lighterGray)" }}
-      />
+    dataIndex: "id",
+    render: (user) => (
+      <Popconfirm
+        title="Deactivate admin？"
+        okText="Yes"
+        onConfirm={() => user.deactive(user.id)}
+        cancelText="No">
+        <BiDotsVerticalRounded
+          style={{
+            fontSize: "20px",
+            cursor: "pointer",
+            color: "var(--lighterGray)",
+          }}
+        />
+      </Popconfirm>
     ),
   },
 ];

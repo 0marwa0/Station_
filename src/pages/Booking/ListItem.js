@@ -69,7 +69,7 @@ const ItemOverlay = styled.div`
 
 const ItemHolder = styled.div`
   width: 100%;
-  height: 227px;
+  height: 250px;
   position: relative;
   cursor: pointer;
   &:hover ${ItemActions} {

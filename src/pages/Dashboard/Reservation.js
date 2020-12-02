@@ -6,9 +6,10 @@ import { Link } from "react-router-dom";
 import { monthNames } from "../shared/assets";
 import { Text } from "../Notification";
 import { ReservationLoading } from "../shared/Loading";
+import TimeAgo from "react-simple-timeago";
 const ReservationItem = styled.div`
   display: grid;
-  grid-template-columns: 15% 55% auto;
+  grid-template-columns: 15% 43% 12%;
   width: 100%;
   padding-bottom: 3%;
   align-items: center;
@@ -95,7 +96,7 @@ function Index(props) {
       id: item.id,
       place: item.space.title,
       name: item.title,
-      time: "a week ago",
+      time: item.createdAt,
       doc: item.organizer,
       date:
         item.createdAt.slice(0, 2) +
@@ -109,6 +110,7 @@ function Index(props) {
         item.createdAt.split("-")[0],
     })
   );
+
   const Name = styled.div`
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -195,13 +197,14 @@ function Index(props) {
                             display: "flex",
                             fontSize: "0.8vw",
                             color: "var(--textGray)",
-
                             paddingRight: "2px",
                             justifyContent: "flex-end",
                             textAlign: "right",
+                            height: "23px",
+                            width: "max-content",
                             backgroundColor: "white",
                           }}>
-                          {item.time}
+                          <TimeAgo date={item.time} />
                         </div>
                       </ReservationItem>
                     </Link>

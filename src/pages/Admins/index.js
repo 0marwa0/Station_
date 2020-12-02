@@ -4,11 +4,12 @@ import Sider from "antd/lib/layout/Sider";
 import React, { useState, useEffect } from "react";
 import CustomPage from "../shared/CustomPage";
 import { Mesg, FailedMesg, SuccessMesg } from "../../API/APIMessage";
-
+import "react-responsive-modal/styles.css";
+import { Modal } from "react-responsive-modal";
+import PasswordRest from "./PasswordRest";
 // import { AdminsData } from "../../fakeData/index";
 import { AdminsColumns, AdminsData } from "./Config";
 // import { Modal } from "react-responsive-modal";
-
 import NewAdmin from "./NewAmin";
 import { LoadData, addData } from "../../API";
 
@@ -17,9 +18,31 @@ function Admins(props) {
   const [Loading, setLoading] = useState(false);
   const [Admins, setAdmins] = useState([]);
   const [data, setdata] = useState([]);
+  const [openPass, setopenPass] = useState(false);
   const [Filterdata, setFilterdata] = useState([]);
+  const [id, setId] = useState();
+  const [admin, setadmin] = useState([]);
   const onOpenModal = (open) => {
     setOpen(open);
+  };
+  const onOpenModalPass = (id, value) => {
+    setopenPass(value);
+    setId(id);
+  };
+  const deactive = (id) => {
+    let data = { id: id };
+    addData(
+      "admin/deactivate",
+      data,
+      (mesg, Data) => {
+        SuccessMesg("Deactivate admin done !");
+
+        getAdmins();
+      },
+      (err) => {
+        FailedMesg(err);
+      }
+    );
   };
   const getAdmins = () => {
     LoadData(
@@ -34,13 +57,20 @@ function Admins(props) {
           // });
 
           let Admins = [];
+          setadmin(data.data);
           data.data.map((admin) => {
             Admins.push({
+              id: { id: admin.id, deactive: () => deactive(admin.id) },
               FullName: admin.name,
               Username: admin.username,
               Type: admin.type === 1 ? ["Book Admin"] : ["Book Admin"],
               Branch: "Baghdad",
-              Status: true ? ["Enabled"] : ["Disabled"],
+              Status: admin.active ? ["Enabled"] : ["Disabled"],
+              pass: {
+                onOpen: () => onOpenModalPass(admin.id, true),
+                openPass: openPass,
+                onClose: onOpenModalPass(null, false),
+              },
             });
           });
           setdata(Admins);
@@ -161,6 +191,21 @@ function Admins(props) {
           handleInput={handleInput}
         />
       ) : null}
+      <Modal
+        closeOnOverlayClick={false}
+        open={openPass}
+        onClose={() => onOpenModalPass(null, false)}
+        center
+        showCloseIcon={false}
+        classNames={{
+          modal: "customModal",
+        }}>
+        <PasswordRest
+          id={id}
+          onClose={() => onOpenModalPass(null, false)}
+          data={admin}
+        />
+      </Modal>
     </div>
   );
 }

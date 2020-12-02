@@ -4,6 +4,22 @@
   box-sizing: border-box;
   font-family: Px-Grotesk !important;
 }
+
+.ant-popover-inner-content {
+  padding: 17px 15px !important;
+}
+.ant-popover-inner {
+  border-radius: 7px !important;
+  overflow: hidden !important;
+  /* margin: 0 30px; */
+}
+.ant-popover-placement-rightBottom > .ant-popover-content > .ant-popover-arrow {
+  bottom: 20px !important;
+  /* margin: 0 20px; */
+  padding: 2px;
+  width: 30px;
+  height: 30px;
+}
 .upload_modal_event {
   display: flex;
   align-items: center;

@@ -5,6 +5,7 @@ import EditBooking from "../../pages/Booking/EditBooking";
 import { monthNames } from "../shared/assets";
 import { Skeleton, Input } from "antd";
 import "../../App.css";
+import TimeAgo from "react-simple-timeago";
 import { DateName, getTime } from "../Dashboard";
 import Moment from "react-moment";
 import LoadingBar from "react-top-loading-bar";
@@ -60,6 +61,7 @@ const DetailItem = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
+  padding: 0 10px;
   font-size: 17px;
   width: 100%;
 `;
@@ -73,11 +75,12 @@ const Activity = styled.div`
 `;
 const ActivityItem = styled.div`
   display: grid;
-  grid-template-columns: 100px 80px;
+  grid-template-columns: 100px 120px;
   gap: 5px;
   width: 100%;
   justify-content: space-between;
   margin: 10px 0;
+
   align-items: center;
 `;
 const BoldText = styled.div`
@@ -471,7 +474,14 @@ const Index = (props) => {
                           )}
                         </span>
                       </UserHolder>
-                      <GrayText>a week ago</GrayText>
+                      <GrayText>
+                        <div
+                          style={{
+                            width: "max-content",
+                          }}>
+                          <TimeAgo date={data.createdAt} />
+                        </div>
+                      </GrayText>
                     </ActivityItem>
                   </DetailItem>
                   <DetailItem>
@@ -485,7 +495,7 @@ const Index = (props) => {
                             />
                             <span>{data.admin ? data.admin.name : ""} </span>
                           </UserHolder>
-                          <GrayText>now</GrayText>
+                          <GrayText></GrayText>
                         </ActivityItem>
                       </div>
                     ) : null}

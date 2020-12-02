@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { BsDot } from "react-icons/bs";
 import { LoadData } from "../../API";
 import { Scrollbars } from "react-custom-scrollbars";
+import TimeAgo from "react-simple-timeago";
 
 import ContentLoader from "react-content-loader";
 import { Mesg, FailedMesg } from "../../API/APIMessage";
@@ -15,24 +16,25 @@ const NotificationsHolder = styled.div`
   height: 400px;
   align-items: center;
 
-  scrollbar-width: thin;
-  scrollbar-color: var(--lightGray) transparent;
+  width: 500px;
+
   font-size: 14px;
 `;
 
 const NotifiItem = styled.div`
   display: grid;
   grid-template-columns: auto 1fr auto;
-  gap: 10px;
+  gap: 15px;
   font-size: 12px;
-  padding: 20px;
-  width: 398px;
+  padding: 20px 40px;
+  width: 100%;
+
   align-items: center;
   border-bottom: 1px solid var(--lighterGray);
 `;
 export const NotifiImage = styled.img`
-  width: 45px;
-  height: 45px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
 `;
 export const Text = styled.span`
@@ -82,7 +84,6 @@ function Index(props) {
       (err) => {
         setLoading(false);
         FailedMesg(err, "Something worng happend !");
-        console.log(err, "failed");
       }
     );
   }, []);
@@ -90,7 +91,7 @@ function Index(props) {
   return (
     <div>
       <NotificationsHolder>
-        <Scrollbars style={{ width: "420px", height: "380px" }}>
+        <Scrollbars style={{ width: "100%", height: "380px" }}>
           {Loading
             ? [1, 2].map((i) => {
                 return (
@@ -100,8 +101,7 @@ function Index(props) {
                       height: "85px",
                       padding: "10px 0",
                       borderBottom: "1px solid var(--lighterGray)",
-                    }}
-                  >
+                    }}>
                     <ContentLoader
                       speed={2}
                       width={400}
@@ -109,8 +109,7 @@ function Index(props) {
                       viewBox="0 0 600 160"
                       backgroundColor="#f3f3f3"
                       foregroundColor="#ecebeb"
-                      {...props}
-                    >
+                      {...props}>
                       <rect
                         x="90"
                         y="26"
@@ -149,9 +148,20 @@ function Index(props) {
                       </span>{" "}
                       {item.contents}
                     </Text>
-                    <span style={{ display: "flex", alignItems: "center" }}>
-                      <BsDot color="var(--yellow)" size={30} />
-                      {item.time}
+                    <span
+                      style={{
+                        display: "flex",
+
+                        justifyContent: "center",
+                      }}>
+                      <BsDot
+                        color="var(--yellow)"
+                        size={30}
+                        style={{ marginTop: "-5px" }}
+                      />
+                      <div style={{ textAlign: "center" }}>
+                        <TimeAgo date={item.createdAt} />
+                      </div>
                     </span>
                   </NotifiItem>
                 );
@@ -167,8 +177,7 @@ function Index(props) {
           height: "50px",
           alignItems: "center",
           justifyContent: "center",
-        }}
-      >
+        }}>
         <CustomButton main>See All Activity</CustomButton>
       </div>
     </div>

@@ -61,7 +61,7 @@ const NavItem = ({ slug, children, index, title }) => {
 
   let text = slug.charAt(0).toUpperCase() + slug.slice(1);
   return slug === "Notifications" ? (
-    <SideItem type={type} isSelected={isSelected}>
+    <SideItem type={type} isSelected={isSelected} move={true}>
       {children}
     </SideItem>
   ) : (
@@ -100,6 +100,7 @@ export const SideList = styled.ul`
    {
   }
 `;
+// move
 export const SideItem = styled.li`
   position: relative;
   padding: 1.5vh 25px;
@@ -373,7 +374,6 @@ function SideBar(props) {
                     fillRule="evenodd"
                   />
                 </svg>
-                {/* <Notification /> */}
               </div>{" "}
             </Popover>
           </NavItem>

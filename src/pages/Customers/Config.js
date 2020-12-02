@@ -2,6 +2,8 @@
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import React from "react";
 import { Checkbox, Tag } from "antd";
+import { Popconfirm } from "antd";
+
 const monthNames = [
   "January",
   "February",
@@ -82,13 +84,22 @@ export const CustomersColumns = [
   },
   {
     title: "",
-    dataIndex: "",
-    render: () => (
-      <div>
+    dataIndex: "id",
+    render: (user) => (
+      <Popconfirm
+        title="Deactivate Customer？"
+        okText="Yes"
+        placement="left"
+        onConfirm={() => user.deactive(user.id)}
+        cancelText="No">
         <BiDotsVerticalRounded
-          style={{ fontSize: "20px", color: "var(--lighterGray)" }}
+          style={{
+            fontSize: "20px",
+            cursor: "pointer",
+            color: "var(--lighterGray)",
+          }}
         />
-      </div>
+      </Popconfirm>
     ),
   },
 ];

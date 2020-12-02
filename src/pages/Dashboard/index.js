@@ -371,6 +371,19 @@ function Index(props) {
             }}>
             <Clander>
               <FullCalendar
+                customButtons={{
+                  myCustomButton: {
+                    text: "custom!",
+                    click: function () {
+                      alert("clicked the custom button!");
+                    },
+                  },
+                }}
+                header={{
+                  left: "prev,next today myCustomButton",
+                  center: "title",
+                  right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
+                }}
                 plugins={[dayGridPlugin]}
                 initialView="dayGridMonth"
                 height="700px"

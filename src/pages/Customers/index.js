@@ -8,8 +8,8 @@ import { DateName } from "../Dashboard";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import Newcustomer from "./NewCustomer";
-import { Mesg, FailedMesg } from "../../API/APIMessage";
-import { LoadData } from "../../API";
+import { Mesg, FailedMesg, SuccessMesg } from "../../API/APIMessage";
+import { LoadData, addData } from "../../API";
 import Progress from "react-progress-2";
 function Customers(props) {
   const [open, setOpen] = useState(false);
@@ -20,9 +20,25 @@ function Customers(props) {
   const onOpenModal = (open) => {
     setOpen(open);
   };
+  const deactive = (id) => {
+    let data = { id: id };
+    addData(
+      "user/deactivate",
+      data,
+      (mesg, Data) => {
+        SuccessMesg("Deactivate costumer done !");
+
+        loadCustomers();
+      },
+      (err) => {
+        FailedMesg(err);
+      }
+    );
+  };
   const loadCustomers = () => {
     setLoading(true);
     // Progress.show();
+
     LoadData(
       "users",
       (err, data) => {
@@ -33,11 +49,13 @@ function Customers(props) {
           let Users = [];
           data.data.rows.map((user) => {
             Users.push({
+              id: { id: user.id, deactive: () => deactive(user.id) },
+
               FullName: user.name,
               Email: user.email,
               PhoneNumber: user.phone,
               Date: DateName(user.createdAt),
-              Status: true ? ["Enabled"] : ["Disabled"],
+              Status: user.active ? ["Enabled"] : ["Disabled"],
             });
           });
           setdata(Users);
