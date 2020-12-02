@@ -331,16 +331,20 @@ function CustomPage(props) {
                 ""
               ) : props.pageTitle === "admins" ? (
                 ""
+              ) : props.pageTitle === "articles" ? (
+                ""
               ) : (
                 <CustomButton lable="Import" loading={props.Loading}>
                   {/* <BiImport /> */}
                   <ImportIcon />
                 </CustomButton>
               )}
+
               <CustomButton lable="Export" loading={props.Loading}>
                 {/* <BiExport /> */}
                 <ExportIcon />
               </CustomButton>
+
               {pageTitleName == "customer" ? (
                 <CustomButton
                   main
