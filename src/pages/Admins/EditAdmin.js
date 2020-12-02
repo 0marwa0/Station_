@@ -1,73 +1,29 @@
 import React from "react";
-import { InputLable } from "../../shared/SharedStyle";
-import { CustomModleButton } from "../../shared/SharedComponents";
+import { InputLable } from "../shared/SharedStyle";
+import { CustomModleButton } from "../shared/SharedComponents";
 import { Menu, Dropdown, Button, Input } from "antd";
-import { ReactComponent as DropIcon } from "../../../public/images/dropdown.svg";
-import { ReactComponent as Close } from "../../../public/images/close.svg";
+import { ReactComponent as DropIcon } from "../../public/images/dropdown.svg";
+import { ReactComponent as Close } from "../../public/images/close.svg";
 import styled from "styled-components";
+import {
+  option,
+  data,
+  SideOverlay,
+  ModalFooter,
+  SideModal,
+  Title,
+  Space,
+} from "./NewAmin";
+import "../../App.css";
+import { CustomInput } from "../shared/SharedStyle";
 
-import "../../../App.css";
-import { CustomInput } from "../../shared/SharedStyle";
-export const option = (
-  <Menu>
-    <Menu.Item key="1">200</Menu.Item>
-    <Menu.Item key="2">100</Menu.Item>
-    <Menu.Item key="3">50</Menu.Item>
-  </Menu>
-);
-export const data = (
-  <Menu>
-    <Menu.Item key="1">200</Menu.Item>
-    <Menu.Item key="2">100</Menu.Item>
-    <Menu.Item key="3">50</Menu.Item>
-  </Menu>
-);
-export const SideOverlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  z-index: 999999999;
-
-  background: rgba(0, 0, 0, 0.3);
-`;
-export const ModalFooter = styled.div`
-  height: 5%;
-`;
-export const SideModal = styled.div`
-  position: absolute;
-  top: 0;
-  animation: listFade 0.6s;
-  right: 0;
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  overflow: hidden;
-  height: 100%;
-  width: 400px;
-  backgorund-color: red;
-  padding: 30px;
-`;
-export const Title = styled.div`
-  display: flex;
-  justify-content: space-between;
-  font-size: 25px;
-  font-weight: bold;
-  margin-bottom: 40px;
-  align-items: center;
-`;
-export const Space = styled.div`
-  height: 8px;
-`;
 function Index(props) {
   return (
     <SideOverlay>
       <SideModal>
         <div style={{ height: "95%" }}>
           <Title>
-            <div>Add new Admin</div>
+            <div>Edit Admin</div>
             <Close onClick={() => props.fun(false)} cursor="pointer" />
             {/* <AiOutlineClose /> */}
           </Title>
@@ -136,7 +92,7 @@ function Index(props) {
           <div style={{ float: "right" }}>
             {" "}
             <CustomModleButton main extra fun={props.handleSubmit}>
-              Create
+              Save
             </CustomModleButton>
           </div>
         </ModalFooter>

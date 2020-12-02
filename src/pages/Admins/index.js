@@ -11,6 +11,7 @@ import PasswordRest from "./PasswordRest";
 import { AdminsColumns, AdminsData } from "./Config";
 // import { Modal } from "react-responsive-modal";
 import NewAdmin from "./NewAmin";
+import EditAdmin from "./EditAdmin";
 import { LoadData, addData } from "../../API";
 
 function Admins(props) {
@@ -19,8 +20,10 @@ function Admins(props) {
   const [Admins, setAdmins] = useState([]);
   const [data, setdata] = useState([]);
   const [openPass, setopenPass] = useState(false);
+  const [openEdit, setopenEdit] = useState(false);
   const [Filterdata, setFilterdata] = useState([]);
   const [id, setId] = useState();
+  const [idEdit, setIdEdit] = useState();
   const [admin, setadmin] = useState([]);
   const onOpenModal = (open) => {
     setOpen(open);
@@ -28,6 +31,10 @@ function Admins(props) {
   const onOpenModalPass = (id, value) => {
     setopenPass(value);
     setId(id);
+  };
+  const onOpenModalEdit = (id, value) => {
+    setopenEdit(value);
+    setIdEdit(id);
   };
   const deactive = (id) => {
     let data = { id: id };
@@ -70,6 +77,9 @@ function Admins(props) {
                 onOpen: () => onOpenModalPass(admin.id, true),
                 openPass: openPass,
                 onClose: onOpenModalPass(null, false),
+              },
+              edit: {
+                onOpen: () => onOpenModalEdit(admin.id, true),
               },
             });
           });
@@ -186,6 +196,13 @@ function Admins(props) {
       />
       {open ? (
         <NewAdmin
+          fun={onOpenModal}
+          handleSubmit={handleSubmit}
+          handleInput={handleInput}
+        />
+      ) : null}
+      {openEdit ? (
+        <EditAdmin
           fun={onOpenModal}
           handleSubmit={handleSubmit}
           handleInput={handleInput}

@@ -4,7 +4,7 @@ import React from "react";
 import { Checkbox, Tag } from "antd";
 import { HiLockClosed } from "react-icons/hi";
 import { Popconfirm } from "antd";
-
+import { FaRegEdit } from "react-icons/fa";
 export const AdminsColumns = [
   { key: 1, title: "", dataIndex: "", render: () => <Checkbox /> },
   {
@@ -96,7 +96,17 @@ export const AdminsColumns = [
       </>
     ),
   },
+  {
+    key: 9,
+    title: "",
+    dataIndex: "edit",
 
+    render: (item) => (
+      <div onClick={() => item.onOpen(item.id, true)}>
+        <FaRegEdit color="var(--lighterGray)" style={{ cursor: "pointer" }} />
+      </div>
+    ),
+  },
   {
     key: 8,
     title: "",
