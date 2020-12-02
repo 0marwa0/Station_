@@ -40,6 +40,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "react-semantic-ui-datepickers": "^2.12.0",
+    "react-simple-timeago": "^1.0.1",
     "react-slick": "^0.27.12",
     "react-spinners": "^0.9.0",
     "react-swipeable": "^6.0.0",
