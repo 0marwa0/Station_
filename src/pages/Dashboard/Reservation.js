@@ -9,7 +9,7 @@ import { ReservationLoading } from "../shared/Loading";
 import TimeAgo from "react-simple-timeago";
 const ReservationItem = styled.div`
   display: grid;
-  grid-template-columns: 15% 43% 12%;
+  grid-template-columns: 15% max-content 12%;
   width: 100%;
   padding-bottom: 3%;
   align-items: center;

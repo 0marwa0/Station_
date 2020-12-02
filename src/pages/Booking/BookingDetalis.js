@@ -284,7 +284,11 @@ const Index = (props) => {
               <PageTitle>{Loading ? <TextLoadS /> : Data.title}</PageTitle>
 
               <div style={{ display: "flex", gap: "10px" }}>
-                <ButtonStyled onClick={onOpenModal}>Edit</ButtonStyled>
+                <ButtonStyled
+                //  onClick={onOpenModal}
+                >
+                  Edit
+                </ButtonStyled>
                 {Data.status === "approved" ? (
                   <ButtonStyled
                     onClick={() => history.push(`/createEvent/${id}`)}
@@ -506,7 +510,7 @@ const Index = (props) => {
           </Wrapper>
         </div>
       </PageContent>
-      <EditBooking
+      {/* <EditBooking
         open={open}
         id={id}
         onOpenModal={onOpenModal}
@@ -514,7 +518,7 @@ const Index = (props) => {
         Designs={Designs}
         getData={getDetalis}
         data={Data}
-      />
+      /> */}
     </CustomPageWrapper>
   );
 };
