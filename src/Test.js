@@ -259,12 +259,13 @@ const Index = (props) => {
   // let Data = data ? data : {};
   // let design = Designs.filter((item) => item.id != data.designId);
   return (
-    <CustomPageWrapper>
-      {/* <LoadingBar color="var(--yellow)" ref={ref} shadow={true} /> */}
+    <div>test</div>
+    // <CustomPageWrapper>
+    //   {/* <LoadingBar color="var(--yellow)" ref={ref} shadow={true} /> */}
 
-      <GlobalStyle />
-      <SideBar />
-      {/* <PageContent>
+    //   <GlobalStyle />
+    //   <SideBar />
+    /* <PageContent>
         <div style={{ marginTop: "40px" }}>
           <Wrapper>
             <Link to="/booking">
@@ -512,8 +513,8 @@ const Index = (props) => {
         Designs={Designs}
         getData={getDetalis}
         data={Data}
-      /> */}
-    </CustomPageWrapper>
+      /> 
+    </CustomPageWrapper>*/}
   );
 };
 
