@@ -20,6 +20,7 @@ import Profile from "./pages/Profile";
 import CreateEvent from "./pages/Events/CreateEvent";
 import Home from "./pages/Home";
 import BookingDetalis from "./pages/Booking/BookingDetalis";
+import Test from "./Test";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 function App(props) {
   const [admins, setadmins] = useState([]);
@@ -66,9 +67,7 @@ function App(props) {
       //.log(props.history);
     }
   }, []);
-  const Test = () => {
-    return <div>test</div>;
-  };
+
   return (
     <div>
       <Router>

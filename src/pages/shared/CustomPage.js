@@ -381,7 +381,10 @@ function CustomPage(props) {
                   loading={props.Loading}
                   onClick={props.onOpenModal}>
                   <PlusIcon />
-                  {`New Articles`}
+                  {`New ${
+                    pageTitleName.charAt(0).toUpperCase() +
+                    pageTitleName.slice(1)
+                  }`}
                 </ButtonStyled>
               )}
               {/* {pageTitleName === "articles" ? null : (

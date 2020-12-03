@@ -12,7 +12,8 @@ import { AdminsColumns, AdminsData } from "./Config";
 // import { Modal } from "react-responsive-modal";
 import NewAdmin from "./NewAmin";
 import EditAdmin from "./EditAdmin";
-import { LoadData, addData } from "../../API";
+import { Drawer } from "antd";
+import { LoadData, addData, editData } from "../../API";
 
 function Admins(props) {
   const [open, setOpen] = useState(false);
@@ -23,19 +24,24 @@ function Admins(props) {
   const [openEdit, setopenEdit] = useState(false);
   const [Filterdata, setFilterdata] = useState([]);
   const [id, setId] = useState();
-  const [idEdit, setIdEdit] = useState();
+  const [Edited, setEdited] = useState([]);
   const [admin, setadmin] = useState([]);
-  const onOpenModal = (open) => {
-    setOpen(open);
+
+  const onOpenModal = () => {
+    setOpen(true);
   };
+  const onCloseModal = () => {
+    setOpen(false);
+  };
+  const onCloseModalEdit = () => {
+    setopenEdit(false);
+  };
+
   const onOpenModalPass = (id, value) => {
     setopenPass(value);
     setId(id);
   };
-  const onOpenModalEdit = (id, value) => {
-    setopenEdit(value);
-    setIdEdit(id);
-  };
+
   const deactive = (id) => {
     let data = { id: id };
     addData(
@@ -79,10 +85,12 @@ function Admins(props) {
                 onClose: onOpenModalPass(null, false),
               },
               edit: {
-                onOpen: () => onOpenModalEdit(admin.id, true),
+                onOpen: () => onOpenModalEdit(admin.id),
               },
             });
           });
+          setEdited(data.data);
+
           setdata(Admins);
           setFilterdata(Admins);
         }
@@ -93,6 +101,10 @@ function Admins(props) {
         console.log(err, "failed");
       }
     );
+  };
+  const onOpenModalEdit = (id) => {
+    setId(id);
+    setopenEdit(true);
   };
   useEffect(() => {
     if (localStorage.getItem("station_token")) {
@@ -105,6 +117,8 @@ function Admins(props) {
   const [name, setname] = useState("");
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
+  const [branch, setbranch] = useState("");
+  const [email, setemail] = useState("");
   const [type, settype] = useState("");
 
   const handleInput = (e, key) => {
@@ -116,11 +130,24 @@ function Admins(props) {
       case "username":
         setusername(value);
         break;
+      case "email":
+        setemail(value);
+        break;
       case "password":
         setpassword(value);
         break;
+
+      default:
+        break;
+    }
+  };
+  const handleSelect = (e, key) => {
+    let value = e;
+    switch (key) {
       case "type":
         settype(value);
+      case "branch":
+        setbranch(value);
         break;
       default:
         break;
@@ -138,32 +165,57 @@ function Admins(props) {
       name: name,
       username: username,
       password: password,
-      type: 1,
+      email: email,
+      type: type,
+      branch: branch,
     };
-    if (name != "" && password != "") {
-      setLoading(true);
-      addData(
-        "admin/add",
-        data,
-        (mesg, Data) => {
-          SuccessMesg("Account creating done !");
-          onOpenModal(false);
-          getAdmins();
-          ClearState();
-        },
-        (err) => {
-          onOpenModal(false);
-          ClearState();
-          FailedMesg(err);
-        }
-      );
-    } else {
-      onOpenModal(false);
-      FailedMesg(" Account creating failed ", "Empty fileds");
-    }
+
+    setLoading(true);
+    console.log(data, "data");
+    // addData(
+    //   "admin/add",
+    //   data,
+    //   (mesg, Data) => {
+    //     SuccessMesg("Account creating done !");
+    //     onOpenModal(false);
+    //     getAdmins();
+    //     ClearState();
+    //   },
+    //   (err) => {
+    //     onOpenModal(false);
+    //     ClearState();
+    //     FailedMesg(err);
+    //   }
+    // );
+  };
+  const handleEdit = () => {
+    let data = {
+      name: name,
+      username: username,
+      password: password,
+      email: email,
+      type: type,
+      branch: branch,
+    };
+
+    setLoading(true);
+    editData(
+      "",
+      data,
+      (mesg, Data) => {
+        SuccessMesg("Account data saved !");
+        onOpenModal(false);
+        getAdmins();
+        ClearState();
+      },
+      (err) => {
+        onOpenModal(false);
+        ClearState();
+        FailedMesg(err);
+      }
+    );
   };
   const [searchText, setsearchText] = useState("");
-
   const HandleSearch = (e) => {
     let value = e.target.value;
     setsearchText(value);
@@ -179,6 +231,9 @@ function Admins(props) {
 
     setFilterdata(newData);
   };
+  let admins = admin.filter((item) => item.id === id);
+  // setEdited(admins[0]);
+
   return (
     <div>
       <CustomPage
@@ -194,20 +249,43 @@ function Admins(props) {
         Loading={Loading}
         length={Admins.length}
       />
-      {open ? (
+
+      <Drawer
+        placement="right"
+        closable={false}
+        title={false}
+        onClose={onCloseModal}
+        width={570}
+        maskClosable={open}
+        visible={open}
+        key="right">
         <NewAdmin
-          fun={onOpenModal}
+          fun={onCloseModal}
+          type="create"
+          handleSelect={handleSelect}
           handleSubmit={handleSubmit}
           handleInput={handleInput}
         />
-      ) : null}
-      {openEdit ? (
-        <EditAdmin
-          fun={onOpenModal}
-          handleSubmit={handleSubmit}
+      </Drawer>
+      <Drawer
+        placement="right"
+        closable={false}
+        title={false}
+        onClose={onCloseModalEdit}
+        width={570}
+        visible={openEdit}
+        key="right">
+        <NewAdmin
+          fun={onCloseModalEdit}
+          type="edit"
+          id={id}
+          handleSelect={handleSelect}
+          admins={admins}
+          handleSubmit={handleEdit}
           handleInput={handleInput}
         />
-      ) : null}
+      </Drawer>
+
       <Modal
         closeOnOverlayClick={false}
         open={openPass}

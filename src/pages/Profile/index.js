@@ -40,7 +40,7 @@ const PageTitle = styled.div`
   font-size: 25px;
   font-weight: bold;
 `; //
-const ProfileImage = styled.div`
+export const ProfileImage = styled.div`
   width: 100px;
   height: 100px;
   border-radius: 50%;
@@ -129,7 +129,6 @@ function Index(props) {
             ctx.fillStyle = "yellow";
             ctx.textBaseline = "middle";
             setImageUrl(img.src);
-            console.log(img.src, "immmmmm");
             ctx.fillText("Ant Design", 20, 20);
             canvas.toBlob(resolve);
           };
@@ -224,7 +223,7 @@ function Index(props) {
       }
     );
   };
-
+  let name = data.name;
   return (
     <CustomPageWrapper>
       <GlobalStyle />
@@ -249,15 +248,9 @@ function Index(props) {
         <ProfileContetn>
           <Form>
             <div style={{ width: "40%" }}>
-              gg
-              <img
-                style={{ backgroundColor: "red" }}
-                src={
-                  ImageUrl === "" ? "../../public/images/avatar.jpg" : ImageUrl
-                }
-                width={20}
-              />
-              <ProfileImage src={ImageUrl}>BA</ProfileImage>
+              <ProfileImage src={ImageUrl}>
+                {/* {ImageUrl === "" ? name : ""} */}
+              </ProfileImage>
               <Space style={{ cursor: "pointer" }}>
                 <Upload {...Props}>Upload Photo</Upload>
               </Space>

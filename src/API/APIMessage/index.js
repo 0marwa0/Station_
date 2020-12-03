@@ -8,7 +8,7 @@ export const Mesg = (Msg) => {
     message: "Something worng happend !",
     description: Msg,
     placement: "bottomRight",
-    style: { borderRadius: "5px", width: "480px", height: "120px" },
+    style: { borderRadius: "5px", width: "420px", height: "120px" },
     icon: (
       <div className="NotificationIcon">
         <FaExclamation color="var(--orange)" size={18} />
@@ -21,7 +21,7 @@ export const SuccessMesg = (Title, Msg) => {
     message: Title,
     description: Msg,
     placement: "bottomRight",
-    style: { borderRadius: "5px", width: "480px", height: "120px" },
+    style: { borderRadius: "5px", width: "420px", height: "120px" },
     icon: (
       <div className="NotificationIcon Success">
         <GoCheck color="var(--darkGreen)" size={25} />
@@ -34,7 +34,7 @@ export const FailedMesg = (Title, Msg) => {
     message: Title,
     description: Msg,
     placement: "bottomRight",
-    style: { borderRadius: "5px", width: "480px", height: "120px" },
+    style: { borderRadius: "5px", width: "420px", height: "120px" },
     icon: (
       <div className="NotificationIcon Failed">
         <IoIosWarning color="var(--red)" size={18} />
