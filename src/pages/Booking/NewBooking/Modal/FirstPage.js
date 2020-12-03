@@ -53,7 +53,7 @@ export default function FirstPage(props) {
     <Values.Consumer>
       {({ title, organizer, people, comment, spaceId, data }) => (
         <div className="modleWrapper">
-          {/* <Page1Item>
+          <Page1Item>
             {title}
             <InputLable>
               Booking Title
@@ -115,7 +115,7 @@ export default function FirstPage(props) {
               onChange={(e) => props.handleInput(e, "comment")}
               placeholder="write something about this booking ..."
             />
-          </InputLable> */}
+          </InputLable>
         </div>
       )}
     </Values.Consumer>

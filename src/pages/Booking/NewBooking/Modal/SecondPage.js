@@ -140,7 +140,7 @@ export default function SecondPage(props) {
   return (
     <div className="modleWrapper">
       {/* {console.log(days, "context days")} */}
-      <SecondPageInput>
+      {/* <SecondPageInput>
         <InputLable>
           Choose Date
           <div style={{ display: "flex", position: "relative" }}>
@@ -228,9 +228,8 @@ export default function SecondPage(props) {
               </BookedItem>
             );
           })}
-        </div>
-        {/* </Scrollbars> */}
-      </div>
+        </div> 
+      </div>*/}
     </div>
   );
 }
