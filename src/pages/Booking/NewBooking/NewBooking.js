@@ -146,30 +146,34 @@ function NewBooking(props) {
         return (
           <div>
             {i.id === 1 ? (
-              <FirstPage
-                handleInput={props.handleInput}
-                handleselect={props.handleselect}
-              />
-            ) : i.id === 2 ? (
-              <SecondPage
-                // handleInput={props.handleInput}
-                handleselect={props.handleselect}
-              />
-            ) : i.id === 3 ? (
-              <ThirdPage
-                coffees={coffees}
-                lunches={lunches}
-                Designs={Designs}
-                Loading={Loading}
-                handleselect={props.handleselect}
-              />
-            ) : i.id === 4 ? (
-              <ForthPage
-                handleInput={props.handleInput}
-                edit={props.edit}
-                handleselect={props.handleselect}
-              />
+              <div>step 1</div>
+            ) : // <FirstPage
+            //   handleInput={props.handleInput}
+            //   handleselect={props.handleselect}
+            // />
+            i.id === 2 ? (
+              <div>step 2</div>
+            ) : // <SecondPage
+            //   // handleInput={props.handleInput}
+            //   handleselect={props.handleselect}
+            // />
+            i.id === 3 ? (
+              <div>step 3</div>
+            ) : // <ThirdPage
+            //   coffees={coffees}
+            //   lunches={lunches}
+            //   Designs={Designs}
+            //   Loading={Loading}
+            //   handleselect={props.handleselect}
+            // />
+            i.id === 4 ? (
+              <div>step 4</div>
             ) : (
+              // <ForthPage
+              //   handleInput={props.handleInput}
+              //   edit={props.edit}
+              //   handleselect={props.handleselect}
+              // />
               ""
             )}
           </div>
