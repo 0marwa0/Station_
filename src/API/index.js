@@ -36,31 +36,31 @@ export const LoadDataByID = (query, onSuccess, onFailure) => {
     });
 };
 
-export const LoadBooking = (onSuccess, onFailure) => {
-  fetch(`${Host}books/home`, {
-    headers: {
-      token: localStorage.getItem("station_token"),
-    },
-  })
-    .then((resp) => resp.json())
-    .then((jsonData) => jsonData)
-    .then((jsonData) => {
-      let info = [];
-      jsonData.data.map((item) => {
-        LoadDataByID(
-          `book/${item.id}`,
-          (err, data) => {
-            info.push(data.data);
-            onSuccess(jsonData.errMsg, info);
-          },
-          () => {}
-        );
-      });
-    })
-    .catch((err) => {
-      onFailure(err.message);
-    });
-};
+// export const LoadBooking = (onSuccess, onFailure) => {
+//   fetch(`${Host}books/home`, {
+//     headers: {
+//       token: localStorage.getItem("station_token"),
+//     },
+//   })
+//     .then((resp) => resp.json())
+//     .then((jsonData) => jsonData)
+//     .then((jsonData) => {
+//       let info = [];
+//       jsonData.data.map((item) => {
+//         LoadDataByID(
+//           `book/${item.id}`,
+//           (err, data) => {
+//             info.push(data.data);
+//             onSuccess(jsonData.errMsg, info);
+//           },
+//           () => {}
+//         );
+//       });
+//     })
+//     .catch((err) => {
+//       onFailure(err.message);
+//     });
+// };
 export const Login = (data, onSuccess, onFailure) => {
   let myHeaders = new Headers();
   let raw = JSON.stringify(data);
@@ -116,9 +116,9 @@ export const addData = (query, data, onSuccess, onFailure) => {
 
 export const addFile = (query, data, onSuccess, onFailure) => {
   var myHeaders = new Headers();
-  if (query === "resource") {
-    myHeaders.append("Content-Type", "application/json");
-  }
+  // if (query === "resource") {
+  //   myHeaders.append("Content-Type", "application/json");
+  // }
   myHeaders.append("token", localStorage.getItem("station_token"));
   var requestOptions = {
     method: "POST",

@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
 import SideBar from "../Sidebar";
-import { CustomPageWrapper, PageContent } from "../shared/CustomPage";
-import { Button, Col, Row, Input } from "antd";
+import { CustomPageWrapper, ProfileContent } from "../shared/CustomPage";
+import { Button, Col, Row, Input, Upload } from "antd";
 import { GlobalStyle } from "../Dashboard";
 import { Link } from "react-router-dom";
 import { BsArrowLeft } from "react-icons/bs";
 import styled from "styled-components";
 import { CustomInput } from "../shared/SharedStyle";
 import { BsExclamationCircle } from "react-icons/bs";
+import { ButtonStyledModle } from "../shared/SharedStyle";
+import { editData, addFile } from "../../API";
+import { Mesg, SuccessMesg, FailedMesg } from "../../API/APIMessage";
 const ProfileContetn = styled.div`
   margin: 0 10%;
-  border-radius: 10px;
-  height: 600px;
+  border-radius: 6px;
+  height: 700px;
   background-color: white;
-
   width: 80%;
   padding: 40px 60px;
 `;
@@ -82,17 +84,125 @@ function Index(props) {
   let user = props.admins.filter((i) => i.id === props.id);
   let data = {};
   user.map((i) => (data = i));
+
+  const [fillName, setfillName] = useState("");
+  const [userName, setuserName] = useState("");
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+  const [phone, setphone] = useState("");
+  const [type, settype] = useState("");
+  const [file, setfile] = useState("");
+
   useEffect(() => {
     if (localStorage.getItem("station_token")) {
     } else {
       props.history.push("/login");
     }
   }, []);
+
+  const Props = {
+    multiple: false,
+
+    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
+    showUploadList: false,
+    onChange({ file, fileList }) {
+      Image(file.originFileObj);
+    },
+  };
+  const ProfileContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+
+    margin-top: 25px;
+    margin-left: auto;
+
+    margin-right: auto;
+  `;
+  const Image = (e) => {
+    console.log(e, "iamge");
+    setfillName(e);
+  };
+  const handleInput = (e, key) => {
+    let value = e.target.value;
+    let file = e;
+    switch (key) {
+      case "userName":
+        setuserName(value);
+        break;
+      case "fillName":
+        setfillName(value);
+        break;
+      case "phone":
+        setphone(value);
+        break;
+      case "eamil":
+        setemail(value);
+        break;
+      case "password":
+        setpassword(value);
+        break;
+
+      default:
+        break;
+    }
+  };
+  const Save = () => {
+    let File = new FormData();
+    File.append("image", file);
+    addFile(
+      "upload",
+      File,
+      (data) => {
+        if (data.errMsg) {
+          Mesg(data.errMsg);
+        } else {
+          let admin = {
+            id: data.id,
+            name: fillName,
+            username: userName,
+            type: type,
+            active: true,
+            phone: phone,
+            email: email,
+            image: data.data.link,
+          };
+          console.log(admin, "admin should be edited");
+          // editData(
+          //   "",
+          //   admin,
+          //   data.id,
+          //   (mesg, Data) => {
+          //     if (mesg && mesg != undefined) {
+          //       Mesg(mesg);
+          //       setLoading(false);
+          //     } else {
+          //       SuccessMesg("Account data Saved!");
+          //       setLoading(false);
+          //       props.onOpenModal(false);
+          //       props.getData();
+          //     }
+          //   },
+          //   (err) => {
+          //     props.onOpenModal(false);
+          //     setLoading(false);
+          //     clearState();
+          //     FailedMesg(err);
+          //   }
+          // );
+        }
+      },
+      (err) => {
+        FailedMesg(err.toString());
+      }
+    );
+  };
+
   return (
     <CustomPageWrapper>
       <GlobalStyle />
       <SideBar />
-      <PageContent>
+      <ProfileContent>
         <ProfileHead>
           <Link to="/">
             <PageBack>
@@ -103,18 +213,9 @@ function Index(props) {
           <PageTitle>
             My Profile
             <div>
-              <Button
-                style={{
-                  backgroundColor: "var(--yellow)",
-                  borderRadius: "7px",
-                  border: "none",
-                  display: "flex",
-
-                  height: "30px",
-                }}
-              >
+              <ButtonStyledModle main onClick={Save}>
                 Save
-              </Button>
+              </ButtonStyledModle>
             </div>
           </PageTitle>
         </ProfileHead>
@@ -122,28 +223,47 @@ function Index(props) {
           <Form>
             <div style={{ width: "40%" }}>
               <ProfileImage>BA</ProfileImage>
-
-              <Space>Upload Photo</Space>
+              <Space style={{ cursor: "pointer" }}>
+                <Upload {...Props}>Upload Photo</Upload>
+              </Space>
             </div>
             <InputLable>
               Full Name
               <span style={{ display: "flex", gap: "5px" }}>
-                <CustomInput value={data.name} />{" "}
-                <CustomInput value={data.username} />
+                <CustomInput
+                  defaultValue={data.name}
+                  onChange={(e) => handleInput(e, "fillName")}
+                />{" "}
+                <CustomInput
+                  defaultValue={data.username}
+                  onChange={(e) => handleInput(e, "userName")}
+                />
               </span>
             </InputLable>
             <InputLable>
               Email Address
-              <CustomInput gray value="" />
+              <CustomInput
+                gray
+                defaultValue={data.email}
+                onChange={(e) => handleInput(e, "email")}
+              />
             </InputLable>
             <InputLable>
               Password
-              <CustomInput type="password" gray value="" />
+              <CustomInput
+                type="password"
+                gray
+                defaultValue={data.password}
+                onChange={(e) => handleInput(e, "password")}
+              />
             </InputLable>
             <Space>Change Password?</Space>
             <InputLable>
               Phone Number
-              <CustomInput value="" />
+              <CustomInput
+                defaultValue={data.phone}
+                onChange={(e) => handleInput(e, "phone")}
+              />
             </InputLable>
             <DeleteAccount>
               Delet Your Account?
@@ -151,7 +271,7 @@ function Index(props) {
             </DeleteAccount>
           </Form>{" "}
         </ProfileContetn>
-      </PageContent>
+      </ProfileContent>
     </CustomPageWrapper>
   );
 }

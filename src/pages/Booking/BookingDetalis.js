@@ -271,7 +271,7 @@ const Index = (props) => {
 
       <GlobalStyle />
       <SideBar />
-      <PageContent>
+      {/* <PageContent>
         <div style={{ marginTop: "40px" }}>
           <Wrapper>
             <Link to="/booking">
