@@ -514,7 +514,7 @@ const Index = (props) => {
         getData={getDetalis}
         data={Data}
       /> 
-    </CustomPageWrapper>*/}
+    </CustomPageWrapper>*/
   );
 };
 
