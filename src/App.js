@@ -20,7 +20,6 @@ import Profile from "./pages/Profile";
 import CreateEvent from "./pages/Events/CreateEvent";
 import Home from "./pages/Home";
 import BookingDetalis from "./pages/Booking/BookingDetalis";
-import Test from "./Test";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 function App(props) {
   const [admins, setadmins] = useState([]);
@@ -101,7 +100,7 @@ function App(props) {
             )}
             exact
           />
-          <Route path="/bookingDetalis/:id" component={Test} exact />
+          <Route path="/bookingDetalis/:id" component={BookingDetalis} exact />
           <Route path="/home" component={Home} exact />
           <Route
             path="/events"
