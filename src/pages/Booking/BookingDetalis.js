@@ -260,7 +260,7 @@ const Index = (props) => {
   // let design = Designs.filter((item) => item.id != data.designId);
   return (
     <CustomPageWrapper>
-      <LoadingBar color="var(--yellow)" ref={ref} shadow={true} />
+      {/* <LoadingBar color="var(--yellow)" ref={ref} shadow={true} /> */}
 
       <GlobalStyle />
       <SideBar />
