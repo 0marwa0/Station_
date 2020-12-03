@@ -195,8 +195,7 @@ function Index(props) {
           classNames={{
             modal: "customModal",
           }}>
-          <div>booking modal in dashboard</div>
-          {/* <NewBooking
+          <NewBooking
             handleInput={handleInput}
             handleselect={handleselect}
             edit={edit ? true : false}
@@ -205,7 +204,7 @@ function Index(props) {
               props.onOpenModal(false);
               clearState();
             }}
-          /> */}
+          />
         </Modal>
       </Values.Provider>
     </div>

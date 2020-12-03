@@ -1,6 +1,6 @@
 // create new booking  modle
 import { CustomModleButton } from "../../shared/SharedComponents";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import { Button } from "antd";
@@ -14,7 +14,6 @@ import FirstPage from "./Modal/FirstPage";
 import SecondPage from "./Modal/SecondPage";
 import ThirdPage from "./Modal/ThirdPage";
 import ForthPage from "./Modal/ForthPage";
-import { useEffect } from "react/cjs/react.development";
 const data = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
 const Dot = styled.span``;
 const CurrentDot = styled.span``;
@@ -146,34 +145,30 @@ function NewBooking(props) {
         return (
           <div>
             {i.id === 1 ? (
-              <div>step 1</div>
-            ) : // <FirstPage
-            //   handleInput={props.handleInput}
-            //   handleselect={props.handleselect}
-            // />
-            i.id === 2 ? (
-              <div>step 2</div>
-            ) : // <SecondPage
-            //   // handleInput={props.handleInput}
-            //   handleselect={props.handleselect}
-            // />
-            i.id === 3 ? (
-              <div>step 3</div>
-            ) : // <ThirdPage
-            //   coffees={coffees}
-            //   lunches={lunches}
-            //   Designs={Designs}
-            //   Loading={Loading}
-            //   handleselect={props.handleselect}
-            // />
-            i.id === 4 ? (
-              <div>step 4</div>
+              <FirstPage
+                handleInput={props.handleInput}
+                handleselect={props.handleselect}
+              />
+            ) : i.id === 2 ? (
+              <SecondPage
+                // handleInput={props.handleInput}
+                handleselect={props.handleselect}
+              />
+            ) : i.id === 3 ? (
+              <ThirdPage
+                coffees={coffees}
+                lunches={lunches}
+                Designs={Designs}
+                Loading={Loading}
+                handleselect={props.handleselect}
+              />
+            ) : i.id === 4 ? (
+              <ForthPage
+                handleInput={props.handleInput}
+                edit={props.edit}
+                handleselect={props.handleselect}
+              />
             ) : (
-              // <ForthPage
-              //   handleInput={props.handleInput}
-              //   edit={props.edit}
-              //   handleselect={props.handleselect}
-              // />
               ""
             )}
           </div>
