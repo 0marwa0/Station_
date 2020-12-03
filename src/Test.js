@@ -10,22 +10,22 @@ import React, { useState, useEffect, useRef } from "react";
 // import Moment from "react-moment";
 // import LoadingBar from "react-top-loading-bar";
 // import BookingModal from "../Dashboard/BookingModal";
-import { Col, Row, Menu, Dropdown } from "antd";
-import {
-  CustomPageWrapper,
-  PageContent,
-  PageTitle,
-} from "./pages/shared/CustomPage";
+// import { Col, Row, Menu, Dropdown } from "antd";
+// import {
+//   CustomPageWrapper,
+//   PageContent,
+//   PageTitle,
+// } from "./pages/shared/CustomPage";
 // import { TextLoadS } from "../shared/SharedComponents";
 // import { DownOutlined } from "@ant-design/icons";
 // import { useHistory, useLocation, useParams } from "react-router-dom";
-import SideBar from "./pages/Sidebar";
+//import SideBar from "./pages/Sidebar";
 // import { PageBack } from "../Profile";
 // import { BsArrowLeft } from "react-icons/bs";
 // import { Link } from "react-router-dom";
-import styled from "styled-components";
+//import styled from "styled-components";
 // import { ButtonStyled } from "../shared/SharedStyle";
-import { GlobalStyle } from "./pages/Dashboard";
+//import { GlobalStyle } from "./pages/Dashboard";
 // import { UserImage } from "../Sidebar";
 // import { BsThreeDotsVertical } from "react-icons/bs";
 // const PageActions = styled.div`
