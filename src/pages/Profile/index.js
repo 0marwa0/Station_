@@ -11,6 +11,7 @@ import { BsExclamationCircle } from "react-icons/bs";
 import { ButtonStyledModle } from "../shared/SharedStyle";
 import { editData, addFile } from "../../API";
 import { Mesg, SuccessMesg, FailedMesg } from "../../API/APIMessage";
+import { set } from "date-fns";
 const ProfileContetn = styled.div`
   margin: 0 10%;
   border-radius: 6px;
@@ -92,7 +93,7 @@ function Index(props) {
   const [phone, setphone] = useState("");
   const [type, settype] = useState("");
   const [file, setfile] = useState("");
-
+  const [ImageUrl, setImageUrl] = useState("");
   useEffect(() => {
     if (localStorage.getItem("station_token")) {
     } else {
@@ -108,6 +109,28 @@ function Index(props) {
     onChange({ file, fileList }) {
       Image(file.originFileObj);
     },
+    transformFile(file) {
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          const canvas = document.createElement("canvas");
+          const img = document.createElement("img");
+          img.src = reader.result;
+
+          img.onload = () => {
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0);
+            ctx.fillStyle = "yellow";
+            ctx.textBaseline = "middle";
+
+            console.log(img.src, "immmmmm");
+            ctx.fillText("Ant Design", 20, 20);
+            canvas.toBlob(resolve);
+          };
+        };
+      });
+    },
   };
   const ProfileContent = styled.div`
     display: flex;
@@ -120,8 +143,7 @@ function Index(props) {
     margin-right: auto;
   `;
   const Image = (e) => {
-    console.log(e, "iamge");
-    setfillName(e);
+    setfile(e);
   };
   const handleInput = (e, key) => {
     let value = e.target.value;
@@ -152,10 +174,11 @@ function Index(props) {
     File.append("image", file);
     addFile(
       "upload",
+
       File,
-      (data) => {
-        if (data.errMsg) {
-          Mesg(data.errMsg);
+      (res) => {
+        if (res.errMsg) {
+          Mesg(res.errMsg);
         } else {
           let admin = {
             id: data.id,
@@ -165,9 +188,8 @@ function Index(props) {
             active: true,
             phone: phone,
             email: email,
-            image: data.data.link,
+            image: data.url,
           };
-          console.log(admin, "admin should be edited");
           // editData(
           //   "",
           //   admin,
@@ -222,6 +244,7 @@ function Index(props) {
         <ProfileContetn>
           <Form>
             <div style={{ width: "40%" }}>
+              <img src={ImageUrl === "" ? "" : ImageUrl} />
               <ProfileImage>BA</ProfileImage>
               <Space style={{ cursor: "pointer" }}>
                 <Upload {...Props}>Upload Photo</Upload>
