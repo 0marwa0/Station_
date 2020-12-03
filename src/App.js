@@ -4,7 +4,7 @@ import { LoadData } from "./API";
 import logo from "./logo.svg";
 import "./App.css";
 import { useHistory } from "react-router";
-
+import NewArticle from "./pages/Article/NewArticle";
 import "react-progress-2/main.css";
 import Sidebar from "./pages/Sidebar";
 import Dashboard from "./pages/Dashboard";
@@ -85,7 +85,7 @@ function App(props) {
             exact
           />
           <Route path="/createEvent/:id" component={CreateEvent} exact />
-
+          <Route path="/createarticle" component={NewArticle} exact />
           <Route
             path="/articles"
             // component={Articles}

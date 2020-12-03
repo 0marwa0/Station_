@@ -90,7 +90,7 @@ export const Size = styled.span`
 export const GrayBoldText = styled.div`
   color: var(--textGray);
 `;
-export const Space = styled.div`
+export const Divider = styled.div`
   height: 5px;
 `;
 const SlideLoadHolder = styled.div`

@@ -5,7 +5,7 @@ import { Col, Row, Table, Input } from "antd";
 import React, { useEffect } from "react";
 import LoadingBar from "react-top-loading-bar";
 import { TableLoading } from "../shared/Loading";
-
+import { ButtonStyled } from "../shared/SharedStyle";
 import { BiImport, BiExport } from "react-icons/bi";
 import { ReactComponent as ExportIcon } from "../../public/images/export.svg";
 import { ReactComponent as ImportIcon } from "../../public/images/import.svg";
@@ -335,13 +335,11 @@ function CustomPage(props) {
                 ""
               ) : (
                 <CustomButton lable="Import" loading={props.Loading}>
-                  {/* <BiImport /> */}
                   <ImportIcon />
                 </CustomButton>
               )}
 
               <CustomButton lable="Export" loading={props.Loading}>
-                {/* <BiExport /> */}
                 <ExportIcon />
               </CustomButton>
 
@@ -364,17 +362,41 @@ function CustomPage(props) {
                   onOpen={() => props.onOpenModal(true)}>
                   <Upload />
                 </CustomButton>
-              ) : pageTitleName === "article" ||
-                pageTitleName === "event" ? null : (
+              ) : pageTitleName === "event" ? (
                 <CustomButton
                   main
-                  lable={`New ${pageTitleName}`}
+                  lable={`New ${
+                    pageTitleName.charAt(0).toUpperCase() +
+                    pageTitleName.slice(1)
+                  }`}
+                  pageTitle={pageTitle}
+                  loading={props.Loading}
+                  onOpen={() => props.onOpenModal(true)}>
+                  <Upload />
+                </CustomButton>
+              ) : pageTitleName === "articles" ? null : (
+                <ButtonStyled
+                  main
+                  pageTitle={pageTitle}
+                  loading={props.Loading}
+                  onClick={props.onOpenModal}>
+                  <PlusIcon />
+                  {`New Articles`}
+                </ButtonStyled>
+              )}
+              {/* {pageTitleName === "articles" ? null : (
+                <CustomButton
+                  main
+                  lable={`New ${
+                    pageTitleName.charAt(0).toUpperCase() +
+                    pageTitleName.slice(1)
+                  }`}
                   pageTitle={pageTitle}
                   loading={props.Loading}
                   onOpen={() => props.onOpenModal(true)}>
                   <PlusIcon />
                 </CustomButton>
-              )}
+              )} */}
             </ButtonGroup>
           </PageBtn>
         </Row>

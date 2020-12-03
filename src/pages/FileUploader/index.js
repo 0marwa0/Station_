@@ -111,7 +111,6 @@ function FilUploader(props) {
         } else {
           SuccessMesg("File upload done !");
 
-          // console.log("link", data.data.link);
           onOpenModal(false);
           getFiles();
         }

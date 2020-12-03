@@ -37,9 +37,13 @@ export const CustomButton = ({
     </ButtonStyled>
   );
 };
-export const CustomModleButton = ({ children, main, fun, extra }) => {
+export const CustomModleButton = ({ Loading, children, main, fun, extra }) => {
   return (
-    <ButtonStyledModle main={main} extra={extra} onClick={fun}>
+    <ButtonStyledModle
+      Loading={Loading}
+      main={main}
+      extra={extra}
+      onClick={fun}>
       {children}
     </ButtonStyledModle>
   );

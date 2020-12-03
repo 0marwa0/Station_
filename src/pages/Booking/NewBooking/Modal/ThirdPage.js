@@ -21,7 +21,7 @@ import {
   CardWrapper,
   PageWrapper,
   SlidHolder,
-  Space,
+  Divider,
   Size,
   GrayBoldText,
   GrayText,
@@ -92,6 +92,9 @@ export default function ThirdPage(props) {
     setactivedesignId(id);
     props.handleselect(id, "designId");
   };
+  let lunches = props.lunches ? props.lunches : [];
+  let designs = props.Designs ? props.Designs : [];
+  let coffees = props.coffees ? props.coffees : [];
   return (
     <Values.Consumer>
       {({ coffeebreakId, lunchId, designId }) => (
@@ -104,7 +107,7 @@ export default function ThirdPage(props) {
                 <BookItemLoading />
               ) : (
                 <Slider {...settings}>
-                  {props.coffees.map((item, i) => {
+                  {coffees.map((item, i) => {
                     return (
                       <CardWrapper>
                         <div
@@ -139,7 +142,7 @@ export default function ThirdPage(props) {
                 <BookItemLoading />
               ) : (
                 <Slider {...settings}>
-                  {props.lunches.map((item, i) => {
+                  {lunches.map((item, i) => {
                     return (
                       <CardWrapper>
                         <div
@@ -173,7 +176,7 @@ export default function ThirdPage(props) {
                 <BookItemLoading />
               ) : (
                 <Slider {...settings} className="slide">
-                  {props.Designs.map((item, i) => {
+                  {designs.map((item, i) => {
                     return (
                       <CardWrapper>
                         <div

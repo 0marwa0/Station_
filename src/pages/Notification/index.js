@@ -87,7 +87,7 @@ function Index(props) {
       }
     );
   }, []);
-
+  let notifications = notification ? notification : [];
   return (
     <div>
       <NotificationsHolder>
@@ -133,7 +133,7 @@ function Index(props) {
                   </div>
                 );
               })
-            : notification.map((item, i) => {
+            : notifications.map((item, i) => {
                 return (
                   <NotifiItem key={i}>
                     <NotifiImage

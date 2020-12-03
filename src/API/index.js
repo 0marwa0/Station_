@@ -1,6 +1,8 @@
 // /** @format */
 
 import { Host } from "./Config";
+
+//let Host = "https://station-solo.herokuapp.com/dash/v1/";
 // import axios from "axios";
 let host = `https://station-test-api.herokuapp.com/dash/v1/`;
 
@@ -8,9 +10,7 @@ export const LoadData = (query, onSuccess, onFailure) => {
   // let data ;spaces
   fetch(`${Host}${query}`, {
     headers: {
-      token:
-        // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNTkzNDAzODI2MTQ5LCJpYXQiOjE1OTM0MDM4MjB9.4x1MBn-UnDXl-s83r0U4FBk2lYO9FMzkKBVjfCPUeUQ",
-        localStorage.getItem("station_token"),
+      token: localStorage.getItem("station_token"),
     },
   })
     .then((resp) => resp.json())
@@ -24,9 +24,7 @@ export const LoadData = (query, onSuccess, onFailure) => {
 export const LoadDataByID = (query, onSuccess, onFailure) => {
   fetch(`${Host}${query}`, {
     headers: {
-      token:
-        // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNTkzNDAzODI2MTQ5LCJpYXQiOjE1OTM0MDM4MjB9.4x1MBn-UnDXl-s83r0U4FBk2lYO9FMzkKBVjfCPUeUQ",
-        localStorage.getItem("station_token"),
+      token: localStorage.getItem("station_token"),
     },
   })
     .then((resp) => resp.json())

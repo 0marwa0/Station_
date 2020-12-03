@@ -291,6 +291,7 @@ const Index = (props) => {
                 </ButtonStyled>
                 {Data.status === "approved" ? (
                   <ButtonStyled
+                    Loading={Loading}
                     onClick={() => history.push(`/createEvent/${id}`)}
                     main>
                     Create Event

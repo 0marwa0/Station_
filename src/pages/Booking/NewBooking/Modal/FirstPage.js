@@ -5,7 +5,7 @@ import { BookItemLoading } from "../../../shared/Loading";
 import { Values } from "../../index";
 import { ReactComponent as DatePickerIcon } from "../../../../public/images/solid calendar-alt.svg";
 import { Menu, Dropdown, Button, message, Tooltip } from "antd";
-import { Space, Size, Page1Item } from "./index";
+import { Divider, Size, Page1Item } from "./index";
 import styled from "styled-components";
 import "react-datepicker/dist/react-datepicker.css";
 import { LoadData } from "../../../../API";
@@ -40,9 +40,10 @@ export default function FirstPage(props) {
   useEffect(() => {
     getSpace();
   }, []);
+  let Space = spaces ? spaces : [];
   const optionData = (
     <Menu>
-      {spaces.map((item, i) => (
+      {Space.map((item, i) => (
         <Menu.Item key={item.id}>{item.title}</Menu.Item>
       ))}
     </Menu>
@@ -53,6 +54,7 @@ export default function FirstPage(props) {
       {({ title, organizer, people, comment, spaceId, data }) => (
         <div className="modleWrapper">
           <Page1Item>
+            {title}
             <InputLable>
               Booking Title
               <CustomInput
@@ -70,15 +72,17 @@ export default function FirstPage(props) {
                 placeholder="Choose space"
                 // optionFilterProp="children"
               >
-                {spaces.map((item, i) => (
-                  <Option value={item.id}>{item.title}</Option>
-                ))}
+                {spaces
+                  ? spaces.map((item, i) => (
+                      <Option value={item.id}>{item.title}</Option>
+                    ))
+                  : []}
               </Select>
             </InputLable>
           </Page1Item>
           <Page1Item>
             <InputLable>
-              <Space />
+              <Divider />
               Organizer Name
               <CustomInput
                 defaultValue={organizer}
@@ -87,7 +91,8 @@ export default function FirstPage(props) {
               />
             </InputLable>{" "}
             <InputLable>
-              <Space />
+              <Divider />
+
               <Size>
                 No. of People
                 <span style={{ color: "var(--textGray)" }}>Max: 30</span>{" "}
@@ -102,7 +107,7 @@ export default function FirstPage(props) {
             </InputLable>
           </Page1Item>
           <InputLable>
-            <Space />
+            <Divider />
             Comment
             <CustomInputArea
               rows={4}

@@ -1,6 +1,6 @@
 // Aritcle page //
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useHistory } from "react";
 import ArticlesColumns, { ArticlesData } from "./Config.js";
 // import { ArticlesData } from "../../fakeData";
 import CustomPage from "../shared/CustomPage";
@@ -14,7 +14,7 @@ function Aritcle(props) {
   const [Loading, setLoading] = useState(false);
   const [data, setdata] = useState([]);
   const [Filterdata, setFilterdata] = useState([]);
-
+  // let history = useHistory();
   const loadArticle = () => {
     setLoading(true);
     LoadData(
@@ -22,6 +22,7 @@ function Aritcle(props) {
       (err, data) => {
         if (err) {
           Mesg(err);
+          setLoading(false);
         } else {
           setLoading(false);
           let Articles = [];
@@ -75,6 +76,10 @@ function Aritcle(props) {
 
     setFilterdata(newData);
   };
+  const onOpen = (value) => {
+    props.history.push("/");
+  };
+
   return (
     <div>
       <CustomPage
@@ -83,6 +88,7 @@ function Aritcle(props) {
         Item="aritcle"
         Loading={Loading}
         data={Filterdata}
+        onOpenModal={() => props.history.push("/createarticle")}
         HandleSearch={HandleSearch}
         filter={Filter}
       />

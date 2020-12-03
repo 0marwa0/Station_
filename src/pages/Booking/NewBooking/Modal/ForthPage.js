@@ -15,7 +15,7 @@ import {
   CardWrapper,
   PageWrapper,
   SlidHolder,
-  Space,
+  Divider,
   Size,
   GrayBoldText,
   GrayText,
@@ -95,8 +95,8 @@ export default function ForthPage(props) {
               />
             </InputLable>
           </div>
-          <Space />
-          <Space />
+          <Divider />
+          <Divider />
           <InputLable>
             <Select
               suffixIcon={<DropIcon />}

@@ -10,7 +10,7 @@ import { ReactComponent as DropIcon } from "../../../../public/images/dropdown.s
 import { FaTrashAlt } from "react-icons/fa";
 import { DateName, getTime } from "../../../Dashboard";
 
-import { Space, GrayBoldText, SecondPageInput, BookedItem } from "./index";
+import { Divider, GrayBoldText, SecondPageInput, BookedItem } from "./index";
 import { InputLable } from "../../../shared/SharedStyle";
 import { Day } from "@syncfusion/ej2-react-schedule";
 const { Option } = Select;
@@ -204,7 +204,7 @@ export default function SecondPage(props) {
           <div>Start</div>
           <div>End</div>
         </BookedItem>
-        <Space />
+        <Divider />
         <div style={{ width: "100%", height: "90px" }}>
           {Privew.map((item, i) => {
             return (
