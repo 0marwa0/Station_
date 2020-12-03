@@ -262,12 +262,13 @@ function Booking(props) {
           center
           showCloseIcon={false}
           classNames={{ modal: "customModal" }}>
-          <NewBooking
+          <div>new booking modal</div>
+          {/* <NewBooking
             handleInput={handleInput}
             handleselect={handleselect}
             handleSubmit={handleSubmit}
             Close={() => onOpenModal(false)}
-          />
+          /> */}
         </Modal>
       </Values.Provider>
     </div>
