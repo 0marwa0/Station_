@@ -28,116 +28,116 @@ import styled from "styled-components";
 import { GlobalStyle } from "./pages/Dashboard";
 // import { UserImage } from "../Sidebar";
 // import { BsThreeDotsVertical } from "react-icons/bs";
-const PageActions = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  align-items: center;
-`;
-const Wrapper = styled(Row)`
-  background-color: white;
-  width: 100%;
-  border: 1px solid var(--lighterGray);
-  borderradius: 5px;
-  margin-left: 20px;
-  padding: 20px 40px;
-`;
-const GrayText = styled.div`
-  font-size: 13px;
-  color: var(--darkGray);
-  width: 100%;
-`;
-const EventDetails = styled.div`
-  display: grid;
-  grid-template-columns: auto auto auto auto;
-  gap: 16px;
-  width: 100%;
+// const PageActions = styled.div`
+//   display: flex;
+//   justify-content: space-between;
+//   width: 100%;
+//   align-items: center;
+// `;
+// const Wrapper = styled(Row)`
+//   background-color: white;
+//   width: 100%;
+//   border: 1px solid var(--lighterGray);
+//   borderradius: 5px;
+//   margin-left: 20px;
+//   padding: 20px 40px;
+// `;
+// const GrayText = styled.div`
+//   font-size: 13px;
+//   color: var(--darkGray);
+//   width: 100%;
+// `;
+// const EventDetails = styled.div`
+//   display: grid;
+//   grid-template-columns: auto auto auto auto;
+//   gap: 16px;
+//   width: 100%;
 
-  padding-top: 20px;
-  padding-right: 25px;
-  padding-bottom: 20px;
-`;
-const DetailItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  padding: 0 10px;
-  font-size: 17px;
-  width: 100%;
-`;
-const Activity = styled.div`
-  padding: 25px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding-left: 25px;
-  border-bottom: 1px solid var(--lighterGray);
-`;
-const ActivityItem = styled.div`
-  display: grid;
-  grid-template-columns: 100px 120px;
-  gap: 5px;
-  width: 100%;
-  justify-content: space-between;
-  margin: 10px 0;
+//   padding-top: 20px;
+//   padding-right: 25px;
+//   padding-bottom: 20px;
+// `;
+// const DetailItem = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   gap: 5px;
+//   padding: 0 10px;
+//   font-size: 17px;
+//   width: 100%;
+// `;
+// const Activity = styled.div`
+//   padding: 25px 0;
+//   display: flex;
+//   flex-direction: column;
+//   gap: 10px;
+//   padding-left: 25px;
+//   border-bottom: 1px solid var(--lighterGray);
+// `;
+// const ActivityItem = styled.div`
+//   display: grid;
+//   grid-template-columns: 100px 120px;
+//   gap: 5px;
+//   width: 100%;
+//   justify-content: space-between;
+//   margin: 10px 0;
 
-  align-items: center;
-`;
-const BoldText = styled.div`
-  font-weight: bold;
-  font-size: 18px;
-`;
-const Date = styled.div`
-  display: grid;
-  width: 100%;
-  height: auto;
-  padding: 7px;
-  background-color: ${(props) => (props.odd ? "var(--lightGray)" : "none")};
-  border-bottom: ${(props) =>
-    props.item ? "1px solid var(--lighterGray)" : "none"};
-  grid-template-columns: 1fr 1fr 1fr auto;
-`;
-const DateInfo = styled.div`
-  border: 1px solid var(--lighterGray);
-  border-radius: 6px;
-  border-bottom: none;
-  margin-bottom: 15px;
-`;
-const UserHolder = styled.div`
-  display: flex;
-  gap: 7px;
-  align-items: center;
+//   align-items: center;
+// `;
+// const BoldText = styled.div`
+//   font-weight: bold;
+//   font-size: 18px;
+// `;
+// const Date = styled.div`
+//   display: grid;
+//   width: 100%;
+//   height: auto;
+//   padding: 7px;
+//   background-color: ${(props) => (props.odd ? "var(--lightGray)" : "none")};
+//   border-bottom: ${(props) =>
+//     props.item ? "1px solid var(--lighterGray)" : "none"};
+//   grid-template-columns: 1fr 1fr 1fr auto;
+// `;
+// const DateInfo = styled.div`
+//   border: 1px solid var(--lighterGray);
+//   border-radius: 6px;
+//   border-bottom: none;
+//   margin-bottom: 15px;
+// `;
+// const UserHolder = styled.div`
+//   display: flex;
+//   gap: 7px;
+//   align-items: center;
 
-  justify-content: center;
-`;
-const BookingActions = styled.div`
-  display: flex;
-  gap: 6px;
-  align-items: center;
-  padding-bottom: 10px;
-`;
-const Reject = styled.div`
-  background-color: var(--lightRed);
-  color: var(--red);
-  padding: 2px 8px;
-  height: 22px;
-  border-radius: 6px;
-  font-size: 12px;
-  cursor: pointer;
-`;
-const Accept = styled.div`
-  background-color: var(--LightGreen);
-  color: var(--darkGreen);
-  padding: 2px 8px;
-  height: 22px;
-  border-radius: 6px;
-  font-size: 12px;
-  cursor: pointer;
-`;
-const Pending = styled.div`
-  color: var(--orange);
-  font-size: 16px;
-`;
+//   justify-content: center;
+// `;
+// const BookingActions = styled.div`
+//   display: flex;
+//   gap: 6px;
+//   align-items: center;
+//   padding-bottom: 10px;
+// `;
+// const Reject = styled.div`
+//   background-color: var(--lightRed);
+//   color: var(--red);
+//   padding: 2px 8px;
+//   height: 22px;
+//   border-radius: 6px;
+//   font-size: 12px;
+//   cursor: pointer;
+// `;
+// const Accept = styled.div`
+//   background-color: var(--LightGreen);
+//   color: var(--darkGreen);
+//   padding: 2px 8px;
+//   height: 22px;
+//   border-radius: 6px;
+//   font-size: 12px;
+//   cursor: pointer;
+// `;
+// const Pending = styled.div`
+//   color: var(--orange);
+//   font-size: 16px;
+// `;
 
 const Index = (props) => {
   // let history = useHistory();
