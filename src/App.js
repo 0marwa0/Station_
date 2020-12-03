@@ -66,6 +66,9 @@ function App(props) {
       //.log(props.history);
     }
   }, []);
+  const Test = () => {
+    return <div>test</div>;
+  };
   return (
     <div>
       <Router>
@@ -99,7 +102,7 @@ function App(props) {
             )}
             exact
           />
-          <Route path="/bookingDetalis/:id" component={BookingDetalis} exact />
+          <Route path="/bookingDetalis/:id" component={Test} exact />
           <Route path="/home" component={Home} exact />
           <Route
             path="/events"

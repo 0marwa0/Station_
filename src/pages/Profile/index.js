@@ -48,6 +48,10 @@ const ProfileImage = styled.div`
   border: 1px solid var(--yellow);
   display: flex;
   align-items: center;
+  background-position: 100% 100%;
+  background-repeat: no-repeat;
+
+  background-size: 100px 100px;
   justify-content: center;
   background-image: url(${(props) => props.src});
   font-size: 25px;
