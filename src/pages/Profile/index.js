@@ -39,7 +39,7 @@ const PageTitle = styled.div`
   justify-content: space-between;
   font-size: 25px;
   font-weight: bold;
-`;
+`; //
 const ProfileImage = styled.div`
   width: 100px;
   height: 100px;
@@ -49,6 +49,7 @@ const ProfileImage = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  background-image: url(${(props) => props.src});
   font-size: 25px;
   margin-bottom: 15px;
   color: var(--yellow);
@@ -123,7 +124,7 @@ function Index(props) {
             ctx.drawImage(img, 0, 0);
             ctx.fillStyle = "yellow";
             ctx.textBaseline = "middle";
-
+            setImageUrl(img.src);
             console.log(img.src, "immmmmm");
             ctx.fillText("Ant Design", 20, 20);
             canvas.toBlob(resolve);
@@ -244,8 +245,15 @@ function Index(props) {
         <ProfileContetn>
           <Form>
             <div style={{ width: "40%" }}>
-              <img src={ImageUrl === "" ? "" : ImageUrl} />
-              <ProfileImage>BA</ProfileImage>
+              gg
+              <img
+                style={{ backgroundColor: "red" }}
+                src={
+                  ImageUrl === "" ? "../../public/images/avatar.jpg" : ImageUrl
+                }
+                width={20}
+              />
+              <ProfileImage src={ImageUrl}>BA</ProfileImage>
               <Space style={{ cursor: "pointer" }}>
                 <Upload {...Props}>Upload Photo</Upload>
               </Space>

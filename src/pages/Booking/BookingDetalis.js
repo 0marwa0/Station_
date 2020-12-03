@@ -1,33 +1,33 @@
 import React, { useState, useEffect, useRef } from "react";
-import { SuccessMesg, FailedMesg, Mesg } from "../../API/APIMessage";
-import { LoadData, addData } from "../../API";
-import EditBooking from "../../pages/Booking/EditBooking";
-import { monthNames } from "../shared/assets";
-import { Skeleton, Input } from "antd";
-import "../../App.css";
-import TimeAgo from "react-simple-timeago";
-import { DateName, getTime } from "../Dashboard";
-import Moment from "react-moment";
-import LoadingBar from "react-top-loading-bar";
-import BookingModal from "../Dashboard/BookingModal";
+// import { SuccessMesg, FailedMesg, Mesg } from "../../API/APIMessage";
+// import { LoadData, addData } from "../../API";
+// import EditBooking from "../../pages/Booking/EditBooking";
+// import { monthNames } from "../shared/assets";
+// import { Skeleton, Input } from "antd";
+// import "../../App.css";
+// import TimeAgo from "react-simple-timeago";
+// import { DateName, getTime } from "../Dashboard";
+// import Moment from "react-moment";
+// import LoadingBar from "react-top-loading-bar";
+// import BookingModal from "../Dashboard/BookingModal";
 import { Col, Row, Menu, Dropdown } from "antd";
 import {
   CustomPageWrapper,
   PageContent,
   PageTitle,
 } from "../shared/CustomPage";
-import { TextLoadS } from "../shared/SharedComponents";
-import { DownOutlined } from "@ant-design/icons";
-import { useHistory, useLocation, useParams } from "react-router-dom";
+// import { TextLoadS } from "../shared/SharedComponents";
+// import { DownOutlined } from "@ant-design/icons";
+// import { useHistory, useLocation, useParams } from "react-router-dom";
 import SideBar from "../Sidebar";
-import { PageBack } from "../Profile";
-import { BsArrowLeft } from "react-icons/bs";
-import { Link } from "react-router-dom";
+// import { PageBack } from "../Profile";
+// import { BsArrowLeft } from "react-icons/bs";
+// import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { ButtonStyled } from "../shared/SharedStyle";
+// import { ButtonStyled } from "../shared/SharedStyle";
 import { GlobalStyle } from "../Dashboard";
-import { UserImage } from "../Sidebar";
-import { BsThreeDotsVertical } from "react-icons/bs";
+// import { UserImage } from "../Sidebar";
+// import { BsThreeDotsVertical } from "react-icons/bs";
 const PageActions = styled.div`
   display: flex;
   justify-content: space-between;
