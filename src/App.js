@@ -22,7 +22,7 @@ import Home from "./pages/Home";
 import Bookingdetalis from "./pages/Booking/bookingdetalis";
 import booking from "./pages/Booking/booking";
 import Editarticle from "./pages/Article/editarticle";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 const test = () => {
   return <div>booking test</div>;
 };
