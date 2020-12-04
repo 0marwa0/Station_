@@ -74,67 +74,63 @@ function App(props) {
 
   return (
     <div>
-      <Router>
-        <Switch>
-          <Route path="/login" component={Login} exact />
-          <Route
-            path="/"
-            exact
-            render={(props) => <Dashboard {...props} admins={admins} />}
-          />
-          <Route
-            path="/profile"
-            // component={Profile}
-            render={(props) => (
-              <Profile {...props} admins={admins} id={userId} />
-            )}
-            exact
-          />
-          <Route path="/createEvent/:id" component={CreateEvent} exact />
-          <Route path="/createarticle" component={Newarticle} exact />
-          <Route
-            path="/articles"
-            // component={Articles}
-            render={(props) => <Articles {...props} admins={admins} />}
-            exact
-          />
-          <Route
-            path="/booking"
-            render={(props) => (
-              <Booking {...props} admins={admins} id={userId} />
-            )}
-            exact
-          />
-          <Route path="/bookingdetalis/:id" component={Bookingdetalis} exact />
-          <Route path="/articles/:id" component={Editarticle} exact />
+      {/* <Router> */}
+      <Switch>
+        <Route path="/login" component={Login} exact />
+        <Route
+          path="/"
+          exact
+          render={(props) => <Dashboard {...props} admins={admins} />}
+        />
+        <Route
+          path="/profile"
+          // component={Profile}
+          render={(props) => <Profile {...props} admins={admins} id={userId} />}
+          exact
+        />
+        <Route path="/createEvent/:id" component={CreateEvent} exact />
+        <Route path="/createarticle" component={Newarticle} exact />
+        <Route
+          path="/articles"
+          // component={Articles}
+          render={(props) => <Articles {...props} admins={admins} />}
+          exact
+        />
+        <Route
+          path="/booking"
+          render={(props) => <Booking {...props} admins={admins} id={userId} />}
+          exact
+        />
+        <Route path="/bookingdetalis/:id" component={Bookingdetalis} exact />
+        <Route path="/articles/:id" component={Editarticle} exact />
 
-          {/* <Route path="/bookingdetalis" component={booking} exact /> */}
+        {/* <Route path="/bookingdetalis" component={booking} exact /> */}
 
-          <Route path="/home" component={Home} exact />
-          <Route
-            path="/events"
-            exact
-            render={(props) => <Events {...props} admins={admins} />}
-          />
-          <Route
-            path="/customers"
-            // component={Customers}
-            render={(props) => <Customers {...props} id={userId} />}
-            exact
-          />
-          <Route path="/admins" component={Admins} exact />
-          <Route
-            path="/resources"
-            exact
-            render={(props) => <Resources {...props} admins={admins} />}
-          />
-          <Route
-            path="/fileUploader"
-            exact
-            render={(props) => <FilUploader {...props} admins={admins} />}
-          />
-        </Switch>
-      </Router>
+        <Route path="/home" component={Home} exact />
+        <Route
+          path="/events"
+          exact
+          render={(props) => <Events {...props} admins={admins} />}
+        />
+        <Route
+          path="/customers"
+          // component={Customers}
+          render={(props) => <Customers {...props} id={userId} />}
+          exact
+        />
+        <Route path="/admins" component={Admins} exact />
+        <Route
+          path="/resources"
+          exact
+          render={(props) => <Resources {...props} admins={admins} />}
+        />
+        <Route
+          path="/fileUploader"
+          exact
+          render={(props) => <FilUploader {...props} admins={admins} />}
+        />
+      </Switch>
+      {/* </Router> */}
     </div>
   );
 }

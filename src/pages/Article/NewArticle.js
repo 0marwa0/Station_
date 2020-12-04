@@ -9,6 +9,7 @@ import { ReactComponent as RefreshIconLeft } from "../../public/images/solid und
 import { ReactComponent as DropIcon } from "../../public/images/dropdown.svg";
 import { CustomPageWrapper, PageContent } from "../shared/CustomPage";
 import EditorJS from "@editorjs/editorjs";
+
 import Header from "@editorjs/header";
 import List from "@editorjs/list";
 import { Link } from "react-router-dom";
@@ -128,6 +129,8 @@ const GrayText = styled.div`
 `;
 const Index = (props) => {
   let { id } = useLocation();
+  let location = useLocation();
+  console.log(id, location, "uselocation");
   const [Active, setActive] = useState(false);
   const [title, settitle] = useState("");
   const [price, setprice] = useState("");
@@ -260,7 +263,7 @@ const Index = (props) => {
       HandleFile(file.originFileObj);
     },
   };
-  console.log("its heare", articles);
+  // console.log("its ", articles);
   let item = articles;
   return (
     <CustomPageWrapper>
@@ -303,7 +306,7 @@ const Index = (props) => {
           <EventContent>
             <EventHeader>
               <InputTitle
-                value={item.title}
+                // value={item.title}
                 placeholder="Add Article title .."
                 onChange={(e) => handleselect(e, "title")}
               />{" "}
