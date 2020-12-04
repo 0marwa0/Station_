@@ -1,10 +1,10 @@
 // /** @format */
 
-import { Host } from "./Config";
+//import { Host } from "./Config";
 
-//let Host = "https://station-solo.herokuapp.com/dash/v1/";
+let Host = "https://station-solo.herokuapp.com/dash/v1/";
 // import axios from "axios";
-let host = `https://station-test-api.herokuapp.com/dash/v1/`;
+//let Host = `https://station-test-api.herokuapp.com/dash/v1/`;
 
 export const LoadData = (query, onSuccess, onFailure) => {
   // let data ;spaces

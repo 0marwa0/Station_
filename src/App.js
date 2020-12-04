@@ -4,7 +4,7 @@ import { LoadData } from "./API";
 import logo from "./logo.svg";
 import "./App.css";
 import { useHistory } from "react-router";
-import NewArticle from "./pages/Article/NewArticle";
+import Newarticle from "./pages/Article/newarticle";
 import "react-progress-2/main.css";
 import Sidebar from "./pages/Sidebar";
 import Dashboard from "./pages/Dashboard";
@@ -21,6 +21,7 @@ import CreateEvent from "./pages/Events/CreateEvent";
 import Home from "./pages/Home";
 import Bookingdetalis from "./pages/Booking/bookingdetalis";
 import booking from "./pages/Booking/booking";
+import Editarticle from "./pages/Article/editarticle";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 const test = () => {
   return <div>booking test</div>;
@@ -90,7 +91,7 @@ function App(props) {
             exact
           />
           <Route path="/createEvent/:id" component={CreateEvent} exact />
-          <Route path="/createarticle" component={NewArticle} exact />
+          <Route path="/createarticle" component={Newarticle} exact />
           <Route
             path="/articles"
             // component={Articles}
@@ -105,6 +106,8 @@ function App(props) {
             exact
           />
           <Route path="/bookingdetalis/:id" component={Bookingdetalis} exact />
+          <Route path="/articles/:id" component={Editarticle} exact />
+
           {/* <Route path="/bookingdetalis" component={booking} exact /> */}
 
           <Route path="/home" component={Home} exact />

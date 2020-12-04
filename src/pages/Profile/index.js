@@ -30,6 +30,7 @@ export const PageBack = styled.div`
   display: flex;
   flex-direction: row;
   gap: 5px;
+  font-size: 16px;
   align-items: center;
 `;
 const PageTitle = styled.div`

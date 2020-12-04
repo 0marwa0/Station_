@@ -9,11 +9,15 @@ import { BsTrashFill } from "react-icons/bs";
 import { FiEdit } from "react-icons/fi";
 import { FaCalendarAlt } from "react-icons/fa";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { Popconfirm } from "antd";
+
+import { useHistory, Link } from "react-router-dom";
 import { ReactComponent as EditICon } from "../../public/images/solid edit.svg";
 import { ReactComponent as ItemIcon } from "../../public/images/itemIcon.svg";
 import { PageText, PageNmber, IconCss, Pagination } from "../shared/CustomPage";
 import { ReactComponent as TrashICon } from "../../public/images/solid trash-alt.svg";
+import { LoadData, addData, addFile } from "../../API";
+import { SuccessMesg, FailedMesg, Mesg } from "../../API/APIMessage";
 
 const ListItemWrapper = styled.div`
   display: grid;
@@ -34,7 +38,7 @@ const ItemActions = styled.span`
 const Item = styled.img`
   width: 100%;
   height: 100%;
-  cursor: pointer;
+
   border-radius: 7px;
 `;
 
@@ -62,7 +66,7 @@ const ItemOverlay = styled.div`
 
   background-size: 1px 500px;
   border-radius: 10px;
-  cursor: pointer;
+
   width: 100%;
   height: 100%;
 `;
@@ -71,7 +75,7 @@ const ItemHolder = styled.div`
   width: 100%;
   height: 250px;
   position: relative;
-  cursor: pointer;
+
   &:hover ${ItemActions} {
     visibility: visible;
   }
@@ -112,7 +116,7 @@ const ListIcon = styled.div`
   align-items: center;
   border-radius: 7px;
   margin-right: 13px;
-
+  cursor: pointer;
   margin-top: 9px;
   padding: 1px 10px;
   color: white;
@@ -152,6 +156,32 @@ const ListItem = (props) => {
   const indexOfLastPage = currentPage * pagePerOnce;
   const indexOfFirstPage = indexOfLastPage - pagePerOnce;
   const Data = props.data.slice(indexOfFirstPage, indexOfLastPage);
+  const [Loading, setLoading] = useState(false);
+
+  const onDelete = (id) => {
+    setLoading(true);
+    let data = {
+      publish: false,
+    };
+
+    addData(
+      `article/edit/${id}`,
+      data,
+      (mesg, Data) => {
+        if (!mesg) {
+          Mesg(mesg);
+        } else {
+          SuccessMesg("unpublish Article Done!");
+          setLoading(false);
+        }
+      },
+      (err) => {
+        setLoading(false);
+
+        FailedMesg(err);
+      }
+    );
+  };
   return (
     <div>
       <ListItemWrapper>
@@ -170,14 +200,24 @@ const ListItem = (props) => {
                     <ItemIcon />
                   </div>
                   <span style={{ display: "flex" }}>
-                    <ListIcon>
-                      <TrashICon />
-                      <div>Delete</div>
-                    </ListIcon>
-                    <ListIcon>
-                      <EditICon />
-                      <div> Edit</div>
-                    </ListIcon>
+                    <Popconfirm
+                      title="Are you sure？"
+                      okText="Yes"
+                      onConfirm={() => onDelete(item.id)}
+                      cancelText="No">
+                      <ListIcon>
+                        <TrashICon />
+                        <div>Delete</div>
+                      </ListIcon>
+                    </Popconfirm>
+                    <Link to={`/articles/${item.id}`}>
+                      <ListIcon
+                      // onClick={() => props.history.push(`/article/${item.id}`)}
+                      >
+                        <EditICon />
+                        <div> Edit</div>
+                      </ListIcon>
+                    </Link>
                   </span>
                 </ItemActions>
                 <ListBottom>

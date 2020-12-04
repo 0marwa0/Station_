@@ -28,6 +28,7 @@ function Aritcle(props) {
           let Articles = [];
           data.data.rows.map((item) => {
             Articles.push({
+              id: item.id,
               image: item.image,
               Title: item.title,
               CreatedDate: DateName(item.createdAt),
@@ -45,7 +46,6 @@ function Aritcle(props) {
       (err) => {
         setLoading(false);
         FailedMesg(err, "Something worng happend !");
-        console.log(err, "failed");
       }
     );
   };
