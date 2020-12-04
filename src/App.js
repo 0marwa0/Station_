@@ -22,7 +22,7 @@ import Home from "./pages/Home";
 // import BookingDetalis from "./pages/Booking/bookingdetalis";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-const BookingDetalis = () => {
+const test = () => {
   return <div>booking test</div>;
 };
 function App(props) {
@@ -104,7 +104,9 @@ function App(props) {
             )}
             exact
           />
-          <Route path="/bookingdetalis/:id" component={BookingDetalis} exact />
+          {/* <Route path="/bookingdetalis/:id" component={BookingDetalis} exact /> */}
+          <Route path="/test" component={test} exact />
+
           <Route path="/home" component={Home} exact />
           <Route
             path="/events"
