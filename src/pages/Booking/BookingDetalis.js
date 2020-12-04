@@ -259,262 +259,263 @@ function Index(props) {
   let Data = data ? data : {};
   let design = Designs.filter((item) => item.id != data.designId);
   return (
-    <CustomPageWrapper>
-      {/* <LoadingBar color="var(--yellow)" ref={ref} shadow={true} /> */}
+    // <CustomPageWrapper>
+    //   {/* <LoadingBar color="var(--yellow)" ref={ref} shadow={true} /> */}
 
-      <GlobalStyle />
-      <SideBar />
+    //   <GlobalStyle />
+    //   <SideBar />
 
-      <PageContent>
-        <div style={{ marginTop: "40px" }}>
-          <Wrapper>
-            <Link to="/booking">
-              <PageBack>
-                <BsArrowLeft />
-                <div>Booking</div>
-              </PageBack>
-            </Link>
-            <PageActions>
-              <PageTitle>{Loading ? <TextLoadS /> : Data.title}</PageTitle>
+    //   <PageContent>
+    //     <div style={{ marginTop: "40px" }}>
+    //       <Wrapper>
+    //         <Link to="/booking">
+    //           <PageBack>
+    //             <BsArrowLeft />
+    //             <div>Booking</div>
+    //           </PageBack>
+    //         </Link>
+    //         <PageActions>
+    //           <PageTitle>{Loading ? <TextLoadS /> : Data.title}</PageTitle>
 
-              <div style={{ display: "flex", gap: "10px" }}>
-                <ButtonStyled
-                //  onClick={onOpenModal}
-                >
-                  Edit
-                </ButtonStyled>
-                {Data.status === "approved" ? (
-                  <ButtonStyled
-                    Loading={Loading}
-                    onClick={() => history.push(`/createEvent/${id}`)}
-                    main>
-                    Create Event
-                  </ButtonStyled>
-                ) : null}
-              </div>
-            </PageActions>
+    //           <div style={{ display: "flex", gap: "10px" }}>
+    //             <ButtonStyled
+    //             //  onClick={onOpenModal}
+    //             >
+    //               Edit
+    //             </ButtonStyled>
+    //             {Data.status === "approved" ? (
+    //               <ButtonStyled
+    //                 Loading={Loading}
+    //                 onClick={() => history.push(`/createEvent/${id}`)}
+    //                 main>
+    //                 Create Event
+    //               </ButtonStyled>
+    //             ) : null}
+    //           </div>
+    //         </PageActions>
 
-            <BookingActions>
-              {BookingStatus ? (
-                <div>Published</div>
-              ) : (
-                <Dropdown>
-                  <Pending>
-                    <spna>
-                      {Data.status}
-                      <DownOutlined
-                        style={{ fontSize: "10px", margin: " 0 5px" }}
-                      />
-                    </spna>
-                  </Pending>
-                </Dropdown>
-              )}
-              {!BookingStatus ? (
-                <Reject onClick={Recject}>Reject</Reject>
-              ) : null}
-              {!BookingStatus ? (
-                <Accept onClick={Approve}>Accept</Accept>
-              ) : null}
-            </BookingActions>
-            <Row
-              style={{
-                borderTop: "1px solid var(--lighterGray)",
-                display: "flex",
-                width: "100%",
-              }}>
-              <Col
-                style={{
-                  width: "70%",
-                  paddingTop: "20px",
-                  paddingBottom: "30px",
-                  paddingRight: "50px",
-                  borderRight: "1px solid var(--lighterGray)",
-                }}>
-                <BoldText>Event Details</BoldText>
-                <EventDetails>
-                  <DetailItem>
-                    <GrayText> Space</GrayText>
+    //         <BookingActions>
+    //           {BookingStatus ? (
+    //             <div>Published</div>
+    //           ) : (
+    //             <Dropdown>
+    //               <Pending>
+    //                 <spna>
+    //                   {Data.status}
+    //                   <DownOutlined
+    //                     style={{ fontSize: "10px", margin: " 0 5px" }}
+    //                   />
+    //                 </spna>
+    //               </Pending>
+    //             </Dropdown>
+    //           )}
+    //           {!BookingStatus ? (
+    //             <Reject onClick={Recject}>Reject</Reject>
+    //           ) : null}
+    //           {!BookingStatus ? (
+    //             <Accept onClick={Approve}>Accept</Accept>
+    //           ) : null}
+    //         </BookingActions>
+    //         <Row
+    //           style={{
+    //             borderTop: "1px solid var(--lighterGray)",
+    //             display: "flex",
+    //             width: "100%",
+    //           }}>
+    //           <Col
+    //             style={{
+    //               width: "70%",
+    //               paddingTop: "20px",
+    //               paddingBottom: "30px",
+    //               paddingRight: "50px",
+    //               borderRight: "1px solid var(--lighterGray)",
+    //             }}>
+    //             <BoldText>Event Details</BoldText>
+    //             <EventDetails>
+    //               <DetailItem>
+    //                 <GrayText> Space</GrayText>
 
-                    <div>
-                      {Loading ? (
-                        <TextLoadS />
-                      ) : data.space ? (
-                        data.space.title
-                      ) : (
-                        ""
-                      )}
-                    </div>
-                  </DetailItem>
-                  <DetailItem>
-                    <GrayText> Cooffee Break</GrayText>
+    //                 <div>
+    //                   {Loading ? (
+    //                     <TextLoadS />
+    //                   ) : data.space ? (
+    //                     data.space.title
+    //                   ) : (
+    //                     ""
+    //                   )}
+    //                 </div>
+    //               </DetailItem>
+    //               <DetailItem>
+    //                 <GrayText> Cooffee Break</GrayText>
 
-                    <div>
-                      {Loading ? (
-                        <TextLoadS />
-                      ) : data.coffeebreak ? (
-                        data.coffeebreak.title
-                      ) : (
-                        ""
-                      )}
-                    </div>
-                  </DetailItem>
-                  <DetailItem>
-                    <GrayText> Hall Design</GrayText>
+    //                 <div>
+    //                   {Loading ? (
+    //                     <TextLoadS />
+    //                   ) : data.coffeebreak ? (
+    //                     data.coffeebreak.title
+    //                   ) : (
+    //                     ""
+    //                   )}
+    //                 </div>
+    //               </DetailItem>
+    //               <DetailItem>
+    //                 <GrayText> Hall Design</GrayText>
 
-                    {Loading ? <TextLoadS /> : design[0] ? design[0].name : ""}
-                  </DetailItem>
-                  <DetailItem>
-                    <GrayText> Date</GrayText>
+    //                 {Loading ? <TextLoadS /> : design[0] ? design[0].name : ""}
+    //               </DetailItem>
+    //               <DetailItem>
+    //                 <GrayText> Date</GrayText>
 
-                    <div>Event Hall</div>
-                  </DetailItem>
-                  <DetailItem>
-                    <GrayText> No. of People</GrayText>
+    //                 <div>Event Hall</div>
+    //               </DetailItem>
+    //               <DetailItem>
+    //                 <GrayText> No. of People</GrayText>
 
-                    <div>{Loading ? <TextLoadS /> : Data.people}</div>
-                  </DetailItem>
-                  <DetailItem>
-                    <GrayText> Entity Type</GrayText>
+    //                 <div>{Loading ? <TextLoadS /> : Data.people}</div>
+    //               </DetailItem>
+    //               <DetailItem>
+    //                 <GrayText> Entity Type</GrayText>
 
-                    <div>
-                      {Loading ? (
-                        <TextLoadS />
-                      ) : data.booktype ? (
-                        data.booktype.name
-                      ) : (
-                        ""
-                      )}
-                    </div>
-                  </DetailItem>
-                  <DetailItem>
-                    <GrayText> Total Price</GrayText>
+    //                 <div>
+    //                   {Loading ? (
+    //                     <TextLoadS />
+    //                   ) : data.booktype ? (
+    //                     data.booktype.name
+    //                   ) : (
+    //                     ""
+    //                   )}
+    //                 </div>
+    //               </DetailItem>
+    //               <DetailItem>
+    //                 <GrayText> Total Price</GrayText>
 
-                    <div>
-                      {" "}
-                      {Loading ? <TextLoadS /> : "$" + Data ? Data.price : ""}
-                    </div>
-                  </DetailItem>
-                  <DetailItem>
-                    <GrayText>Received</GrayText>
+    //                 <div>
+    //                   {" "}
+    //                   {Loading ? <TextLoadS /> : "$" + Data ? Data.price : ""}
+    //                 </div>
+    //               </DetailItem>
+    //               <DetailItem>
+    //                 <GrayText>Received</GrayText>
 
-                    <div>
-                      {Loading ? (
-                        <TextLoadS />
-                      ) : "$" + Data ? (
-                        Data.received
-                      ) : (
-                        ""
-                      )}
-                    </div>
-                  </DetailItem>
-                  <DetailItem>
-                    <GrayText>Lunches</GrayText>
+    //                 <div>
+    //                   {Loading ? (
+    //                     <TextLoadS />
+    //                   ) : "$" + Data ? (
+    //                     Data.received
+    //                   ) : (
+    //                     ""
+    //                   )}
+    //                 </div>
+    //               </DetailItem>
+    //               <DetailItem>
+    //                 <GrayText>Lunches</GrayText>
 
-                    <div>
-                      {Loading ? (
-                        <TextLoadS />
-                      ) : data.lunch ? (
-                        data.lunch.title
-                      ) : (
-                        ""
-                      )}
-                    </div>
-                  </DetailItem>
-                </EventDetails>
-                <Col>
-                  <Date>
-                    <div>Data</div>
-                    <div>Starting Time</div>
-                    <div>Ending Time</div>
-                  </Date>
-                  <DateInfo>
-                    {data.bookDates
-                      ? data.bookDates.map((i, index) => (
-                          <Date item odd={index % 2 != 0 ? true : false}>
-                            <GrayText>{DateName(i.start)}</GrayText>
-                            <GrayText>{getTime(i.start)}</GrayText>
-                            <GrayText>{getTime(i.end)}</GrayText>
-                            <GrayText>
-                              <BsThreeDotsVertical />
-                            </GrayText>
-                          </Date>
-                        ))
-                      : ""}
-                  </DateInfo>
-                  <DetailItem>
-                    <div style={{ fontSize: "13px" }}> Commnets</div>
+    //                 <div>
+    //                   {Loading ? (
+    //                     <TextLoadS />
+    //                   ) : data.lunch ? (
+    //                     data.lunch.title
+    //                   ) : (
+    //                     ""
+    //                   )}
+    //                 </div>
+    //               </DetailItem>
+    //             </EventDetails>
+    //             <Col>
+    //               <Date>
+    //                 <div>Data</div>
+    //                 <div>Starting Time</div>
+    //                 <div>Ending Time</div>
+    //               </Date>
+    //               <DateInfo>
+    //                 {data.bookDates
+    //                   ? data.bookDates.map((i, index) => (
+    //                       <Date item odd={index % 2 != 0 ? true : false}>
+    //                         <GrayText>{DateName(i.start)}</GrayText>
+    //                         <GrayText>{getTime(i.start)}</GrayText>
+    //                         <GrayText>{getTime(i.end)}</GrayText>
+    //                         <GrayText>
+    //                           <BsThreeDotsVertical />
+    //                         </GrayText>
+    //                       </Date>
+    //                     ))
+    //                   : ""}
+    //               </DateInfo>
+    //               <DetailItem>
+    //                 <div style={{ fontSize: "13px" }}> Commnets</div>
 
-                    {Loading ? (
-                      <TextLoadS />
-                    ) : (
-                      <GrayText>{Data.comment} </GrayText>
-                    )}
-                  </DetailItem>
-                </Col>
-              </Col>
-              <Col style={{ width: "30%" }}>
-                <Activity>
-                  <DetailItem>
-                    <BoldText>Activity</BoldText>
-                    <GrayText>Created by</GrayText>
+    //                 {Loading ? (
+    //                   <TextLoadS />
+    //                 ) : (
+    //                   <GrayText>{Data.comment} </GrayText>
+    //                 )}
+    //               </DetailItem>
+    //             </Col>
+    //           </Col>
+    //           <Col style={{ width: "30%" }}>
+    //             <Activity>
+    //               <DetailItem>
+    //                 <BoldText>Activity</BoldText>
+    //                 <GrayText>Created by</GrayText>
 
-                    <ActivityItem>
-                      <UserHolder>
-                        <UserImage
-                          src={require("../../public/images/user2.png")}
-                        />
-                        <span>
-                          {Loading ? (
-                            <TextLoadS />
-                          ) : data.admin ? (
-                            data.admin.name
-                          ) : (
-                            ""
-                          )}
-                        </span>
-                      </UserHolder>
-                      <GrayText>
-                        <div
-                          style={{
-                            width: "max-content",
-                          }}>
-                          <TimeAgo date={data.createdAt} />
-                        </div>
-                      </GrayText>
-                    </ActivityItem>
-                  </DetailItem>
-                  <DetailItem>
-                    {BookingStatus ? (
-                      <div>
-                        <GrayText>Approved by</GrayText>
-                        <ActivityItem>
-                          <UserHolder>
-                            <UserImage
-                              src={require("../../public/images/user2.png")}
-                            />
-                            <span>{data.admin ? data.admin.name : ""} </span>
-                          </UserHolder>
-                          <GrayText></GrayText>
-                        </ActivityItem>
-                      </div>
-                    ) : null}
-                  </DetailItem>
-                </Activity>
-              </Col>
-            </Row>
-          </Wrapper>
-        </div>
-      </PageContent>
-      <EditBooking
-        open={open}
-        id={id}
-        onOpenModal={onOpenModal}
-        Edit={true}
-        Designs={Designs}
-        getData={getDetalis}
-        data={Data}
-      />
-    </CustomPageWrapper>
+    //                 <ActivityItem>
+    //                   <UserHolder>
+    //                     <UserImage
+    //                       src={require("../../public/images/user2.png")}
+    //                     />
+    //                     <span>
+    //                       {Loading ? (
+    //                         <TextLoadS />
+    //                       ) : data.admin ? (
+    //                         data.admin.name
+    //                       ) : (
+    //                         ""
+    //                       )}
+    //                     </span>
+    //                   </UserHolder>
+    //                   <GrayText>
+    //                     <div
+    //                       style={{
+    //                         width: "max-content",
+    //                       }}>
+    //                       <TimeAgo date={data.createdAt} />
+    //                     </div>
+    //                   </GrayText>
+    //                 </ActivityItem>
+    //               </DetailItem>
+    //               <DetailItem>
+    //                 {BookingStatus ? (
+    //                   <div>
+    //                     <GrayText>Approved by</GrayText>
+    //                     <ActivityItem>
+    //                       <UserHolder>
+    //                         <UserImage
+    //                           src={require("../../public/images/user2.png")}
+    //                         />
+    //                         <span>{data.admin ? data.admin.name : ""} </span>
+    //                       </UserHolder>
+    //                       <GrayText></GrayText>
+    //                     </ActivityItem>
+    //                   </div>
+    //                 ) : null}
+    //               </DetailItem>
+    //             </Activity>
+    //           </Col>
+    //         </Row>
+    //       </Wrapper>
+    //     </div>
+    //   </PageContent>
+    //   <EditBooking
+    //     open={open}
+    //     id={id}
+    //     onOpenModal={onOpenModal}
+    //     Edit={true}
+    //     Designs={Designs}
+    //     getData={getDetalis}
+    //     data={Data}
+    //   />
+    // </CustomPageWrapper>
+    <div>test</div>
   );
 }
 
