@@ -389,7 +389,7 @@ function Index(props) {
                 height="700px"
                 eventClick={(e) =>
                   props.history.push(
-                    `/bookingDetalis/${e.event._def.extendedProps.bookId}`
+                    `/bookingdetalis/${e.event._def.extendedProps.bookId}`
                   )
                 }
                 eventMouseEnter={(item) => onEnter(item)}

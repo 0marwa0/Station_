@@ -101,7 +101,7 @@ function App(props) {
           render={(props) => <Booking {...props} admins={admins} id={userId} />}
           exact
         />
-        <Route path="/bookingdetalis/:id" component={Bookingdetalis} exact />
+        <Route path="/bookingdetalis/:id" component={booking} exact />
         <Route path="/articles/:id" component={Editarticle} exact />
 
         {/* <Route path="/bookingdetalis" component={booking} exact /> */}

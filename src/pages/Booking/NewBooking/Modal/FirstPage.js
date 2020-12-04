@@ -54,7 +54,6 @@ export default function FirstPage(props) {
       {({ title, organizer, people, comment, spaceId, data }) => (
         <div className="modleWrapper">
           <Page1Item>
-            {title}
             <InputLable>
               Booking Title
               <CustomInput
