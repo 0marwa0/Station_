@@ -19,8 +19,12 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import CreateEvent from "./pages/Events/CreateEvent";
 import Home from "./pages/Home";
-import BookingDetalis from "./pages/Booking/bookingdetalis";
+// import BookingDetalis from "./pages/Booking/bookingdetalis";
+
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+const BookingDetalis = () => {
+  return <div>booking test</div>;
+};
 function App(props) {
   const [admins, setadmins] = useState([]);
   const [spaces, setspaces] = useState([]);
