@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { IoMdRefresh } from "react-icons/io";
 import Editor from "@stfy/react-editor.js";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { LoadData, addData, addFile } from "../../API";
 import { SuccessMesg, FailedMesg, Mesg } from "../../API/APIMessage";
 import { ReactComponent as RefreshIcon } from "../../public/images/solid undo-right.svg";
@@ -127,7 +127,7 @@ const GrayText = styled.div`
   font-size: 1vw;
 `;
 const Index = (props) => {
-  let { id } = useParams();
+  let { id } = useLocation();
   const [Active, setActive] = useState(false);
   const [title, settitle] = useState("");
   const [price, setprice] = useState("");

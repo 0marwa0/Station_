@@ -73,7 +73,7 @@ const ItemOverlay = styled.div`
 
 const ItemHolder = styled.div`
   width: 100%;
-  height: 250px;
+  height: 280px;
   position: relative;
 
   &:hover ${ItemActions} {
@@ -125,9 +125,9 @@ const ListIcon = styled.div`
 const ListBottom = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 10px 20px;
+  padding: 10px;
 
-  margin-top: 80px;
+  margin-top: 140px;
 `;
 
 const BottomText = styled.div`
@@ -158,6 +158,33 @@ const ListItem = (props) => {
   const Data = props.data.slice(indexOfFirstPage, indexOfLastPage);
   const [Loading, setLoading] = useState(false);
 
+  const onEdit = (id) => {
+    setLoading(true);
+
+    let data = {
+      title: "test",
+      description: "test",
+      platform: "web",
+      publish: true,
+      image: "file",
+      lang: "ar",
+      gov: "baghdad",
+    };
+    addData(
+      `article/edit/${id}`,
+      data,
+      (mesg, Data) => {
+        SuccessMesg("Edit Article Done!");
+        setLoading(false);
+      },
+      (err) => {
+        setLoading(false);
+
+        FailedMesg(err);
+      }
+    );
+  };
+
   const onDelete = (id) => {
     setLoading(true);
     let data = {
@@ -168,12 +195,8 @@ const ListItem = (props) => {
       `article/edit/${id}`,
       data,
       (mesg, Data) => {
-        if (!mesg) {
-          Mesg(mesg);
-        } else {
-          SuccessMesg("unpublish Article Done!");
-          setLoading(false);
-        }
+        SuccessMesg("unpublish Article Done!");
+        setLoading(false);
       },
       (err) => {
         setLoading(false);
