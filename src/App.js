@@ -20,7 +20,7 @@ import Profile from "./pages/Profile";
 import CreateEvent from "./pages/Events/CreateEvent";
 import Home from "./pages/Home";
 // import BookingDetalis from "./pages/Booking/bookingdetalis";
-
+import booking from "./pages/Booking/booking";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 const test = () => {
   return <div>booking test</div>;
@@ -105,7 +105,7 @@ function App(props) {
             exact
           />
           {/* <Route path="/bookingdetalis" component={BookingDetalis} exact /> */}
-          <Route path="/bookingdetalis" component={test} exact />
+          <Route path="/bookingdetalis" component={booking} exact />
 
           <Route path="/home" component={Home} exact />
           <Route
