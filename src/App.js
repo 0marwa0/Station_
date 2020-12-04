@@ -105,7 +105,7 @@ function App(props) {
             exact
           />
           {/* <Route path="/bookingdetalis/:id" component={BookingDetalis} exact /> */}
-          <Route path="/test" component={test} exact />
+          <Route path="/bookinginf/:55" component={test} exact />
 
           <Route path="/home" component={Home} exact />
           <Route

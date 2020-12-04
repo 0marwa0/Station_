@@ -32,7 +32,7 @@ export const BookingColumns = [
     title: "Title",
     dataIndex: "Title",
     render: (item) => (
-      <Link to={`/test`}>{item.title}</Link>
+      <Link to={`/bookinginfo/:55`}>{item.title}</Link>
 
       // <Link to={`/bookingdetalis/${item.id}`}>{item.title}</Link>
     ),
