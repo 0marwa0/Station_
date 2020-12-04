@@ -140,124 +140,124 @@ const Pending = styled.div`
   font-size: 16px;
 `;
 function Index(props) {
-  let history = useHistory();
-  let location = useLocation();
-  const [Id, setId] = useState("");
-  const [data, setdata] = useState({});
-  const ref = useRef(null);
-  const [open, setOpen] = useState(false);
-  const [Loading, setLoading] = useState(false);
-  const [Designs, setDesigns] = useState([]);
-  const [BookingStatus, setBookingStatus] = useState(false);
-  const setBooking = (status) => {
-    setBookingStatus(status);
-  };
-  let { id } = useParams();
-  const onOpenModal = (open) => {
-    setOpen(open);
-    //callback()
-  };
-  useEffect(() => {
-    if (localStorage.getItem("station_token")) {
-      if (Loading) {
-        ref.current.staticStart();
-      } else {
-        ref.current.complete();
-      }
-      setId(id);
+  // let history = useHistory();
+  // let location = useLocation();
+  // const [Id, setId] = useState("");
+  // const [data, setdata] = useState({});
+  // const ref = useRef(null);
+  // const [open, setOpen] = useState(false);
+  // const [Loading, setLoading] = useState(false);
+  // const [Designs, setDesigns] = useState([]);
+  // const [BookingStatus, setBookingStatus] = useState(false);
+  // const setBooking = (status) => {
+  //   setBookingStatus(status);
+  // };
+  // let { id } = useParams();
+  // const onOpenModal = (open) => {
+  //   setOpen(open);
+  //   //callback()
+  // };
+  // useEffect(() => {
+  //   if (localStorage.getItem("station_token")) {
+  //     if (Loading) {
+  //       ref.current.staticStart();
+  //     } else {
+  //       ref.current.complete();
+  //     }
+  //     setId(id);
 
-      loadDesigns();
-      getDetalis();
-    } else {
-      props.history.push("/login");
-    }
-  }, []);
-  const getDetalis = () => {
-    setLoading(true);
+  //     loadDesigns();
+  //     getDetalis();
+  //   } else {
+  //     props.history.push("/login");
+  //   }
+  // }, []);
+  // const getDetalis = () => {
+  //   setLoading(true);
 
-    LoadData(
-      `book/${id}`,
-      (err, data) => {
-        setLoading(false);
+  //   LoadData(
+  //     `book/${id}`,
+  //     (err, data) => {
+  //       setLoading(false);
 
-        setdata(data.data);
-        if (err) {
-          Mesg(err);
-        }
-      },
-      (err) => {
-        setLoading(false);
-        FailedMesg(err, "Something worng happend !");
-      }
-    );
-  };
+  //       setdata(data.data);
+  //       if (err) {
+  //         Mesg(err);
+  //       }
+  //     },
+  //     (err) => {
+  //       setLoading(false);
+  //       FailedMesg(err, "Something worng happend !");
+  //     }
+  //   );
+  // };
 
-  const Recject = () => {
-    let data = {
-      id: Id,
-    };
-    setLoading(true);
-    addData(
-      "book/reject",
-      data,
-      (mesg, Data) => {
-        SuccessMesg("Reservation Rejected !");
-        setLoading(false);
-        setId("");
-        props.history.push("/");
-      },
-      (err) => {
-        setLoading(false);
-        setId("");
+  // const Recject = () => {
+  //   let data = {
+  //     id: Id,
+  //   };
+  //   setLoading(true);
+  //   addData(
+  //     "book/reject",
+  //     data,
+  //     (mesg, Data) => {
+  //       SuccessMesg("Reservation Rejected !");
+  //       setLoading(false);
+  //       setId("");
+  //       props.history.push("/");
+  //     },
+  //     (err) => {
+  //       setLoading(false);
+  //       setId("");
 
-        FailedMesg(err);
-      }
-    );
-  };
-  const Approve = () => {
-    let data = {
-      id: Id,
-    };
+  //       FailedMesg(err);
+  //     }
+  //   );
+  // };
+  // const Approve = () => {
+  //   let data = {
+  //     id: Id,
+  //   };
 
-    setLoading(true);
-    addData(
-      "book/approve",
-      data,
-      (mesg, Data) => {
-        SuccessMesg("Reservation Approved!");
-        setLoading(false);
-        setId("");
-        setBooking(true);
-      },
-      (err) => {
-        setLoading(false);
-        setId("");
+  //   setLoading(true);
+  //   addData(
+  //     "book/approve",
+  //     data,
+  //     (mesg, Data) => {
+  //       SuccessMesg("Reservation Approved!");
+  //       setLoading(false);
+  //       setId("");
+  //       setBooking(true);
+  //     },
+  //     (err) => {
+  //       setLoading(false);
+  //       setId("");
 
-        FailedMesg(err);
-      }
-    );
-  };
+  //       FailedMesg(err);
+  //     }
+  //   );
+  // };
 
-  const loadDesigns = () => {
-    setLoading(true);
-    LoadData(
-      "space/designs",
-      (err, data) => {
-        setLoading(false);
-        setDesigns(data.data);
+  // const loadDesigns = () => {
+  //   setLoading(true);
+  //   LoadData(
+  //     "space/designs",
+  //     (err, data) => {
+  //       setLoading(false);
+  //       setDesigns(data.data);
 
-        if (err) {
-          Mesg(err);
-        }
-      },
-      (err) => {
-        setLoading(false);
-        FailedMesg(err, "Something worng happend !");
-      }
-    );
-  };
-  let Data = data ? data : {};
-  let design = Designs.filter((item) => item.id != data.designId);
+  //       if (err) {
+  //         Mesg(err);
+  //       }
+  //     },
+  //     (err) => {
+  //       setLoading(false);
+  //       FailedMesg(err, "Something worng happend !");
+  //     }
+  //   );
+  // };
+  // let Data = data ? data : {};
+  // let design = Designs.filter((item) => item.id != data.designId);
   return (
     // <CustomPageWrapper>
     //   {/* <LoadingBar color="var(--yellow)" ref={ref} shadow={true} /> */}
