@@ -22,7 +22,7 @@ import Home from "./pages/Home";
 // import BookingDetalis from "./pages/Booking/bookingdetalis";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-const bookingdetalis = () => {
+const test = () => {
   return <div>booking test</div>;
 };
 function App(props) {
