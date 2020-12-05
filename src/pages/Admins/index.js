@@ -275,7 +275,8 @@ function Admins(props) {
         width={570}
         visible={openEdit}
         key="right">
-        <NewAdmin
+        <div>admin from test </div>
+        {/* <NewAdmin
           fun={onCloseModalEdit}
           type="edit"
           id={id}
@@ -283,7 +284,7 @@ function Admins(props) {
           admins={admins}
           handleSubmit={handleEdit}
           handleInput={handleInput}
-        />
+        /> */}
       </Drawer>
 
       <Modal
