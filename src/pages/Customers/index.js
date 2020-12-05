@@ -7,7 +7,7 @@ import { DateName } from "../Dashboard";
 
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
-import Newcustomer from "./NewCustomer";
+import Notify from "./Notify";
 import { Mesg, FailedMesg, SuccessMesg } from "../../API/APIMessage";
 import { LoadData, addData } from "../../API";
 import Progress from "react-progress-2";
@@ -16,9 +16,16 @@ function Customers(props) {
   const [Loading, setLoading] = useState(false);
   const [users, setusers] = useState([]);
   const [data, setdata] = useState([]);
+  const [openNotify, setNotify] = useState(false);
+
   const [Filterdata, setFilterdata] = useState([]);
   const onOpenModal = (open) => {
     setOpen(open);
+  };
+  const [Id, setId] = useState("");
+  const onOpenModalNotify = (id, value) => {
+    setNotify(value);
+    setId(id);
   };
   const deactive = (id) => {
     let data = { id: id };
@@ -53,6 +60,9 @@ function Customers(props) {
 
               FullName: user.name,
               Email: user.email,
+              notify: {
+                onOpen: () => onOpenModalNotify(user.id, true),
+              },
               PhoneNumber: user.phone,
               Date: DateName(user.createdAt),
               Status: user.active ? ["Enabled"] : ["Disabled"],
@@ -117,7 +127,23 @@ function Customers(props) {
         classNames={{
           modal: "customModal",
         }}>
-        <Newcustomer Close={() => onOpenModal(false)} id={props.id} />
+        <Notify Close={() => onOpenModal(false)} id={props.id} all={true} />
+      </Modal>
+      <Modal
+        closeOnOverlayClick={false}
+        open={openNotify}
+        onClose={() => onOpenModalNotify(false)}
+        center
+        showCloseIcon={false}
+        classNames={{
+          modal: "customModal",
+        }}>
+        <Notify
+          Close={() => onOpenModalNotify(false)}
+          id={props.id}
+          recevierId={Id}
+          all={false}
+        />
       </Modal>
     </div>
   );

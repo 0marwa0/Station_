@@ -38,7 +38,7 @@ function Events(props) {
             console.log(Events);
             Events.push({
               id: index + 1,
-              Organizer: item.organizer,
+              Organizer: { name: item.organizer, id: item.bookId },
               Date: DateName(item.createdAt),
               Space: [`${item.space.title}`],
               SoldTickets: item.people - item.ticketLeft,
@@ -46,6 +46,7 @@ function Events(props) {
                 .filter((i) => i.id === item.approvedBy)
                 .map((i) => i.username)
                 .toString(),
+              edit: item.bookId,
             });
           });
           setdata(Events);

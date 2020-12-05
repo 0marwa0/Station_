@@ -10,7 +10,7 @@ import PasswordRest from "./PasswordRest";
 // import { AdminsData } from "../../fakeData/index";
 import { AdminsColumns, AdminsData } from "./Config";
 // import { Modal } from "react-responsive-modal";
-import NewAdmin from "./NewAmin";
+import Admin from "./Admin";
 import EditAdmin from "./EditAdmin";
 import { Drawer } from "antd";
 import { LoadData, addData, editData } from "../../API";
@@ -259,7 +259,7 @@ function Admins(props) {
         maskClosable={open}
         visible={open}
         key="right">
-        <NewAdmin
+        <Admin
           fun={onCloseModal}
           type="create"
           handleSelect={handleSelect}
@@ -275,8 +275,7 @@ function Admins(props) {
         width={570}
         visible={openEdit}
         key="right">
-        <div>admin from test </div>
-        {/* <NewAdmin
+        <Admin
           fun={onCloseModalEdit}
           type="edit"
           id={id}
@@ -284,7 +283,7 @@ function Admins(props) {
           admins={admins}
           handleSubmit={handleEdit}
           handleInput={handleInput}
-        /> */}
+        />
       </Drawer>
 
       <Modal

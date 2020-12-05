@@ -162,12 +162,12 @@ function Index(props) {
     //   if (Loading) {
     //     ref.current.staticStart();
     //   } else {
-    //     ref.current.complete();
-    //   }
     setId(id);
 
     loadDesigns();
     getDetalis();
+    //ref.current.complete();
+    //}
     // } else {
     //   props.history.push("/login");
     // }
@@ -276,40 +276,44 @@ function Index(props) {
             </Link>
             <PageActions>
               <PageTitle>{Loading ? <TextLoadS /> : Data.title}</PageTitle>
-
-              <div style={{ display: "flex", gap: "10px" }}>
-                <ButtonStyled onClick={onOpenModal}>Edit</ButtonStyled>
-                {Data.status === "approved" ? (
-                  <ButtonStyled
-                    Loading={Loading}
-                    onClick={() => history.push(`/createEvent/${id}`)}
-                    main>
-                    Create Event
-                  </ButtonStyled>
-                ) : null}
-              </div>
+              {props.event ? (
+                ""
+              ) : (
+                <div style={{ display: "flex", gap: "10px" }}>
+                  <ButtonStyled onClick={onOpenModal}>Edit</ButtonStyled>
+                  {Data.status === "approved" ? (
+                    <ButtonStyled
+                      Loading={Loading}
+                      onClick={() => history.push(`/createEvent/${id}`)}
+                      main>
+                      Create Event
+                    </ButtonStyled>
+                  ) : null}
+                </div>
+              )}
             </PageActions>
 
             <BookingActions>
               {/* {BookingStatus ? (
                 <div>Published</div>
-              ) : (
-                <Dropdown>
-                  <Pending>
-                    <spna>
-                      {Data.status}
-                      <DownOutlined
-                        style={{ fontSize: "10px", margin: " 0 5px" }}
-                      />
-                    </spna>
-                  </Pending>
-                </Dropdown>
-              )} */}
-              {!BookingStatus ? (
-                <Reject onClick={Recject}>Reject</Reject>
-              ) : null}
-              {!BookingStatus ? (
-                <Accept onClick={Approve}>Accept</Accept>
+              ) : ( )} */}
+              {/* <Dropdown> */}
+              <Pending>
+                <spna>
+                  {Data.status}
+                  <DownOutlined
+                    style={{ fontSize: "10px", margin: " 0 5px" }}
+                  />
+                </spna>
+              </Pending>
+              {/* </Dropdown> */}
+
+              {!props.event ? (
+                <div>
+                  <Reject onClick={Recject}>Reject</Reject>
+
+                  <Accept onClick={Approve}>Accept</Accept>
+                </div>
               ) : null}
             </BookingActions>
             <Row
@@ -480,7 +484,7 @@ function Index(props) {
                     </ActivityItem>
                   </DetailItem>
                   <DetailItem>
-                    {BookingStatus ? (
+                    {data.approve ? (
                       <div>
                         <GrayText>Approved by</GrayText>
                         <ActivityItem>
@@ -488,7 +492,14 @@ function Index(props) {
                             <UserImage
                               src={require("../../public/images/user2.png")}
                             />
-                            <span>{data.admin ? data.admin.name : ""} </span>
+                            <span>
+                              {data.approvedBy
+                                ? props.admins
+                                    .filter((i) => i.id === data.approvedBy)
+                                    .map((i) => i.username)
+                                    .toString()
+                                : ""}
+                            </span>
                           </UserHolder>
                           <GrayText></GrayText>
                         </ActivityItem>
@@ -511,7 +522,6 @@ function Index(props) {
         data={Data}
       />
     </CustomPageWrapper>
-    // <div>test</div>
   );
 }
 

@@ -13,7 +13,7 @@ import {
   SideModal,
   Title,
   Space,
-} from "./NewAmin";
+} from "./Admin";
 import "../../App.css";
 import { CustomInput } from "../shared/SharedStyle";
 
@@ -28,9 +28,8 @@ function Index(props) {
             {/* <AiOutlineClose /> */}
           </Title>
           <InputLable>
-            {" "}
             <div style={{ fontSize: "17px" }}>Admin Info</div>
-          </InputLable>{" "}
+          </InputLable>
           <Space />
           <InputLable>
             Full Name

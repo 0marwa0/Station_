@@ -22,6 +22,8 @@ import Home from "./pages/Home";
 import Bookingdetalis from "./pages/Booking/bookingdetalis";
 import booking from "./pages/Booking/booking";
 import Editarticle from "./pages/Article/editarticle";
+import Event from "./pages/Events/event";
+import EditeEvent from "./pages/Events/editEvent";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 const test = () => {
   return <div>booking test</div>;
@@ -103,14 +105,22 @@ function App(props) {
         />
         <Route path="/bookingdetalis/:id" component={booking} exact />
         <Route path="/articles/:id" component={Editarticle} exact />
-
         {/* <Route path="/bookingdetalis" component={booking} exact /> */}
-
         <Route path="/home" component={Home} exact />
         <Route
           path="/events"
           exact
           render={(props) => <Events {...props} admins={admins} />}
+        />{" "}
+        <Route
+          path="/event/:id"
+          exact
+          render={(props) => <Event {...props} admins={admins} />}
+        />{" "}
+        <Route
+          path="/editevent/:id"
+          exact
+          render={(props) => <EditeEvent {...props} admins={admins} />}
         />
         <Route
           path="/customers"

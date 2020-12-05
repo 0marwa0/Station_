@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Input, InputNumber } from "antd";
-import { Menu, Dropdown, Button } from "antd";
+import { Menu, Dropdown, Button, Select } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { Mesg, FailedMesg, SuccessMesg } from "../../../API/APIMessage";
 
@@ -19,6 +19,7 @@ import { GiNorthStarShuriken } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
 import { CustomModleButton } from "../../shared/SharedComponents";
 import { CustomInput, CustomInputArea } from "../../shared/SharedStyle";
+const { Option } = Select;
 
 const { TextArea } = Input;
 
@@ -51,38 +52,40 @@ function Index(props) {
       setMesg(value);
     }
   };
+
+  const clear = () => {
+    setTitle("");
+    setMesg("");
+  };
   const handleSubmit = () => {
+    let receiver = props.all ? "all" : props.recevierId.toString();
     let data = {
       title: title,
-      to: "all",
+      to: receiver,
       contents: mesg,
       lang: "ar",
-      // userId: props.id,
+      userId: props.id,
     };
-    console.log(data, "send notifi");
-
+    setLoading(true);
     if (title != "" && mesg != "") {
-      setLoading(true);
       addData(
         "send/notification",
         data,
-        (mesg,
-        (Data) => {
+        (mesg, Data) => {
           // if (!Data.status) {
           //   Mesg(mesg);
           // }
-          SuccessMesg("Customers notified successfully");
+          console.log(data, Data, mesg, "send notifi");
 
+          SuccessMesg("Notification done !");
+          clear();
           setLoading(false);
           props.Close();
-          setTitle("");
-          setMesg("");
-        }),
+        },
         (err) => {
           props.Close();
           setLoading(false);
-          setTitle("");
-          setMesg("");
+          clear();
           FailedMesg(err);
         }
       );
@@ -97,8 +100,13 @@ function Index(props) {
       {" "}
       <ModleHeader>
         Send notification
-        <Close onClick={props.Close} cursor="pointer" />
-        {/* <AiOutlineClose /> */}
+        <Close
+          onClick={() => {
+            props.Close();
+            clear();
+          }}
+          cursor="pointer"
+        />
       </ModleHeader>
       <PageWrapper>
         <InputLable>
@@ -124,26 +132,32 @@ function Index(props) {
           />
         </InputLable>{" "}
         <Space />
-        <InputLable>
-          User filter
-          <Dropdown overlay={optionData}>
-            <Button
-              style={{
-                borderRadius: "7px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
+        {!props.all ? (
+          ""
+        ) : (
+          <InputLable>
+            User filter
+            <Select
+              suffixIcon={<DropIcon />}
+              placeholder="Platform"
+              // onChange={(e) => handleselect(e, "all")}
             >
-              <div style={{ color: "var(--darkGray)" }}>All users</div>
-              <DropIcon />
-            </Button>
-          </Dropdown>
-        </InputLable>
+              <Option key="all">All users</Option>
+              {/* <Option key=""></Option>
+              <Option key=""></Option> */}
+            </Select>
+          </InputLable>
+        )}
       </PageWrapper>{" "}
       <ModleFooter>
-        <CustomModleButton fun={props.Close}>Cancel</CustomModleButton>
-        <CustomModleButton main fun={handleSubmit}>
+        <CustomModleButton
+          fun={() => {
+            props.Close();
+            clear();
+          }}>
+          Cancel
+        </CustomModleButton>
+        <CustomModleButton main fun={handleSubmit} loading={Loading}>
           Send
         </CustomModleButton>
       </ModleFooter>

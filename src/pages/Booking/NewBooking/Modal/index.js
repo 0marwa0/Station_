@@ -22,6 +22,7 @@ export const CardItem = styled.div`
   min-width: 200px;
   padding: 11px;
   display: flex;
+
   flex-direction: column;
   border-radius: 5px;
 
@@ -35,7 +36,7 @@ export const CardItem = styled.div`
 export const CardWrapper = styled.div`
   display: flex;
   width: 600px;
-
+  height: auto;
   gap: 10px;
   cursor: grab;
 `;

@@ -3,28 +3,12 @@ import { BiDotsVerticalRounded } from "react-icons/bi";
 import React from "react";
 import { Checkbox, Tag } from "antd";
 import { Popconfirm } from "antd";
-
-const monthNames = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
+import { ReactComponent as Notifiy } from "../../public/images/solid bell.svg";
+import { IoMdNotificationsOutline } from "react-icons/io";
 export const CustomersColumns = [
+  { key: 1, title: "", dataIndex: "", render: () => <Checkbox /> },
   {
-    title: "",
-    dataIndex: "",
-    render: () => <Checkbox />,
-  },
-  {
+    key: 2,
     title: "Full Name",
     dataIndex: "FullName",
     sorter: {
@@ -33,6 +17,18 @@ export const CustomersColumns = [
     },
   },
   {
+    key: 3,
+    title: "",
+    dataIndex: "notify",
+
+    render: (item) => (
+      <div style={{ cursor: "pointer" }} onClick={() => item.onOpen()}>
+        <IoMdNotificationsOutline color="var(--darkGray)" />
+      </div>
+    ),
+  },
+  {
+    key: 4,
     title: "Email",
     dataIndex: "Email",
     sorter: {
@@ -41,6 +37,7 @@ export const CustomersColumns = [
     },
   },
   {
+    key: 5,
     title: "Phone Number",
     dataIndex: "PhoneNumber",
     sorter: {
@@ -50,6 +47,7 @@ export const CustomersColumns = [
   },
 
   {
+    key: 6,
     title: "Date",
     dataIndex: "Date",
     sorter: {
@@ -58,6 +56,7 @@ export const CustomersColumns = [
     },
   },
   {
+    key: 7,
     title: "Status",
     dataIndex: "Status",
     sorter: {

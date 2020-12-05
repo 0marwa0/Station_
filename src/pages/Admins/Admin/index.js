@@ -110,7 +110,6 @@ function Index(props) {
   let admin = props.type === "edit" ? props.admins[0] : {};
 
   return (
-    // <SideOverlay>
     <SideModal>
       <div style={{ height: "95%" }}>
         <Title>
@@ -183,8 +182,8 @@ function Index(props) {
             defaultValue={admin.type}
             onChange={(e) => props.handleSelect(e, "type")}
             optionFilterProp="children">
-            <Option value="1">Baghadad</Option>
-            <Option value="2">Mosul</Option>
+            <Option key="1">Baghadad</Option>
+            <Option key="2">Mosul</Option>
           </Select>
         </InputLable>
         <Space /> <Space />
@@ -195,8 +194,8 @@ function Index(props) {
             placeholder="Choose admin role"
             onChange={(e) => props.handleSelect(e, "branch")}
             optionFilterProp="children">
-            <Option value="1">Meadia Admin</Option>
-            <Option value="2">Book Admin</Option>
+            <Option key="1">Meadia Admin</Option>
+            <Option key="2">Book Admin</Option>
           </Select>
         </InputLable>
       </div>
@@ -205,12 +204,11 @@ function Index(props) {
         <div style={{ float: "right" }}>
           {" "}
           <CustomModleButton main extra fun={props.handleSubmit}>
-            Create
+            {props.type === "create" ? "Create" : "Save"}
           </CustomModleButton>
         </div>
       </ModalFooter>
     </SideModal>
-    // </SideOverlay>
   );
 }
 

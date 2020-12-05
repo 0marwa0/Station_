@@ -4,6 +4,8 @@ import { BiDotsVerticalRounded } from "react-icons/bi";
 import { UserImage } from "../Sidebar";
 import { Checkbox, Progress, Tooltip, Tag, Space, Button, Input } from "antd";
 import React from "react";
+import { FaRegEdit } from "react-icons/fa";
+import { Link } from "react-router-dom";
 const monthNames = [
   "January",
   "February",
@@ -37,6 +39,7 @@ export const EventsColumns = [
       compare: (a, b) => a.chinese - b.chinese,
       multiple: 3,
     },
+    render: (item) => <Link to={`/event/${item.id}`}>{item.name}</Link>,
   },
   {
     key: "4",
@@ -107,6 +110,17 @@ export const EventsColumns = [
     },
   },
   {
+    key: " 9",
+    title: "",
+    dataIndex: "edit",
+
+    render: (id) => (
+      <Link to={`/editevent/${id}`}>
+        <FaRegEdit color="var(--lighterGray)" style={{ cursor: "pointer" }} />
+      </Link>
+    ),
+  },
+  {
     key: "8",
     title: "",
     dataIndex: "",
@@ -121,38 +135,38 @@ export const EventsData = (data, callback) => {
   let Events = [];
 
   data.map((item) => {
-    Events.push({
-      Organizer: item.organizer,
-      Date:
-        item.createdAt.slice(0, 2) +
-        " " +
-        monthNames[
-          item.date.split("-")[1] === 0
-            ? item.date.split("-")[1].slice(1) - 1
-            : item.date.split("-")[1] - 1
-        ] +
-        " " +
-        item.date.split("-")[0],
-      // Time: "10:0 AM -4:00 PM",
-      Space: [`${item.space.title}`],
-      SoldTickets: item.ticketLeft,
-      Approvedby: "",
-      // Title: item.name,
-      // Descriptions: item.descriptionAr,
-      // Type: ["PDF"],
-      // Size: "12.2mb",
-      // UploadedDate:
-      //   item.createdAt.slice(0, 2) +
-      //   " " +
-      //   monthNames[
-      //     item.createdAt.split("-")[1] === 0
-      //       ? item.createdAt.split("-")[1].slice(1) - 1
-      //       : item.createdAt.split("-")[1] - 1
-      //   ] +
-      //   " " +
-      //   item.createdAt.split("-")[0],
-      // image: "",
-    });
+    // Events.push({
+    //   Organizer: item.organizer,
+    //   Date:
+    //     item.createdAt.slice(0, 2) +
+    //     " " +
+    //     monthNames[
+    //       item.date.split("-")[1] === 0
+    //         ? item.date.split("-")[1].slice(1) - 1
+    //         : item.date.split("-")[1] - 1
+    //     ] +
+    //     " " +
+    //     item.date.split("-")[0],
+    //   // Time: "10:0 AM -4:00 PM",
+    //   Space: [`${item.space.title}`],
+    //   SoldTickets: item.ticketLeft,
+    //   Approvedby: "",
+    // Title: item.name,
+    // Descriptions: item.descriptionAr,
+    // Type: ["PDF"],
+    // Size: "12.2mb",
+    // UploadedDate:
+    //   item.createdAt.slice(0, 2) +
+    //   " " +
+    //   monthNames[
+    //     item.createdAt.split("-")[1] === 0
+    //       ? item.createdAt.split("-")[1].slice(1) - 1
+    //       : item.createdAt.split("-")[1] - 1
+    //   ] +
+    //   " " +
+    //   item.createdAt.split("-")[0],
+    // image: "",
+    // });
   });
 
   callback(Events);
