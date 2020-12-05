@@ -308,13 +308,9 @@ function Index(props) {
               </Pending>
               {/* </Dropdown> */}
 
-              {!props.event ? (
-                <div>
-                  <Reject onClick={Recject}>Reject</Reject>
+              {!props.event ? <Reject onClick={Recject}>Reject</Reject> : null}
 
-                  <Accept onClick={Approve}>Accept</Accept>
-                </div>
-              ) : null}
+              {!props.event ? <Accept onClick={Approve}>Accept</Accept> : null}
             </BookingActions>
             <Row
               style={{

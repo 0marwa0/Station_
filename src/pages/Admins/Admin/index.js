@@ -79,6 +79,7 @@ function Index(props) {
     showUploadList: false,
     onChange({ file, fileList }) {
       Image(file.originFileObj);
+      props.handleSelect(file.originFileObj, "image");
     },
     transformFile(file) {
       return new Promise((resolve) => {
@@ -167,10 +168,18 @@ function Index(props) {
         </InputLable>
         <Space /> <Space />
         <InputLable>
-          Password
+          Email
           <CustomInput
             placeholder="Write admin Email"
             onChange={(e) => props.handleInput(e, "email")}
+          />
+        </InputLable>
+        <Space /> <Space />
+        <InputLable>
+          Phone
+          <CustomInput
+            placeholder="Write admin phone number"
+            onChange={(e) => props.handleInput(e, "phone")}
           />
         </InputLable>
         <Space /> <Space />
@@ -180,10 +189,10 @@ function Index(props) {
             suffixIcon={<DropIcon />}
             placeholder=" Choose admin branch loaction"
             defaultValue={admin.type}
-            onChange={(e) => props.handleSelect(e, "type")}
+            onChange={(e) => props.handleSelect(e, "branch")}
             optionFilterProp="children">
-            <Option key="1">Baghadad</Option>
-            <Option key="2">Mosul</Option>
+            <Option value="branch1">Baghadad</Option>
+            <Option value="branch2">Mosul</Option>
           </Select>
         </InputLable>
         <Space /> <Space />
@@ -192,10 +201,10 @@ function Index(props) {
           <Select
             suffixIcon={<DropIcon />}
             placeholder="Choose admin role"
-            onChange={(e) => props.handleSelect(e, "branch")}
+            onChange={(e) => props.handleSelect(e, "type")}
             optionFilterProp="children">
-            <Option key="1">Meadia Admin</Option>
-            <Option key="2">Book Admin</Option>
+            <Option value="type1">Meadia Admin</Option>
+            <Option value="type2">Book Admin</Option>
           </Select>
         </InputLable>
       </div>

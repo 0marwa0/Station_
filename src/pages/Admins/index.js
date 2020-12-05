@@ -13,7 +13,7 @@ import { AdminsColumns, AdminsData } from "./Config";
 import Admin from "./Admin";
 import EditAdmin from "./EditAdmin";
 import { Drawer } from "antd";
-import { LoadData, addData, editData } from "../../API";
+import { LoadData, addData, editData, addFile } from "../../API";
 
 function Admins(props) {
   const [open, setOpen] = useState(false);
@@ -26,6 +26,7 @@ function Admins(props) {
   const [id, setId] = useState();
   const [Edited, setEdited] = useState([]);
   const [admin, setadmin] = useState([]);
+  const [image, setimage] = useState();
 
   const onOpenModal = () => {
     setOpen(true);
@@ -98,7 +99,7 @@ function Admins(props) {
       (err) => {
         setLoading(false);
         FailedMesg(err, "Something worng happend !");
-        console.log(err, "failed");
+        // console.log(err, "failed");
       }
     );
   };
@@ -119,6 +120,7 @@ function Admins(props) {
   const [password, setpassword] = useState("");
   const [branch, setbranch] = useState("");
   const [email, setemail] = useState("");
+  const [phone, setphone] = useState("");
   const [type, settype] = useState("");
 
   const handleInput = (e, key) => {
@@ -136,7 +138,9 @@ function Admins(props) {
       case "password":
         setpassword(value);
         break;
-
+      case "phone":
+        setphone(value);
+        break;
       default:
         break;
     }
@@ -148,6 +152,9 @@ function Admins(props) {
         settype(value);
       case "branch":
         setbranch(value);
+        break;
+      case "image":
+        setimage(value);
         break;
       default:
         break;
@@ -161,30 +168,50 @@ function Admins(props) {
     setpassword("");
   };
   const handleSubmit = () => {
-    let data = {
-      name: name,
-      username: username,
-      password: password,
-      email: email,
-      type: type,
-      branch: branch,
-    };
+    console.log(branch, type, "branch,type");
 
-    setLoading(true);
-    console.log(data, "data");
-    // addData(
-    //   "admin/add",
-    //   data,
-    //   (mesg, Data) => {
-    //     SuccessMesg("Account creating done !");
-    //     onOpenModal(false);
-    //     getAdmins();
-    //     ClearState();
+    // setLoading(true);
+    // // console.log(data, "data");
+    // let File = new FormData();
+    // File.append("image", image);
+    // addFile(
+    //   "upload",
+    //   File,
+    //   (res) => {
+    //     if (res.errMsg) {
+    //       Mesg(res.errMsg);
+    //     } else {
+    //       let admin = {
+    //         image: res.url,
+    //         name: name,
+    //         username: username,
+    //         password: password,
+    //         email: email,
+    //         type: type,
+    //         phone: phone,
+    //         branch: branch,
+    //       };
+    //       console.log(admin, "data");
+
+    //       addData(
+    //         "admin/add",
+    //         data,
+    //         (mesg, Data) => {
+    //           SuccessMesg("Account creating done !");
+    //           onOpenModal(false);
+    //           getAdmins();
+    //           ClearState();
+    //         },
+    //         (err) => {
+    //           onOpenModal(false);
+    //           ClearState();
+    //           FailedMesg(err);
+    //         }
+    //       );
+    //     }
     //   },
     //   (err) => {
-    //     onOpenModal(false);
-    //     ClearState();
-    //     FailedMesg(err);
+    //     FailedMesg(err.toString());
     //   }
     // );
   };

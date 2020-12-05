@@ -54,7 +54,23 @@ function Index(props) {
               onChange={(e) => props.handleInput(e, "password")}
             />
           </InputLable>
-          <Space />
+          <Space /> <Space />
+          <InputLable>
+            Email
+            <CustomInput
+              placeholder="Write admin Email"
+              onChange={(e) => props.handleInput(e, "email")}
+            />
+          </InputLable>
+          <Space /> <Space />
+          <InputLable>
+            Phone
+            <CustomInput
+              placeholder="Write admin phone number"
+              onChange={(e) => props.handleInput(e, "phone")}
+            />
+          </InputLable>
+          <Space /> <Space />
           <InputLable>
             Branch
             <Dropdown overlay={option}>
