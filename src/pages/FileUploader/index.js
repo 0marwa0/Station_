@@ -6,7 +6,7 @@ import { Popconfirm } from "antd";
 import { FiEdit } from "react-icons/fi";
 
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { Checkbox, Tag, Tooltip, Popover } from "antd";
+import { Checkbox, Tag, Tooltip, Popover, Drawer } from "antd";
 import React, { useState, useEffect } from "react";
 // import { FilUploadedColumns, FilesData } from "./Config";
 import CustomPage from "../shared/CustomPage";
@@ -295,7 +295,7 @@ function FilUploader(props) {
         Loading={Loading}
         Item="file"
       />
-      <Modal
+      {/* <Modal
         closeOnOverlayClick={true}
         open={open}
         onClose={() => onOpenModal(false)}
@@ -303,13 +303,23 @@ function FilUploader(props) {
         showCloseIcon={false}
         classNames={{
           modal: "customModal",
-        }}>
+        }}> */}
+      <Drawer
+        placement="right"
+        closable={false}
+        title={false}
+        onClose={() => onOpenModal(false)}
+        width={510}
+        maskClosable={open}
+        visible={open}
+        key="right">
         <NewFileUploader
           handleInput={handleInput}
           handleSubmit={handleSubmit}
           Close={() => onOpenModal(false)}
         />
-      </Modal>
+      </Drawer>
+      {/* </Modal> */}
     </div>
   );
 }

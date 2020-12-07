@@ -7,8 +7,10 @@ import { ReactComponent as Close } from "../../../public/images/close.svg";
 import styled from "styled-components";
 import { ProfileImage } from "../../Profile";
 import { Upload, Select } from "antd";
-
+import { LoadData, addData, editData, addFile } from "../../../API";
 import "../../../App.css";
+import { Mesg, FailedMesg, SuccessMesg } from "../../../API/APIMessage";
+
 import { CustomInput } from "../../shared/SharedStyle";
 export const option = (
   <Menu>
@@ -67,20 +69,19 @@ export const Space = styled.div`
 `;
 const Imageholder = styled.div``;
 function Index(props) {
+  const [Loading, setLoading] = useState(false);
+  const [imageName, setimageName] = useState();
   const [file, setfile] = useState("");
   const [ImageUrl, setImageUrl] = useState("");
   const Image = (e) => {
     setfile(e);
   };
   const Props = {
-    multiple: false,
-
-    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
+    //multiple: false,
+    name: "image",
+    action: "https://station-solo.herokuapp.com/dash/v1/upload",
+    headers: { token: localStorage.getItem("station_token") },
     showUploadList: false,
-    onChange({ file, fileList }) {
-      Image(file.originFileObj);
-      props.handleSelect(file.originFileObj, "image");
-    },
     transformFile(file) {
       return new Promise((resolve) => {
         const reader = new FileReader();
@@ -103,19 +104,33 @@ function Index(props) {
       });
     },
   };
+  const handleImage = (info, fileList) => {
+    Image(info.originFileObj);
 
-  useEffect(() => {}, []);
-  // if(props.type==="edit"){
+    if (info.file.status === "done") {
+      let data = {
+        uid: info.file.uid,
+        name: info.file.name,
+        url: info.file.response.url,
+      };
+      setimageName(data);
+      props.handleSelect(info.file.response.url, "image");
+      // console.log(fileList, "respone");
+    }
+  };
 
-  // }
-  let admin = props.type === "edit" ? props.admins[0] : {};
-
+  let admin = {};
   return (
     <SideModal>
       <div style={{ height: "95%" }}>
         <Title>
           <div>Add new Admin</div>
-          <Close onClick={() => props.fun(false)} cursor="pointer" />
+          <Close
+            onClick={() => {
+              props.fun(false);
+            }}
+            cursor="pointer"
+          />
           {/* <AiOutlineClose /> */}
         </Title>
         <InputLable>
@@ -135,7 +150,12 @@ function Index(props) {
               {/* {ImageUrl === "" ? name : ""} */}
             </ProfileImage>
             <Space style={{ cursor: "pointer" }}>
-              <Upload {...Props}>Upload Photo</Upload>
+              <Upload
+                {...Props}
+                onChange={(e) => handleImage(e)}
+                defaultFileList={imageName && [imageName]}>
+                Upload Photo
+              </Upload>
             </Space>
           </div>
         </div>
@@ -143,7 +163,7 @@ function Index(props) {
         <InputLable>
           Full Name
           <CustomInput
-            defaultValue={admin.name}
+            defaultValue={props.admins[0].name}
             onChange={(e) => props.handleInput(e, "name")}
             placeholder="Write admin name"
           />
@@ -157,20 +177,26 @@ function Index(props) {
             placeholder="Write admin username"
           />
         </InputLable>
-        <Space /> <Space />
-        <InputLable>
-          Password
-          <CustomInput
-            placeholder="Write admin password"
-            defaultValue={admin.password}
-            onChange={(e) => props.handleInput(e, "password")}
-          />
-        </InputLable>
+        {props.type === "create" ? (
+          <div>
+            {props.type}
+            <Space /> <Space />{" "}
+            <InputLable>
+              Password
+              <CustomInput
+                placeholder="Write admin password"
+                defaultValue={admin.password}
+                onChange={(e) => props.handleInput(e, "password")}
+              />
+            </InputLable>
+          </div>
+        ) : null}
         <Space /> <Space />
         <InputLable>
           Email
           <CustomInput
             placeholder="Write admin Email"
+            defaultValue={admin.email}
             onChange={(e) => props.handleInput(e, "email")}
           />
         </InputLable>
@@ -179,6 +205,7 @@ function Index(props) {
           Phone
           <CustomInput
             placeholder="Write admin phone number"
+            defaultValue={admin.phone}
             onChange={(e) => props.handleInput(e, "phone")}
           />
         </InputLable>
@@ -188,11 +215,10 @@ function Index(props) {
           <Select
             suffixIcon={<DropIcon />}
             placeholder=" Choose admin branch loaction"
-            defaultValue={admin.type}
-            onChange={(e) => props.handleSelect(e, "branch")}
-            optionFilterProp="children">
-            <Option value="branch1">Baghadad</Option>
-            <Option value="branch2">Mosul</Option>
+            defaultValue={admin.gov}
+            onChange={(e) => props.handleSelect(e, "branch")}>
+            <Option key="baghadad">Baghadad</Option>
+            <Option key="mosul">Mosul</Option>
           </Select>
         </InputLable>
         <Space /> <Space />
@@ -201,10 +227,14 @@ function Index(props) {
           <Select
             suffixIcon={<DropIcon />}
             placeholder="Choose admin role"
-            onChange={(e) => props.handleSelect(e, "type")}
-            optionFilterProp="children">
-            <Option value="type1">Meadia Admin</Option>
-            <Option value="type2">Book Admin</Option>
+            defaultValue={admin.type === 2 ? "Meadia Admin" : "Book Admin"}
+            onChange={(e) => props.handleRole(e, "type")}>
+            <Option value="Meadia Admin" key="2">
+              {/* Meadia Admin */}
+            </Option>
+            <Option value="Book Admin" key="3">
+              {/* Book Admin */}
+            </Option>
           </Select>
         </InputLable>
       </div>
@@ -212,7 +242,7 @@ function Index(props) {
       <ModalFooter>
         <div style={{ float: "right" }}>
           {" "}
-          <CustomModleButton main extra fun={props.handleSubmit}>
+          <CustomModleButton main extra fun={() => props.handleSubmit}>
             {props.type === "create" ? "Create" : "Save"}
           </CustomModleButton>
         </div>

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { IoMdRefresh } from "react-icons/io";
-import Editor from "@stfy/react-editor.js";
+import EditorJs from "react-editor-js";
 import { useLocation } from "react-router-dom";
 import { LoadData, addData, addFile } from "../../API";
+import { toole } from "./toole";
 import { SuccessMesg, FailedMesg, Mesg } from "../../API/APIMessage";
 import { ReactComponent as RefreshIcon } from "../../public/images/solid undo-right.svg";
 import { ReactComponent as RefreshIconLeft } from "../../public/images/solid undo.svg";
@@ -12,7 +13,7 @@ import EditorJS from "@editorjs/editorjs";
 
 import Header from "@editorjs/header";
 import List from "@editorjs/list";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { BsArrowLeft } from "react-icons/bs";
 import { PageBack } from "../Profile";
 import { Menu, Dropdown, message, Tooltip } from "antd";
@@ -34,9 +35,10 @@ export const TextNote = styled.div`
 
 const EventContent = styled(Col)`
   width: 75%;
-  height: 80vh;
+  height: auto;
   padding: 40px 50px;
   background-color: white;
+
   border: 1px solid var(--lighterGray);
   border-radius: 7px;
 `;
@@ -128,9 +130,8 @@ const GrayText = styled.div`
   font-size: 1vw;
 `;
 const Index = (props) => {
-  let { id } = useLocation();
+  let { id } = useParams();
   let location = useLocation();
-  console.log(id, location, "uselocation");
   const [Active, setActive] = useState(false);
   const [title, settitle] = useState("");
   const [price, setprice] = useState("");
@@ -173,44 +174,42 @@ const Index = (props) => {
     );
   };
   const createEvent = () => {
-    let File = new FormData();
-    File.append("file", Image);
-    addFile(
-      "upload/file",
-      File,
-      (data) => {
-        if (data.errMsg) {
-          Mesg(data.errMsg);
-        } else {
-          let artilce = {
-            title: title,
-            description: description,
-            platform: "web",
-            publish: true,
-            image: data.data.link,
-            lang: "ar",
-            gov: "baghdad",
-          };
-
-          addData(
-            "article/add",
-            artilce,
-            (mesg, Data) => {
-              SuccessMesg("Create Article Done!");
-              setLoading(false);
-            },
-            (err) => {
-              setLoading(false);
-
-              FailedMesg(err);
-            }
-          );
-        }
-      },
-      (err) => {
-        FailedMesg(err.toString());
-      }
-    );
+    // let File = new FormData();
+    // File.append("file", Image);
+    // addFile(
+    //   "upload/file",
+    //   File,
+    //   (data) => {
+    //     if (data.errMsg) {
+    //       Mesg(data.errMsg);
+    //     } else {
+    //       let artilce = {
+    //         title: title,
+    //         description: description,
+    //         platform: "web",
+    //         publish: true,
+    //         image: data.data.link,
+    //         lang: "ar",
+    //         gov: "baghdad",
+    //       };
+    //   addData(
+    //     "article/add",
+    //     artilce,
+    //     (mesg, Data) => {
+    //       SuccessMesg("Create Article Done!");
+    //       setLoading(false);
+    //     },
+    //     (err) => {
+    //       setLoading(false);
+    //       FailedMesg(err);
+    //     }
+    //   );
+    // }
+    //   },
+    //   (err) => {
+    //     FailedMesg(err.toString());
+    //   }
+    // );
   };
   const [t, sett] = useState("");
   const handletext = (e, key) => {
@@ -235,6 +234,8 @@ const Index = (props) => {
 
   const [articles, setartiles] = useState({});
   useEffect(() => {
+    // console.log(id, "article id");
+    setdescription(props.description);
     LoadData(
       "articles",
       (err, data) => {
@@ -265,6 +266,7 @@ const Index = (props) => {
   };
   // console.log("its ", articles);
   let item = articles;
+  console.log(props.description, "what now");
   return (
     <CustomPageWrapper>
       <GlobalStyle />
@@ -338,11 +340,12 @@ const Index = (props) => {
               }}>
               <p>Start writing or tap here to add images or videos ..</p>
               {t}
-              <Editor
+              <EditorJs
                 onData={(e) => handletext(e.blocks)}
                 // instanceRef={(instance) => (instanceRef.current = instance)}
                 // tools={EDITOR_JS_TOOLS}
-                // data={data}
+                tools={toole}
+                data={props.description}
               />
             </div>
           </EventContent>

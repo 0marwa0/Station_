@@ -11,6 +11,7 @@ import Notify from "./Notify";
 import { Mesg, FailedMesg, SuccessMesg } from "../../API/APIMessage";
 import { LoadData, addData } from "../../API";
 import Progress from "react-progress-2";
+import { Drawer } from "antd";
 function Customers(props) {
   const [open, setOpen] = useState(false);
   const [Loading, setLoading] = useState(false);
@@ -107,7 +108,6 @@ function Customers(props) {
   return (
     <div>
       {/* <Progress.Component thumbStyle={{ background: "var(--yellow)" }} /> */}
-
       <CustomPage
         pageTitle="customers"
         columns={CustomersColumns}
@@ -118,7 +118,7 @@ function Customers(props) {
         Loading={Loading}
         Item="customer"
       />
-      <Modal
+      {/* <Modal
         closeOnOverlayClick={false}
         open={open}
         onClose={() => onOpenModal(false)}
@@ -126,10 +126,20 @@ function Customers(props) {
         showCloseIcon={false}
         classNames={{
           modal: "customModal",
-        }}>
+        }}> */}
+      <Drawer
+        placement="right"
+        closable={false}
+        title={false}
+        onClose={() => onOpenModal(false)}
+        width={520}
+        maskClosable={open}
+        visible={open}
+        key="right">
         <Notify Close={() => onOpenModal(false)} id={props.id} all={true} />
-      </Modal>
-      <Modal
+      </Drawer>{" "}
+      {/* </Modal> */}
+      {/* <Modal
         closeOnOverlayClick={false}
         open={openNotify}
         onClose={() => onOpenModalNotify(false)}
@@ -137,14 +147,24 @@ function Customers(props) {
         showCloseIcon={false}
         classNames={{
           modal: "customModal",
-        }}>
+        }}> */}
+      <Drawer
+        placement="right"
+        closable={false}
+        title={false}
+        onClose={() => onOpenModalNotify(false)}
+        width={520}
+        maskClosable={openNotify}
+        visible={openNotify}
+        key="right">
         <Notify
           Close={() => onOpenModalNotify(false)}
           id={props.id}
           recevierId={Id}
           all={false}
         />
-      </Modal>
+      </Drawer>
+      {/* </Modal> */}
     </div>
   );
 }

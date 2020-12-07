@@ -12,7 +12,7 @@ import NewResources from "./NewResource";
 import { LoadData, addData, addFile, removeItem } from "../../API";
 import { monthNames } from "../shared/assets";
 import { DateName } from "../Dashboard";
-
+import { Drawer } from "antd";
 import { Mesg, FailedMesg, SuccessMesg } from "../../API/APIMessage";
 
 function Resources(props) {
@@ -47,7 +47,7 @@ function Resources(props) {
             Type: [
               `${/[.]/.exec(item.name) ? /[^.]+$/.exec(item.name) : undefined}`,
             ],
-            Size: "",
+            Size: item.size,
 
             UploadedDate: DateName(item.createdAt),
             image: "",
@@ -69,7 +69,7 @@ function Resources(props) {
   const [url, seturl] = useState("");
   const [image, setimage] = useState("");
   const [file, setfile] = useState("");
-
+  const [size, setsize] = useState("");
   const handleInput = (e, key) => {
     let value = e.target.value;
     let file = e;
@@ -88,49 +88,49 @@ function Resources(props) {
   const handleFile = (file) => {
     setimage(file);
   };
+  const handlesiz = (file) => {
+    setsize(file);
+  };
   const handleSubmit = () => {
     setLoading(true);
-    let File = new FormData();
-    File.append("file", image);
-    addFile(
-      "upload/file",
-      File,
+    // let File = new FormData();
+    // File.append("file", image);
+    // addFile(
+    //   "upload/file",
+    //   File,
+    //   (data) => {
+    //     if (data.errMsg) {
+    //       Mesg(data.errMsg);
+    //     } else {
+    var resource = {
+      name: title,
+      description: dec,
+      url: image,
+      image: image,
+      nameAr: title,
+      descriptionAr: dec,
+      size: size.toString(),
+    };
+    console.log(resource, "file");
+    addData(
+      "resource",
+      resource,
       (data) => {
+        console.log(data, resource, "fucning story");
         if (data.errMsg) {
           Mesg(data.errMsg);
         } else {
-          var resource = {
-            name: title,
-            description: dec,
-            url: data.data.link,
-            image: data.data.link,
-            nameAr: title,
-            descriptionAr: dec,
-          };
+          SuccessMesg("Resource creating done !");
 
-          addData(
-            "resource",
-            resource,
-            (data) => {
-              if (data.errMsg) {
-                Mesg(data.errMsg);
-              } else {
-                SuccessMesg("Resource creating done !");
-                getResources();
-              }
-              onOpenModal(false);
-              ClearState();
-            },
-            (err) => {
-              onOpenModal(false);
-              ClearState();
-              FailedMesg(" Resuorces creating failed ", err);
-            }
-          );
+          getResources();
         }
+        onOpenModal(false);
+        ClearState();
       },
       (err) => {
-        FailedMesg(err.toString());
+        onOpenModal(false);
+        ClearState();
+        FailedMesg(" Resuorces creating failed ", err);
       }
     );
   };
@@ -199,7 +199,7 @@ function Resources(props) {
         Item="resource"
         Loading={Loading}
       />
-      <Modal
+      {/* <Modal
         closeOnOverlayClick={true}
         open={open}
         onClose={() => onOpenModal(false)}
@@ -207,14 +207,25 @@ function Resources(props) {
         showCloseIcon={false}
         classNames={{
           modal: "customModal",
-        }}>
+        }}> */}
+      <Drawer
+        placement="right"
+        closable={false}
+        title={false}
+        onClose={() => onOpenModal(false)}
+        width={520}
+        maskClosable={open}
+        visible={open}
+        key="right">
         <NewResources
           handleFile={handleFile}
           handleInput={handleInput}
           handleSubmit={handleSubmit}
+          handlesiz={handlesiz}
           Close={() => onOpenModal(false)}
         />
-      </Modal>
+      </Drawer>
+      {/* </Modal> */}
     </div>
   );
 }

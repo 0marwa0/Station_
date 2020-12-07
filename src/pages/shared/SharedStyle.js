@@ -57,8 +57,8 @@ export const ModleFooter = styled.div`
   display: flex;
   gap: 10px;
   justify-content: flex-end;
-  marign-top: 5px;
-  padding: 20px 40px 40px 40px;
+
+  padding: 10px 0;
 `;
 // export const NotificationIcon = styled.div`
 //   width: 15px;
@@ -81,9 +81,7 @@ export const ModleHeader = styled.div`
   align-items: center;
   border-radius: 7px;
   font-size: 20px;
-  padding-top: 40px;
-  padding-left: 40px;
-  padding-right: 40px;
+  padding: 50px 5px;
 `;
 export const ButtonStyledModle = styled(Button)`
   height: 40px;

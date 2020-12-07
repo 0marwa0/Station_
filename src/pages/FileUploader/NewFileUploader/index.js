@@ -19,14 +19,21 @@ export const TextNote = styled.div`
 `;
 
 const PageWrapper = styled.div`
-  width: 600px;
-  padding: 40px;
+  width: max-content;
+
+  display: flex;
+  flex-direction: column;
+  height: 85%;
+
+  justify-content: space-between;
 `;
 export default function NewFileUploader(props) {
+  const [imageName, setimageName] = useState();
+
   const Props = {
     multiple: false,
 
-    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
+    action: "https://station-solo.herokuapp.com/dash/v1",
 
     // previewFile(file) {
     //   console.log("Your upload file:", file);
@@ -40,7 +47,13 @@ export default function NewFileUploader(props) {
     // },
     onChange({ file, fileList }) {
       props.handleInput(file.originFileObj);
-
+      console.log(file);
+      let data = {
+        uid: file.uid,
+        name: file.name,
+        url: "file.response.url",
+      };
+      setimageName(data);
       //   if (file.status !== "uploading") {
       //     console.log(file, fileList);
       //   }
@@ -88,7 +101,8 @@ export default function NewFileUploader(props) {
       </ModleHeader>
 
       <PageWrapper>
-        <Upload {...Props}>
+        <Upload {...Props} defaultFileList={imageName && [imageName]}>
+          {console.log(imageName && [imageName], "now waht")}
           <div className="upload_modal">
             <div className="upload_img_close">
               <img src={require("./default.png")} className="img" />
@@ -104,14 +118,14 @@ export default function NewFileUploader(props) {
               <Button>Upload</Button>
             </span>
           </div>
-        </Upload>
+        </Upload>{" "}
+        <ModleFooter>
+          <CustomModleButton fun={props.Close}>Cancel</CustomModleButton>
+          <CustomModleButton main fun={props.handleSubmit}>
+            Upload
+          </CustomModleButton>
+        </ModleFooter>
       </PageWrapper>
-      <ModleFooter>
-        <CustomModleButton fun={props.Close}>Cancel</CustomModleButton>
-        <CustomModleButton main fun={props.handleSubmit}>
-          Upload
-        </CustomModleButton>
-      </ModleFooter>
     </>
   );
 }

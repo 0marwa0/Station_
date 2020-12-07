@@ -34,8 +34,13 @@ const optionData = (
 );
 
 const PageWrapper = styled.div`
-  width: 400px;
-  padding: 40px;
+  width: 470px;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  height: 85%;
+
+  justify-content: space-between;
 `;
 
 function Index(props) {
@@ -96,72 +101,73 @@ function Index(props) {
     }
   };
   return (
-    <div>
-      {" "}
-      <ModleHeader>
-        Send notification
-        <Close
-          onClick={() => {
-            props.Close();
-            clear();
-          }}
-          cursor="pointer"
-        />
-      </ModleHeader>
+    <>
       <PageWrapper>
-        <InputLable>
-          <span>
-            Title <GiNorthStarShuriken color="red" size={8} />
-          </span>
-          <CustomInput
-            onChange={(e) => handleInput(e, "title")}
-            placeholder="Write notification title"
-          />
-        </InputLable>
-        <Space />
-        <InputLable>
-          <span>
-            {" "}
-            Message <GiNorthStarShuriken color="red" size={8} />
-          </span>
-
-          <CustomInputArea
-            rows={4}
-            onChange={(e) => handleInput(e, "mesg")}
-            placeholder="Write notification message ..."
-          />
-        </InputLable>{" "}
-        <Space />
-        {!props.all ? (
-          ""
-        ) : (
+        <div>
+          <ModleHeader>
+            Send notification
+            <Close
+              onClick={() => {
+                props.Close();
+                clear();
+              }}
+              cursor="pointer"
+            />
+          </ModleHeader>
           <InputLable>
-            User filter
-            <Select
-              suffixIcon={<DropIcon />}
-              placeholder="Platform"
-              // onChange={(e) => handleselect(e, "all")}
-            >
-              <Option key="all">All users</Option>
-              {/* <Option key=""></Option>
-              <Option key=""></Option> */}
-            </Select>
+            <span>
+              Title <GiNorthStarShuriken color="red" size={8} />
+            </span>
+            <CustomInput
+              onChange={(e) => handleInput(e, "title")}
+              placeholder="Write notification title"
+            />
           </InputLable>
-        )}
+          <Space />
+          <InputLable>
+            <span>
+              {" "}
+              Message <GiNorthStarShuriken color="red" size={8} />
+            </span>
+
+            <CustomInputArea
+              rows={4}
+              onChange={(e) => handleInput(e, "mesg")}
+              placeholder="Write notification message ..."
+            />
+          </InputLable>{" "}
+          <Space />
+          {!props.all ? (
+            ""
+          ) : (
+            <InputLable>
+              User filter
+              <Select
+                suffixIcon={<DropIcon />}
+                placeholder="Platform"
+                // onChange={(e) => handleselect(e, "all")}
+              >
+                <Option key="all">All users</Option>
+                {/* <Option key=""></Option>
+              <Option key=""></Option> */}
+              </Select>
+            </InputLable>
+          )}{" "}
+        </div>
+        <ModleFooter>
+          <CustomModleButton
+            fun={() => {
+              props.Close();
+              clear();
+            }}>
+            Cancel
+          </CustomModleButton>
+          <CustomModleButton main fun={handleSubmit} loading={Loading}>
+            Send
+          </CustomModleButton>
+        </ModleFooter>
       </PageWrapper>{" "}
-      <ModleFooter>
-        <CustomModleButton
-          fun={() => {
-            props.Close();
-            clear();
-          }}>
-          Cancel
-        </CustomModleButton>
-        <CustomModleButton main fun={handleSubmit} loading={Loading}>
-          Send
-        </CustomModleButton>
-      </ModleFooter>
-    </div>
+    </>
   );
 }
 

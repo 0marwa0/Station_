@@ -35,22 +35,19 @@ export const ReservationLoading = () => {
           height: "70px",
 
           borderBottom: "1px solid var(--LighterGray)",
-        }}
-      >
+        }}>
         {/* <Skeleton.Image /> */}
         <Divider />
         <div
           style={{
             display: "flex",
-          }}
-        >
+          }}>
           <div
             style={{
               display: "flex",
               alignItems: "center",
               gap: "10px",
-            }}
-          >
+            }}>
             <Skeleton.Input
               active="active"
               style={{ width: "3vw", height: "3vw", borderRadius: "7px" }}
@@ -103,9 +100,8 @@ export const TableLoading = (Loading, Item) => {
           style={{
             borderBottom: "1px solid var(--lighterGray)",
             width: "100%",
-          }}
-        >
-          {[1, 2, 3, 3, 4, 5, 6].map((i, index) => {
+          }}>
+          {[1, 2, 3, 3, 4, 5].map((i, index) => {
             return (
               <Skeleton.Input
                 key={index}

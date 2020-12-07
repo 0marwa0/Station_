@@ -53,6 +53,8 @@ export const AdminsColumns = [
           let color;
           if (type === "Book Admin") {
             color = "gold";
+          } else if (type === "Admin") {
+            color = "blue";
           }
           return (
             <Tag color={color} key={type}>

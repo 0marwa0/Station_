@@ -128,7 +128,11 @@ function App(props) {
           render={(props) => <Customers {...props} id={userId} />}
           exact
         />
-        <Route path="/admins" component={Admins} exact />
+        <Route
+          path="/admins"
+          render={(props) => <Admins {...props} admins={admins} />}
+          exact
+        />
         <Route
           path="/resources"
           exact

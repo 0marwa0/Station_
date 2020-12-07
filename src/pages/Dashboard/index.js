@@ -27,6 +27,7 @@ import {
   CustomPageWrapper,
   PageContent,
   PageTitle,
+  PageContentFix,
   PageBtn,
   ButtonGroup,
 } from "../shared/CustomPage";
@@ -322,7 +323,7 @@ function Index(props) {
       <LoadingBar color="var(--yellow)" ref={ref} shadow={true} />
 
       <SideBar />
-      <PageContent>
+      <PageContentFix>
         <PageHeader>
           <PageTitle> Dashboard</PageTitle>
           <span style={{ marginTop: "20px", color: "var(--darkGray)" }}>
@@ -338,7 +339,8 @@ function Index(props) {
         </PageHeader>
         <Row>
           <PageBtn>
-            <ButtonGroup space>
+            <div></div>
+            {/* <ButtonGroup space>
               <Dropdown overlay={menu}>
                 <List>
                   <span>This Month</span>
@@ -346,8 +348,8 @@ function Index(props) {
                   <RiArrowDropDownLine size="25px" />
                 </List>
               </Dropdown>
-              {/* <SearchInput placeholder="Advanced Search" /> */}
-            </ButtonGroup>
+             
+            </ButtonGroup> */}
             <ButtonGroup>
               {/* <CustomButton lable="Print">
                 <PrintIcon />
@@ -406,7 +408,7 @@ function Index(props) {
             <Statistic Loading={Loading} statistics={statistics} />
           </Col>
         </Row>
-      </PageContent>
+      </PageContentFix>
       <BookingModal
         open={open}
         onOpenModal={onOpenModal}

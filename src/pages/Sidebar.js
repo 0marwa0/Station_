@@ -11,13 +11,15 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { FaRegUser } from "react-icons/fa";
 import { RiNewspaperLine } from "react-icons/ri";
 import { Tooltip, Button, Popover } from "antd";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { ReactComponent as Booking } from "../public/images/Book.svg";
 import { BiCalendarWeek } from "react-icons/bi";
 import Notification from "./Notification";
 import { render } from "@testing-library/react";
 
 const NavItem = ({ slug, children, index, title }) => {
+  const history = useHistory();
   const location = useLocation();
   let url = `/` + slug;
   let type;
@@ -163,7 +165,7 @@ function SideBar(props) {
   //   showPopup(false);
   // };
   const location = useLocation();
-
+  let { id } = useParams();
   let title = props.title;
   let page = location.pathname.substr(1);
   // console.log(page === "booking", "should be flase");
@@ -310,21 +312,22 @@ function SideBar(props) {
               </g>
             </svg>
           </NavItem>
-          <NavItem slug="events" title={title}>
+          {/* <NavItem slug="events" title={title}>
             <BiCalendarWeek />
-          </NavItem>{" "}
-          <NavItem slug="customers" title={title}>
-            <HiOutlineUsers />
-          </NavItem>
-          <NavItem slug="admins" title={title}>
-            <FaRegUser />
-          </NavItem>
+          </NavItem>{" "} */}
           <NavItem slug="fileUploader" title={title}>
             <CloudUploadOutlined />
           </NavItem>
-          <NavItem slug="resources" title={title}>
-            <VscSourceControl />
+          {/* <NavItem slug="customers" title={title}>
+            <HiOutlineUsers />
+          </NavItem> */}
+          <NavItem slug="admins" title={title}>
+            <HiOutlineUsers />
           </NavItem>
+
+          {/* <NavItem slug="resources" title={title}>
+            <VscSourceControl />
+          </NavItem> */}
         </SideList>
         <SideList>
           <SideItem>
@@ -385,6 +388,161 @@ function SideBar(props) {
           </NavItem>
         </SideList>
       </SideWrapper>
+      {page === "" ? null : (
+        <div className="NavBar_ctrl">
+          {
+            // page.slice(0, 14) === page &&
+
+            page === "booking" ? (
+              <ul>
+                <li className="listTitle">
+                  <div className="titleIcon">
+                    <Booking color="white" fill="white" />
+                  </div>
+                  Bookings
+                </li>
+                <li className={page === "booking" ? "active" : ""}>
+                  <Link to="/booking">Books</Link>
+                </li>
+                <li className={page === "events" ? "active" : ""}>
+                  <Link to="/events">Events</Link>
+                </li>
+              </ul>
+            ) : (
+              ""
+            )
+          }{" "}
+          {
+            // page.slice(0, 14) === page &&
+            page.includes("events") || page.includes("event") ? (
+              <ul>
+                <li className="listTitle">
+                  <div className="titleIcon">
+                    <Booking color="white" fill="white" />
+                  </div>
+                  Bookings
+                </li>
+                <li className={page === "booking" ? "active" : ""}>
+                  <Link to="/booking">Books</Link>
+                </li>
+                <li
+                  className={
+                    page.includes("events") || page.includes("event")
+                      ? "active"
+                      : ""
+                  }>
+                  <Link to="/events">Events</Link>
+                </li>
+              </ul>
+            ) : (
+              ""
+            )
+          }
+          {page === "fileUploader" ? (
+            <ul>
+              <li className="listTitle">
+                <div className="titleIcon">
+                  <CloudUploadOutlined
+                    style={{ color: "white", fontSize: "25px" }}
+                  />{" "}
+                </div>
+                files
+              </li>
+              <li className={page === "fileUploader" ? "active" : ""}>
+                <Link to="/fileUploader">File upload</Link>
+              </li>
+              <li className={page === "resources" ? "active" : ""}>
+                <Link to="/resources">Resources</Link>
+              </li>
+            </ul>
+          ) : null}
+          {page.includes("articles") || page.includes("createarticle") ? (
+            <ul>
+              <li className="listTitle">
+                <div className="titleIcon">
+                  <BiCalendarWeek
+                    style={{ color: "white", fontSize: "25px" }}
+                  />{" "}
+                </div>
+                Media
+              </li>
+              <li
+                className={
+                  page.includes("articles") || page.includes("createarticle")
+                    ? "active"
+                    : ""
+                }>
+                <Link to="/articles">Articles</Link>
+              </li>
+            </ul>
+          ) : null}
+          {/* {`${"/"}` + page === location.pathname ? (
+            <ul>
+              <li className="listTitle">
+                <div className="titleIcon">
+                  <BiCalendarWeek
+                    style={{ color: "white", fontSize: "25px" }}
+                  />{" "}
+                </div>
+                Media
+              </li>
+              <li className={page === "articles" ? "active" : ""}>
+                <Link to="/articles">Articles</Link>
+              </li>
+            </ul>
+          ) : null} */}
+          {page === "resources" ? (
+            <ul>
+              <li className="listTitle">
+                <div className="titleIcon">
+                  <CloudUploadOutlined
+                    style={{ color: "white", fontSize: "25px" }}
+                  />
+                </div>
+                files
+              </li>
+              <li className={page === "fileUploader" ? "active" : ""}>
+                <Link to="/fileUploader">File upload</Link>
+              </li>
+              <li className={page === "resources" ? "active" : ""}>
+                <Link to="/resources">Resources</Link>
+              </li>
+            </ul>
+          ) : null}
+          {page === "admins" ? (
+            <ul>
+              <li className="listTitle">
+                <div className="titleIcon">
+                  <HiOutlineUsers color="white" size={26} />
+                </div>
+                People
+              </li>
+              <li className={page === "admins" ? "active" : ""}>
+                <Link to="/admins">Admins</Link>
+              </li>
+              <li className={page === "customers" ? "active" : ""}>
+                <Link to="/customers">Customers</Link>
+              </li>
+            </ul>
+          ) : null}
+          {page === "customers" ? (
+            <ul>
+              <li className="listTitle">
+                <div className="titleIcon">
+                  <HiOutlineUsers color="white" size={26} />
+                </div>
+                People
+              </li>
+              <li className={page === "admins" ? "active" : ""}>
+                <Link to="/admins">Admins</Link>
+              </li>
+              <li className={page === "customers" ? "active" : ""}>
+                <Link to="/customers">Customers</Link>
+              </li>
+            </ul>
+          ) : null}
+        </div>
+      )}
     </div>
   );
 }

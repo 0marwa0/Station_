@@ -18,8 +18,14 @@ import { ReactComponent as Close } from "../../../public/images/close.svg";
 
 const { TextArea } = Input;
 const PageWrapper = styled.div`
-  width: 600px;
-  padding: 15px 40px;
+  width: max-content;
+
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0 10px;
+
+  justify-content: space-between;
 `;
 function Index(props) {
   // const [Active, setActive] = useState(false);
@@ -105,11 +111,13 @@ function Index(props) {
   //   setFileName(e.dataTransfer.files[0].name);
   //   getFileSize(e.dataTransfer.files[0].size);
   // };
+  const [imageName, setimageName] = useState();
+
   const Props = {
     multiple: false,
-
-    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-
+    name: "file",
+    action: "https://station-solo.herokuapp.com/dash/v1/upload/file",
+    headers: { token: localStorage.getItem("station_token") },
     // previewFile(file) {
     //   console.log("Your upload file:", file);
     //   // Your process logic. Here we just mock to the same file
@@ -120,9 +128,20 @@ function Index(props) {
     //     .then((res) => res.json())
     //     .then(({ thumbnail }) => thumbnail);
     // },
-    onChange({ file, fileList }) {
-      props.handleFile(file.originFileObj);
 
+    onChange({ file, fileList }) {
+      if (file.status === "done") {
+        let data = {
+          uid: file.uid,
+          name: file.name,
+          url: file.response.data.link,
+        };
+        props.handlesiz(file.size);
+        props.handleFile(file.response.data.link);
+
+        console.log(file, "don");
+        setimageName(data);
+      }
       //   if (file.status !== "uploading") {
       //     console.log(file, fileList);
       //   }
@@ -130,59 +149,61 @@ function Index(props) {
   };
 
   return (
-    <div>
-      <ModleHeader>
-        Upload New Resources
-        <Close onClick={props.Close} cursor="pointer" />
-        {/* <AiOutlineClose  /> */}
-      </ModleHeader>
+    <>
       <PageWrapper>
-        <InputLable>
-          Title
-          <CustomInput
-            onChange={(e) => props.handleInput(e, "title")}
-            placeholder="write file title"
-          />
-        </InputLable>
-        <Space />
-        <InputLable>
-          Description
-          <CustomInputArea
-            onChange={(e) => props.handleInput(e, "dec")}
-            rows={3}
-            placeholder="write file Description ..."
-          />
-        </InputLable>
-        <Space />
-        <Space />
-        <Upload {...Props}>
-          <div className="upload_modal">
-            <div className="upload_img_close">
-              <img
-                src={require("../../FileUploader/NewFileUploader/default.png")}
-                className="img"
-              />
+        <div>
+          {" "}
+          <ModleHeader>
+            Upload New Resources
+            <Close onClick={props.Close} cursor="pointer" />
+          </ModleHeader>
+          <InputLable>
+            Title
+            <CustomInput
+              onChange={(e) => props.handleInput(e, "title")}
+              placeholder="write file title"
+            />
+          </InputLable>
+          <Space />
+          <InputLable>
+            Description
+            <CustomInputArea
+              onChange={(e) => props.handleInput(e, "dec")}
+              rows={3}
+              placeholder="write file Description ..."
+            />
+          </InputLable>
+          <Space />
+          <Space />
+          <Upload {...Props} defaultFileList={imageName && [imageName]}>
+            <div className="upload_modal">
+              <div className="upload_img_close">
+                <img
+                  src={require("../../FileUploader/NewFileUploader/default.png")}
+                  className="img"
+                />
+              </div>
+              <span
+                style={{
+                  color: "var(--darkGray)",
+                }}>
+                Choose any file form computer or Drag & Drop it here
+              </span>
+              <span style={{ margin: "20px 0" }}>
+                {" "}
+                <Button>Upload</Button>
+              </span>
             </div>
-            <span
-              style={{
-                color: "var(--darkGray)",
-              }}>
-              Choose any file form computer or Drag & Drop it here
-            </span>
-            <span style={{ margin: "20px 0" }}>
-              {" "}
-              <Button>Upload</Button>
-            </span>
-          </div>
-        </Upload>
+          </Upload>
+        </div>
+        <ModleFooter>
+          <CustomModleButton fun={props.Close}>Cancel</CustomModleButton>
+          <CustomModleButton main fun={props.handleSubmit}>
+            Upload
+          </CustomModleButton>
+        </ModleFooter>
       </PageWrapper>
-      <ModleFooter>
-        <CustomModleButton fun={props.Close}>Cancel</CustomModleButton>
-        <CustomModleButton main fun={props.handleSubmit}>
-          Upload
-        </CustomModleButton>
-      </ModleFooter>
-    </div>
+    </>
   );
 }
 

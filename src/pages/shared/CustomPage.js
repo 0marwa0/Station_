@@ -36,6 +36,15 @@ export const PageContent = styled.div`
   flex-direction: column;
   width: 100%;
   margin-top: 25px;
+  margin-left: 423px;
+
+  margin-right: 35px;
+`;
+export const PageContentFix = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 25px;
   margin-left: 123px;
 
   margin-right: 35px;

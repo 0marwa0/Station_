@@ -11,9 +11,10 @@ import PasswordRest from "./PasswordRest";
 import { AdminsColumns, AdminsData } from "./Config";
 // import { Modal } from "react-responsive-modal";
 import Admin from "./Admin";
-import EditAdmin from "./EditAdmin";
 import { Drawer } from "antd";
 import { LoadData, addData, editData, addFile } from "../../API";
+import EditAdmin from "./EditAdmin";
+export const Values = React.createContext();
 
 function Admins(props) {
   const [open, setOpen] = useState(false);
@@ -26,16 +27,19 @@ function Admins(props) {
   const [id, setId] = useState();
   const [Edited, setEdited] = useState([]);
   const [admin, setadmin] = useState([]);
-  const [image, setimage] = useState();
+  const [edited, setedited] = useState([]);
 
   const onOpenModal = () => {
     setOpen(true);
   };
   const onCloseModal = () => {
     setOpen(false);
+    ClearState();
   };
+
   const onCloseModalEdit = () => {
     setopenEdit(false);
+    ClearState();
   };
 
   const onOpenModalPass = (id, value) => {
@@ -77,8 +81,15 @@ function Admins(props) {
               id: { id: admin.id, deactive: () => deactive(admin.id) },
               FullName: admin.name,
               Username: admin.username,
-              Type: admin.type === 1 ? ["Book Admin"] : ["Book Admin"],
-              Branch: "Baghdad",
+              phone: admin.phone,
+              email: admin.email,
+              Type:
+                admin.type === 3
+                  ? ["Book Admin"]
+                  : admin.type === 2
+                  ? ["Book Admin"]
+                  : ["Admin"],
+              Branch: admin.gov,
               Status: admin.active ? ["Enabled"] : ["Disabled"],
               pass: {
                 onOpen: () => onOpenModalPass(admin.id, true),
@@ -86,7 +97,7 @@ function Admins(props) {
                 onClose: onOpenModalPass(null, false),
               },
               edit: {
-                onOpen: () => onOpenModalEdit(admin.id),
+                onOpen: () => onOpenModalEdit(admin.id, admin),
               },
             });
           });
@@ -103,18 +114,6 @@ function Admins(props) {
       }
     );
   };
-  const onOpenModalEdit = (id) => {
-    setId(id);
-    setopenEdit(true);
-  };
-  useEffect(() => {
-    if (localStorage.getItem("station_token")) {
-      setLoading(true);
-      getAdmins();
-    } else {
-      props.history.push("/login");
-    }
-  }, []);
   const [name, setname] = useState("");
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
@@ -122,6 +121,7 @@ function Admins(props) {
   const [email, setemail] = useState("");
   const [phone, setphone] = useState("");
   const [type, settype] = useState("");
+  const [image, setimage] = useState();
 
   const handleInput = (e, key) => {
     let value = e.target.value;
@@ -145,11 +145,12 @@ function Admins(props) {
         break;
     }
   };
+  const handleRole = (value) => {
+    settype(value);
+  };
   const handleSelect = (e, key) => {
     let value = e;
     switch (key) {
-      case "type":
-        settype(value);
       case "branch":
         setbranch(value);
         break;
@@ -168,50 +169,37 @@ function Admins(props) {
     setpassword("");
   };
   const handleSubmit = () => {
-    console.log(branch, type, "branch,type");
-
-    // setLoading(true);
-    // // console.log(data, "data");
-    // let File = new FormData();
-    // File.append("image", image);
-    // addFile(
-    //   "upload",
-    //   File,
-    //   (res) => {
-    //     if (res.errMsg) {
-    //       Mesg(res.errMsg);
+    setLoading(true);
+    console.log(data, "data");
+    let admin = {
+      image: image,
+      name: name,
+      username: username,
+      password: password,
+      email: email,
+      type: type,
+      phone: phone,
+      gov: branch,
+    };
+    console.log(admin, "addddd");
+    // addData(
+    //   "admin/add",
+    //   admin,
+    //   (mesg, Data) => {
+    //     if (mesg) {
+    //       Mesg(mesg);
     //     } else {
-    //       let admin = {
-    //         image: res.url,
-    //         name: name,
-    //         username: username,
-    //         password: password,
-    //         email: email,
-    //         type: type,
-    //         phone: phone,
-    //         branch: branch,
-    //       };
-    //       console.log(admin, "data");
-
-    //       addData(
-    //         "admin/add",
-    //         data,
-    //         (mesg, Data) => {
-    //           SuccessMesg("Account creating done !");
-    //           onOpenModal(false);
-    //           getAdmins();
-    //           ClearState();
-    //         },
-    //         (err) => {
-    //           onOpenModal(false);
-    //           ClearState();
-    //           FailedMesg(err);
-    //         }
-    //       );
+    //       SuccessMesg("Account creating done !");
+    //       props.getAdmins();
     //     }
+
+    //     ClearState();
+    //     props.fun(false);
     //   },
     //   (err) => {
-    //     FailedMesg(err.toString());
+    //     props.fun(false);
+    //     ClearState();
+    //     FailedMesg(err);
     //   }
     // );
   };
@@ -219,29 +207,48 @@ function Admins(props) {
     let data = {
       name: name,
       username: username,
-      password: password,
+      phone: phone,
+      image: image,
       email: email,
       type: type,
       branch: branch,
     };
+    for (var propName in data) {
+      if (data[propName] === "" || data[propName] === undefined) {
+        delete data[propName];
+      }
+    }
 
     setLoading(true);
-    editData(
-      "",
-      data,
-      (mesg, Data) => {
-        SuccessMesg("Account data saved !");
-        onOpenModal(false);
-        getAdmins();
-        ClearState();
-      },
-      (err) => {
-        onOpenModal(false);
-        ClearState();
-        FailedMesg(err);
-      }
-    );
+    // addData(
+    //   `admin/update/${id}`,
+    //   data,
+    //   (mesg, Data) => {
+    //     if (mesg) {
+    //       Mesg(mesg);
+    //     } else {
+    //       SuccessMesg("Account data saved !");
+    //       onCloseModalEdit();
+    //       getAdmins();
+    //       ClearState();
+    //     }
+    //   },
+    //   (err) => {
+    //     onCloseModalEdit();
+    //     ClearState();
+    //     FailedMesg(err);
+    //   }
+    // );
   };
+  useEffect(() => {
+    if (localStorage.getItem("station_token")) {
+      setLoading(true);
+      getAdmins();
+    } else {
+      props.history.push("/login");
+    }
+  }, []);
+
   const [searchText, setsearchText] = useState("");
   const HandleSearch = (e) => {
     let value = e.target.value;
@@ -258,9 +265,17 @@ function Admins(props) {
 
     setFilterdata(newData);
   };
-  let admins = admin.filter((item) => item.id === id);
   // setEdited(admins[0]);
+  const [info, setinfo] = useState();
+  const onOpenModalEdit = (id, info) => {
+    setId(id);
+    setopenEdit(true);
+    // let admins = admin.filter((item) => item.id === id);
 
+    setinfo(info);
+  };
+  let admins = admin.filter((item) => item.id === id);
+  console.log(info, "sended");
   return (
     <div>
       <CustomPage
@@ -289,29 +304,38 @@ function Admins(props) {
         <Admin
           fun={onCloseModal}
           type="create"
+          getAdmins={getAdmins}
+          handleRole={handleRole}
           handleSelect={handleSelect}
           handleSubmit={handleSubmit}
           handleInput={handleInput}
         />
       </Drawer>
-      <Drawer
-        placement="right"
-        closable={false}
-        title={false}
-        onClose={onCloseModalEdit}
-        width={570}
-        visible={openEdit}
-        key="right">
-        <Admin
-          fun={onCloseModalEdit}
-          type="edit"
-          id={id}
-          handleSelect={handleSelect}
-          admins={admins}
-          handleSubmit={handleEdit}
-          handleInput={handleInput}
-        />
-      </Drawer>
+
+      <Values.Provider
+        value={{
+          name: info ? info.name : "",
+          username: info ? info.username : "",
+          phone: info ? info.phone : "",
+          email: info ? info.eamil : "",
+          type: info ? info.type : "",
+          branch: info ? info.gov : "",
+          image: info ? info.image : "",
+        }}>
+        {openEdit ? (
+          <EditAdmin
+            fun={onCloseModalEdit}
+            type="edit"
+            id={id}
+            getAdmins={getAdmins}
+            handleSelect={handleSelect}
+            admins={info}
+            handleRole={handleRole}
+            handleSubmit={handleEdit}
+            handleInput={handleInput}
+          />
+        ) : null}
+      </Values.Provider>
 
       <Modal
         closeOnOverlayClick={false}
