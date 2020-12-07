@@ -103,7 +103,6 @@ function Index(props) {
   };
   const handleImage = (info, fileList) => {
     Image(info.originFileObj);
-    console.log(info, "done");
     if (info.file.status === "done") {
       let data = {
         uid: info.file.uid,
@@ -112,7 +111,6 @@ function Index(props) {
       };
       setimageName(data);
       props.handleSelect(info.file.response.url, "image");
-      console.log(fileList, "respone");
     }
   };
 
@@ -151,8 +149,7 @@ function Index(props) {
             <SideModal>
               <div style={{ height: "95%" }}>
                 <Title>
-                  {admin.name}
-                  <div>Add new Admin</div>
+                  <div>Update Admin</div>
                   <Close
                     onClick={() => {
                       props.fun(false);

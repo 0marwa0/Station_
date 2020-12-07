@@ -27,7 +27,7 @@
   position: fixed;
   margin-left: 87px;
   padding-right: 4px;
-  z-index: 100;
+  z-index: 2;
   padding: 40px 30px;
   flex-direction: column;
   justify-content: space-between;
@@ -77,6 +77,7 @@
   right: 0;
   bottom: 0;
   left: 0;
+  z-index: 999999;
   background: rgba(0, 0, 0, 0.3) !important;
 }
 .ant-popover-inner-content {

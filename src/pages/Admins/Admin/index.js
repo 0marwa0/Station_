@@ -163,7 +163,6 @@ function Index(props) {
         <InputLable>
           Full Name
           <CustomInput
-            defaultValue={props.admins[0].name}
             onChange={(e) => props.handleInput(e, "name")}
             placeholder="Write admin name"
           />
@@ -172,20 +171,17 @@ function Index(props) {
         <InputLable>
           Username
           <CustomInput
-            defaultValue={admin.username}
             onChange={(e) => props.handleInput(e, "username")}
             placeholder="Write admin username"
           />
         </InputLable>
         {props.type === "create" ? (
           <div>
-            {props.type}
             <Space /> <Space />{" "}
             <InputLable>
               Password
               <CustomInput
                 placeholder="Write admin password"
-                defaultValue={admin.password}
                 onChange={(e) => props.handleInput(e, "password")}
               />
             </InputLable>
@@ -196,7 +192,6 @@ function Index(props) {
           Email
           <CustomInput
             placeholder="Write admin Email"
-            defaultValue={admin.email}
             onChange={(e) => props.handleInput(e, "email")}
           />
         </InputLable>
@@ -205,7 +200,6 @@ function Index(props) {
           Phone
           <CustomInput
             placeholder="Write admin phone number"
-            defaultValue={admin.phone}
             onChange={(e) => props.handleInput(e, "phone")}
           />
         </InputLable>
@@ -215,7 +209,6 @@ function Index(props) {
           <Select
             suffixIcon={<DropIcon />}
             placeholder=" Choose admin branch loaction"
-            defaultValue={admin.gov}
             onChange={(e) => props.handleSelect(e, "branch")}>
             <Option key="baghadad">Baghadad</Option>
             <Option key="mosul">Mosul</Option>
@@ -227,7 +220,6 @@ function Index(props) {
           <Select
             suffixIcon={<DropIcon />}
             placeholder="Choose admin role"
-            defaultValue={admin.type === 2 ? "Meadia Admin" : "Book Admin"}
             onChange={(e) => props.handleRole(e, "type")}>
             <Option value="Meadia Admin" key="2">
               {/* Meadia Admin */}
