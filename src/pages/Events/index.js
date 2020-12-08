@@ -15,7 +15,8 @@ function Events(props) {
   const [open, setOpen] = useState(false);
 
   const onOpenModal = (open) => {
-    setOpen(open);
+    // setOpen(open);
+    props.history.push("/");
   };
   const [Loading, setLoading] = useState(false);
   const [events, setevents] = useState([]);

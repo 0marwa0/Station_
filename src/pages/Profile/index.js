@@ -31,6 +31,7 @@ export const PageBack = styled.div`
   flex-direction: row;
   gap: 5px;
   font-size: 16px;
+  color: var(--lighterGray);
   align-items: center;
 `;
 const PageTitle = styled.div`
@@ -52,7 +53,7 @@ export const ProfileImage = styled.div`
   background-position: 100% 100%;
   background-repeat: no-repeat;
 
-  background-size: 100px 100px;
+  background-size: cover;
   justify-content: center;
   background-image: url(${(props) => props.src});
   font-size: 25px;

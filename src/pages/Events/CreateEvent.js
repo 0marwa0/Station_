@@ -10,6 +10,7 @@ import { ReactComponent as DropIcon } from "../../public/images/dropdown.svg";
 import { CustomPageWrapper, PageContent } from "../shared/CustomPage";
 import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
+import { toole } from "../Article/toole";
 import List from "@editorjs/list";
 import { Link } from "react-router-dom";
 import { BsArrowLeft } from "react-icons/bs";
@@ -271,6 +272,7 @@ const Index = (props) => {
                 onData={(e) => handletext(e.blocks)}
                 // instanceRef={(instance) => (instanceRef.current = instance)}
                 // tools={EDITOR_JS_TOOLS}
+                tools={toole}
                 // data={data}
               />
             </div>

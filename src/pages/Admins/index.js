@@ -170,6 +170,14 @@ function Admins(props) {
   };
   const handleSubmit = () => {
     setLoading(true);
+    let role = 1;
+
+    if (type === "Meadia Admin") {
+      role = 2;
+    } else if (type === "Book Admin") {
+      role = 3;
+    }
+
     console.log(data, "data");
     let admin = {
       image: image,
@@ -177,31 +185,30 @@ function Admins(props) {
       username: username,
       password: password,
       email: email,
-      type: type,
+      type: role,
       phone: phone,
       gov: branch,
     };
     console.log(admin, "addddd");
-    // addData(
-    //   "admin/add",
-    //   admin,
-    //   (mesg, Data) => {
-    //     if (mesg) {
-    //       Mesg(mesg);
-    //     } else {
-    //       SuccessMesg("Account creating done !");
-    //       props.getAdmins();
-    //     }
-
-    //     ClearState();
-    //     props.fun(false);
-    //   },
-    //   (err) => {
-    //     props.fun(false);
-    //     ClearState();
-    //     FailedMesg(err);
-    //   }
-    // );
+    addData(
+      "admin/add",
+      admin,
+      (mesg, Data) => {
+        if (mesg) {
+          Mesg(mesg);
+        } else {
+          SuccessMesg("Account creating done !");
+          props.getAdmins();
+          ClearState();
+          onCloseModal();
+        }
+      },
+      (err) => {
+        ClearState();
+        FailedMesg(err);
+        onCloseModal();
+      }
+    );
   };
   const handleEdit = () => {
     let data = {
@@ -241,7 +248,10 @@ function Admins(props) {
     // );
   };
   useEffect(() => {
-    if (localStorage.getItem("station_token")) {
+    if (
+      localStorage.getItem("station_token") != undefined &&
+      localStorage.getItem("station_token") != ""
+    ) {
       setLoading(true);
       getAdmins();
     } else {
@@ -317,7 +327,7 @@ function Admins(props) {
           name: info ? info.name : "",
           username: info ? info.username : "",
           phone: info ? info.phone : "",
-          email: info ? info.eamil : "",
+          email: info ? info.email : "",
           type: info ? info.type : "",
           branch: info ? info.gov : "",
           image: info ? info.image : "",

@@ -52,10 +52,14 @@ function Booking(props) {
             Space: [`${item.space.title}`],
             CreationDate: DateName(item.createdAt),
 
-            BookedBy: props.admins
-              .filter((i) => i.id === item.approvedBy)
-              .map((i) => i.username)
-              .toString(),
+            BookedBy:
+              // props.admins
+              // ? props.admins
+              //     .filter((i) => i.id === item.approvedBy)
+              //     .map((i) => i.username)
+              //     .toString()
+              // :
+              "",
           });
         });
 
@@ -141,15 +145,15 @@ function Booking(props) {
     setdays([]);
   };
   const [title, settitle] = useState("");
-  const [price, setprice] = useState("");
-  const [received, setrecived] = useState("");
+  const [price, setprice] = useState();
+  const [received, setrecived] = useState();
   const [organizer, setorganizer] = useState("");
   const [people, setpeople] = useState();
   const [comment, setcomment] = useState("");
   const [typeId, settypeId] = useState();
   const [spaceId, setspaceId] = useState();
-  const [designId, setdesignId] = useState();
-  const [coffeebreakId, setcoffeebreakId] = useState();
+  const [designId, setdesignId] = useState(0);
+  const [coffeebreakId, setcoffeebreakId] = useState(0);
   const [lunchId, setlunchId] = useState();
   const [days, setdays] = useState([]);
   const handleSubmit = () => {
@@ -164,8 +168,8 @@ function Booking(props) {
       designId: designId,
       coffeebreakId: coffeebreakId,
       lunchId: lunchId,
-      price: Number(price),
-      received: Number(received),
+      price: price,
+      received: received,
     };
 
     // onOpenModal(false);

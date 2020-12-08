@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import { Mesg, FailedMesg } from "./API/APIMessage";
 import { LoadData } from "./API";
 import logo from "./logo.svg";
 import "./App.css";
+
 import { useHistory } from "react-router";
 import Newarticle from "./pages/Article/newarticle";
 import "react-progress-2/main.css";
@@ -24,31 +25,17 @@ import booking from "./pages/Booking/booking";
 import Editarticle from "./pages/Article/editarticle";
 import Event from "./pages/Events/event";
 import EditeEvent from "./pages/Events/editEvent";
+
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
-const test = () => {
-  return <div>booking test</div>;
-};
+
 function App(props) {
+  const Admin = createContext();
   const [admins, setadmins] = useState([]);
   const [spaces, setspaces] = useState([]);
   const [userId, setuserId] = useState("");
   const history = useHistory();
 
-  const getAdmins = () => {
-    LoadData(
-      "Admins",
-      (err, data) => {
-        setadmins(data.data);
-        if (err) {
-          Mesg(err);
-          console.log(data, "admin whti current one plase");
-        }
-      },
-      (err) => {
-        FailedMesg(err, "Something worng happend !");
-      }
-    );
-  };
+  const getAdmins = () => {};
   const getSpace = () => {
     LoadData(
       "spaces",
@@ -65,17 +52,30 @@ function App(props) {
     );
   };
   useEffect(() => {
-    if (localStorage.getItem("station_token")) {
-      getAdmins();
-      getSpace();
+    LoadData(
+      "Admins",
+      (err, data) => {
+        setadmins(data.data);
+      },
+      (err) => {
+        FailedMesg(err, "Something worng happend !");
+      }
+    );
+    getSpace();
+    if (
+      localStorage.getItem("station_token") != undefined &&
+      localStorage.getItem("station_token") != ""
+    ) {
     } else {
       //history.push("/login");
       //.log(props.history);
     }
   }, []);
+  console.log(admins, "never go ");
 
   return (
     <div>
+      {/* <Admin.Provider value={{ admins: admins }}> */}
       {/* <Router> */}
       <Switch>
         <Route path="/login" component={Login} exact />
@@ -145,6 +145,7 @@ function App(props) {
         />
       </Switch>
       {/* </Router> */}
+      {/* </Admin.Provider> */}
     </div>
   );
 }

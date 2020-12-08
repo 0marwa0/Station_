@@ -139,7 +139,7 @@ function Index(props) {
     props.onOpenModal(false);
 
     // onOpenModal(false);
-    console.log(data, "book data sended");
+    console.log(data, "book data sended/dash");
     setLoading(true);
     addData(
       "book/add",

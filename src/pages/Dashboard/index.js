@@ -300,7 +300,6 @@ function Index(props) {
   };
   const setPrevMonth = () => {
     setCurrentMonth(month - 1);
-    console.log("doooooooooo");
   };
   // year + "-" + CurrentMonth.toString() + "-01T00:00:00.000Z"
   const [change, setchange] = useState(false);
@@ -330,10 +329,12 @@ function Index(props) {
             Welcome Back ,{" "}
             <span style={{ color: "black" }}>
               {props.admins
-                .filter((i) => i.id === Number(id))
-                .map((i) => i.username)
-                .toString()}
-              !
+                ? props.admins
+                    .filter((i) => i.id === Number(id))
+                    .map((i) => i.username)
+                    .toString()
+                : ""}
+              {console.log(props.admins, "find the broblem")}!
             </span>
           </span>
         </PageHeader>

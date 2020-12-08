@@ -4,6 +4,17 @@
   box-sizing: border-box;
   font-family: Px-Grotesk !important;
 }
+.pending {
+  font-size: 20px !important;
+  color: var(--orange) !important;
+}
+.reject {
+  color: var(--red) !important;
+}
+.approve {
+  color: var(--darkGreen) !important;
+}
+
 .Modal {
   position: absolute;
   top: 0;
@@ -57,11 +68,13 @@
 }
 .NavBar_ctrl .active {
   background-color: var(--lighterGray);
+  color: #1d1d1d !important;
 }
 .NavBar_ctrl li {
   padding: 5px 10px;
   font-size: 20px;
   cursor: pointer;
+  color: var(--darkGray) !important;
   border-radius: 7px;
   margin-bottom: 10px;
 }

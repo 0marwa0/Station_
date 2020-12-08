@@ -12,11 +12,8 @@ import Moment from "react-moment";
 import LoadingBar from "react-top-loading-bar";
 import BookingModal from "../Dashboard/BookingModal";
 import { Col, Row, Menu, Dropdown } from "antd";
-import {
-  CustomPageWrapper,
-  PageContent,
-  PageTitle,
-} from "../shared/CustomPage";
+import { ReactComponent as Edit } from "../../public/images/edit.svg";
+import { CustomPageWrapper, PageContent } from "../shared/CustomPage";
 import { TextLoadS } from "../shared/SharedComponents";
 import { DownOutlined } from "@ant-design/icons";
 import { useHistory, useLocation, useParams } from "react-router-dom";
@@ -33,19 +30,19 @@ const PageActions = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  padding: 20px 0;
   align-items: center;
 `;
 const Wrapper = styled(Row)`
   background-color: white;
-  width: 100%;
-  border: 1px solid var(--lighterGray);
+  width: 95%;
   borderradius: 5px;
-  margin-left: 20px;
-  padding: 20px 40px;
+
+  padding: 0 20px;
 `;
 const GrayText = styled.div`
   font-size: 13px;
-  color: var(--darkGray);
+  color: #b5b5b5;
   width: 100%;
 `;
 const EventDetails = styled.div`
@@ -62,7 +59,7 @@ const DetailItem = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
-  padding: 0 10px;
+
   font-size: 17px;
   width: 100%;
 `;
@@ -71,13 +68,13 @@ const Activity = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding-left: 25px;
+  padding-left: 40px;
   border-bottom: 1px solid var(--lighterGray);
 `;
 const ActivityItem = styled.div`
-  display: grid;
-  grid-template-columns: 100px 120px;
-  gap: 5px;
+  display: flex;
+
+  gap:30px
   width: 100%;
   justify-content: space-between;
   margin: 10px 0;
@@ -92,7 +89,8 @@ const Date = styled.div`
   display: grid;
   width: 100%;
   height: auto;
-  padding: 7px;
+  padding: 12px;
+  font-size: 17px;
   background-color: ${(props) => (props.odd ? "var(--lightGray)" : "none")};
   border-bottom: ${(props) =>
     props.item ? "1px solid var(--lighterGray)" : "none"};
@@ -120,19 +118,19 @@ const BookingActions = styled.div`
 const Reject = styled.div`
   background-color: var(--lightRed);
   color: var(--red);
-  padding: 2px 8px;
-  height: 22px;
+  padding: 3px 13px;
+  height: 30px;
   border-radius: 6px;
-  font-size: 12px;
+  font-size: 17px;
   cursor: pointer;
 `;
 const Accept = styled.div`
   background-color: var(--LightGreen);
   color: var(--darkGreen);
-  padding: 2px 8px;
-  height: 22px;
+  padding: 3px 13px;
+  height: 30px;
   border-radius: 6px;
-  font-size: 12px;
+  font-size: 17px;
   cursor: pointer;
 `;
 const Pending = styled.div`
@@ -256,31 +254,92 @@ function Index(props) {
       }
     );
   };
+  const Empty = styled.div`
+    width: 45px;
+    text-align: right;
+  `;
+  const PageTitle = styled.div`
+    display: flex;
+    color: var(--black);
+    font-size: 30px;
+    font-weight: bold;
+  `;
+  const Divider = styled.div`
+    width: 10px;
+    height: 25px;
+  `;
+  const Title = styled.div`
+    display: flex;
+    gap: 10px;
+    height: 43px;
+    flex-direction: column;
+  `;
   let Data = data ? data : {};
   let design = Designs.filter((item) => item.id != data.designId);
   return (
     <CustomPageWrapper>
       {/* <LoadingBar color="var(--yellow)" ref={ref} shadow={true} /> */}
 
-      <GlobalStyle />
+      {/* <GlobalStyle /> */}
       <SideBar />
 
       <PageContent>
         <div style={{ marginTop: "40px" }}>
           <Wrapper>
-            <Link to="/booking">
-              <PageBack>
-                <BsArrowLeft />
-                <div>Booking</div>
-              </PageBack>
-            </Link>
+            <Title>
+              <Link to="/booking">
+                <PageBack>
+                  <BsArrowLeft />
+
+                  <div>Booking</div>
+                </PageBack>
+              </Link>
+              <PageTitle>
+                {Loading ? <TextLoadS /> : Data.title}
+                <Empty>
+                  <Edit onClick={onOpenModal} style={{ cursor: "pointer" }} />
+                </Empty>
+              </PageTitle>
+            </Title>
             <PageActions>
-              <PageTitle>{Loading ? <TextLoadS /> : Data.title}</PageTitle>
+              <div></div>
               {props.event ? (
                 ""
               ) : (
                 <div style={{ display: "flex", gap: "10px" }}>
-                  <ButtonStyled onClick={onOpenModal}>Edit</ButtonStyled>
+                  <div
+                    style={{ fontSize: "20px" }}
+                    className={
+                      Data.status === "approved"
+                        ? "approve"
+                        : Data.status === "rejected"
+                        ? "reject"
+                        : Data.status === "Pending"
+                        ? "pending"
+                        : ""
+                    }>
+                    {" "}
+                    <spna>
+                      {Data.status
+                        ? Data.status.charAt(0).toUpperCase() +
+                          Data.status.slice(1)
+                        : ""}
+                      <DownOutlined
+                        style={{ fontSize: "10px", margin: " 0 5px" }}
+                      />
+                    </spna>
+                  </div>
+                  {!props.event ? (
+                    Data.status === "pending" ? (
+                      <Reject onClick={Recject}>Reject</Reject>
+                    ) : null
+                  ) : null}
+
+                  {!props.event ? (
+                    Data.status === "pending" ? (
+                      <Accept onClick={Approve}>Accept</Accept>
+                    ) : null
+                  ) : null}
                   {Data.status === "approved" ? (
                     <ButtonStyled
                       Loading={Loading}
@@ -298,19 +357,8 @@ function Index(props) {
                 <div>Published</div>
               ) : ( )} */}
               {/* <Dropdown> */}
-              <Pending>
-                <spna>
-                  {Data.status}
-                  <DownOutlined
-                    style={{ fontSize: "10px", margin: " 0 5px" }}
-                  />
-                </spna>
-              </Pending>
+
               {/* </Dropdown> */}
-
-              {!props.event ? <Reject onClick={Recject}>Reject</Reject> : null}
-
-              {!props.event ? <Accept onClick={Approve}>Accept</Accept> : null}
             </BookingActions>
             <Row
               style={{
@@ -321,7 +369,7 @@ function Index(props) {
               <Col
                 style={{
                   width: "70%",
-                  paddingTop: "20px",
+                  paddingTop: "40px",
                   paddingBottom: "30px",
                   paddingRight: "50px",
                   borderRight: "1px solid var(--lighterGray)",
@@ -359,6 +407,7 @@ function Index(props) {
 
                     {Loading ? <TextLoadS /> : design[0] ? design[0].name : ""}
                   </DetailItem>
+
                   <DetailItem>
                     <GrayText> Date</GrayText>
 
@@ -417,9 +466,10 @@ function Index(props) {
                     </div>
                   </DetailItem>
                 </EventDetails>
+                <Divider />
                 <Col>
                   <Date>
-                    <div>Data</div>
+                    <div style={{ paddingLeft: "10px" }}>Data</div>
                     <div>Starting Time</div>
                     <div>Ending Time</div>
                   </Date>
@@ -452,31 +502,36 @@ function Index(props) {
                 <Activity>
                   <DetailItem>
                     <BoldText>Activity</BoldText>
+                    <Divider />
                     <GrayText>Created by</GrayText>
 
                     <ActivityItem>
-                      <UserHolder>
-                        <UserImage
-                          src={require("../../public/images/user2.png")}
-                        />
-                        <span>
-                          {Loading ? (
-                            <TextLoadS />
-                          ) : data.admin ? (
-                            data.admin.name
-                          ) : (
-                            ""
-                          )}
-                        </span>
-                      </UserHolder>
-                      <GrayText>
-                        <div
-                          style={{
-                            width: "max-content",
-                          }}>
-                          <TimeAgo date={data.createdAt} />
-                        </div>
-                      </GrayText>
+                      <div>
+                        <UserHolder>
+                          <UserImage
+                            src={require("../../public/images/user2.png")}
+                          />
+                          <span>
+                            {Loading ? (
+                              <TextLoadS />
+                            ) : data.admin ? (
+                              data.admin.name
+                            ) : (
+                              ""
+                            )}
+                          </span>
+                        </UserHolder>
+                      </div>
+                      <div>
+                        <GrayText>
+                          <div
+                            style={{
+                              width: "max-content",
+                            }}>
+                            <TimeAgo date={data.createdAt} />
+                          </div>
+                        </GrayText>
+                      </div>
                     </ActivityItem>
                   </DetailItem>
                   <DetailItem>
@@ -489,12 +544,12 @@ function Index(props) {
                               src={require("../../public/images/user2.png")}
                             />
                             <span>
-                              {data.approvedBy
+                              {/* {data.approvedBy
                                 ? props.admins
                                     .filter((i) => i.id === data.approvedBy)
                                     .map((i) => i.username)
                                     .toString()
-                                : ""}
+                                : ""} */}
                             </span>
                           </UserHolder>
                           <GrayText></GrayText>
@@ -503,6 +558,11 @@ function Index(props) {
                     ) : null}
                   </DetailItem>
                 </Activity>
+                <DetailItem>
+                  <Col style={{ margin: "40px" }}>
+                    <BoldText>Solod Tickets</BoldText>
+                  </Col>
+                </DetailItem>
               </Col>
             </Row>
           </Wrapper>

@@ -210,7 +210,7 @@ function Index(props) {
             suffixIcon={<DropIcon />}
             placeholder=" Choose admin branch loaction"
             onChange={(e) => props.handleSelect(e, "branch")}>
-            <Option key="baghadad">Baghadad</Option>
+            <Option key="baghdad">Baghadad</Option>
             <Option key="mosul">Mosul</Option>
           </Select>
         </InputLable>
@@ -221,12 +221,8 @@ function Index(props) {
             suffixIcon={<DropIcon />}
             placeholder="Choose admin role"
             onChange={(e) => props.handleRole(e, "type")}>
-            <Option value="Meadia Admin" key="2">
-              {/* Meadia Admin */}
-            </Option>
-            <Option value="Book Admin" key="3">
-              {/* Book Admin */}
-            </Option>
+            <Option key="Meadia Admin">Meadia Admin</Option>
+            <Option key="Book Admin">Book Admin</Option>
           </Select>
         </InputLable>
       </div>
@@ -234,7 +230,7 @@ function Index(props) {
       <ModalFooter>
         <div style={{ float: "right" }}>
           {" "}
-          <CustomModleButton main extra fun={() => props.handleSubmit}>
+          <CustomModleButton main extra fun={props.handleSubmit}>
             {props.type === "create" ? "Create" : "Save"}
           </CustomModleButton>
         </div>

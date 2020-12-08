@@ -169,6 +169,8 @@ function SideBar(props) {
   let title = props.title;
   let page = location.pathname.substr(1);
   // console.log(page === "booking", "should be flase");
+  // let idid = localStorage.getItem("Station_id");
+  // console.log(idid, "idddddddd");
   return (
     <div
     //  onClick={(e) => handleClose(e)}
@@ -390,28 +392,30 @@ function SideBar(props) {
       </SideWrapper>
       {page === "" ? null : (
         <div className="NavBar_ctrl">
-          {
-            // page.slice(0, 14) === page &&
+          {page.includes("booking") || page.includes("bookingdetalis") ? (
+            <ul>
+              <li className="listTitle">
+                <div className="titleIcon">
+                  <Booking color="white" fill="white" />
+                </div>
+                Bookings
+              </li>
+              <li
+                className={
+                  page.includes("booking") || page.includes("bookingdetalis")
+                    ? "active"
+                    : ""
+                }>
+                <Link to="/booking">Books</Link>
+              </li>
+              <li className={page === "events" ? "active" : ""}>
+                <Link to="/events">Events</Link>
+              </li>
+            </ul>
+          ) : (
+            ""
+          )}
 
-            page === "booking" ? (
-              <ul>
-                <li className="listTitle">
-                  <div className="titleIcon">
-                    <Booking color="white" fill="white" />
-                  </div>
-                  Bookings
-                </li>
-                <li className={page === "booking" ? "active" : ""}>
-                  <Link to="/booking">Books</Link>
-                </li>
-                <li className={page === "events" ? "active" : ""}>
-                  <Link to="/events">Events</Link>
-                </li>
-              </ul>
-            ) : (
-              ""
-            )
-          }{" "}
           {
             // page.slice(0, 14) === page &&
             page.includes("events") || page.includes("event") ? (

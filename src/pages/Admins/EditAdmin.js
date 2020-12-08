@@ -69,7 +69,8 @@ function Index(props) {
   const [Loading, setLoading] = useState(false);
   const [imageName, setimageName] = useState();
   const [file, setfile] = useState("");
-  const [ImageUrl, setImageUrl] = useState("");
+  const [ImageUrl, setImageUrl] = useState(props.admins.image);
+  console.log(Values.image, "immmmmmmmmmmmmage");
   const Image = (e) => {
     setfile(e);
   };
@@ -114,12 +115,6 @@ function Index(props) {
     }
   };
 
-  useEffect(() => {
-    console.log("its working");
-
-    return console.log("its not");
-  }, []);
-
   let admin = props.admins;
 
   const infoContext = useContext(Values);
@@ -137,6 +132,13 @@ function Index(props) {
     console.log(e);
     // console.log(this.nods, "out overlay");
   };
+  let role = "";
+
+  if (Values.type === 2) {
+    role = "Meadia Admin";
+  } else if (Values.type === 3) {
+    role = "Book Admin";
+  }
   return (
     // <div>{admin.name}</div>
     <div
@@ -177,7 +179,7 @@ function Index(props) {
                     <Space style={{ cursor: "pointer" }}>
                       <Upload
                         {...Props}
-                        onChange={(e) => props.handleImage(e)}
+                        onChange={(e) => handleImage(e)}
                         defaultFileList={imageName && [imageName]}>
                         Upload Photo
                       </Upload>
@@ -251,14 +253,10 @@ function Index(props) {
                   <Select
                     suffixIcon={<DropIcon />}
                     placeholder="Choose admin role"
-                    defaultValue={type}
+                    defaultValue={role}
                     onChange={(e) => props.handleRole(e, "type")}>
-                    <Option value="Meadia Admin" key="2">
-                      {/* Meadia Admin */}
-                    </Option>
-                    <Option value="Book Admin" key="3">
-                      {/* Book Admin */}
-                    </Option>
+                    <Option value="Meadia Admin">{/* Meadia Admin */}</Option>
+                    <Option value="Book Admin">{/* Book Admin */}</Option>
                   </Select>
                 </InputLable>
               </div>
