@@ -18,6 +18,7 @@
 /**editer*/
 .ce-block__content {
   margin: 10px 0 !important;
+  padding: 0 20px !important;
 }
 .Modal {
   position: absolute;
@@ -59,13 +60,31 @@
   margin-bottom: 40px !important;
 }
 /***tab **/
+.ant-tabs-nav {
+  /* background-color: red !important; */
+  border-radius: 0 !important;
+  border: 1px solid white !important;
+}
+.ant-tabs-card > .ant-tabs-nav .ant-tabs-tab,
+.ant-tabs-card > div > .ant-tabs-nav .ant-tabs-tab {
+  background-color: transparent !important;
+  border: none !important;
+  color: var(--darkGray) !important;
+}
+.ant-tabs-nav-list {
+  border-top: unset !important;
+}
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #000000 !important;
+  font-weight: 500;
+}
 .MuiAppBar-colorPrimary {
   color: black !important;
   background-color: white !important;
   border-bottom: 1px solid var(--lighterGray) !important;
 }
 .PrivateTabIndicator-colorSecondary-4 {
-  background-color: transparent !important;
+  background-color: red !important;
 }
 .PrivateTabIndicator-colorSecondary-10 {
   background-color: transparent !important;

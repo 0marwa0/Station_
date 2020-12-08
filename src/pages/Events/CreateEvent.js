@@ -47,7 +47,6 @@ export const TextNote = styled.div`
 const EventContent = styled(Col)`
   width: 72%;
   height: 800px;
-
   background-color: white;
   border: 1px solid var(--lighterGray);
   border-top: none;
@@ -297,7 +296,44 @@ const Index = (props) => {
               gap: "2%",
             }}>
             <EventContent>
-              <TabsWrappedLabel />
+              <div className="card-container">
+                <Tabs type="card">
+                  <TabPane tab="Arabic" key="1">
+                    <EventHeader>
+                      <InputTitle
+                        style={{ marginLeft: "10px", marginBottom: "10px" }}
+                        placeholder="Event Title Goes Here .."
+                        //  onChange={(e) => handleselect(e, "title")}
+                      />
+                    </EventHeader>
+                    <Editor
+                      style={{ marginLeft: "10px", marginBottom: "10px" }}
+                      placeholder="Start writing or tap here to add images or videos .."
+                      // onData={(e) => handletext(e.blocks)}
+                      tools={toole}
+                      // data={data}
+                    />
+                  </TabPane>
+                  <TabPane tab="English" key="2">
+                    <EventHeader>
+                      {" "}
+                      <InputTitle
+                        style={{ marginLeft: "10px", marginBottom: "10px" }}
+                        placeholder="Event Title Goes Here .."
+                        //  onChange={(e) => handleselect(e, "title")}
+                      />
+                    </EventHeader>
+
+                    <Editor
+                      placeholder="Start writing or tap here to add images or videos .."
+                      // onData={(e) => handletext(e.blocks)}
+                      tools={toole}
+                      // data={data}
+                    />
+                  </TabPane>
+                </Tabs>
+              </div>
+              ,{/* <TabsWrappedLabel /> */}
             </EventContent>
             <Col
               style={{

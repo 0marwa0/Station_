@@ -43,10 +43,10 @@ function a11yProps(index) {
 }
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-  },
+  // root: {
+  //   flexGrow: 1,
+  //   backgroundColor: "teal",
+  // },
 }));
 
 export default function TabsWrappedLabel() {
