@@ -30,6 +30,7 @@ const PageActions = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  align-items: center;
   padding: 20px 0;
   align-items: center;
 `;
@@ -271,7 +272,8 @@ function Index(props) {
   const Title = styled.div`
     display: flex;
     gap: 10px;
-    height: 43px;
+    height: auto;
+
     flex-direction: column;
   `;
   let Data = data ? data : {};
@@ -286,27 +288,32 @@ function Index(props) {
       <PageContent>
         <div style={{ marginTop: "40px" }}>
           <Wrapper>
-            <Title>
-              <Link to="/booking">
-                <PageBack>
-                  <BsArrowLeft />
-
-                  <div>Booking</div>
-                </PageBack>
-              </Link>
-              <PageTitle>
-                {Loading ? <TextLoadS /> : Data.title}
-                <Empty>
-                  <Edit onClick={onOpenModal} style={{ cursor: "pointer" }} />
-                </Empty>
-              </PageTitle>
-            </Title>
             <PageActions>
-              <div></div>
+              <Title>
+                <Link to="/booking">
+                  <PageBack>
+                    <BsArrowLeft />
+
+                    <div>Booking</div>
+                  </PageBack>
+                </Link>
+                <PageTitle>
+                  {Loading ? <TextLoadS /> : Data.title}
+                  <Empty>
+                    <Edit onClick={onOpenModal} style={{ cursor: "pointer" }} />
+                  </Empty>
+                </PageTitle>
+              </Title>
               {props.event ? (
                 ""
               ) : (
-                <div style={{ display: "flex", gap: "10px" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "10px",
+
+                    marginTop: "50px",
+                  }}>
                   <div
                     style={{ fontSize: "20px" }}
                     className={
