@@ -21,7 +21,7 @@ import { SuccessMesg, FailedMesg, Mesg } from "../../API/APIMessage";
 
 const ListItemWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
 
   gap: 15px;
 `;
@@ -139,7 +139,7 @@ const BottomText = styled.div`
 const ListItem = (props) => {
   console.log(props.data, "article list");
   const [currentPage, setcurrentPage] = useState(1);
-  const [pagePerOnce, setpagePerOnce] = useState(8);
+  const [pagePerOnce, setpagePerOnce] = useState(6);
 
   const prevPage = () => {
     if (currentPage > 1) {

@@ -62,6 +62,10 @@ function Admins(props) {
       }
     );
   };
+  const [showSttings, setSttings] = useState(false);
+  const OpenSttings = (value) => {
+    setSttings(value);
+  };
   const getAdmins = () => {
     LoadData(
       "Admins",
@@ -78,7 +82,15 @@ function Admins(props) {
           setadmin(data.data);
           data.data.map((admin) => {
             Admins.push({
-              id: { id: admin.id, deactive: () => deactive(admin.id) },
+              id: {
+                id: admin.id,
+                open: () => OpenSttings(true),
+                deactive: () => deactive(admin.id),
+                onOpen: () => onOpenModalPass(admin.id, true),
+                openPass: openPass,
+                onClose: onOpenModalPass(null, false),
+                onedit: () => onOpenModalEdit(admin.id, admin),
+              },
               FullName: admin.name,
               Username: admin.username,
               phone: admin.phone,
@@ -91,14 +103,14 @@ function Admins(props) {
                   : ["Admin"],
               Branch: admin.gov,
               Status: admin.active ? ["Enabled"] : ["Disabled"],
-              pass: {
-                onOpen: () => onOpenModalPass(admin.id, true),
-                openPass: openPass,
-                onClose: onOpenModalPass(null, false),
-              },
-              edit: {
-                onOpen: () => onOpenModalEdit(admin.id, admin),
-              },
+              // pass: {
+              //   onOpen: () => onOpenModalPass(admin.id, true),
+              //   openPass: openPass,
+              //   onClose: onOpenModalPass(null, false),
+              // },
+              // edit: {
+              //   onOpen: () => onOpenModalEdit(admin.id, admin),
+              // },
             });
           });
           setEdited(data.data);
@@ -301,7 +313,6 @@ function Admins(props) {
         Loading={Loading}
         length={Admins.length}
       />
-
       <Drawer
         placement="right"
         closable={false}
@@ -321,7 +332,6 @@ function Admins(props) {
           handleInput={handleInput}
         />
       </Drawer>
-
       <Values.Provider
         value={{
           name: info ? info.name : "",
@@ -346,7 +356,6 @@ function Admins(props) {
           />
         ) : null}
       </Values.Provider>
-
       <Modal
         closeOnOverlayClick={false}
         open={openPass}
@@ -362,6 +371,7 @@ function Admins(props) {
           data={admin}
         />
       </Modal>
+      ,{showSttings ? <div>delete dectiveate</div> : ""}
     </div>
   );
 }

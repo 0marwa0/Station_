@@ -3,6 +3,7 @@ import { UserImage } from "../Sidebar";
 import { BsTrashFill, BsTrash } from "react-icons/bs";
 import { FaCopy } from "react-icons/fa";
 import { Popconfirm } from "antd";
+
 import { FiEdit } from "react-icons/fi";
 import React from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -99,41 +100,77 @@ export const FilUploadedColumns = [
       multiple: 1,
     },
   },
+  // {
+  //   key: "7",
+  //   title: "",
+  //   dataIndex: "id",
+  //   render: (item) => (
+  //     <div className="ResourcesIcon">
+  //       <div className="icon">
+  //         <Popover
+  //           content={<div>Copied !</div>}
+  //           // title={}
+  //           onVisibleChange={(e) => item.copy(e, null)}
+  //           trigger="click"
+  //           visible={item.url === item.copiedUlr && item.copied ? true : false}
+  //           placement="top">
+  //           {item.copiedUlr + "m" + item.copied}
+  //           <CopyToClipboard text={item.url} onCopy={(e) => item.copy(e)}>
+  //             <FaCopy fontSize="16" style={{ cursor: "pointer" }} />
+  //           </CopyToClipboard>{" "}
+  //         </Popover>
+  //       </div>
+  //       <div className="icon">
+  //         <a href={item.url} target="_blank">
+  //           <FiEdit fontSize="16" />
+  //         </a>
+  //       </div>
+  //       <div className="icon">
+  //         <Popconfirm
+  //           title="Are you sure？"
+  //           okText="Yes"
+  //           onConfirm={() => item.delete()}
+  //           cancelText="No">
+  //           <BsTrashFill fontSize="16" style={{ cursor: "pointer" }} />
+  //         </Popconfirm>
+  //       </div>
+  //     </div>
+  //   ),
+  // },
   {
-    key: "7",
+    key: 8,
     title: "",
     dataIndex: "id",
     render: (item) => (
-      <div className="ResourcesIcon">
-        <div className="icon">
-          <Popover
-            content={<div>Copied !</div>}
-            // title={}
-            onVisibleChange={(e) => item.copy(e, null)}
-            trigger="click"
-            visible={item.url === item.copiedUlr && item.copied ? true : false}
-            placement="top">
-            {item.copiedUlr + "m" + item.copied}
-            <CopyToClipboard text={item.url} onCopy={(e) => item.copy(e)}>
-              <FaCopy fontSize="16" style={{ cursor: "pointer" }} />
-            </CopyToClipboard>{" "}
-          </Popover>
-        </div>
-        <div className="icon">
-          <a href={item.url} target="_blank">
-            <FiEdit fontSize="16" />
-          </a>
-        </div>
-        <div className="icon">
-          <Popconfirm
-            title="Are you sure？"
-            okText="Yes"
-            onConfirm={() => item.delete()}
-            cancelText="No">
-            <BsTrashFill fontSize="16" style={{ cursor: "pointer" }} />
-          </Popconfirm>
-        </div>
-      </div>
+      <Popover
+        content={() => (
+          <div>
+            <CopyToClipboard text={item.url}>
+              <div className="listItem" onClick={(e) => item.copy(e, null)}>
+                Copy
+              </div>
+            </CopyToClipboard>
+            <div className="listItem" onClick={() => item.delete()}>
+              Delete
+            </div>
+            <div className="listItem">
+              <a href={item.url} target="_blank">
+                {" "}
+                Preview
+              </a>
+            </div>
+          </div>
+        )}
+        placement="left"
+        title={false}>
+        <BiDotsVerticalRounded
+          style={{
+            fontSize: "20px",
+            cursor: "pointer",
+            color: "var(--lighterGray)",
+          }}
+        />
+      </Popover>
     ),
   },
 ];

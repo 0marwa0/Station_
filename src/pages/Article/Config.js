@@ -2,8 +2,9 @@
 
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { UserImage } from "../Sidebar";
-import { Checkbox } from "antd";
+import { Checkbox, Popover } from "antd";
 import { Mesg, FailedMesg } from "../../API/APIMessage";
+import { Link } from "react-router-dom";
 
 import { LoadData } from "../../API";
 import styled from "styled-components";
@@ -75,13 +76,26 @@ const ArticlesColumns = [
     },
   },
   {
-    key: "6",
+    key: 6,
     title: "",
-    dataIndex: "",
-    render: () => (
-      <BiDotsVerticalRounded
-        style={{ fontSize: "20px", color: "var(--lighterGray)" }}
-      />
+    dataIndex: "id",
+    render: (id) => (
+      <Popover
+        content={() => (
+          <div className="listItem">
+            <Link to={`/articles/${id}`}>Edit</Link>
+          </div>
+        )}
+        placement="left"
+        title={false}>
+        <BiDotsVerticalRounded
+          style={{
+            fontSize: "20px",
+            cursor: "pointer",
+            color: "var(--lighterGray)",
+          }}
+        />
+      </Popover>
     ),
   },
 ];

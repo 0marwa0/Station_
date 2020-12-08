@@ -1,7 +1,7 @@
 // Customer page config
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import React from "react";
-import { Checkbox, Tag } from "antd";
+import { Checkbox, Tag, Popover } from "antd";
 import { Popconfirm } from "antd";
 import { ReactComponent as Notifiy } from "../../public/images/solid bell.svg";
 import { IoMdNotificationsOutline } from "react-icons/io";
@@ -16,17 +16,17 @@ export const CustomersColumns = [
       multiple: 1,
     },
   },
-  {
-    key: 3,
-    title: "",
-    dataIndex: "notify",
+  // {
+  //   key: 3,
+  //   title: "",
+  //   dataIndex: "notify",
 
-    render: (item) => (
-      <div style={{ cursor: "pointer" }} onClick={() => item.onOpen()}>
-        <IoMdNotificationsOutline color="var(--darkGray)" />
-      </div>
-    ),
-  },
+  //   render: (item) => (
+  //     <div style={{ cursor: "pointer" }} onClick={() => item.onOpen()}>
+  //       <IoMdNotificationsOutline color="var(--darkGray)" />
+  //     </div>
+  //   ),
+  // },
   {
     key: 4,
     title: "Email",
@@ -85,12 +85,23 @@ export const CustomersColumns = [
     title: "",
     dataIndex: "id",
     render: (user) => (
-      <Popconfirm
-        title="Deactivate Customer？"
-        okText="Yes"
+      <Popover
+        content={() => (
+          <div>
+            <div className="listItem">Edit</div>
+            <div className="listItem" onClick={() => user.deactive(user.id)}>
+              Disable
+            </div>
+            <div
+              className="listItem"
+              //  onClick={() => user.onOpen()}
+            >
+              Notify
+            </div>
+          </div>
+        )}
         placement="left"
-        onConfirm={() => user.deactive(user.id)}
-        cancelText="No">
+        title={false}>
         <BiDotsVerticalRounded
           style={{
             fontSize: "20px",
@@ -98,7 +109,7 @@ export const CustomersColumns = [
             color: "var(--lighterGray)",
           }}
         />
-      </Popconfirm>
+      </Popover>
     ),
   },
 ];

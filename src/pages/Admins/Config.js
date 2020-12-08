@@ -5,6 +5,8 @@ import { Checkbox, Tag } from "antd";
 import { HiLockClosed } from "react-icons/hi";
 import { Popconfirm } from "antd";
 import { FaRegEdit } from "react-icons/fa";
+import { Popover, Button } from "antd";
+
 export const AdminsColumns = [
   { key: 1, title: "", dataIndex: "", render: () => <Checkbox /> },
   {
@@ -16,20 +18,20 @@ export const AdminsColumns = [
       multiple: 1,
     },
   },
-  {
-    key: 3,
-    title: "",
-    dataIndex: "pass",
+  // {
+  //   key: 3,
+  //   title: "",
+  //   dataIndex: "pass",
 
-    render: (item) => (
-      <div onClick={() => item.onOpen(item.id, true)}>
-        <HiLockClosed
-          color="var(--lighterGray)"
-          style={{ cursor: "pointer" }}
-        />
-      </div>
-    ),
-  },
+  //   render: (item) => (
+  //     <div onClick={() => item.onOpen(item.id, true)}>
+  //       <HiLockClosed
+  //         color="var(--lighterGray)"
+  //         style={{ cursor: "pointer" }}
+  //       />
+  //     </div>
+  //   ),
+  // },
   {
     key: 4,
     title: "User name",
@@ -98,27 +100,53 @@ export const AdminsColumns = [
       </>
     ),
   },
-  {
-    key: 9,
-    title: "",
-    dataIndex: "edit",
+  // {
+  //   key: 9,
+  //   title: "",
+  //   dataIndex: "edit",
 
-    render: (item) => (
-      <div onClick={() => item.onOpen(item.id, true)}>
-        <FaRegEdit color="var(--lighterGray)" style={{ cursor: "pointer" }} />
-      </div>
-    ),
-  },
+  //   render: (item) => (
+  //     <div onClick={() => item.onOpen(item.id, true)}>
+  //       <FaRegEdit color="var(--lighterGray)" style={{ cursor: "pointer" }} />
+  //     </div>
+  //   ),
+  // },
   {
     key: 8,
     title: "",
     dataIndex: "id",
     render: (user) => (
-      <Popconfirm
-        title="Deactivate admin？"
-        okText="Yes"
-        onConfirm={() => user.deactive(user.id)}
-        cancelText="No">
+      // <Popconfirm
+      //   title="Deactivate admin？"
+      //   okText="Yes"
+      //   onConfirm={
+
+      //     // user.deactive(user.id)
+      //   }
+      //   cancelText="No">
+      <Popover
+        content={() => (
+          <div>
+            <div className="listItem" onClick={() => user.deactive(user.id)}>
+              Disable
+            </div>
+            <div
+              className="listItem"
+              onClick={() => user.onedit(user.id, user)}>
+              Edit
+            </div>
+            {/* <div
+              className="listItem"
+              // onClick={() =>
+
+              // user.onOpen(user.id, true)}
+            >
+              Re set password
+            </div> */}
+          </div>
+        )}
+        placement="left"
+        title={false}>
         <BiDotsVerticalRounded
           style={{
             fontSize: "20px",
@@ -126,7 +154,8 @@ export const AdminsColumns = [
             color: "var(--lighterGray)",
           }}
         />
-      </Popconfirm>
+      </Popover>
+      // </Popconfirm>
     ),
   },
 ];

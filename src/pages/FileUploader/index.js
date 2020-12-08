@@ -8,7 +8,7 @@ import { FiEdit } from "react-icons/fi";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Checkbox, Tag, Tooltip, Popover, Drawer } from "antd";
 import React, { useState, useEffect } from "react";
-// import { FilUploadedColumns, FilesData } from "./Config";
+import { FilUploadedColumns, FilesData } from "./Config";
 import CustomPage from "../shared/CustomPage";
 import "../../styles/globals.css";
 import { DateName } from "../Dashboard";
@@ -37,7 +37,6 @@ function FilUploader(props) {
     setcopy(true);
     setcopiedUlr(url);
     seturl(id);
-    console.log(url, id);
   };
   const [showNotification, setShow] = useState(false);
   const showPopup = (showNotification) => {
@@ -166,123 +165,123 @@ function FilUploader(props) {
     }
   };
   const [url, seturl] = useState("");
-  const FilUploadedColumns = [
-    { key: "1", title: "", dataIndex: "", render: () => <Checkbox /> },
-    {
-      key: "2",
-      title: "File Title",
-      dataIndex: "FileTitle",
-      render: (item) => item,
-      sorter: {
-        compare: (a, b) => a.english - b.english,
-        multiple: 1,
-      },
-    },
+  // const FilUploadedColumns = [
+  //   { key: "1", title: "", dataIndex: "", render: () => <Checkbox /> },
+  //   {
+  //     key: "2",
+  //     title: "File Title",
+  //     dataIndex: "FileTitle",
+  //     render: (item) => item,
+  //     sorter: {
+  //       compare: (a, b) => a.english - b.english,
+  //       multiple: 1,
+  //     },
+  //   },
 
-    {
-      key: "3",
-      title: "Type",
-      dataIndex: "Type",
-      sorter: {
-        compare: (a, b) => a.chinese - b.chinese,
-        multiple: 3,
-      },
-      render: (Type) => (
-        <>
-          {Type.map((type) => {
-            let color;
-            if (type === "pdf" || type == "PDF") {
-              color = "orange";
-            } else if (type === "jpg" || type == "JPG") {
-              color = "blue";
-            } else {
-              color = "green";
-            }
-            return (
-              <Tag color={color} key={type}>
-                {type.toUpperCase()}
-              </Tag>
-            );
-          })}
-        </>
-      ),
-    },
-    {
-      key: "4",
-      title: "Size",
-      dataIndex: "Size",
-      sorter: {
-        compare: (a, b) => a.math - b.math,
-        multiple: 2,
-      },
-    },
-    {
-      key: "5",
-      title: "Uploaded Date",
-      dataIndex: "UploadedDate",
-      sorter: {
-        compare: (a, b) => a.english - b.english,
-        multiple: 1,
-      },
-    },
-    {
-      key: "6",
-      title: "Uploaded by",
-      dataIndex: "image",
-      render: (theImageURL) => (
-        <div style={{ width: "50px" }}>
-          <UserImage
-            alt={theImageURL}
-            src={require("../../public/images/user2.png")}
-          />
-        </div>
-      ),
-      sorter: {
-        compare: (a, b) => a.english - b.english,
-        multiple: 1,
-      },
-    },
-    {
-      key: "7",
-      title: "",
-      dataIndex: "id",
-      render: (item) => (
-        <div className="ResourcesIcon">
-          <div className="icon">
-            <Popover
-              content={<div>Copied !</div>}
-              // title={}
-              // onVisibleChange={(e) => item.copy(e, null)}
-              trigger="click"
-              visible={showNotification && item.id === url}
-              onVisibleChange={showPopup}
-              placement="top">
-              {/* {item.url + "m" + url} */}
-              <CopyToClipboard
-                text={item.url}
-                onCopy={(e) => item.copy(e, item.id)}>
-                <FaCopy fontSize="16" style={{ cursor: "pointer" }} />
-              </CopyToClipboard>{" "}
-            </Popover>
-          </div>
-          <div className="icon">
-            <a href={item.url} target="_blank">
-              <FiEdit fontSize="16" />
-            </a>
-          </div>
-          <div className="icon">
-            <Popconfirm
-              title="Are you sure？"
-              okText="Yes"
-              onConfirm={() => item.delete()}
-              cancelText="No">
-              <BsTrashFill fontSize="16" style={{ cursor: "pointer" }} />
-            </Popconfirm>
-          </div>
-        </div>
-      ),
-    },
-  ];
+  //   {
+  //     key: "3",
+  //     title: "Type",
+  //     dataIndex: "Type",
+  //     sorter: {
+  //       compare: (a, b) => a.chinese - b.chinese,
+  //       multiple: 3,
+  //     },
+  //     render: (Type) => (
+  //       <>
+  //         {Type.map((type) => {
+  //           let color;
+  //           if (type === "pdf" || type == "PDF") {
+  //             color = "orange";
+  //           } else if (type === "jpg" || type == "JPG") {
+  //             color = "blue";
+  //           } else {
+  //             color = "green";
+  //           }
+  //           return (
+  //             <Tag color={color} key={type}>
+  //               {type.toUpperCase()}
+  //             </Tag>
+  //           );
+  //         })}
+  //       </>
+  //     ),
+  //   },
+  //   {
+  //     key: "4",
+  //     title: "Size",
+  //     dataIndex: "Size",
+  //     sorter: {
+  //       compare: (a, b) => a.math - b.math,
+  //       multiple: 2,
+  //     },
+  //   },
+  //   {
+  //     key: "5",
+  //     title: "Uploaded Date",
+  //     dataIndex: "UploadedDate",
+  //     sorter: {
+  //       compare: (a, b) => a.english - b.english,
+  //       multiple: 1,
+  //     },
+  //   },
+  //   {
+  //     key: "6",
+  //     title: "Uploaded by",
+  //     dataIndex: "image",
+  //     render: (theImageURL) => (
+  //       <div style={{ width: "50px" }}>
+  //         <UserImage
+  //           alt={theImageURL}
+  //           src={require("../../public/images/user2.png")}
+  //         />
+  //       </div>
+  //     ),
+  //     sorter: {
+  //       compare: (a, b) => a.english - b.english,
+  //       multiple: 1,
+  //     },
+  //   },
+  //   {
+  //     key: "7",
+  //     title: "",
+  //     dataIndex: "id",
+  //     render: (item) => (
+  //       <div className="ResourcesIcon">
+  //         <div className="icon">
+  //           <Popover
+  //             content={<div>Copied !</div>}
+  //             // title={}
+  //             // onVisibleChange={(e) => item.copy(e, null)}
+  //             trigger="click"
+  //             visible={showNotification && item.id === url}
+  //             onVisibleChange={showPopup}
+  //             placement="top">
+  //             {/* {item.url + "m" + url} */}
+  //             <CopyToClipboard
+  //               text={item.url}
+  //               onCopy={(e) => item.copy(e, item.id)}>
+  //               <FaCopy fontSize="16" style={{ cursor: "pointer" }} />
+  //             </CopyToClipboard>{" "}
+  //           </Popover>
+  //         </div>
+  //         <div className="icon">
+  //           <a href={item.url} target="_blank">
+  //             <FiEdit fontSize="16" />
+  //           </a>
+  //         </div>
+  //         <div className="icon">
+  //           <Popconfirm
+  //             title="Are you sure？"
+  //             okText="Yes"
+  //             onConfirm={() => item.delete()}
+  //             cancelText="No">
+  //             <BsTrashFill fontSize="16" style={{ cursor: "pointer" }} />
+  //           </Popconfirm>
+  //         </div>
+  //       </div>
+  //     ),
+  //   },
+  // ];
 
   return (
     <div>

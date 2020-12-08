@@ -2,7 +2,16 @@
 
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { UserImage } from "../Sidebar";
-import { Checkbox, Progress, Tooltip, Tag, Space, Button, Input } from "antd";
+import {
+  Checkbox,
+  Progress,
+  Tooltip,
+  Tag,
+  Space,
+  Button,
+  Input,
+  Popover,
+} from "antd";
 import React from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -109,25 +118,30 @@ export const EventsColumns = [
       multiple: 1,
     },
   },
+
   {
-    key: " 9",
+    key: 8,
     title: "",
     dataIndex: "edit",
-
-    render: (id) => (
-      <Link to={`/editevent/${id}`}>
-        <FaRegEdit color="var(--lighterGray)" style={{ cursor: "pointer" }} />
-      </Link>
-    ),
-  },
-  {
-    key: "8",
-    title: "",
-    dataIndex: "",
-    render: () => (
-      <BiDotsVerticalRounded
-        style={{ fontSize: "20px", color: "var(--lighterGray)" }}
-      />
+    render: (item) => (
+      <Popover
+        content={() => (
+          <div>
+            <div className="listItem">
+              <Link to={`/editevent/${item.id}`}>Edit</Link>
+            </div>
+          </div>
+        )}
+        placement="left"
+        title={false}>
+        <BiDotsVerticalRounded
+          style={{
+            fontSize: "20px",
+            cursor: "pointer",
+            color: "var(--lighterGray)",
+          }}
+        />
+      </Popover>
     ),
   },
 ];

@@ -116,7 +116,6 @@ function Resources(props) {
       "resource",
       resource,
       (data) => {
-        console.log(data, resource, "fucning story");
         if (data.errMsg) {
           Mesg(data.errMsg);
         } else {

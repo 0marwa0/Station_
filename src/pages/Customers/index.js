@@ -57,13 +57,17 @@ function Customers(props) {
           let Users = [];
           data.data.rows.map((user) => {
             Users.push({
-              id: { id: user.id, deactive: () => deactive(user.id) },
+              id: {
+                id: user.id,
+                onOpen: () => onOpenModalNotify(user.id, true),
+                deactive: () => deactive(user.id),
+              },
 
               FullName: user.name,
               Email: user.email,
-              notify: {
-                onOpen: () => onOpenModalNotify(user.id, true),
-              },
+              // notify: {
+              //   onOpen: () => onOpenModalNotify(user.id, true),
+              // },
               PhoneNumber: user.phone,
               Date: DateName(user.createdAt),
               Status: user.active ? ["Enabled"] : ["Disabled"],

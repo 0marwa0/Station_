@@ -3,7 +3,16 @@ import { BiDotsVerticalRounded } from "react-icons/bi";
 import React from "react";
 import { Link } from "react-router-dom";
 import { LoadDataByID } from "../../API";
-import { Checkbox, Table, Tooltip, Tag, Space, Button, Input } from "antd";
+import {
+  Checkbox,
+  Popover,
+  Table,
+  Tooltip,
+  Tag,
+  Space,
+  Button,
+  Input,
+} from "antd";
 const monthNames = [
   "January",
   "February",
@@ -144,12 +153,26 @@ export const BookingColumns = [
     },
   },
   {
+    key: 8,
     title: "",
-    dataIndex: "",
-    render: () => (
-      <BiDotsVerticalRounded
-        style={{ fontSize: "20px", color: "var(--lighterGray)" }}
-      />
+    dataIndex: "edit",
+    render: (item) => (
+      <Popover
+        content={() => (
+          <div>
+            <div className="listItem">Edit</div>
+          </div>
+        )}
+        placement="left"
+        title={false}>
+        <BiDotsVerticalRounded
+          style={{
+            fontSize: "20px",
+            cursor: "pointer",
+            color: "var(--lighterGray)",
+          }}
+        />
+      </Popover>
     ),
   },
 ];

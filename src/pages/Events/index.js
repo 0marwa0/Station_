@@ -39,6 +39,7 @@ function Events(props) {
             console.log(Events);
             Events.push({
               id: index + 1,
+              edit: item.id,
               Organizer: { name: item.organizer, id: item.bookId },
               Date: DateName(item.createdAt),
               Space: [`${item.space.title}`],
