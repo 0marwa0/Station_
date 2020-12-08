@@ -15,7 +15,10 @@
 .approve {
   color: var(--darkGreen) !important;
 }
-
+/**editer*/
+.ce-block__content {
+  margin: 10px 0 !important;
+}
 .Modal {
   position: absolute;
   top: 0;
@@ -55,7 +58,21 @@
   background-color: transparent !important;
   margin-bottom: 40px !important;
 }
-
+/***tab **/
+.MuiAppBar-colorPrimary {
+  color: black !important;
+  background-color: white !important;
+  border-bottom: 1px solid var(--lighterGray) !important;
+}
+.PrivateTabIndicator-colorSecondary-4 {
+  background-color: transparent !important;
+}
+.PrivateTabIndicator-colorSecondary-10 {
+  background-color: transparent !important;
+}
+.MuiPaper-elevation4 {
+  box-shadow: unset !important;
+}
 .titleIcon {
   padding: 7px 5px;
   height: 38px;
@@ -118,9 +135,9 @@
   /* width: 100%; */
   border-radius: 7px;
   min-height: 270px;
-
+  font-size: 18px;
   margin-bottom: 10px;
-  background-color: var(--lightBlue);
+  background-color: #f4f7fc;
   /*margin-top: 20px; */
   gap: 5%;
 
@@ -132,7 +149,7 @@
 }
 
 .stylecss .ant-select-selector {
-  width: 100px !important;
+  width: 170px !important;
   background-color: var(--lightGray) !important;
 }
 .ant-select-selector {
@@ -144,7 +161,7 @@ body {
 }
 .SkeletonCss {
   width: 70;
-  background-color: rebeccapurple;
+  /* background-color: rebeccapurple; */
   height: 3;
 }
 /*******************************  slick styles ******************/
@@ -438,7 +455,13 @@ body {
   padding: 15px;
   pointer-events: none;
 }
-
+.upload_modal_event .img {
+  height: auto;
+  width: 150px;
+  height: 140px;
+  padding: 15px;
+  pointer-events: none;
+}
 .upload_img_close {
   display: flex;
   flex-direction: column;

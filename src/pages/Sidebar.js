@@ -392,7 +392,9 @@ function SideBar(props) {
       </SideWrapper>
       {page === "" ? null : (
         <div className="NavBar_ctrl">
-          {page.includes("booking") || page.includes("bookingdetalis") ? (
+          {page.includes("booking") ||
+          page.includes("bookingdetalis") ||
+          page.includes("createEvent") ? (
             <ul>
               <li className="listTitle">
                 <div className="titleIcon">
@@ -408,7 +410,12 @@ function SideBar(props) {
                 }>
                 <Link to="/booking">Books</Link>
               </li>
-              <li className={page === "events" ? "active" : ""}>
+              <li
+                className={
+                  page === "events" || page.includes("createEvent")
+                    ? "active"
+                    : ""
+                }>
                 <Link to="/events">Events</Link>
               </li>
             </ul>

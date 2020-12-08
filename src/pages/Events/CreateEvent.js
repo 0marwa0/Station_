@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { IoMdRefresh } from "react-icons/io";
 import Editor from "@stfy/react-editor.js";
+import { Tabs } from "antd";
+import { StickyContainer, Sticky } from "react-sticky";
 import { useParams } from "react-router-dom";
 import { LoadData, addData, addFile } from "../../API";
 import { SuccessMesg, FailedMesg, Mesg } from "../../API/APIMessage";
@@ -24,7 +26,18 @@ import styled from "styled-components";
 import { ImAttachment } from "react-icons/im";
 import { FaTrashAlt } from "react-icons/fa";
 import { CustomButton } from "../shared/SharedComponents";
+import TabsWrappedLabel from "./tap";
+import { CustomInput } from "../shared/SharedStyle";
+export const HeadText = styled.div`
+  padding: 10px 0;
+  font-size: 16px;
+  font-weight: bold;
+`;
+export const Space = styled.div`
+  width: 17px;
+`;
 const { Option } = Select;
+const { TabPane } = Tabs;
 
 export const TextNote = styled.div`
   color: var(--darkGray);
@@ -32,11 +45,13 @@ export const TextNote = styled.div`
 `;
 
 const EventContent = styled(Col)`
-  width: 75%;
-  height: auto;
-  padding: 40px 50px;
+  width: 72%;
+  height: 800px;
+
   background-color: white;
   border: 1px solid var(--lighterGray);
+  border-top: none;
+
   border-radius: 7px;
 `;
 const WidgetCol = styled(Col)`
@@ -69,14 +84,14 @@ const LanguageOption = styled.div`
 const LanguageSide = styled.div`
   padding: 10px 0;
   background-color: white;
-
-  border-bottom: 1px solid var(--lighterGray);
+  font-weight: bold;
 `;
 
-const EventHeader = styled.div`
+export const EventHeader = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-top:
   padding-bottom: 30px;
   border-bottom: 1px solid var(--lighterGray);
 `;
@@ -93,29 +108,30 @@ const LanguageWidget = styled.div`
   padding: 10px 20px;
   border-radius: 7px;
 `;
-const InputTitle = styled(Input)`
+export const InputTitle = styled(Input)`
   width: 80%;
   height: 60px;
   font-size: 20px;
-
+  border: none;
   font-weight: 500;
 `;
 const PageTitle = styled.span`
-  fontsize: 20px;
+  font-size: 27px;
   font-weight: bold;
 `;
 const MainLayout = styled(Col)`
-  width: 99%;
+  width: 100%;
   display: flex;
-  height: 70px;
+  height: 100px;
   align-items: center;
+  border-bottom: 1px solid var(--lighterGray);
 
   justify-content: space-between;
 `;
 
 const GrayText = styled.div`
   color: var(--darkGray);
-  font-size: 1vw;
+  font-size: 0.7vw;
 `;
 const Index = (props) => {
   let { id } = useParams();
@@ -195,146 +211,153 @@ const Index = (props) => {
         break;
     }
   };
+  const [imageName, setimageName] = useState();
 
   const Props = {
     multiple: false,
-
-    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
+    name: "file",
+    action: "https://station-solo.herokuapp.com/dash/v1/upload/file",
+    headers: { token: localStorage.getItem("station_token") },
 
     onChange({ file, fileList }) {
-      HandleFile(file.originFileObj);
+      if (file.status === "done") {
+        let data = {
+          uid: file.uid,
+          name: file.name,
+          url: file.response.data.link,
+        };
+        props.handlesiz(file.size);
+        props.handleFile(file.response.data.link);
+
+        console.log(file, "don");
+        setimageName(data);
+      }
     },
   };
 
+  const renderTabBar = (props, DefaultTabBar) => (
+    <Sticky bottomOffset={80}>
+      {({ style }) => (
+        <DefaultTabBar
+          {...props}
+          className="site-custom-tab-bar"
+          style={{ ...style }}
+        />
+      )}
+    </Sticky>
+  );
+
   return (
     <CustomPageWrapper>
-      <GlobalStyle />
+      {/* <GlobalStyle /> */}
       <SideBar />
+
       <PageContent>
-        <Row>
-          <Link to="/Events">
-            <PageBack>
-              <BsArrowLeft />
-              <div>Events</div>
-            </PageBack>
-          </Link>
-          <MainLayout>
-            <PageTitle> Create New Event</PageTitle>
-
-            <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
-              <span style={{ color: "var(--textGray)", marginRight: "8px" }}>
-                Save as draft
-              </span>
-              <CustomButton undo>
-                <RefreshIconLeft />
-              </CustomButton>
-              <CustomButton undo>
-                <RefreshIcon />
-              </CustomButton>
-              <CustomButton>Preview</CustomButton>{" "}
-              <CustomButton main onOpen={createEvent}>
-                Publish Event{" "}
-              </CustomButton>
-            </div>
-          </MainLayout>
-        </Row>
-        <Row
-          style={{
-            display: "flex",
-            gap: "2%",
-          }}>
-          <EventContent>
-            <EventHeader>
-              <div>
-                <InputTitle
-                  placeholder="Add event title .."
-                  onChange={(e) => handleselect(e, "title")}
-                />
+        {" "}
+        <div style={{ margin: "20px" }}>
+          <Row>
+            <MainLayout>
+              <div
+                style={{
+                  height: "110px",
+                  margin: "60px 0",
+                }}>
+                <Link to="/booking">
+                  <PageBack>
+                    <BsArrowLeft />
+                    <div>Booking</div>
+                  </PageBack>
+                </Link>
+                <PageTitle> create Event from Booking </PageTitle>
               </div>
-              <div>
-                {" "}
-                <Input
-                  placeholder="Add event Price"
-                  onChange={(e) => handleselect(e, "price")}
-                  style={{ width: "200px" }}
-                />
-              </div>{" "}
-            </EventHeader>
 
-            <div
-              style={{
-                padding: "20px 0",
-                fontSize: "17px",
-              }}>
-              <p>Start writing or tap here to add images or videos ..</p>
-              {t}
-              <Editor
-                onData={(e) => handletext(e.blocks)}
-                // instanceRef={(instance) => (instanceRef.current = instance)}
-                // tools={EDITOR_JS_TOOLS}
-                tools={toole}
-                // data={data}
-              />
-            </div>
-          </EventContent>
-          <Col
+              <div
+                style={{ display: "flex", gap: "6px", alignItems: "center" }}>
+                <span style={{ color: "var(--textGray)", marginRight: "8px" }}>
+                  Save as draft
+                </span>
+                <CustomButton undo>
+                  <RefreshIconLeft />
+                </CustomButton>
+                <CustomButton undo>
+                  <RefreshIcon />
+                </CustomButton>
+                <CustomButton>Preview</CustomButton>
+                <Space />
+
+                <CustomButton main onOpen={createEvent}>
+                  Publish Event{" "}
+                </CustomButton>
+              </div>
+            </MainLayout>
+          </Row>
+          <Row
             style={{
-              width: "22%",
+              display: "flex",
+              gap: "2%",
             }}>
-            <UploadContenter>
-              <div style={{ padding: "10px 0" }}>Header Photo</div>
+            <EventContent>
+              <TabsWrappedLabel />
+            </EventContent>
+            <Col
+              style={{
+                width: "25%",
+              }}>
+              <UploadContenter>
+                <HeadText>Header Photo</HeadText>
 
-              <Upload {...Props}>
-                <div className="upload_modal_event">
-                  <img src={require("./default2.png")} className="img" />
+                <Upload {...Props}>
+                  <div className="upload_modal_event">
+                    <img src={require("./default2.png")} className="img" />
 
-                  <span
+                    <span
+                      style={{
+                        color: "var(--darkGray)",
+                      }}>
+                      Choose any file form computer or Drag & Drop it here
+                    </span>
+                    <span style={{ margin: "20px 0" }}>
+                      <Button>Choose File</Button>
+                    </span>
+                  </div>
+                </Upload>
+              </UploadContenter>
+              <LanguageWidget>
+                <HeadText>Settings</HeadText>
+                <div>
+                  <div
                     style={{
-                      color: "var(--darkGray)",
+                      display: "flex",
+                      justifyContent: "space-between",
                     }}>
-                    Choose any file form computer or Drag & Drop it here
-                  </span>
-                  <span style={{ margin: "20px 0" }}>
-                    <Button>Choose File</Button>
-                  </span>
-                </div>
-              </Upload>
-            </UploadContenter>
-            <LanguageWidget>
-              <LanguageSide>Language</LanguageSide>
-              <div>
-                <LanguageOption>
-                  <GrayText> Main Language</GrayText>
+                    <GrayText>Price</GrayText>
+                    <CustomInput
+                      placeholder="0"
+                      onChange={(e) => handleselect(e, "price")}
+                      style={{ width: "100px" }}
+                    />
+                  </div>
 
-                  <Select
-                    suffixIcon={<DropIcon />}
-                    value="English"
-                    className="stylecss"
-                    // style={{ backgroundColor: "var(--lighterGray)" }}
-                    // onChange={(e) => handleselect(e, "end")}
-                  >
-                    <Option key="English">English</Option>
-                    <Option key="Arabic">Arabic</Option>
-                  </Select>
-                </LanguageOption>
-                <LanguageOption>
-                  <GrayText> Translate to</GrayText>
-                  <Select
-                    suffixIcon={<DropIcon />}
-                    value="Arabic"
-                    className="stylecss"
-                    // onChange={(e) => handleselect(e, "end")}
-                  >
-                    <Option key="English" def>
-                      English
-                    </Option>
-                    <Option key="Arabic">Arabic</Option>
-                  </Select>
-                </LanguageOption>
-              </div>
-            </LanguageWidget>
-          </Col>
-        </Row>
+                  <LanguageOption>
+                    <GrayText> Platform</GrayText>
+                    <Select
+                      suffixIcon={<DropIcon />}
+                      value="Arabic"
+                      className="stylecss"
+                      // onChange={(e) => handleselect(e, "end")}
+                    >
+                      <Option key="English" def>
+                        both
+                      </Option>
+                      <Option key="Arabic">web</Option>
+                      <Option key="Arabic">app</Option>
+                    </Select>
+                  </LanguageOption>
+                </div>
+              </LanguageWidget>
+            </Col>
+          </Row>
+        </div>
       </PageContent>
     </CustomPageWrapper>
   );

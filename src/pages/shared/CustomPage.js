@@ -374,10 +374,13 @@ function CustomPage(props) {
               ) : pageTitleName === "event" ? (
                 <CustomButton
                   main
-                  lable={`New ${
-                    pageTitleName.charAt(0).toUpperCase() +
-                    pageTitleName.slice(1)
-                  }`}
+                  lable={
+                    `New Booking `
+                    // ${
+                    //   pageTitleName.charAt(0).toUpperCase() +
+                    //   pageTitleName.slice(1)
+                    // }
+                  }
                   pageTitle={pageTitle}
                   loading={props.Loading}
                   onOpen={() => props.onOpenModal(true)}>
