@@ -26,7 +26,7 @@ export const ButtonStyled = styled(Button)`
   height: ${(props) => (props.extra ? "110px" : "auto")};
   padding: ${(props) =>
     props.main
-      ? "0 15px"
+      ? "0 20px"
       : props.extra
       ? "0 50px"
       : props.undo

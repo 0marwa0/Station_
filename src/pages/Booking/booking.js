@@ -293,7 +293,6 @@ function Index(props) {
                 <Link to="/booking">
                   <PageBack>
                     <BsArrowLeft />
-
                     <div>Booking</div>
                   </PageBack>
                 </Link>
@@ -305,7 +304,12 @@ function Index(props) {
                 </PageTitle>
               </Title>
               {props.event ? (
-                ""
+                <div
+                  style={{
+                    marginTop: "50px",
+                  }}>
+                  <ButtonStyled main>View Event</ButtonStyled>
+                </div>
               ) : (
                 <div
                   style={{
