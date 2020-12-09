@@ -144,6 +144,11 @@ function Booking(props) {
     setrecived("");
     setdays([]);
   };
+  const [name, setname] = useState("");
+  const [phone, setphone] = useState();
+  const [eamil, setemail] = useState();
+  const [birthday, setbirthday] = useState("");
+  const [gender, setgender] = useState("");
   const [title, settitle] = useState("");
   const [price, setprice] = useState();
   const [received, setrecived] = useState();
@@ -173,15 +178,15 @@ function Booking(props) {
       user: {
         name: "Hamdon",
         phone: "9647819898913",
-        password: "9647819898919",
+        password: "",
         sex: "mail",
         birthday: "12/12/1992",
         address: "Haey El Shuhadaa",
-        education: "BA in C.S",
-        jobTitle: "Content Writer",
-        email: "me@mycompany.ii",
+        education: "",
+        jobTitle: "",
+        email: "",
         lang: "ar",
-        image: "image link",
+        image: "",
       },
     };
 

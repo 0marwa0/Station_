@@ -9,15 +9,14 @@ import { ReservationLoading } from "../shared/Loading";
 import TimeAgo from "react-simple-timeago";
 const ReservationItem = styled.div`
   display: grid;
-  grid-template-columns: 15% max-content 12%;
+  grid-template-columns: auto 1fr auto;
   width: 100%;
   padding-bottom: 3%;
   align-items: center;
-  gap: 12px;
-
   cursor: pointer;
   padding-top: 3%;
 `;
+// gap: 12px;
 const ItemHeader = styled.div`
   display: flex;
   justify-content: space-between;
@@ -30,6 +29,7 @@ const ReservIcon = styled.div`
   height: 2.7vw;
   border-radius: 10px;
   display: flex;
+  margin-right: 10px;
   align-items: center;
   font-size: 1vw;
   justify-content: center;
@@ -41,8 +41,10 @@ const SubA = styled.div`
   height: 2.7vw;
   border-radius: 10px;
   display: flex;
+  margin-right: 10px;
   align-items: center;
   font-size: 1vw;
+
   justify-content: center;
   background-color: var(--lightRed);
 `;
@@ -51,6 +53,7 @@ const SubB = styled.div`
   height: 2.7vw;
   border-radius: 10px;
   display: flex;
+  margin-right: 10px;
   align-items: center;
   font-size: 1vw;
   justify-content: center;
@@ -61,6 +64,7 @@ const SubC = styled.div`
   height: 2.7vw;
   border-radius: 10px;
   display: flex;
+  margin-right: 10px;
   align-items: center;
   font-size: 1vw;
   justify-content: center;
@@ -156,9 +160,12 @@ function Index(props) {
                       to={{
                         pathname: `/bookingDetalis/${item.id}`,
                       }}>
+                      {" "}
                       <ReservationItem>
                         {place === "Event Hall" ? (
-                          <ReservIcon> Hall</ReservIcon>
+                          <span>
+                            <ReservIcon> Hall</ReservIcon>
+                          </span>
                         ) : place === "A" ? (
                           <SubA>{item.place}</SubA>
                         ) : place === "B" ? (
@@ -201,7 +208,7 @@ function Index(props) {
                             justifyContent: "flex-end",
                             textAlign: "right",
                             height: "23px",
-                            width: "max-content",
+                            // width: "max-content",
                             backgroundColor: "white",
                           }}>
                           <TimeAgo date={item.time} />

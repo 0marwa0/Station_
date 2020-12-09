@@ -826,6 +826,7 @@ th:last-child {
   min-height: 160px;
   min-width: 205px;
   padding: 11px;
+
   text-align: left !important;
   overflow: hidden;
   display: flex;

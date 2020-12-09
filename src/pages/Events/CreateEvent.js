@@ -221,10 +221,7 @@ const Index = (props) => {
   };
   // let {id}=useParams()
 
-  useEffect(() => {
-    settitle("ddd");
-    console.log(props.data.title, "useeffect");
-  }, []);
+  useEffect(() => {}, []);
   const handletext = (e) => {
     setdescription(e);
   };
@@ -356,7 +353,7 @@ const Index = (props) => {
                           marginBottom: "10px",
                           // textAlign: "right",
                         }}
-                        defaultValue={title}
+                        // defaultValue={title}
                         placeholder="Event Title Goes Here .."
                         onChange={(e) => handleselect(e, "titleAr")}
                       />
