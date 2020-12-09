@@ -3,8 +3,9 @@ import { Button, Input } from "antd";
 import styled from "styled-components";
 const { TextArea } = Input;
 export const CustomInput = styled(Input)`
-  border-radius: 7px;
+  border-radius: ${(props) => (props.search ? "7px 7px 0 0" : "7px")};
   border: 1px solid #e1e4e8;
+  border-bottom: ${(props) => (props.search ? "none" : "1px solid #e1e4e8")};
   color: ${(props) => (props.gray ? " var(--darkGray)" : "black")};
   background-color: ${(props) => (props.gray ? "var(--lighterGray)" : "white")};
 `;

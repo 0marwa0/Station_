@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { ReactComponent as Close } from "../../../public/images/close.svg";
 import { Mesg, FailedMesg } from "../../../API/APIMessage";
 import { LoadData } from "../../../API";
-
+import Step1 from "../NewBooking/Modal/Step1";
 import FirstPage from "./Modal/FirstPage";
 import SecondPage from "./Modal/SecondPage";
 import ThirdPage from "./Modal/ThirdPage";
@@ -145,16 +145,18 @@ function NewBooking(props) {
         return (
           <div>
             {i.id === 1 ? (
+              <Step1 />
+            ) : i.id === 2 ? (
               <FirstPage
                 handleInput={props.handleInput}
                 handleselect={props.handleselect}
               />
-            ) : i.id === 2 ? (
+            ) : i.id === 3 ? (
               <SecondPage
                 // handleInput={props.handleInput}
                 handleselect={props.handleselect}
               />
-            ) : i.id === 3 ? (
+            ) : i.id === 4 ? (
               <ThirdPage
                 coffees={coffees}
                 lunches={lunches}
@@ -162,7 +164,7 @@ function NewBooking(props) {
                 Loading={Loading}
                 handleselect={props.handleselect}
               />
-            ) : i.id === 4 ? (
+            ) : i.id === 5 ? (
               <ForthPage
                 handleInput={props.handleInput}
                 edit={props.edit}
