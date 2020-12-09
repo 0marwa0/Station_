@@ -325,7 +325,7 @@ function Index(props) {
                         ? "approve"
                         : Data.status === "rejected"
                         ? "reject"
-                        : Data.status === "Pending"
+                        : Data.status === "pending"
                         ? "pending"
                         : ""
                     }>
