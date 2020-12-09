@@ -172,7 +172,7 @@
 }
 
 .stylecss .ant-select-selector {
-  width: 170px !important;
+  width: 8vw !important;
   background-color: var(--lightGray) !important;
 }
 .ant-select-selector {
@@ -272,6 +272,7 @@ body {
   color: black !important;
   background-color: var(--yellow) !important;
 }
+
 /**********************************************************/
 /******************* calneder styles  ********************/
 

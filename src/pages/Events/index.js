@@ -48,7 +48,6 @@ function Events(props) {
                 .filter((i) => i.id === item.approvedBy)
                 .map((i) => i.username)
                 .toString(),
-              edit: item.bookId,
             });
           });
           setdata(Events);

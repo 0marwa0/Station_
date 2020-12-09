@@ -222,8 +222,6 @@ const Index = (props) => {
   };
   const [t, sett] = useState("");
   const handletext = (e, key) => {
-    console.log(e, "editer data");
-
     setdescription(e);
   };
   const handleselect = (e, key) => {
@@ -275,7 +273,6 @@ const Index = (props) => {
   };
   // console.log("its ", articles);
   let item = articles;
-  console.log(props.description, "what now");
   return (
     <CustomPageWrapper>
       {/* <GlobalStyle /> */}
@@ -297,7 +294,9 @@ const Index = (props) => {
                     <div>Booking</div>
                   </PageBack>
                 </Link>
-                <PageTitle>New Article </PageTitle>
+                <PageTitle>
+                  {props.type === "edit" ? "Update Article" : "New Article"}{" "}
+                </PageTitle>
               </div>
 
               <div
@@ -315,7 +314,7 @@ const Index = (props) => {
                 <Space />
 
                 <CustomButton main onOpen={createEvent}>
-                  Publish Event{" "}
+                  {props.type === "edit" ? "Save" : "Finsh"}
                 </CustomButton>
               </div>
             </MainLayout>

@@ -123,12 +123,12 @@ export const EventsColumns = [
     key: 8,
     title: "",
     dataIndex: "edit",
-    render: (item) => (
+    render: (id) => (
       <Popover
         content={() => (
           <div>
             <div className="listItem">
-              <Link to={`/editevent/${item.id}`}>Edit</Link>
+              <Link to={`/editevent/${id}`}>Edit</Link>
             </div>
           </div>
         )}

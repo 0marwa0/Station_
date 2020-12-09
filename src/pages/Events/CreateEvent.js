@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { IoMdRefresh } from "react-icons/io";
 import Editor from "@stfy/react-editor.js";
 import { Tabs } from "antd";
 import { StickyContainer, Sticky } from "react-sticky";
 import { useParams } from "react-router-dom";
+import { EventContext } from "./editEvent";
 import { LoadData, addData, addFile } from "../../API";
 import { SuccessMesg, FailedMesg, Mesg } from "../../API/APIMessage";
 import { ReactComponent as RefreshIcon } from "../../public/images/solid undo-right.svg";
@@ -28,6 +29,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import { CustomButton } from "../shared/SharedComponents";
 import TabsWrappedLabel from "./tap";
 import { CustomInput } from "../shared/SharedStyle";
+// import {  EventsData } from "../../fakeData";
 export const HeadText = styled.div`
   padding: 10px 0;
   font-size: 16px;
@@ -78,7 +80,6 @@ const LanguageOption = styled.div`
   gap: 5px;
 
   justify-content: space-between;
-  background-color: white;
 `;
 const LanguageSide = styled.div`
   padding: 10px 0;
@@ -130,14 +131,21 @@ const MainLayout = styled(Col)`
 
 const GrayText = styled.div`
   color: var(--darkGray);
-  font-size: 0.7vw;
+  font-size: 18px;
 `;
+
 const Index = (props) => {
   let { id } = useParams();
+  let EventInfo = useContext(EventContext);
+
   const [Active, setActive] = useState(false);
-  const [title, settitle] = useState("");
   const [price, setprice] = useState("");
+  const [title, settitle] = useState("");
+
   const [description, setdescription] = useState("");
+  const [platform, setplatform] = useState("");
+  const [titleAr, settitleAr] = useState("");
+  const [descriptionAr, setdescriptionAr] = useState("");
   const [Loading, setLoading] = useState(false);
   const [file, setfile] = useState("");
 
@@ -148,53 +156,83 @@ const Index = (props) => {
 
   const HandleFile = (e) => {
     setImage(e);
-    console.log(e, "whatttttttt");
   };
   const [allowToChange, setallowToChange] = useState(false);
 
   const createEvent = () => {
-    let File = new FormData();
-    File.append("file", Image);
-    addFile(
-      "upload/file",
-      File,
-      (data) => {
-        if (data.errMsg) {
-          Mesg(data.errMsg);
+    let event = {
+      id: id,
+      image: Image,
+      title,
+      // titleAr: titleAr,
+      // descriptionAr: JSON.stringify(descriptionAr),
+      description: JSON.stringify(description),
+      lang: "ar",
+      ticketPrice: price,
+      // platform: platform,
+    };
+    console.log(event, "hi");
+    addData(
+      "toevent",
+      event,
+      (msg, Data) => {
+        if (msg) {
+          Mesg(msg);
         } else {
-          let event = {
-            id: id,
-            image: data.data.link,
-            title,
-            description,
-            lang: "ar",
-            ticketPrice: price,
-          };
-          console.log(event);
-
-          addData(
-            "toevent",
-            event,
-            (mesg, Data) => {
-              SuccessMesg("Create Event Done!");
-              setLoading(false);
-            },
-            (err) => {
-              setLoading(false);
-
-              FailedMesg(err);
-            }
-          );
+          SuccessMesg("Event Created Successfully!");
+          setLoading(false);
+          // console.log(Data);
         }
       },
       (err) => {
-        FailedMesg(err.toString());
+        setLoading(false);
+
+        FailedMesg(err);
       }
     );
   };
-  const [t, sett] = useState("");
-  const handletext = (e, key) => {
+
+  const updateEvent = () => {
+    let event = {
+      id: id,
+      image: Image,
+      title,
+      // titleAr: titleAr,
+      // descriptionAr: JSON.stringify(descriptionAr),
+      description: JSON.stringify(description),
+      lang: "ar",
+      ticketPrice: price,
+      // platform: platform,
+    };
+    // addData(
+    //   "event/edit/",
+    //   event,
+    //   (mesg, Data) => {
+    //     SuccessMesg("Event Updated Successfully!");
+    //     setLoading(false);
+    //     console.log(Data);
+    //   },
+    //   (err) => {
+    //     setLoading(false);
+
+    //     FailedMesg(err);
+    //   }
+    // );
+  };
+  // let {id}=useParams()
+
+  useEffect(() => {
+    settitle("ddd");
+    console.log(props.data.title, "useeffect");
+  }, []);
+  const handletext = (e) => {
     setdescription(e);
+  };
+  const handletextAr = (e) => {
+    setdescriptionAr(e);
+  };
+  const handletextPlat = (e) => {
+    setplatform(e);
   };
   const handleselect = (e, key) => {
     let value = e.target.value;
@@ -202,9 +240,12 @@ const Index = (props) => {
       case "title":
         settitle(value);
         break;
-
+      case "titleAr":
+        settitleAr(value);
+        break;
       case "price":
         setprice(value);
+
         break;
       default:
         break;
@@ -225,26 +266,27 @@ const Index = (props) => {
           name: file.name,
           url: file.response.data.link,
         };
-        props.handlesiz(file.size);
-        props.handleFile(file.response.data.link);
 
-        console.log(file, "don");
+        HandleFile(file.response.data.link);
+
         setimageName(data);
       }
     },
   };
 
-  const renderTabBar = (props, DefaultTabBar) => (
-    <Sticky bottomOffset={80}>
-      {({ style }) => (
-        <DefaultTabBar
-          {...props}
-          className="site-custom-tab-bar"
-          style={{ ...style }}
-        />
-      )}
-    </Sticky>
-  );
+  // const renderTabBar = (props, DefaultTabBar) => (
+  //   <Sticky bottomOffset={80}>
+  //     {({ style }) => (
+  //       <DefaultTabBar
+  //         {...props}
+  //         className="site-custom-tab-bar"
+  //         style={{ ...style }}
+  //       />
+  //     )}
+  //   </Sticky>
+  // );
+
+  let data = props.edit ? props.data : {};
 
   return (
     <CustomPageWrapper>
@@ -261,13 +303,15 @@ const Index = (props) => {
                   height: "110px",
                   margin: "60px 0",
                 }}>
-                <Link to="/booking">
+                <Link to="/events">
                   <PageBack>
                     <BsArrowLeft />
-                    <div>Booking</div>
+                    <div>Events</div>
                   </PageBack>
                 </Link>
-                <PageTitle> create Event from Booking </PageTitle>
+                <PageTitle>
+                  {props.edit ? "Update Event" : " Create Event from Booking"}
+                </PageTitle>
               </div>
 
               <div
@@ -284,8 +328,11 @@ const Index = (props) => {
                 <CustomButton>Preview</CustomButton>
                 <Space />
 
-                <CustomButton main onOpen={createEvent}>
-                  Publish Event{" "}
+                <CustomButton
+                  main
+                  onOpen={props.edit ? updateEvent : createEvent}
+                  loading={Loading}>
+                  {props.edit ? "Save" : "Publish Event"}
                 </CustomButton>
               </div>
             </MainLayout>
@@ -300,16 +347,28 @@ const Index = (props) => {
                 <Tabs type="card">
                   <TabPane tab="Arabic" key="1">
                     <EventHeader>
+                      {/* <EventContext.Consumer>
+                        {({ title }) => <div>{title}</div>}
+                      </EventContext.Consumer> */}
                       <InputTitle
-                        style={{ marginLeft: "10px", marginBottom: "10px" }}
+                        style={{
+                          marginLeft: "10px",
+                          marginBottom: "10px",
+                          // textAlign: "right",
+                        }}
+                        defaultValue={title}
                         placeholder="Event Title Goes Here .."
-                        //  onChange={(e) => handleselect(e, "title")}
+                        onChange={(e) => handleselect(e, "titleAr")}
                       />
                     </EventHeader>
                     <Editor
-                      style={{ marginLeft: "10px", marginBottom: "10px" }}
+                      style={{
+                        marginLeft: "10px",
+                        marginBottom: "10px",
+                        textAlign: "right",
+                      }}
                       placeholder="Start writing or tap here to add images or videos .."
-                      // onData={(e) => handletext(e.blocks)}
+                      onData={(e) => handletextAr(e)}
                       tools={toole}
                       // data={data}
                     />
@@ -320,13 +379,13 @@ const Index = (props) => {
                       <InputTitle
                         style={{ marginLeft: "10px", marginBottom: "10px" }}
                         placeholder="Event Title Goes Here .."
-                        //  onChange={(e) => handleselect(e, "title")}
+                        onChange={(e) => handleselect(e, "title")}
                       />
                     </EventHeader>
 
                     <Editor
                       placeholder="Start writing or tap here to add images or videos .."
-                      // onData={(e) => handletext(e.blocks)}
+                      onData={(e) => handletext(e)}
                       tools={toole}
                       // data={data}
                     />
@@ -361,32 +420,27 @@ const Index = (props) => {
               <LanguageWidget>
                 <HeadText>Settings</HeadText>
                 <div>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                    }}>
+                  <LanguageOption>
                     <GrayText>Price</GrayText>
                     <CustomInput
                       placeholder="0"
                       onChange={(e) => handleselect(e, "price")}
                       style={{ width: "100px" }}
                     />
-                  </div>
+                  </LanguageOption>
 
                   <LanguageOption>
                     <GrayText> Platform</GrayText>
                     <Select
                       suffixIcon={<DropIcon />}
-                      value="Arabic"
                       className="stylecss"
-                      // onChange={(e) => handleselect(e, "end")}
-                    >
-                      <Option key="English" def>
+                      defaultValue="both"
+                      onChange={(e) => handletextPlat(e)}>
+                      <Option key="both" def>
                         both
                       </Option>
-                      <Option key="Arabic">web</Option>
-                      <Option key="Arabic">app</Option>
+                      <Option key="web">web</Option>
+                      <Option key="app">app</Option>
                     </Select>
                   </LanguageOption>
                 </div>

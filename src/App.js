@@ -71,7 +71,6 @@ function App(props) {
       //.log(props.history);
     }
   }, []);
-  console.log(admins, "never go ");
 
   return (
     <div>

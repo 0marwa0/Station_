@@ -185,7 +185,7 @@ function Booking(props) {
           setLoading(false);
           loadBook();
         } else {
-          SuccessMesg("Booking done !");
+          SuccessMesg("Booking Created Successfully !");
           setLoading(false);
           onOpenModal(false);
           loadBook();

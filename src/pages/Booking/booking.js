@@ -351,14 +351,16 @@ function Index(props) {
                       <Accept onClick={Approve}>Accept</Accept>
                     ) : null
                   ) : null}
-                  {Data.status === "approved" ? (
+                  {!Data.isEvent || Data.status === "rejected" ? (
                     <ButtonStyled
                       Loading={Loading}
                       onClick={() => history.push(`/createEvent/${id}`)}
                       main>
                       Create Event
                     </ButtonStyled>
-                  ) : null}
+                  ) : (
+                    <ButtonStyled main>View Event</ButtonStyled>
+                  )}
                 </div>
               )}
             </PageActions>
