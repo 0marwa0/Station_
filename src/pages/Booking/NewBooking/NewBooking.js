@@ -141,41 +141,77 @@ function NewBooking(props) {
           Create a booking for a costumer directly from reception
         </div>
       </ModleTitle>
-      {pages.map((i) => {
-        return (
-          <div>
-            {i.id === 1 ? (
-              <Step1 />
-            ) : i.id === 2 ? (
-              <FirstPage
-                handleInput={props.handleInput}
-                handleselect={props.handleselect}
-              />
-            ) : i.id === 3 ? (
-              <SecondPage
-                // handleInput={props.handleInput}
-                handleselect={props.handleselect}
-              />
-            ) : i.id === 4 ? (
-              <ThirdPage
-                coffees={coffees}
-                lunches={lunches}
-                Designs={Designs}
-                Loading={Loading}
-                handleselect={props.handleselect}
-              />
-            ) : i.id === 5 ? (
-              <ForthPage
-                handleInput={props.handleInput}
-                edit={props.edit}
-                handleselect={props.handleselect}
-              />
-            ) : (
-              ""
-            )}
-          </div>
-        );
-      })}
+      {props.edit ? "" : ""}
+      {props.edit
+        ? pages.map((i) => {
+            return (
+              <div>
+                {i.id === 1 ? (
+                  <FirstPage
+                    handleInput={props.handleInput}
+                    handleselect={props.handleselect}
+                  />
+                ) : i.id === 2 ? (
+                  <SecondPage
+                    // handleInput={props.handleInput}
+                    handleselect={props.handleselect}
+                  />
+                ) : i.id === 3 ? (
+                  <ThirdPage
+                    coffees={coffees}
+                    lunches={lunches}
+                    Designs={Designs}
+                    Loading={Loading}
+                    handleselect={props.handleselect}
+                  />
+                ) : i.id === 5 ? (
+                  <ForthPage
+                    handleInput={props.handleInput}
+                    edit={props.edit}
+                    handleselect={props.handleselect}
+                  />
+                ) : (
+                  ""
+                )}
+              </div>
+            );
+          })
+        : pages.map((i) => {
+            return (
+              <div>
+                {i.id === 1 ? (
+                  <Step1 />
+                ) : i.id === 2 ? (
+                  <FirstPage
+                    handleInput={props.handleInput}
+                    handleselect={props.handleselect}
+                  />
+                ) : i.id === 3 ? (
+                  <SecondPage
+                    // handleInput={props.handleInput}
+                    handleselect={props.handleselect}
+                  />
+                ) : i.id === 4 ? (
+                  <ThirdPage
+                    coffees={coffees}
+                    lunches={lunches}
+                    Designs={Designs}
+                    Loading={Loading}
+                    handleselect={props.handleselect}
+                  />
+                ) : i.id === 5 ? (
+                  <ForthPage
+                    handleInput={props.handleInput}
+                    edit={props.edit}
+                    handleselect={props.handleselect}
+                  />
+                ) : (
+                  ""
+                )}
+              </div>
+            );
+          })}
+
       <ModleFooter>
         <div>
           {data.map((i) => (

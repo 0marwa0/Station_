@@ -229,6 +229,7 @@ function Index(props) {
             handleInput={handleInput}
             handleselect={handleselect}
             handleSubmit={handleSubmit}
+            edit={true}
             Close={() => {
               props.onOpenModal(false);
               clearState();

@@ -170,6 +170,19 @@ function Booking(props) {
       lunchId: lunchId,
       price: price,
       received: received,
+      user: {
+        name: "Hamdon",
+        phone: "9647819898913",
+        password: "9647819898919",
+        sex: "mail",
+        birthday: "12/12/1992",
+        address: "Haey El Shuhadaa",
+        education: "BA in C.S",
+        jobTitle: "Content Writer",
+        email: "me@mycompany.ii",
+        lang: "ar",
+        image: "image link",
+      },
     };
 
     // onOpenModal(false);
