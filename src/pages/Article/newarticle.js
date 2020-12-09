@@ -50,11 +50,11 @@ export const TextNote = styled.div`
 `;
 
 const EventContent = styled(Col)`
-  width: 72%;
+  width: 68%;
   height: 800px;
 
   background-color: white;
-  border: 1px solid var(--lighterGray);
+  border: 1px solid var(--lightGray);
   border-top: none;
 
   border-radius: 7px;
@@ -98,7 +98,7 @@ export const EventHeader = styled.div`
   gap: 10px;
   margin-top:
   padding-bottom: 30px;
-  border-bottom: 1px solid var(--lighterGray);
+  border-bottom: 1px solid var(--lightGray);
 `;
 const UploadContenter = styled.div`
   background-color: white;
@@ -129,7 +129,7 @@ const MainLayout = styled(Col)`
   display: flex;
   height: 100px;
   align-items: center;
-  border-bottom: 1px solid var(--lighterGray);
+  border-bottom: 1px solid var(--lightGray);
 
   justify-content: space-between;
 `;

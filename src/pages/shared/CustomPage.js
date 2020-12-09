@@ -384,7 +384,7 @@ function CustomPage(props) {
                   pageTitle={pageTitle}
                   loading={props.Loading}
                   onOpen={() => props.onOpenModal(true)}>
-                  <Upload />
+                  <PlusIcon />
                 </CustomButton>
               ) : pageTitleName === "articles" ? null : (
                 <ButtonStyled
