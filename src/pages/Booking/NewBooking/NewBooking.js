@@ -14,7 +14,7 @@ import FirstPage from "./Modal/FirstPage";
 import SecondPage from "./Modal/SecondPage";
 import ThirdPage from "./Modal/ThirdPage";
 import ForthPage from "./Modal/ForthPage";
-const data = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
+const data = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }];
 const Dot = styled.span``;
 const CurrentDot = styled.span``;
 

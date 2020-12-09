@@ -123,9 +123,7 @@ export default function ThirdPage(props) {
                           {item.price + " IQD"}
 
                           <GrayText>
-                            <div style={{ textAlign: "right" }}>
-                              {item.description}
-                            </div>
+                            <div>{item.description}</div>
                           </GrayText>
                         </div>
                       </CardWrapper>
@@ -157,9 +155,7 @@ export default function ThirdPage(props) {
                           }}>
                           <div>{item.price} IQD</div>
                           <GrayText>
-                            <div style={{ textAlign: "right" }}>
-                              {item.description}
-                            </div>
+                            <div>{item.description}</div>
                           </GrayText>
                         </div>{" "}
                       </CardWrapper>
@@ -191,9 +187,7 @@ export default function ThirdPage(props) {
                           }}>
                           <div>{item.name} </div>
                           <GrayText>
-                            <div style={{ textAlign: "right" }}>
-                              {item.description}
-                            </div>
+                            <div>{item.description}</div>
                           </GrayText>
                         </div>
                       </CardWrapper>

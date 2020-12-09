@@ -6,6 +6,7 @@ import { LoadData, addData } from "../../../../API";
 import { CustomInput, InputLable } from "../../../shared/SharedStyle";
 import { ReactComponent as DatePickerIcon } from "../../../../public/images/solid calendar-alt.svg";
 import styled from "styled-components";
+import { Divider } from "./index";
 import { Scrollbars } from "react-custom-scrollbars";
 
 function Index() {
@@ -59,7 +60,6 @@ function Index() {
   const [email, setemail] = useState("");
   const [phone, setphone] = useState("");
   const [address, setaddress] = useState("");
-  const [sex, setsex] = useState("");
   const [gender, setgender] = useState("");
   const [ShowForm, setShowForm] = useState("");
   const OnItem = (item) => {
@@ -99,6 +99,8 @@ function Index() {
 
   return (
     <div className="modleWrapper">
+      <div>Search by full name , email and phone number</div>
+      <Divider />
       {ShowCreate ? (
         ""
       ) : ShowForm ? (

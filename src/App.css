@@ -822,11 +822,17 @@ th:last-child {
 /***********book modal third page modal****/
 
 .cardItem {
-  height: 120px;
+  height: auto;
+  min-height: 160px;
   min-width: 205px;
   padding: 11px;
+  text-align: left !important;
   overflow: hidden;
   display: flex;
+  /* white-space: nowrap; */
+
+  overflow: hidden !important;
+  text-overflow: ellipsis;
   margin-right: 20px;
   margin-bottom: 5px;
   flex-direction: column;

@@ -44,7 +44,7 @@ export const CardWrapper = styled.div`
 export const SlidHolder = styled.div`
   display: flex;
   overflow: hidden;
-  height: 185px;
+  height: 200px;
 
   flex-direction: column;
 `;
