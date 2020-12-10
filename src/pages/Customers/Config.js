@@ -94,7 +94,7 @@ export const CustomersColumns = [
             </div>
             <div
               className="listItem"
-              //  onClick={() => user.onOpen()}
+              // onClick={() => user.onOpen(user.id)}
             >
               Notify
             </div>

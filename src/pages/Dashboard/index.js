@@ -334,7 +334,6 @@ function Index(props) {
                     .map((i) => i.username)
                     .toString()
                 : ""}
-              {console.log(props.admins, "find the broblem")}!
             </span>
           </span>
         </PageHeader>

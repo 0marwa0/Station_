@@ -33,10 +33,9 @@
   /* padding: 2em; */
   /* min-width: 20em;
   max-width: 70%; */
-
+  overflow: scroll;
   background-color: #fff;
-  border-radius: 1em;
-  transform: translate(-50%, -50%);
+
   outline: transparent;
 }
 
@@ -818,6 +817,11 @@ th:last-child {
   background-color: #fff;
   transform: rotate(45deg);
   z-index: 2;
+}
+
+/***********select*********************/
+.costumSelect {
+  border-radius: 7px !important;
 }
 /***********book modal third page modal****/
 

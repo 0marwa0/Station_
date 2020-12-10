@@ -100,74 +100,89 @@ function Index(props) {
       // props.Close();
     }
   };
+  const handleClose = (e) => {
+    if (node.contains(e.target)) {
+      return;
+    }
+    props.fun(false);
+  };
+  let node;
   return (
-    <>
-      <PageWrapper>
-        <div>
-          <ModleHeader>
-            Send notification
-            <Close
-              onClick={() => {
+    <div className="Overlay" onClick={(e) => handleClose(e)}>
+      <div
+        className="Modal"
+        ref={(nods) => {
+          node = nods;
+        }}>
+        {/* <> */}
+        <PageWrapper>
+          <div>
+            <ModleHeader>
+              Send notification
+              <Close
+                onClick={() => {
+                  props.Close();
+                  clear();
+                }}
+                cursor="pointer"
+              />
+            </ModleHeader>
+            <InputLable>
+              <span>
+                Title <GiNorthStarShuriken color="red" size={8} />
+              </span>
+              <CustomInput
+                onChange={(e) => handleInput(e, "title")}
+                placeholder="Write notification title"
+              />
+            </InputLable>
+            <Space />
+            <InputLable>
+              <span>
+                {" "}
+                Message <GiNorthStarShuriken color="red" size={8} />
+              </span>
+
+              <CustomInputArea
+                rows={4}
+                onChange={(e) => handleInput(e, "mesg")}
+                placeholder="Write notification message ..."
+              />
+            </InputLable>{" "}
+            <Space />
+            {!props.all ? (
+              ""
+            ) : (
+              <InputLable>
+                User filter
+                <Select
+                  suffixIcon={<DropIcon />}
+                  placeholder="Platform"
+                  // onChange={(e) => handleselect(e, "all")}
+                >
+                  <Option key="all">All users</Option>
+                  {/* <Option key=""></Option>
+              <Option key=""></Option> */}
+                </Select>
+              </InputLable>
+            )}{" "}
+          </div>
+          <ModleFooter>
+            <CustomModleButton
+              fun={() => {
                 props.Close();
                 clear();
-              }}
-              cursor="pointer"
-            />
-          </ModleHeader>
-          <InputLable>
-            <span>
-              Title <GiNorthStarShuriken color="red" size={8} />
-            </span>
-            <CustomInput
-              onChange={(e) => handleInput(e, "title")}
-              placeholder="Write notification title"
-            />
-          </InputLable>
-          <Space />
-          <InputLable>
-            <span>
-              {" "}
-              Message <GiNorthStarShuriken color="red" size={8} />
-            </span>
-
-            <CustomInputArea
-              rows={4}
-              onChange={(e) => handleInput(e, "mesg")}
-              placeholder="Write notification message ..."
-            />
-          </InputLable>{" "}
-          <Space />
-          {!props.all ? (
-            ""
-          ) : (
-            <InputLable>
-              User filter
-              <Select
-                suffixIcon={<DropIcon />}
-                placeholder="Platform"
-                // onChange={(e) => handleselect(e, "all")}
-              >
-                <Option key="all">All users</Option>
-                {/* <Option key=""></Option>
-              <Option key=""></Option> */}
-              </Select>
-            </InputLable>
-          )}{" "}
-        </div>
-        <ModleFooter>
-          <CustomModleButton
-            fun={() => {
-              props.Close();
-              clear();
-            }}>
-            Cancel
-          </CustomModleButton>
-          <CustomModleButton main fun={handleSubmit} loading={Loading}>
-            Send
-          </CustomModleButton>
-        </ModleFooter>
-      </PageWrapper>{" "}
-    </>
+              }}>
+              Cancel
+            </CustomModleButton>
+            <CustomModleButton main fun={handleSubmit} loading={Loading}>
+              Send
+            </CustomModleButton>
+          </ModleFooter>
+        </PageWrapper>{" "}
+        {/* </> */}
+      </div>
+    </div>
   );
 }
 

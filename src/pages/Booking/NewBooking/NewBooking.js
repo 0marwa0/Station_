@@ -180,7 +180,7 @@ function NewBooking(props) {
             return (
               <div>
                 {i.id === 1 ? (
-                  <Step1 />
+                  <Step1 handleInput={props.handleInput} />
                 ) : i.id === 2 ? (
                   <FirstPage
                     handleInput={props.handleInput}

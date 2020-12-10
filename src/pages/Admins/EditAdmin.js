@@ -6,10 +6,13 @@ import { ReactComponent as DropIcon } from "../../public/images/dropdown.svg";
 import { ReactComponent as Close } from "../../public/images/close.svg";
 import styled from "styled-components";
 import { ProfileImage } from "../Profile";
-import { Upload, Select } from "antd";
+import { Upload } from "antd";
 import "../../App.css";
 import { Values } from "./index";
+import Select, { components } from "react-select";
+
 import { CustomInput } from "../shared/SharedStyle";
+
 export const option = (
   <Menu>
     <Menu.Item key="1">200</Menu.Item>
@@ -24,6 +27,7 @@ export const data = (
     <Menu.Item key="3">50</Menu.Item>
   </Menu>
 );
+
 const { Option } = Select;
 export const SideOverlay = styled.div`
   position: fixed;
@@ -37,20 +41,19 @@ export const SideOverlay = styled.div`
 export const ModalFooter = styled.div`
   height: 5%;
 `;
+// position: absolute;
+//   top: 0;
+//   bottom: 0;
+//   right: 0;
 export const SideModal = styled.div`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  animation: listFade 0.6s;
-  right: 0;
   display: flex;
   height: 100vh;
   flex-direction: column;
   background-color: white;
-  overflow: hidden;
-
+  display: flex;
+  gap: 20vh;
+  justify-content: space-between;
   width: 540px;
-  backgorund-color: red;
   padding: 30px 50px;
 `;
 export const Title = styled.div`
@@ -61,9 +64,7 @@ export const Title = styled.div`
   margin-bottom: 40px;
   align-items: center;
 `;
-export const Space = styled.div`
-  height: 8px;
-`;
+export const Space = styled.div``;
 const Imageholder = styled.div``;
 function Index(props) {
   const [Loading, setLoading] = useState(false);
@@ -125,12 +126,10 @@ function Index(props) {
   };
   const model = React.createRef();
   const handleClose = (e) => {
-    if (model.contains(e.target)) {
+    if (node.contains(e.target)) {
       return;
     }
     props.fun(false);
-    console.log(e);
-    // console.log(this.nods, "out overlay");
   };
   let role = "";
 
@@ -139,16 +138,46 @@ function Index(props) {
   } else if (Values.type === 3) {
     role = "Book Admin";
   }
+
+  const Placeholder = (props) => {
+    return <components.Placeholder {...props} />;
+  };
+  const DropdownIndicator = (props) => {
+    return (
+      <components.DropdownIndicator {...props}>
+        <DropIcon />
+      </components.DropdownIndicator>
+    );
+  };
+  const style = {
+    control: (base) => ({
+      ...base,
+      borderRadius: "7px",
+    }),
+  };
+  const branchs = [
+    { value: "baghdad", label: "baghdad" },
+    { value: "mosul", label: "mosul" },
+  ];
+  const roles = [
+    { value: 1, label: "Admin" },
+
+    { value: 2, label: "Meadia Admin" },
+    { value: 3, label: "Book Admin" },
+  ];
+  let node;
   return (
     // <div>{admin.name}</div>
-    <div
-      className="Overlay"
-      //  onClick={(e) => handleClose(e)}
-    >
-      <div className="Modal" ref={model}>
-        <Values.Consumer>
-          {({ username, phone, email, type, branch, image }) => (
-            <SideModal>
+    <div className="Overlay" onClick={(e) => handleClose(e)}>
+      <div
+        className="Modal"
+        ref={(nods) => {
+          node = nods;
+        }}>
+        <SideModal>
+          {" "}
+          <Values.Consumer>
+            {({ username, phone, email, type, branch, image }) => (
               <div style={{ height: "95%" }}>
                 <Title>
                   <div>Update Admin</div>
@@ -186,7 +215,7 @@ function Index(props) {
                     </Space>
                   </div>
                 </div>
-                <Space /> <Space />
+                <Space />
                 <InputLable>
                   Full Name
                   <CustomInput
@@ -195,7 +224,7 @@ function Index(props) {
                     placeholder="Write admin name"
                   />
                 </InputLable>
-                <Space /> <Space />
+                <Space />
                 <InputLable>
                   Username
                   <CustomInput
@@ -207,7 +236,7 @@ function Index(props) {
                 {props.type === "create" ? (
                   <div>
                     {props.type}
-                    <Space /> <Space />{" "}
+                    <Space />
                     <InputLable>
                       Password
                       <CustomInput
@@ -217,7 +246,7 @@ function Index(props) {
                     </InputLable>
                   </div>
                 ) : null}
-                <Space /> <Space />
+                <Space />
                 <InputLable>
                   Email
                   <CustomInput
@@ -226,7 +255,7 @@ function Index(props) {
                     onChange={(e) => props.handleInput(e, "email")}
                   />
                 </InputLable>
-                <Space /> <Space />
+                <Space />
                 <InputLable>
                   Phone
                   <CustomInput
@@ -235,43 +264,51 @@ function Index(props) {
                     onChange={(e) => props.handleInput(e, "phone")}
                   />
                 </InputLable>
-                <Space /> <Space />
+                <Space />
                 <InputLable>
                   Branch
                   <Select
-                    suffixIcon={<DropIcon />}
-                    placeholder=" Choose admin branch loaction"
-                    defaultValue={branch}
-                    onChange={(e) => props.handleSelect(e, "branch")}>
-                    <Option key="baghadad">Baghadad</Option>
-                    <Option key="mosul">Mosul</Option>
-                  </Select>
+                    onChange={(e) => props.handleSelect(e, "branch")}
+                    components={{
+                      Placeholder,
+                      DropdownIndicator,
+                      IndicatorSeparator: () => null,
+                    }}
+                    className="costumSelect"
+                    styles={style}
+                    value={branchs.filter((option) => option.label === branch)}
+                    options={branchs}
+                  />
                 </InputLable>
-                <Space /> <Space />
+                <Space />
                 <InputLable>
                   Role
                   <Select
-                    suffixIcon={<DropIcon />}
-                    placeholder="Choose admin role"
-                    defaultValue={role}
-                    onChange={(e) => props.handleRole(e, "type")}>
-                    <Option value="Meadia Admin">{/* Meadia Admin */}</Option>
-                    <Option value="Book Admin">{/* Book Admin */}</Option>
-                  </Select>
+                    onChange={(e) => props.handleRole(e, "type")}
+                    components={{
+                      Placeholder,
+                      DropdownIndicator,
+                      IndicatorSeparator: () => null,
+                    }}
+                    className="costumSelect"
+                    styles={style}
+                    value={roles.filter((option) => option.value === type)}
+                    options={roles}
+                  />
                 </InputLable>
+                <Space />
               </div>
-              <Space />
-              <ModalFooter>
-                <div style={{ float: "right" }}>
-                  {" "}
-                  <CustomModleButton main extra fun={props.handleSubmit}>
-                    {props.type === "create" ? "Create" : "Save"}
-                  </CustomModleButton>
-                </div>
-              </ModalFooter>
-            </SideModal>
-          )}
-        </Values.Consumer>
+            )}
+          </Values.Consumer>
+          <ModalFooter>
+            <div style={{ float: "right" }}>
+              {" "}
+              <CustomModleButton main extra fun={props.handleSubmit}>
+                {props.type === "create" ? "Create" : "Save"}
+              </CustomModleButton>
+            </div>
+          </ModalFooter>
+        </SideModal>
       </div>
     </div>
   );

@@ -24,9 +24,10 @@ function Customers(props) {
     setOpen(open);
   };
   const [Id, setId] = useState("");
-  const onOpenModalNotify = (id, value) => {
-    setNotify(value);
+  const onOpenModalNotify = (id) => {
+    setNotify(true);
     setId(id);
+    // console.log("notify user", value);
   };
   const deactive = (id) => {
     let data = { id: id };
@@ -59,7 +60,7 @@ function Customers(props) {
             Users.push({
               id: {
                 id: user.id,
-                onOpen: () => onOpenModalNotify(user.id, true),
+                onOpen: () => onOpenModalNotify(user.id),
                 deactive: () => deactive(user.id),
               },
 
@@ -152,7 +153,7 @@ function Customers(props) {
         classNames={{
           modal: "customModal",
         }}> */}
-      <Drawer
+      {/* <Drawer
         placement="right"
         closable={false}
         title={false}
@@ -160,15 +161,18 @@ function Customers(props) {
         width={520}
         maskClosable={openNotify}
         visible={openNotify}
-        key="right">
+        key="right"> */}
+      {openNotify ? (
         <Notify
           Close={() => onOpenModalNotify(false)}
           id={props.id}
           recevierId={Id}
           all={false}
+          fun={onOpenModalNotify(false)}
         />
-      </Drawer>
-      {/* </Modal> */}
+      ) : null}
+      {/* </Drawer>
+       </Modal>  */}
     </div>
   );
 }

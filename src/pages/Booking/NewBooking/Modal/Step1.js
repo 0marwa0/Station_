@@ -8,8 +8,20 @@ import { ReactComponent as DatePickerIcon } from "../../../../public/images/soli
 import styled from "styled-components";
 import { Divider } from "./index";
 import { Scrollbars } from "react-custom-scrollbars";
-
-function Index() {
+import UserForm from "./UserForm";
+export const InputGroup = styled.div`
+  display: grid;
+  gap: 15px;
+  padding: 10px 0;
+  grid-template-columns: ${(props) =>
+    props.row1
+      ? "0.5fr 0.5fr 1fr"
+      : (props) =>
+          props.row2
+            ? "1fr 1fr"
+            : (props) => (props.row3 ? "1fr 0.3fr" : "1fr 1fr")};
+`;
+function Index(props) {
   const [ShowCreate, setShowCreate] = useState("");
   const [Loading, setLoading] = useState(false);
   const [user, setusers] = useState("");
@@ -72,18 +84,7 @@ function Index() {
     setgender(item.sex);
     setaddress(item.address);
   };
-  const InputGroup = styled.div`
-    display: grid;
-    gap: 15px;
-    padding: 10px 0;
-    grid-template-columns: ${(props) =>
-      props.row1
-        ? "0.5fr 0.5fr 1fr"
-        : (props) =>
-            props.row2
-              ? "1fr 1fr"
-              : (props) => (props.row3 ? "1fr 0.3fr" : "1fr 1fr")};
-  `;
+
   const CreateBtn = styled.div`
     display: flex;
     gap: 5px;
@@ -96,6 +97,9 @@ function Index() {
     cursor: pointer;
     border-bottom: 1px solid var(--lightGray);
   `;
+  const handleDate = (e) => {
+    console.log(e);
+  };
 
   return (
     <div className="modleWrapper">
@@ -138,11 +142,11 @@ function Index() {
           <div>
             <InputGroup row1={true}>
               <InputLable
-                placeholder="Andrew"
                 onChange={(e) => setValues(e.target.value)}
                 value={values}>
                 Fist Name
                 <CustomInput
+                  disabled
                   onChange={(e) => setValues(e.target.value)}
                   value={values}
                 />
@@ -151,6 +155,7 @@ function Index() {
                 Last Name
                 <CustomInput
                   //   placeholder="Morton"
+                  disabled
                   onChange={(e) => setValues(e.target.value)}
                   value={values}
                 />
@@ -158,7 +163,7 @@ function Index() {
               <InputLable>
                 Phone Number
                 <CustomInput
-                  placeholder="(123)456-7890"
+                  disabled
                   onChange={(e) => setphone(e.target.value)}
                   value={phone}
                 />
@@ -168,17 +173,19 @@ function Index() {
               <InputLable>
                 Email
                 <CustomInput
+                  disabled
                   onChange={(e) => setemail(e.target.value)}
                   value={email}
-                  placeholder="Customer e-mail"
                 />
               </InputLable>
               <InputLable>
                 Brith Date
                 <div style={{ display: "flex", position: "relative" }}>
                   <DatePicker
-                    placeholder="DD / MM / YYYY"
                     style={{ width: "100%" }}
+                    // defaultValue="2000-03-03"
+                    disabled
+                    // format="dd/mm/yy"
                     // onChange={(e) => handleDate(e)}
                   />
                   <span className="datePickerIcon">
@@ -191,7 +198,7 @@ function Index() {
               <InputLable>
                 Address
                 <CustomInput
-                  placeholder="Customer address"
+                  disabled
                   onChange={(e) => setaddress(e.target.value)}
                   value={address}
                 />
@@ -199,7 +206,7 @@ function Index() {
               <InputLable>
                 Gender
                 <CustomInput
-                  placeholder="Male"
+                  disabled
                   onChange={(e) => setgender(e.target.value)}
                   value={gender}
                 />
@@ -208,84 +215,7 @@ function Index() {
           </div>
         </div>
       ) : null}
-      {ShowForm ? (
-        <div>
-          <CustomInput placeholder="" value={values} />
-
-          <div>
-            <InputGroup row1={true}>
-              <InputLable
-                placeholder="Andrew"
-                // onChange={(e) => setValues(e.target.value)}
-                // value={values}
-              >
-                Fist Name
-                <CustomInput
-                //   onChange={(e) => setValues(e.target.value)}
-                //   value={values}
-                />
-              </InputLable>
-              <InputLable>
-                Last Name
-                <CustomInput
-                  placeholder="Morton"
-                  //   onChange={(e) => setValues(e.target.value)}
-                  //   value={values}
-                />
-              </InputLable>
-              <InputLable>
-                Phone Number
-                <CustomInput
-                  placeholder="(123)456-7890"
-                  //   onChange={(e) => setphone(e.target.value)}
-                  //   value={phone}
-                />
-              </InputLable>
-            </InputGroup>
-            <InputGroup row2={true}>
-              <InputLable>
-                Email
-                <CustomInput
-                  //   onChange={(e) => setemail(e.target.value)}
-                  //   value={email}
-                  placeholder="Customer e-mail"
-                />
-              </InputLable>
-              <InputLable>
-                Brith Date
-                <div style={{ display: "flex", position: "relative" }}>
-                  <DatePicker
-                    placeholder="DD / MM / YYYY"
-                    style={{ width: "100%" }}
-                    // onChange={(e) => handleDate(e)}
-                  />
-                  <span className="datePickerIcon">
-                    <DatePickerIcon />
-                  </span>
-                </div>
-              </InputLable>
-            </InputGroup>
-            <InputGroup row3={true}>
-              <InputLable>
-                Address
-                <CustomInput
-                  placeholder="Customer address"
-                  //   onChange={(e) => setaddress(e.target.value)}
-                  //   value={address}
-                />
-              </InputLable>
-              <InputLable>
-                Gender
-                <CustomInput
-                  placeholder="Male"
-                  //   onChange={(e) => setgender(e.target.value)}
-                  //   value={gender}
-                />
-              </InputLable>
-            </InputGroup>
-          </div>
-        </div>
-      ) : null}
+      {ShowForm ? <UserForm handleInput={props.handleInput} /> : null}
     </div>
   );
 }

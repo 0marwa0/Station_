@@ -39,7 +39,24 @@ function Index(props) {
       case "comment":
         setcomment(value);
         break;
-
+      case "name":
+        setname(value);
+        break;
+      case "phone":
+        setphone(value);
+        break;
+      case "email":
+        setemail(value);
+        break;
+      case "gender":
+        setgender(value);
+        break;
+      case "birthday":
+        setbirthday(value);
+        break;
+      case "address":
+        setaddress(value);
+        break;
       default:
         break;
     }
@@ -87,6 +104,12 @@ function Index(props) {
     setrecived("");
     setdays([]);
   };
+  const [name, setname] = useState("");
+  const [phone, setphone] = useState();
+  const [email, setemail] = useState();
+  const [birthday, setbirthday] = useState("");
+  const [gender, setgender] = useState("");
+  const [address, setaddress] = useState("");
   const [title, settitle] = useState(data.title);
   const [price, setprice] = useState(data.price);
   const [received, setrecived] = useState(data.received);
@@ -133,8 +156,21 @@ function Index(props) {
       designId: designId,
       coffeebreakId: coffeebreakId,
       lunchId: lunchId,
-      price: Number(price),
-      received: Number(received),
+      price: price,
+      received: received,
+      user: {
+        name: name,
+        phone: phone,
+        password: "",
+        sex: gender,
+        birthday: birthday,
+        address: address,
+        education: "",
+        jobTitle: "",
+        email: email,
+        lang: "ar",
+        image: "",
+      },
     };
     props.onOpenModal(false);
 

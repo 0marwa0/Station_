@@ -13,6 +13,7 @@ import { EmptyText } from "../../pages/shared/SharedComponents";
 import { LoadData, LoadBooking, LoadDataByID, addData } from "../../API";
 import { FailedMesg, Mesg, SuccessMesg } from "../../API/APIMessage";
 import { DateName } from "../Dashboard";
+import { getSectionClassNames } from "@fullcalendar/react";
 export const Values = React.createContext();
 
 function Booking(props) {
@@ -94,7 +95,24 @@ function Booking(props) {
       case "comment":
         setcomment(value);
         break;
-
+      case "name":
+        setname(value);
+        break;
+      case "phone":
+        setphone(value);
+        break;
+      case "email":
+        setemail(value);
+        break;
+      case "gender":
+        setgender(value);
+        break;
+      case "birthday":
+        setbirthday(value);
+        break;
+      case "address":
+        setaddress(value);
+        break;
       default:
         break;
     }
@@ -121,6 +139,7 @@ function Booking(props) {
       case "people":
         setpeople(value);
         break;
+
       case "days":
         setDateValues(daysValues);
 
@@ -146,9 +165,10 @@ function Booking(props) {
   };
   const [name, setname] = useState("");
   const [phone, setphone] = useState();
-  const [eamil, setemail] = useState();
+  const [email, setemail] = useState();
   const [birthday, setbirthday] = useState("");
   const [gender, setgender] = useState("");
+  const [address, setaddress] = useState("");
   const [title, settitle] = useState("");
   const [price, setprice] = useState();
   const [received, setrecived] = useState();
@@ -176,15 +196,15 @@ function Booking(props) {
       price: price,
       received: received,
       user: {
-        name: "Hamdon",
-        phone: "9647819898913",
+        name: name,
+        phone: phone,
         password: "",
-        sex: "mail",
-        birthday: "12/12/1992",
-        address: "Haey El Shuhadaa",
+        sex: gender,
+        birthday: birthday,
+        address: address,
         education: "",
         jobTitle: "",
-        email: "",
+        email: email,
         lang: "ar",
         image: "",
       },
