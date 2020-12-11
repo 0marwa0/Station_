@@ -62,7 +62,7 @@ function Index(props) {
   const Props = {
     //multiple: false,
     name: "image",
-    action: "https://station-solo.herokuapp.com/dash/v1/upload",
+    action: "http://station-solo.herokuapp.com/dash/v1/upload",
     headers: { token: localStorage.getItem("station_token") },
     showUploadList: false,
     transformFile(file) {
@@ -187,13 +187,13 @@ function Index(props) {
                   />
                 </InputLable>
                 <Space />
-                <InputLable>
+                {/* <InputLable>
                   Birthday
                   <CustomInput
                     defaultValue={birthday}
                     onChange={(e) => props.handleInput(e, "birthday")}
                   />
-                </InputLable>
+                </InputLable> */}
                 <InputLable>
                   Gender
                   <CustomInput

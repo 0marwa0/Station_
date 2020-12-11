@@ -116,7 +116,7 @@ function Index(props) {
   const Props = {
     multiple: false,
     name: "file",
-    action: "https://station-solo.herokuapp.com/dash/v1/upload/file",
+    action: "http://station-solo.herokuapp.com/dash/v1/file",
     headers: { token: localStorage.getItem("station_token") },
     // previewFile(file) {
     //   console.log("Your upload file:", file);
