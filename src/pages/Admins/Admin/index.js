@@ -41,20 +41,33 @@ export const SideOverlay = styled.div`
 export const ModalFooter = styled.div`
   height: 5%;
 `;
-export const SideModal = styled.div`
-  position: absolute;
-  top: 0;
-  animation: listFade 0.6s;
-  right: 0;
-  display: flex;
+// export const SideModal = styled.div`
+//   position: absolute;
+//   top: 0;
+//   animation: listFade 0.6s;
+//   right: 0;
+//   display: flex;
 
+//   flex-direction: column;
+//   background-color: white;
+//   overflow: hidden;
+//   height: 100%;
+//   width: 540px;
+//   backgorund-color: red;
+//   padding: 30px 50px;
+// `;
+
+export const SideModal = styled.div`
+  width: max-content;
+
+  display: flex;
   flex-direction: column;
-  background-color: white;
-  overflow: hidden;
   height: 100%;
+  overflow-y: scroll;
+  justify-content: space-between;
   width: 540px;
-  backgorund-color: red;
-  padding: 30px 50px;
+  padding: 30px 40px;
+  margin-bottom: 20px;
 `;
 export const Title = styled.div`
   display: flex;
@@ -119,123 +132,142 @@ function Index(props) {
     }
   };
 
-  let admin = {};
+  const handleClose = (e) => {
+    if (node.contains(e.target)) {
+      return;
+    }
+    props.fun(false);
+  };
+  let node;
   return (
-    <SideModal>
-      <div style={{ height: "95%" }}>
-        <Title>
-          <div>Add new Admin</div>
-          <Close
-            onClick={() => {
-              props.fun(false);
-            }}
-            cursor="pointer"
-          />
-          {/* <AiOutlineClose /> */}
-        </Title>
-        <InputLable>
-          {" "}
-          <div style={{ fontSize: "17px" }}>Admin Info</div>
-        </InputLable>{" "}
-        <Space />
-        <div
-          style={{
-            width: "100%",
-            display: "flex",
-            justifyContent: "center",
-            alignContent: "center",
-          }}>
-          <div>
-            <ProfileImage src={ImageUrl}>
-              {/* {ImageUrl === "" ? name : ""} */}
-            </ProfileImage>
-            <Space style={{ cursor: "pointer" }}>
-              <Upload
-                {...Props}
-                onChange={(e) => handleImage(e)}
-                defaultFileList={imageName && [imageName]}>
-                Upload Photo
-              </Upload>
-            </Space>
-          </div>
-        </div>
-        <Space /> <Space />
-        <InputLable>
-          Full Name
-          <CustomInput
-            onChange={(e) => props.handleInput(e, "name")}
-            placeholder="Write admin name"
-          />
-        </InputLable>
-        <Space /> <Space />
-        <InputLable>
-          Username
-          <CustomInput
-            onChange={(e) => props.handleInput(e, "username")}
-            placeholder="Write admin username"
-          />
-        </InputLable>
-        {props.type === "create" ? (
-          <div>
-            <Space /> <Space />{" "}
+    <div className="Overlay" onClick={(e) => handleClose(e)}>
+      <div
+        className="Modal"
+        ref={(nods) => {
+          node = nods;
+        }}>
+        <SideModal>
+          <div style={{ height: "150vh" }}>
+            <Title>
+              <div>Add new Admin</div>
+              <Close
+                onClick={() => {
+                  props.fun(false);
+                }}
+                cursor="pointer"
+              />
+              {/* <AiOutlineClose /> */}
+            </Title>
             <InputLable>
-              Password
+              {" "}
+              <div style={{ fontSize: "17px" }}>Admin Info</div>
+            </InputLable>{" "}
+            <Space />
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignContent: "center",
+              }}>
+              <div>
+                <ProfileImage src={ImageUrl}>
+                  {/* {ImageUrl === "" ? name : ""} */}
+                </ProfileImage>
+                <Space style={{ cursor: "pointer" }}>
+                  <Upload
+                    {...Props}
+                    onChange={(e) => handleImage(e)}
+                    defaultFileList={imageName && [imageName]}>
+                    Upload Photo
+                  </Upload>
+                </Space>
+              </div>
+            </div>
+            <Space /> <Space />
+            <InputLable>
+              Full Name
               <CustomInput
-                placeholder="Write admin password"
-                onChange={(e) => props.handleInput(e, "password")}
+                onChange={(e) => props.handleInput(e, "name")}
+                placeholder="Write admin name"
               />
             </InputLable>
+            <Space /> <Space />
+            <InputLable>
+              Username
+              <CustomInput
+                onChange={(e) => props.handleInput(e, "username")}
+                placeholder="Write admin username"
+              />
+            </InputLable>
+            {props.type === "create" ? (
+              <div>
+                <Space /> <Space />{" "}
+                <InputLable>
+                  Password
+                  <CustomInput
+                    placeholder="Write admin password"
+                    onChange={(e) => props.handleInput(e, "password")}
+                  />
+                </InputLable>
+              </div>
+            ) : null}
+            <Space /> <Space />
+            <InputLable>
+              Email
+              <CustomInput
+                placeholder="Write admin Email"
+                onChange={(e) => props.handleInput(e, "email")}
+              />
+            </InputLable>
+            <Space /> <Space />
+            <InputLable>
+              Phone
+              <CustomInput
+                placeholder="Write admin phone number"
+                onChange={(e) => props.handleInput(e, "phone")}
+              />
+            </InputLable>
+            <Space /> <Space />
+            <InputLable>
+              Branch
+              <Select
+                suffixIcon={<DropIcon />}
+                placeholder=" Choose admin branch loaction"
+                onChange={(e) => props.handleSelect(e, "branch")}>
+                <Option key="baghdad">Baghadad</Option>
+                <Option key="mosul">Mosul</Option>
+              </Select>
+            </InputLable>
+            <Space /> <Space />
+            <InputLable>
+              Role
+              <Select
+                suffixIcon={<DropIcon />}
+                placeholder="Choose admin role"
+                onChange={(e) => props.handleRole(e, "type")}>
+                <Option key="Meadia Admin">Meadia Admin</Option>
+                <Option key="Book Admin">Book Admin</Option>
+              </Select>
+            </InputLable>
           </div>
-        ) : null}
-        <Space /> <Space />
-        <InputLable>
-          Email
-          <CustomInput
-            placeholder="Write admin Email"
-            onChange={(e) => props.handleInput(e, "email")}
-          />
-        </InputLable>
-        <Space /> <Space />
-        <InputLable>
-          Phone
-          <CustomInput
-            placeholder="Write admin phone number"
-            onChange={(e) => props.handleInput(e, "phone")}
-          />
-        </InputLable>
-        <Space /> <Space />
-        <InputLable>
-          Branch
-          <Select
-            suffixIcon={<DropIcon />}
-            placeholder=" Choose admin branch loaction"
-            onChange={(e) => props.handleSelect(e, "branch")}>
-            <Option key="baghdad">Baghadad</Option>
-            <Option key="mosul">Mosul</Option>
-          </Select>
-        </InputLable>
-        <Space /> <Space />
-        <InputLable>
-          Role
-          <Select
-            suffixIcon={<DropIcon />}
-            placeholder="Choose admin role"
-            onChange={(e) => props.handleRole(e, "type")}>
-            <Option key="Meadia Admin">Meadia Admin</Option>
-            <Option key="Book Admin">Book Admin</Option>
-          </Select>
-        </InputLable>
+          <Space />
+          <div
+            style={{
+              marginTop: "40px",
+            }}>
+            <ModalFooter>
+              <div style={{ float: "right" }}>
+                {" "}
+                <CustomModleButton main extra fun={props.handleSubmit}>
+                  {props.type === "create" ? "Create" : "Save"}
+                </CustomModleButton>
+              </div>
+            </ModalFooter>
+          </div>
+        </SideModal>
       </div>
-      <Space />
-      <ModalFooter>
-        <div style={{ float: "right" }}>
-          {" "}
-          <CustomModleButton main extra fun={props.handleSubmit}>
-            {props.type === "create" ? "Create" : "Save"}
-          </CustomModleButton>
-        </div>
-      </ModalFooter>
-    </SideModal>
+    </div>
   );
 }
 

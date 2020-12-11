@@ -239,25 +239,25 @@ function Admins(props) {
     }
 
     setLoading(true);
-    // addData(
-    //   `admin/update/${id}`,
-    //   data,
-    //   (mesg, Data) => {
-    //     if (mesg) {
-    //       Mesg(mesg);
-    //     } else {
-    //       SuccessMesg("Account data saved !");
-    //       onCloseModalEdit();
-    //       getAdmins();
-    //       ClearState();
-    //     }
-    //   },
-    //   (err) => {
-    //     onCloseModalEdit();
-    //     ClearState();
-    //     FailedMesg(err);
-    //   }
-    // );
+    addData(
+      `admin/edit/${id}`,
+      data,
+      (mesg, Data) => {
+        if (mesg) {
+          Mesg(mesg);
+        } else {
+          SuccessMesg("Account data saved !");
+          onCloseModalEdit();
+          getAdmins();
+          ClearState();
+        }
+      },
+      (err) => {
+        onCloseModalEdit();
+        ClearState();
+        FailedMesg(err);
+      }
+    );
   };
   useEffect(() => {
     if (
@@ -296,8 +296,9 @@ function Admins(props) {
 
     setinfo(info);
   };
+
   let admins = admin.filter((item) => item.id === id);
-  console.log(info, "sended");
+  // console.log(info, "sended");
   return (
     <div>
       <CustomPage
@@ -313,7 +314,7 @@ function Admins(props) {
         Loading={Loading}
         length={Admins.length}
       />
-      <Drawer
+      {/* <Drawer
         placement="right"
         closable={false}
         title={false}
@@ -321,7 +322,8 @@ function Admins(props) {
         width={570}
         maskClosable={open}
         visible={open}
-        key="right">
+        key="right"> */}
+      {open ? (
         <Admin
           fun={onCloseModal}
           type="create"
@@ -331,7 +333,8 @@ function Admins(props) {
           handleSubmit={handleSubmit}
           handleInput={handleInput}
         />
-      </Drawer>
+      ) : null}
+      {/* </Drawer> */}
       <Values.Provider
         value={{
           name: info ? info.name : "",

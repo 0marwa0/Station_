@@ -88,14 +88,13 @@ export const CustomersColumns = [
       <Popover
         content={() => (
           <div>
-            <div className="listItem">Edit</div>
+            <div className="listItem" onClick={() => user.edit(user.id)}>
+              Edit
+            </div>
             <div className="listItem" onClick={() => user.deactive(user.id)}>
               Disable
             </div>
-            <div
-              className="listItem"
-              // onClick={() => user.onOpen(user.id)}
-            >
+            <div className="listItem" onClick={() => user.onOpen()}>
               Notify
             </div>
           </div>

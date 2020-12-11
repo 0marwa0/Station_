@@ -64,7 +64,7 @@ const Clander = styled.div`
   border-radius: 7px;
   padding: 15px 25px;
   height: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 10%;
   border: 1px solid var(--lighterGray);
 `;
 const List = styled.div`

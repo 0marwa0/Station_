@@ -8,6 +8,8 @@ import styled from "styled-components";
 import { ProfileImage } from "../Profile";
 import { Upload } from "antd";
 import "../../App.css";
+import { Scrollbars } from "react-custom-scrollbars";
+
 import { Values } from "./index";
 import Select, { components } from "react-select";
 
@@ -46,15 +48,16 @@ export const ModalFooter = styled.div`
 //   bottom: 0;
 //   right: 0;
 export const SideModal = styled.div`
+  width: max-content;
+
   display: flex;
-  height: 100vh;
   flex-direction: column;
-  background-color: white;
-  display: flex;
-  gap: 20vh;
+  height: 100%;
+  overflow-y: scroll;
   justify-content: space-between;
   width: 540px;
-  padding: 30px 50px;
+  padding: 30px 40px;
+  margin-bottom: 20px;
 `;
 export const Title = styled.div`
   display: flex;
@@ -71,7 +74,6 @@ function Index(props) {
   const [imageName, setimageName] = useState();
   const [file, setfile] = useState("");
   const [ImageUrl, setImageUrl] = useState(props.admins.image);
-  console.log(Values.image, "immmmmmmmmmmmmage");
   const Image = (e) => {
     setfile(e);
   };
@@ -112,6 +114,8 @@ function Index(props) {
         url: info.file.response.url,
       };
       setimageName(data);
+      console.log(info, "image");
+
       props.handleSelect(info.file.response.url, "image");
     }
   };
@@ -166,21 +170,27 @@ function Index(props) {
     { value: 3, label: "Book Admin" },
   ];
   let node;
+
+  let SelectCoponent = {
+    Placeholder,
+    DropdownIndicator,
+    IndicatorSeparator: () => null,
+  };
   return (
     // <div>{admin.name}</div>
     <div className="Overlay" onClick={(e) => handleClose(e)}>
-      <div
-        className="Modal"
-        ref={(nods) => {
-          node = nods;
-        }}>
-        <SideModal>
-          {" "}
-          <Values.Consumer>
-            {({ username, phone, email, type, branch, image }) => (
-              <div style={{ height: "95%" }}>
+      <Values.Consumer>
+        {({ username, phone, email, type, branch, image }) => (
+          <div
+            className="Modal"
+            ref={(nods) => {
+              node = nods;
+            }}>
+            <SideModal>
+              <div style={{ height: "150vh" }}>
                 <Title>
                   <div>Update Admin</div>
+
                   <Close
                     onClick={() => {
                       props.fun(false);
@@ -269,11 +279,7 @@ function Index(props) {
                   Branch
                   <Select
                     onChange={(e) => props.handleSelect(e, "branch")}
-                    components={{
-                      Placeholder,
-                      DropdownIndicator,
-                      IndicatorSeparator: () => null,
-                    }}
+                    components={SelectCoponent}
                     className="costumSelect"
                     styles={style}
                     value={branchs.filter((option) => option.label === branch)}
@@ -285,31 +291,35 @@ function Index(props) {
                   Role
                   <Select
                     onChange={(e) => props.handleRole(e, "type")}
-                    components={{
-                      Placeholder,
-                      DropdownIndicator,
-                      IndicatorSeparator: () => null,
-                    }}
+                    components={SelectCoponent}
                     className="costumSelect"
                     styles={style}
                     value={roles.filter((option) => option.value === type)}
                     options={roles}
                   />
-                </InputLable>
-                <Space />
-              </div>
-            )}
-          </Values.Consumer>
-          <ModalFooter>
-            <div style={{ float: "right" }}>
-              {" "}
-              <CustomModleButton main extra fun={props.handleSubmit}>
-                {props.type === "create" ? "Create" : "Save"}
-              </CustomModleButton>
-            </div>
-          </ModalFooter>
-        </SideModal>
-      </div>
+                </InputLable>{" "}
+              </div>{" "}
+              <Space />
+              <div
+                style={{
+                  marginTop: "40px",
+                }}>
+                <ModalFooter>
+                  <div
+                    style={{
+                      marginBottom: "5px",
+                      float: "right",
+                    }}>
+                    <CustomModleButton main extra fun={props.handleSubmit}>
+                      {props.type === "create" ? "Create" : "Save"}
+                    </CustomModleButton>
+                  </div>
+                </ModalFooter>
+              </div>{" "}
+            </SideModal>
+          </div>
+        )}
+      </Values.Consumer>
     </div>
   );
 }

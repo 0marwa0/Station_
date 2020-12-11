@@ -27,13 +27,15 @@ function Index(props) {
         break;
     }
   };
+  const handleDate = (e) => {
+    console.log(e, "dataeeeeeee");
+  };
   const d = (e) => {
     console.log(e.format("YY-MM-DD"));
   };
   return (
     <div>
-      <CustomInput placeholder="" />
-      <div>
+      <div style={{ marginTop: "10px" }}>
         <InputGroup row1={true}>
           <InputLable>
             Fist Name
@@ -81,7 +83,7 @@ function Index(props) {
                 placeholder="DD / MM / YYYY"
                 style={{ width: "100%" }}
                 // format="dd/mm/yy"
-                onChange={(e) => handleInput(e, "birthday")}
+                onChange={(e) => handleDate(e, "birthday")}
               />
               <span className="datePickerIcon">
                 <DatePickerIcon />

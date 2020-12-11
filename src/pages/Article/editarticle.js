@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import { editData } from "../../API";
 import { useParams } from "react-router-dom";
 
 import Newarticle from "./newarticle";
 import { LoadData, addData, addFile } from "../../API";
 import { SuccessMesg, FailedMesg, Mesg } from "../../API/APIMessage";
-
+export const ArticleContext = createContext();
 function Index() {
   let { id } = useParams();
   const [description, setdescription] = useState();
@@ -19,8 +19,9 @@ function Index() {
           //setLoading(false);
         } else {
           setData(data.data);
-          console.log("one article", JSON.parse(data.data.description));
-          setdescription(JSON.parse(data.data.description));
+
+          // console.log("one article", data.data.description);
+          setdescription(data.data.description);
         }
       },
       (err) => {
@@ -29,8 +30,12 @@ function Index() {
       }
     );
   }, []);
-  let datad = description;
-  return data ? <Newarticle type="edit" description={datad} /> : null;
+
+  return (
+    <ArticleContext.Provider value={{ data: data.description }}>
+      <Newarticle type="edit" description={data.description} />
+    </ArticleContext.Provider>
+  );
 }
 
 export default Index;

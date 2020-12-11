@@ -6,6 +6,7 @@ import { LoadData, addData } from "../../../../API";
 import { CustomInput, InputLable } from "../../../shared/SharedStyle";
 import { ReactComponent as DatePickerIcon } from "../../../../public/images/solid calendar-alt.svg";
 import styled from "styled-components";
+import Moment from "react-moment";
 import { Divider } from "./index";
 import { Scrollbars } from "react-custom-scrollbars";
 import UserForm from "./UserForm";
@@ -30,9 +31,10 @@ function Index(props) {
   const CreateUser = (value) => {
     setShowCreate(value);
   };
-
+  const [show, setshow] = useState("");
   const FilterInput = (e) => {
     let value = e.target.value;
+
     let temp = [];
     let newData;
     if (value) {
@@ -73,16 +75,23 @@ function Index(props) {
   const [phone, setphone] = useState("");
   const [address, setaddress] = useState("");
   const [gender, setgender] = useState("");
+  const [select, setSelect] = useState(false);
   const [ShowForm, setShowForm] = useState("");
+
   const OnItem = (item) => {
     console.log(item);
-
+    setSelect(true);
     setShowCreate(true);
     setValues(item.name);
     setemail(item.email);
     setphone(item.phone);
     setgender(item.sex);
     setaddress(item.address);
+    props.handleselect(item.name, "name");
+    props.handleselect(item.phone, "phone");
+    props.handleselect(item.email, "email");
+    props.handleselect(item.sex, "gender");
+    props.handleselect(item.name, "address");
   };
 
   const CreateBtn = styled.div`
@@ -98,48 +107,44 @@ function Index(props) {
     border-bottom: 1px solid var(--lightGray);
   `;
   const handleDate = (e) => {
-    console.log(e);
+    console.log(e, "dataeeeeeee");
   };
 
   return (
     <div className="modleWrapper">
       <div>Search by full name , email and phone number</div>
       <Divider />
-      {ShowCreate ? (
-        ""
-      ) : ShowForm ? (
-        ""
-      ) : (
-        <List
-          style={{ borderRadius: "10px" }}
-          locale={{
-            emptyText: <div></div>,
-          }}
-          header={
-            <CustomInput
-              onChange={(e) => FilterInput(e)}
-              style={{ width: "100%" }}
-              search={true}
-            />
-          }
-          footer={
-            <CreateBtn onClick={() => setShowForm(true)}>
-              <PlusIcon style={{ marginTop: "5px" }} />
-              Create New Costumer
-            </CreateBtn>
-          }
-          bordered
-          dataSource={option}
-          renderItem={(item) => (
-            <ListItem onClick={() => OnItem(item)}>{item.name}</ListItem>
-          )}
-        />
-      )}
-      {ShowCreate ? (
-        <div>
-          <CustomInput placeholder="" value={values} />
 
-          <div>
+      <List
+        style={{ borderRadius: "10px" }}
+        locale={{
+          emptyText: <div></div>,
+        }}
+        header={
+          <CustomInput
+            onChange={(e) => FilterInput(e)}
+            style={{ width: "100%" }}
+            search={true}
+          />
+        }
+        footer={
+          <CreateBtn onClick={() => setShowForm(true)}>
+            <PlusIcon style={{ marginTop: "5px" }} />
+            Create New Costumer
+          </CreateBtn>
+        }
+        bordered
+        dataSource={option}
+        renderItem={(item) => (
+          <ListItem onClick={() => OnItem(item)}>{item.name}</ListItem>
+        )}
+      />
+
+      {select ? (
+        <div>
+          {/* <CustomInput placeholder="" value={values} /> */}
+
+          <div style={{ marginTop: "10px" }}>
             <InputGroup row1={true}>
               <InputLable
                 onChange={(e) => setValues(e.target.value)}
@@ -183,10 +188,11 @@ function Index(props) {
                 <div style={{ display: "flex", position: "relative" }}>
                   <DatePicker
                     style={{ width: "100%" }}
-                    // defaultValue="2000-03-03"
+                    // defaultValue="7/11/2011"
+                    // defaultValu={Moment("07 / 11 / 2011", "DD-MM-YYYY")}
                     disabled
                     // format="dd/mm/yy"
-                    // onChange={(e) => handleDate(e)}
+                    onChange={(e) => handleDate(e)}
                   />
                   <span className="datePickerIcon">
                     <DatePickerIcon />

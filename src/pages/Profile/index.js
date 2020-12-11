@@ -50,14 +50,15 @@ export const ProfileImage = styled.div`
   border: 1px solid var(--yellow);
   display: flex;
   align-items: center;
-  background-position: 100% 100%;
+  background-position: cover;
   background-repeat: no-repeat;
-
+  object-fit: cover;
   background-size: cover;
   justify-content: center;
   background-image: url(${(props) => props.src});
   font-size: 25px;
   margin-bottom: 15px;
+  position: relative;
   color: var(--yellow);
 `;
 const InputLable = styled.div`

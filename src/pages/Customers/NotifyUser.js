@@ -2,23 +2,23 @@ import React, { useState } from "react";
 import { Input, InputNumber } from "antd";
 import { Menu, Dropdown, Button, Select } from "antd";
 import { DownOutlined } from "@ant-design/icons";
-import { Mesg, FailedMesg, SuccessMesg } from "../../../API/APIMessage";
+import { Mesg, FailedMesg, SuccessMesg } from "../../API/APIMessage";
 
 import {
   InputLable,
   ModleFooter,
   ModleHeader,
   Space,
-} from "../../shared/SharedStyle";
+} from "../shared/SharedStyle";
 import styled from "styled-components";
-import { ReactComponent as DropIcon } from "../../../public/images/dropdown.svg";
-import { ReactComponent as Close } from "../../../public/images/close.svg";
-import { addData } from "../../../API";
+import { ReactComponent as DropIcon } from "../../public/images/dropdown.svg";
+import { ReactComponent as Close } from "../../public/images/close.svg";
+import { addData } from "../../API";
 
 import { GiNorthStarShuriken } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
-import { CustomModleButton } from "../../shared/SharedComponents";
-import { CustomInput, CustomInputArea } from "../../shared/SharedStyle";
+import { CustomModleButton } from "../shared/SharedComponents";
+import { CustomInput, CustomInputArea } from "../shared/SharedStyle";
 const { Option } = Select;
 
 const { TextArea } = Input;
@@ -39,7 +39,6 @@ const PageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-
   justify-content: space-between;
 `;
 
@@ -104,7 +103,7 @@ function Index(props) {
     if (node.contains(e.target)) {
       return;
     }
-    props.Close(false);
+    props.fun();
   };
   let node;
   return (
@@ -154,19 +153,18 @@ function Index(props) {
             ) : (
               <InputLable>
                 User filter
-                <Select suffixIcon={<DropIcon />} placeholder="all">
+                <Select suffixIcon={<DropIcon />} placeholder="Platform">
                   <Option key="all">All users</Option>
                 </Select>
               </InputLable>
             )}{" "}
           </div>
           <ModleFooter>
-            <CustomModleButton main fun={handleSubmit} loading={props.loading}>
+            <CustomModleButton main fun={handleSubmit} loading={Loading}>
               Send
             </CustomModleButton>
           </ModleFooter>
         </PageWrapper>{" "}
-        {/* </> */}
       </div>
     </div>
   );

@@ -5,6 +5,24 @@
 
   font-family: Px-Grotesk !important;
 }
+.exportSpaec {
+  height: 40px;
+}
+.exportList {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #c8c8c8;
+  width: 200px;
+
+  font-size: 17px;
+}
+.exportListHolder {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 .pending {
   font-size: 20px !important;
   color: var(--orange) !important;
@@ -28,14 +46,16 @@
   position: absolute;
   top: 0;
   right: 0;
-
-  display: block;
+  display: flex;
+  justify-content: space-between;
+  /* display: block; */
   /* padding: 2em; */
   /* min-width: 20em;
   max-width: 70%; */
-  overflow: scroll;
+  /* overflow-y: scroll; */
+  padding-bottom: 20px;
   background-color: #fff;
-
+  height: 100%;
   outline: transparent;
 }
 
@@ -154,11 +174,11 @@
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  /* width: 100%; */
+  width: 100%;
   border-radius: 7px;
-  min-height: 270px;
-  font-size: 18px;
-  margin-bottom: 10px;
+  /* min-height: 270px; */
+  padding: 0 20px;
+  margin-bottom: 20px;
   background-color: #f4f7fc;
   /*margin-top: 20px; */
   gap: 5%;
@@ -305,6 +325,9 @@ body {
 }
 .fc-media-screen {
   /* padding-left: 30px; */
+}
+.ant-tabs-nav-wrap {
+  margin: 0 !important;
 }
 .fc-media-screen .fc-col-header-cell {
   text-transform: uppercase !important;

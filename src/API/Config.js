@@ -1,1 +1,1 @@
-export const Host = "https://station-test-api.herokuapp.com/dash/v1/";
+export const Host = "http://station-solo.herokuapp.com/";

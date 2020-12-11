@@ -106,7 +106,7 @@ export const TableLoading = (Loading, Item) => {
               <Skeleton.Input
                 key={index}
                 style={{
-                  width: "5vw",
+                  width: "3.5vw",
                   height: 5,
                   margin: "20px 3.5vw",
                 }}

@@ -26,21 +26,34 @@ function Aritcle(props) {
         } else {
           setLoading(false);
           let Articles = [];
+          let d;
+          // LoadData(
+          //   "Admins",
+          //   (err, admin) => {
+          //     //d = data.data;
+          //     console.log(admin);
           data.data.rows.map((item) => {
             Articles.push({
               id: item.id,
               image: item.image,
               Title: item.title,
               CreatedDate: DateName(item.createdAt),
+
               Createdby: props.admins
                 .filter((i) => i.id === item.adminId)
-                .map((i) => i.username)
+                .map((i) => i.image)
                 .toString(),
             });
           });
-
           setdata(Articles);
           setFilterdata(Articles);
+          //   },
+          //   (err) => {
+          //     FailedMesg(err, "Something worng happend !");
+          //   }
+          // );
+
+          console.log(props.admins);
         }
       },
       (err) => {

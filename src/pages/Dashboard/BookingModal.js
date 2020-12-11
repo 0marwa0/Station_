@@ -39,24 +39,7 @@ function Index(props) {
       case "comment":
         setcomment(value);
         break;
-      case "name":
-        setname(value);
-        break;
-      case "phone":
-        setphone(value);
-        break;
-      case "email":
-        setemail(value);
-        break;
-      case "gender":
-        setgender(value);
-        break;
-      case "birthday":
-        setbirthday(value);
-        break;
-      case "address":
-        setaddress(value);
-        break;
+
       default:
         break;
     }
@@ -85,6 +68,24 @@ function Index(props) {
       case "days":
         setDateValues(daysValues);
         setdays(value);
+        break;
+      case "name":
+        setname(value);
+        break;
+      case "phone":
+        setphone(value);
+        break;
+      case "email":
+        setemail(value);
+        break;
+      case "gender":
+        setgender(value);
+        break;
+      case "birthday":
+        setbirthday(value);
+        break;
+      case "address":
+        setaddress(value);
         break;
       default:
         break;

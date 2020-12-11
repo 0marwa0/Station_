@@ -348,7 +348,10 @@ function CustomPage(props) {
                 </CustomButton>
               )}
 
-              <CustomButton lable="Export" loading={props.Loading}>
+              <CustomButton
+                lable="Export"
+                loading={props.Loading}
+                fun={props.export}>
                 <ExportIcon />
               </CustomButton>
 

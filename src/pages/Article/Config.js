@@ -62,14 +62,17 @@ const ArticlesColumns = [
     key: "5",
     title: "Created by",
     dataIndex: "Createdby",
-    // render: (theImageURL) => (
-    //   <div style={{ width: "50px" }}>
-    //     <UserImage
-    //       alt={theImageURL}
-    //       src={require("../../public/images/user2.png")}
-    //     />
-    //   </div>
-    // ),
+    render: (theImageURL) => (
+      <div style={{ width: "50px" }}>
+        <UserImage
+          alt={theImageURL}
+          src={theImageURL}
+          onError={(e) =>
+            (e.target.src = require("../../public/images/defaultImg.jpg"))
+          }
+        />
+      </div>
+    ),
     sorter: {
       compare: (a, b) => a.english - b.english,
       multiple: 1,

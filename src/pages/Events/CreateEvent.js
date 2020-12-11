@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { IoMdRefresh } from "react-icons/io";
 import Editor from "@stfy/react-editor.js";
 import { Tabs } from "antd";
+import { Checkbox } from "@material-ui/core";
+
 import { StickyContainer, Sticky } from "react-sticky";
 import { useParams } from "react-router-dom";
 import { EventContext } from "./editEvent";
@@ -47,13 +49,14 @@ export const TextNote = styled.div`
 `;
 
 const EventContent = styled(Col)`
-  width: 68%;
-  height: 800px;
+  width: 65%;
+  min-height: 800px;
+  height: auto;
   background-color: white;
   border: 1px solid var(--lightGray);
-  border-top: none;
+  position: relative;
 
-  border-radius: 7px;
+  border-radius: 0 0 7px 7px;
 `;
 const WidgetCol = styled(Col)`
   background-color: white;
@@ -171,7 +174,6 @@ const Index = (props) => {
       ticketPrice: price,
       // platform: platform,
     };
-    console.log(event, "hi");
     addData(
       "toevent",
       event,
@@ -270,7 +272,17 @@ const Index = (props) => {
       }
     },
   };
-
+  const EditerFooter = styled.div`
+    position: absolute;
+    background-color: #e8e8e8;
+    bottom: 0;
+    display: flex;
+    width: 100%;
+    height: 40px;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-radius: 0 0 7px 7px;
+  `;
   // const renderTabBar = (props, DefaultTabBar) => (
   //   <Sticky bottomOffset={80}>
   //     {({ style }) => (
@@ -337,38 +349,25 @@ const Index = (props) => {
           <Row
             style={{
               display: "flex",
-              gap: "2%",
             }}>
             <EventContent>
               <div className="card-container">
                 <Tabs type="card">
                   <TabPane tab="Arabic" key="1">
                     <EventHeader>
-                      {/* <EventContext.Consumer>
-                        {({ title }) => <div>{title}</div>}
-                      </EventContext.Consumer> */}
                       <InputTitle
-                        style={{
-                          marginLeft: "10px",
-                          marginBottom: "10px",
-                          // textAlign: "right",
-                        }}
-                        // defaultValue={title}
+                        style={{ marginLeft: "10px", marginBottom: "10px" }}
                         placeholder="Event Title Goes Here .."
                         onChange={(e) => handleselect(e, "titleAr")}
                       />
                     </EventHeader>
-                    <Editor
-                      style={{
-                        marginLeft: "10px",
-                        marginBottom: "10px",
-                        textAlign: "right",
-                      }}
+                    {/* <Editor
+                      style={{ marginLeft: "10px", marginBottom: "10px" }}
                       placeholder="Start writing or tap here to add images or videos .."
-                      onData={(e) => handletextAr(e)}
+                      onData={(e) => handletextAr(e.blocks)}
                       tools={toole}
-                      // data={data}
-                    />
+                      data={[]}
+                    />{" "} */}
                   </TabPane>
                   <TabPane tab="English" key="2">
                     <EventHeader>
@@ -376,55 +375,84 @@ const Index = (props) => {
                       <InputTitle
                         style={{ marginLeft: "10px", marginBottom: "10px" }}
                         placeholder="Event Title Goes Here .."
-                        onChange={(e) => handleselect(e, "title")}
+                        //  onChange={(e) => handleselect(e, "title")}
                       />
                     </EventHeader>
-
-                    <Editor
+                    <div id="edit-artical"></div>
+                    {/* <Editor
                       placeholder="Start writing or tap here to add images or videos .."
-                      onData={(e) => handletext(e)}
+                      // onData={(e) => handletext(e.blocks)}
                       tools={toole}
                       // data={data}
-                    />
+                    /> */}
                   </TabPane>
                 </Tabs>
               </div>
-              ,{/* <TabsWrappedLabel /> */}
+              <EditerFooter>
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "5",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}>
+                  <Checkbox color="red"> </Checkbox>Disalbe
+                </div>
+                <div>Words count 0</div>
+              </EditerFooter>
             </EventContent>
             <Col
               style={{
-                width: "25%",
+                width: "35%",
+                paddingLeft: "2%",
+                borderTop: "1px solid var(--lightGray)",
               }}>
               <UploadContenter>
                 <HeadText>Header Photo</HeadText>
-
-                <Upload {...Props}>
-                  <div className="upload_modal_event">
-                    <img src={require("./default2.png")} className="img" />
-
-                    <span
+                <div className="upload_modal_event">
+                  <Upload {...Props} defaultFileList={imageName && [imageName]}>
+                    <div
                       style={{
-                        color: "var(--darkGray)",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "10px",
+                        alignItems: "center",
+                        justifyContent: "center",
                       }}>
-                      Choose any file form computer or Drag & Drop it here
-                    </span>
-                    <span style={{ margin: "20px 0" }}>
-                      <Button>Choose File</Button>
-                    </span>
-                  </div>
-                </Upload>
+                      <img src={require("./default2.png")} className="img" />
+
+                      <span
+                        style={{
+                          color: "var(--darkGray)",
+                          fontSize: "1vw",
+                          width: "14vw",
+                        }}>
+                        Choose any file form computer or{" "}
+                        <span style={{ color: "black" }}>Drag & Drop </span>it
+                        here
+                      </span>
+                      <span style={{ margin: "20px 0" }}>
+                        <Button>Choose File</Button>
+                      </span>
+                    </div>
+                  </Upload>
+                </div>
               </UploadContenter>
               <LanguageWidget>
                 <HeadText>Settings</HeadText>
                 <div>
-                  <LanguageOption>
+                  {/* <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}>
                     <GrayText>Price</GrayText>
                     <CustomInput
                       placeholder="0"
                       onChange={(e) => handleselect(e, "price")}
                       style={{ width: "100px" }}
                     />
-                  </LanguageOption>
+                  </div> */}
 
                   <LanguageOption>
                     <GrayText> Platform</GrayText>

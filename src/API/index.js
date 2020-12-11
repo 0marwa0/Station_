@@ -2,7 +2,7 @@
 
 //import { Host } from "./Config";
 
-let Host = "https://station-solo.herokuapp.com/dash/v1/";
+let Host = "http://station-solo.herokuapp.com/dash/v1/";
 // import axios from "axios";
 //let Host = `https://station-test-api.herokuapp.com/dash/v1/`;
 

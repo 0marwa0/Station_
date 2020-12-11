@@ -13,6 +13,7 @@ import { EmptyText } from "../../pages/shared/SharedComponents";
 import { LoadData, LoadBooking, LoadDataByID, addData } from "../../API";
 import { FailedMesg, Mesg, SuccessMesg } from "../../API/APIMessage";
 import { DateName } from "../Dashboard";
+import Exportpage from "./exportpage";
 import { getSectionClassNames } from "@fullcalendar/react";
 export const Values = React.createContext();
 
@@ -21,7 +22,10 @@ function Booking(props) {
   const [Loading, setLoading] = useState(false);
   const [Book, setBook] = useState([]);
   const [DateValues, setDateValues] = useState([]);
-
+  const [showexport, setshowexport] = useState("");
+  const onOpenExport = (value) => {
+    setshowexport(value);
+  };
   const onOpenModal = (open) => {
     setOpen(open);
     clearState();
@@ -53,14 +57,12 @@ function Booking(props) {
             Space: [`${item.space.title}`],
             CreationDate: DateName(item.createdAt),
 
-            BookedBy:
-              // props.admins
-              // ? props.admins
-              //     .filter((i) => i.id === item.approvedBy)
-              //     .map((i) => i.username)
-              //     .toString()
-              // :
-              "",
+            BookedBy: props.admins
+              ? props.admins
+                  .filter((i) => i.id === item.approvedBy)
+                  .map((i) => i.username)
+                  .toString()
+              : "",
           });
         });
 
@@ -95,24 +97,7 @@ function Booking(props) {
       case "comment":
         setcomment(value);
         break;
-      case "name":
-        setname(value);
-        break;
-      case "phone":
-        setphone(value);
-        break;
-      case "email":
-        setemail(value);
-        break;
-      case "gender":
-        setgender(value);
-        break;
-      case "birthday":
-        setbirthday(value);
-        break;
-      case "address":
-        setaddress(value);
-        break;
+
       default:
         break;
     }
@@ -144,6 +129,24 @@ function Booking(props) {
         setDateValues(daysValues);
 
         setdays(value);
+        break;
+      case "name":
+        setname(value);
+        break;
+      case "phone":
+        setphone(value);
+        break;
+      case "email":
+        setemail(value);
+        break;
+      case "gender":
+        setgender(value);
+        break;
+      case "birthday":
+        setbirthday(value);
+        break;
+      case "address":
+        setaddress(value);
         break;
       default:
         break;
@@ -278,6 +281,7 @@ function Booking(props) {
         Item="event"
         HandleSearch={HandleSearch}
         filter={Filter}
+        export={() => onOpenExport(true)}
         onOpenModal={() => onOpenModal(true)}
         Loading={Loading}
       />
@@ -312,6 +316,8 @@ function Booking(props) {
           />
         </Modal>
       </Values.Provider>
+
+      {showexport ? <Exportpage fun={() => onOpenExport(false)} /> : null}
     </div>
   );
 }
