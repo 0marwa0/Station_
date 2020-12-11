@@ -89,12 +89,12 @@ function FilUploader(props) {
     );
   };
   useEffect(() => {
-    if (localStorage.getItem("station_token")) {
-      setLoading(true);
-      getFiles();
-    } else {
-      props.history.push("/login");
-    }
+    // if (localStorage.getItem("station_token")) {
+    //   setLoading(true);
+    //   getFiles();
+    // } else {
+    //   props.history.push("/login");
+    // }
   }, []);
   const handleSubmit = () => {
     let data = new FormData();

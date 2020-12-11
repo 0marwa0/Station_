@@ -260,15 +260,15 @@ function Admins(props) {
     );
   };
   useEffect(() => {
-    if (
-      localStorage.getItem("station_token") != undefined &&
-      localStorage.getItem("station_token") != ""
-    ) {
-      setLoading(true);
-      getAdmins();
-    } else {
-      props.history.push("/login");
-    }
+    // if (
+    //   localStorage.getItem("station_token") != undefined &&
+    //   localStorage.getItem("station_token") != ""
+    // ) {
+    //   setLoading(true);
+    //   getAdmins();
+    // } else {
+    //   props.history.push("/login");
+    // }
   }, []);
 
   const [searchText, setsearchText] = useState("");

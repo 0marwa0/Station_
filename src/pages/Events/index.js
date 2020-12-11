@@ -226,11 +226,11 @@ function Events(props) {
     );
   };
   useEffect(() => {
-    if (localStorage.getItem("station_token")) {
-      loadEvent();
-    } else {
-      props.history.push("/login");
-    }
+    // if (localStorage.getItem("station_token")) {
+    //   loadEvent();
+    // } else {
+    //   props.history.push("/login");
+    // }
   }, []);
 
   const [searchText, setsearchText] = useState("");

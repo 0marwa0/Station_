@@ -141,11 +141,11 @@ function Resources(props) {
     seturl("");
   };
   useEffect(() => {
-    if (localStorage.getItem("station_token")) {
-      getResources();
-    } else {
-      props.history.push("/login");
-    }
+    // if (localStorage.getItem("station_token")) {
+    //   getResources();
+    // } else {
+    //   props.history.push("/login");
+    // }
   }, []);
   const onDelete = (id) => {
     setLoading(true);

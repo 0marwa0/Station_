@@ -274,12 +274,12 @@ function Index(props) {
     );
   };
   useEffect(() => {
-    if (localStorage.getItem("station_token")) {
-      loadApiData();
-      getStatistic();
-    } else {
-      props.history.push("/login");
-    }
+    // if (localStorage.getItem("station_token")) {
+    //   loadApiData();
+    //   getStatistic();
+    // } else {
+    //   props.history.push("/login");
+    // }
   }, []);
   let id = localStorage.getItem("Station_id");
   let NowDate = new Date();

@@ -202,11 +202,11 @@ function Customers(props) {
     );
   };
   useEffect(() => {
-    if (localStorage.getItem("station_token")) {
-      loadCustomers();
-    } else {
-      props.history.push("/login");
-    }
+    // if (localStorage.getItem("station_token")) {
+    //   loadCustomers();
+    // } else {
+    //   props.history.push("/login");
+    // }
   }, []);
   const [searchText, setsearchText] = useState("");
 

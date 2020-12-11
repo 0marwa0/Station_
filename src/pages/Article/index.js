@@ -65,11 +65,11 @@ function Aritcle(props) {
   const [FilterdData, setFilterdData] = useState([]);
 
   useEffect(() => {
-    if (localStorage.getItem("station_token")) {
-      loadArticle();
-    } else {
-      props.history.push("/login");
-    }
+    // if (localStorage.getItem("station_token")) {
+    //   loadArticle();
+    // } else {
+    //   props.history.push("/login");
+    // }
   }, []);
   const [searchText, setsearchText] = useState("");
 

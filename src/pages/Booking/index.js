@@ -241,11 +241,11 @@ function Booking(props) {
     );
   };
   useEffect(() => {
-    if (localStorage.getItem("station_token")) {
-      loadBook();
-    } else {
-      props.history.push("/login");
-    }
+    // if (localStorage.getItem("station_token")) {
+    //   loadBook();
+    // } else {
+    //   props.history.push("/login");
+    // }
   }, []);
   const [FilterdData, setFilterdData] = useState([]);
 

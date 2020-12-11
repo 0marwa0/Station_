@@ -77,7 +77,7 @@ function App(props) {
       {/* <Admin.Provider value={{ admins: admins }}> */}
       {/* <Router> */}
       <Switch>
-        <Route path="/login" component={Login} exact />
+        {/* <Route path="/login" component={Login} exact /> */}
         <Route
           path="/"
           exact
